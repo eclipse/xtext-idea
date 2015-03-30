@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types
+package org.eclipse.xtext.xbase.idea.types
 
 import com.google.common.base.Predicate
 import com.google.inject.Inject
@@ -16,10 +16,10 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.common.types.xtext.AbstractConstructorScope
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider
-import org.eclipse.xtext.idea.types.access.StubJvmTypeProvider
-import org.eclipse.xtext.idea.types.access.StubTypeProviderFactory
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider
+import org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory
 
 class StubBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 

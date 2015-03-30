@@ -5,18 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.stubindex
+package org.eclipse.xtext.xbase.idea.jvm
 
-import com.intellij.psi.stubs.StringStubIndexExtension
-import com.intellij.psi.stubs.StubIndexKey
-import org.eclipse.xtext.psi.impl.BaseXtextFile
+import com.intellij.lang.java.JavaParserDefinition
+import com.intellij.psi.FileViewProvider
 
-class JvmDeclaredTypeShortNameIndex extends StringStubIndexExtension<BaseXtextFile> {
+/**
+ * @author kosyakov - Initial contribution and API
+ */
+class JvmParserDefinition extends JavaParserDefinition {
 	
-	public static StubIndexKey<String, BaseXtextFile> KEY = StubIndexKey.<String, BaseXtextFile>createIndexKey("JvmDeclaredTypeShortNameIndex");
+	override getFileNodeType() {
+		JvmFileElementType.INSTANCE
+	}
 	
-	override getKey() {
-		KEY
+	override createFile(FileViewProvider viewProvider) {
+		new PsiJvmFileImpl(fileNodeType, fileNodeType, viewProvider)
 	}
 
 }

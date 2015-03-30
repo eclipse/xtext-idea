@@ -5,21 +5,24 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.jvmmodel
+package org.eclipse.xtext.xbase.idea.jvmmodel
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
-import org.eclipse.xtext.idea.types.psi.impl.JvmPsiClassImpl
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
+
+import static extension org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions.*
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 
@@ -27,7 +30,10 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 	extension IPsiModelAssociator
 
 	@Inject
-	extension IPsiModelAssociations psiAssociations
+	extension IPsiModelAssociations
+
+	@Inject
+	Provider<JvmPsiClassProvider> psiClassProviderProvider
 
 	override associate(EObject sourceElement, EObject jvmElement) {
 		super.associate(sourceElement, jvmElement)
@@ -45,52 +51,44 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 		}
 	}
 
-	def PsiElementProvider createPsiElementProvider(EObject sourceElement, EObject jvmElement) {
+	protected def PsiElementProvider createPsiElementProvider(EObject sourceElement, EObject jvmElement) {
 		switch jvmElement {
-			JvmDeclaredType: {
-				return [
-					if (jvmElement.declaringType == null) {
-						new JvmPsiClassImpl(jvmElement, sourceElement.psiElement)
-					} else {
-						val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
-						if (psiClass == null)
-							return null
-						psiClass.innerClasses.findFirst [
-							getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
-						]
-					}
+			JvmDeclaredType case jvmElement.declaringType == null:
+				psiClassProviderProvider.get => [ provider |
+					provider.jvmDeclaredType = jvmElement
+					provider.sourceElement = sourceElement
 				]
-			}
-			JvmExecutable: {
+			JvmDeclaredType:
 				[
-					val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
-					if (psiClass == null)
-						return null
-					psiClass.methods.findFirst [
-						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
-					]
+					val psiClass = jvmElement.declaringType.psiElement
+					if (psiClass instanceof PsiClass)
+						psiClass.innerClasses.findByJvmElement(jvmElement)
 				]
-			}
-			JvmField: {
+			JvmExecutable:
 				[
-					val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
-					if (psiClass == null)
-						return null
-					psiClass.fields.findFirst [
-						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
-					]
+					val psiClass = jvmElement.declaringType.psiElement
+					if (psiClass instanceof PsiClass)
+						psiClass.methods.findByJvmElement(jvmElement)
 				]
-			}
-			JvmFormalParameter: {
+			JvmField:
 				[
-					val psiMethod = psiAssociations.getPsiElement(jvmElement.eContainer) as PsiMethod
-					if (psiMethod == null)
-						return null
-					psiMethod.parameterList.parameters.findFirst [
-						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
-					]
+					val psiClass = jvmElement.declaringType.psiElement
+					if (psiClass instanceof PsiClass)
+						psiClass.fields.findByJvmElement(jvmElement)
 				]
-			}
+			JvmFormalParameter:
+				[
+					val psiMethod = jvmElement.eContainer.psiElement
+					if (psiMethod instanceof PsiMethod)
+						psiMethod.parameterList.parameters.findByJvmElement(jvmElement)
+				]
 		}
 	}
+
+	protected def findByJvmElement(PsiElement[] elements, EObject jvmElement) {
+		elements.findFirst [ element |
+			element.jvmElement == jvmElement
+		]
+	}
+
 }

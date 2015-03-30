@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.psi
+package org.eclipse.xtext.xbase.idea.types.psi
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -22,12 +22,12 @@ class JvmPsiClasses {
 	@Inject
 	extension IPsiModelAssociations
 
-	def getJvmPsiClassesByName(BaseXtextFile it, String name) {
+	def getPsiClassesByName(BaseXtextFile it, String name) {
 		val resource = resource
 
 		val result = newArrayList
 		for (description : resourceDescription.getExportedObjectsByType(JVM_DECLARED_TYPE)) {
-			switch jvmDeclaredType : resource.resourceSet.getEObject(description.EObjectURI, true) {
+			switch jvmDeclaredType : resource.resourceSet.getEObject(description.getEObjectURI, true) {
 				JvmDeclaredType case jvmDeclaredType.simpleName == name:
 					result += jvmDeclaredType.psiElement as JvmPsiClass
 			}
@@ -35,12 +35,12 @@ class JvmPsiClasses {
 		result
 	}
 
-	def getJvmPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
+	def getPsiClassesByQualifiedName(BaseXtextFile it, QualifiedName qualifiedName) {
 		val resource = resource
 
 		val result = newArrayList
 		for (description : resourceDescription.getExportedObjects(JVM_DECLARED_TYPE, qualifiedName, false)) {
-			switch jvmDeclaredType : resource.resourceSet.getEObject(description.EObjectURI, true) {
+			switch jvmDeclaredType : resource.resourceSet.getEObject(description.getEObjectURI, true) {
 				JvmDeclaredType:
 					result += jvmDeclaredType.psiElement as JvmPsiClass
 			}
@@ -48,7 +48,7 @@ class JvmPsiClasses {
 		result
 	}
 	
-	def getJvmPsiClasses(BaseXtextFile it) {
+	def getPsiClasses(BaseXtextFile it) {
 		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(JvmPsiClass)
 	}
 

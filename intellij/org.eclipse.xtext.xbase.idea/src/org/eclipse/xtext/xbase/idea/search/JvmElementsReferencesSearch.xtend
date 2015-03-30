@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.psi.search
+package org.eclipse.xtext.xbase.idea.search
 
 import com.google.inject.Inject
 import com.intellij.openapi.application.QueryExecutorBase
@@ -15,18 +15,13 @@ import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.psi.search.searches.ReferencesSearch.SearchParameters
 import com.intellij.util.Processor
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.psi.IPsiModelAssociations
-import org.eclipse.xtext.psi.PsiNamedEObject
 import org.eclipse.xtext.service.OperationCanceledError
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
 
 class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
 
 	@Inject
-	extension IPsiModelAssociations
-
-	@Inject
-	extension IJvmModelAssociations
+	extension IPsiJvmModelAssociations
 
 	val IXtextLanguage language
 
@@ -42,10 +37,8 @@ class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference, Refere
 			return
 		}
 		try {
-			if (element instanceof PsiNamedEObject) {
-				for (psiJvmElement : element.EObject.jvmElements.map[psiElement].filter(PsiNamedElement)) {
-					queryParameters.optimizer.searchWord(psiJvmElement.name, queryParameters.effectiveSearchScope, true, psiJvmElement)
-				}
+			for (psiJvmElement : element.jvmElements.filter(PsiNamedElement)) {
+				queryParameters.optimizer.searchWord(psiJvmElement.name, queryParameters.effectiveSearchScope, true, psiJvmElement)
 			}
 		} catch (OperationCanceledError e) {
 			throw e.wrapped

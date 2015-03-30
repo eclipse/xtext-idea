@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.access
+package org.eclipse.xtext.xbase.idea.types.access
 
 import com.google.inject.Inject
 import com.intellij.openapi.progress.ProgressIndicatorProvider
@@ -264,17 +264,21 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		val intf = psiClass.isInterface && !psiClass.isAnnotationType
 		for (method : psiClass.methods) {
 			fqn.preserve [ |
-				val operation = if (method.constructor) {
-						method.createConstructor(fqn)
-					} else {
-						method.createOperation(fqn) => [
-							setDefaultValue(method)
-							if (intf && !abstract && !static) {
-								setDefault(true)
-							}
-						]
-					}
-				members.addUnique(operation)
+				try {
+					val operation = if (method.constructor) {
+							method.createConstructor(fqn)
+						} else {
+							method.createOperation(fqn) => [
+								setDefaultValue(method)
+								if (intf && !abstract && !static) {
+									setDefault(true)
+								}
+							]
+						}
+					members.addUnique(operation)
+				} catch (UnresolvedPsiClassType e) {
+					// some cross references are broken -> skip a method
+				}
 			]
 		}
 		if (psiClass.hasDefaultConstructor) {
@@ -326,7 +330,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 			val componentType = type.componentType
 			return componentType.createAnnotationValue => [
 				if (value instanceof Object[]) {
-					for (Object element : value as Object[]) {
+					for (Object element : value) {
 						addValue(element)
 					}
 				} else {
@@ -593,7 +597,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 			PsiClassType: {
 				val resolveResult = psiType.resolveGenerics
 				val psiClass = resolveResult.element
-				if (psiClass == null) {
+				if (psiClass === null) {
 					createJvmUnknownTypeReference
 				} else if (psiType.parameterCount == 0) {
 					resolveResult.createClassTypeReference => [

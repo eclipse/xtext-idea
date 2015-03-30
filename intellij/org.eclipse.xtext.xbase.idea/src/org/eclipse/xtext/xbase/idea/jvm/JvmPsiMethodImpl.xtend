@@ -5,13 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.psi
+package org.eclipse.xtext.xbase.idea.jvm
 
-import com.intellij.psi.PsiClass
-import org.eclipse.emf.ecore.EClass
+import com.intellij.lang.ASTNode
+import com.intellij.psi.impl.source.PsiMethodImpl
 
-interface JvmPsiClass extends PsiClass {
+/**
+ * @author kosyakov - Initial contribution and API
+ */
+class JvmPsiMethodImpl extends PsiMethodImpl {
 	
-	def EClass getType()
+	new(ASTNode node) {
+		super(node)
+	}
 
+	override getNavigationElement() {
+		JvmPsiElementExtensions.getNavigationElement(this) ?: super.navigationElement
+	}
+	
 }

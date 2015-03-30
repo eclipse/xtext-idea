@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.types.psi
+package org.eclipse.xtext.xbase.idea.types.psi
 
 import com.google.inject.Inject
 import com.intellij.openapi.project.Project
@@ -41,7 +41,7 @@ class JvmTypesElementFinder extends PsiElementFinder {
 		val result = newArrayList 
 		for (xtextFile : exportedObjectQualifiedNameIndex.get(qualifiedName, project, scope)) {
 			if (xtextFile.language == language) {
-				result += xtextFile.getJvmPsiClassesByQualifiedName(QualifiedName.create(qualifiedName.split("\\.")))
+				result += xtextFile.getPsiClassesByQualifiedName(QualifiedName.create(qualifiedName.split("\\.")))
 			}
 		}
 		result
