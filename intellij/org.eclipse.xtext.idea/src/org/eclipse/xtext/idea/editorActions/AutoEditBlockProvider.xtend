@@ -8,32 +8,16 @@
 package org.eclipse.xtext.idea.editorActions
 
 import com.google.inject.ImplementedBy
-import com.intellij.openapi.editor.ex.EditorEx
-import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-@ImplementedBy(DefaultTokenSetProvider)
-interface TokenSetProvider {
+@ImplementedBy(DefaultAutoEditBlockProvider)
+interface AutoEditBlockProvider {
 
-	def TokenSet getTokenSet(EditorEx editor, int offset)
+	def Iterable<AbstractAutoEditBlock> getQuotes()
 
-	def TokenSet getTokenSet(IElementType tokenType)
-
-	def boolean isStartOfLine(EditorEx editor, int offset)
-
-	def boolean isStartOfLine(TokenSet tokenSet, EditorEx editor, int offset)
-
-	def boolean isEndOfLine(EditorEx editor, int offset)
-
-	def boolean isEndOfLine(TokenSet tokenSet, EditorEx editor, int offset)
-	
-	def TokenSet getCommentTokens()
-	
-	def TokenSet getSingleLineCommentTokens()
-	
-	def TokenSet getStringLiteralTokens()
+	def Iterable<AbstractIndentableAutoEditBlock> getBlocks(TokenSet tokenSet)
 
 }
