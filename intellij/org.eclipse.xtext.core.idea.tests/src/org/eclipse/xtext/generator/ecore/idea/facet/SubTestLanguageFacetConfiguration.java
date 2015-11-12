@@ -11,10 +11,10 @@ import com.intellij.openapi.components.StorageScheme;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 
-@State(name = "org.eclipse.xtext.generator.ecore.SuperTestLanguageGenerator", storages = {
+@State(name = "org.eclipse.xtext.generator.ecore.SubTestLanguageGenerator", storages = {
 		@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 		@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-				+ "/SuperTestLanguageGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-public class SuperTestLanguageFacetConfiguration extends AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>{
+				+ "/SubTestLanguageGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
+public class SubTestLanguageFacetConfiguration extends AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>{
 
 }
