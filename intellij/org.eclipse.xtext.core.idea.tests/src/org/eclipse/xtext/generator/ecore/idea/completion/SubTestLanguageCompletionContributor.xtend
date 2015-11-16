@@ -3,12 +3,12 @@
  */
 package org.eclipse.xtext.generator.ecore.idea.completion
 
-import org.eclipse.xtext.generator.ecore.idea.lang.SuperTestLanguageLanguage
+import org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageLanguage
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 
-class SuperTestLanguageCompletionContributor extends AbstractSuperTestLanguageCompletionContributor {
+class SubTestLanguageCompletionContributor extends AbstractSubTestLanguageCompletionContributor {
 	new() {
-		this(SuperTestLanguageLanguage.INSTANCE)
+		this(SubTestLanguageLanguage.INSTANCE)
 	}
 	
 	new(AbstractXtextLanguage lang) {
