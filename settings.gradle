@@ -1,16 +1,8 @@
 rootProject.name = 'xtext-idea'
 
-[
-	'org.eclipse.xtext.idea',
-	'org.eclipse.xtext.idea.example.entities',
-	'org.eclipse.xtext.idea.example.entities.ide',
-	'org.eclipse.xtext.idea.example.entities.idea',
-	'org.eclipse.xtext.idea.junit',
-	'org.eclipse.xtext.idea.sdomain',
-	'org.eclipse.xtext.idea.sdomain.idea',
-	'org.eclipse.xtext.idea.sdomain.idea.tests',
-	'org.eclipse.xtext.xtext.idea'
-].each { projectName ->
-	include projectName
-	project(":$projectName").projectDir = file("../../intellij/$projectName")
-}
+include 'org.eclipse.xtext.idea'
+include 'org.eclipse.xtext.idea.example.entities'
+include 'org.eclipse.xtext.idea.example.entities.ide'
+include 'org.eclipse.xtext.idea.example.entities.idea'
+include 'org.eclipse.xtext.idea.junit'
+include 'org.eclipse.xtext.xtext.idea'

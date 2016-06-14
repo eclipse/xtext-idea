@@ -7,6 +7,10 @@ tasks.withType(JavaCompile) {
 }
 
 configurations {
+    generator {
+    	description 'Dependencies for the Xtext language generator'
+    }
+    
 	/*
 	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
 	 */
@@ -17,5 +21,7 @@ configurations {
 		exclude group: 'org.ow2.asm'
 	}
 }
+
+eclipse.classpath.plusConfigurations += [configurations.generator]
 
 javadoc.options.addStringOption('-Xdoclint:none')
