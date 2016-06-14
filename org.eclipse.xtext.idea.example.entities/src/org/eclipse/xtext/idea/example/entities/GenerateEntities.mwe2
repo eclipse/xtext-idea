@@ -23,9 +23,6 @@ Workflow {
 				genericIde = {
 					enabled = true
 				}
-				eclipsePlugin = {
-					enabled = true
-				}
 				ideaPlugin = {
 					enabled = true
 				}
