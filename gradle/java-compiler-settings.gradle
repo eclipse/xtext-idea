@@ -6,10 +6,24 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'
 }
 
-configurations {
-    generator {
-    	description 'Dependencies for the Xtext language generator'
+tasks.withType(Javadoc) {
+	options.encoding = 'ISO-8859-1'
+	options.tags = [ 'noreference', 'noextend', 'noimplement', 'noinstantiate', 'nooverride', 'model', 'generated', 'ordered' ] 
+	options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+sourceSets {
+    mwe2 {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+        }
     }
+}
+
+configurations {
+    mwe2Compile.extendsFrom mainCompile
+	mwe2Runtime.extendsFrom mainRuntime
     
 	/*
 	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
@@ -22,6 +36,11 @@ configurations {
 	}
 }
 
-eclipse.classpath.plusConfigurations += [configurations.generator]
+eclipse {
+	classpath.plusConfigurations += [configurations.mwe2Runtime]
 
-javadoc.options.addStringOption('-Xdoclint:none')
+	project {
+		natures 'org.eclipse.xtext.ui.shared.xtextNature'
+		buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
+	}
+}
