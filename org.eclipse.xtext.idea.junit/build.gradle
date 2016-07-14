@@ -1,5 +1,5 @@
 dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 }
 
 ideaDevelopment {

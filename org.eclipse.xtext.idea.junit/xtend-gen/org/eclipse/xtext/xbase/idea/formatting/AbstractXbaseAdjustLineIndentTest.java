@@ -15,7 +15,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 
@@ -3667,7 +3667,7 @@ public abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest
     Editor _editor = this.myFixture.getEditor();
     Document _document = _editor.getDocument();
     String _text = _document.getText();
-    Assert.assertEquals(_dumpFormattingModel, expectedAdjustedModel, _text);
+    TestCase.assertEquals(_dumpFormattingModel, expectedAdjustedModel, _text);
   }
   
   protected Runnable adjustLineIndent(final PsiFile file) {

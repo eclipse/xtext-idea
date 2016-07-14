@@ -33,12 +33,12 @@ import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.lang.LanguageSetup
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 
 abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
 

@@ -19,8 +19,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.tests.LightToolingTest
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.LazyStringInputStream
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*

@@ -19,7 +19,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.IdeaTestCase;
 import com.intellij.testFramework.PlatformTestCase;
 import java.util.List;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -112,7 +112,7 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
         return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
       boolean _exists = IterableExtensions.<Issue>exists(issues, _function);
-      Assert.assertFalse(_string, _exists);
+      TestCase.assertFalse(_string, _exists);
     }
   }
   

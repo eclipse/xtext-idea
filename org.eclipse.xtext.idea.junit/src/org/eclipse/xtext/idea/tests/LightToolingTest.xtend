@@ -40,7 +40,6 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.parser.TokenTypeProvider
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions

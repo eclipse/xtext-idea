@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.IdeActions
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.util.TextRange
 import java.awt.datatransfer.StringSelection
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 abstract class AbstractAutoEditTest extends LightToolingTest {
 

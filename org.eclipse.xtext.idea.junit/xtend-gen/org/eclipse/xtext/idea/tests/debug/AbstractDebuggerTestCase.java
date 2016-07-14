@@ -57,7 +57,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -101,7 +100,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final SourcePosition sp = _context.getSourcePosition();
     PsiFile _file = sp.getFile();
     VirtualFile _virtualFile = _file.getVirtualFile();
-    Assert.assertEquals(file, _virtualFile);
+    TestCase.assertEquals(file, _virtualFile);
     Project _project = this.getProject();
     PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
     PsiFile _file_1 = sp.getFile();
@@ -113,11 +112,11 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       VirtualFile _virtualFile_1 = _file_2.getVirtualFile();
       String _name = _virtualFile_1.getName();
       String _plus = ((("couldn\'t find \'" + fragment) + "\' in file ") + _name);
-      Assert.fail(_plus);
+      TestCase.fail(_plus);
     }
     int _lineNumber = doc.getLineNumber(index);
     int _line = sp.getLine();
-    Assert.assertEquals(_lineNumber, _line);
+    TestCase.assertEquals(_lineNumber, _line);
   }
   
   protected void assertCurrentLine(final VirtualFile file, final int line) {
@@ -126,15 +125,15 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final SourcePosition sp = _context.getSourcePosition();
     PsiFile _file = sp.getFile();
     VirtualFile _virtualFile = _file.getVirtualFile();
-    Assert.assertEquals(file, _virtualFile);
+    TestCase.assertEquals(file, _virtualFile);
     int _line = sp.getLine();
-    Assert.assertEquals(line, _line);
+    TestCase.assertEquals(line, _line);
   }
   
   protected void assertProcessTerminated() {
     ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
     boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-    Assert.assertTrue(_isProcessTerminated);
+    TestCase.assertTrue(_isProcessTerminated);
   }
   
   protected LineBreakpoint<?> addLineBreakpoint(final VirtualFile file, final int line) {
@@ -157,7 +156,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
           final AssertionFailedError e = (AssertionFailedError)_t;
           String _message = e.getMessage();
           String _plus = ((("Failed on step " + i) + " : ") + _message);
-          Assert.fail(_plus);
+          TestCase.fail(_plus);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -197,7 +196,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     try {
       ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
       boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-      Assert.assertFalse(_isProcessTerminated);
+      TestCase.assertFalse(_isProcessTerminated);
       int i = 0;
       final SuspendManager suspendManager = this.myDebugProcess.getSuspendManager();
       DebuggerSession _session = this.myDebugProcess.getSession();
@@ -223,7 +222,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         ProcessHandler _processHandler_1 = this.myDebugProcess.getProcessHandler();
         boolean _isProcessTerminated_1 = _processHandler_1.isProcessTerminated();
         _builder.append(_isProcessTerminated_1, "");
-        Assert.fail(_builder.toString());
+        TestCase.fail(_builder.toString());
       }
       return suspendManager.getPausedContext();
     } catch (Throwable _e) {
@@ -289,13 +288,13 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     }
     int _size = args.size();
     boolean _lessThan = (before < _size);
-    Assert.assertTrue("No Java files!", _lessThan);
+    TestCase.assertTrue("No Java files!", _lessThan);
     String[] _stringArray = ArrayUtil.toStringArray(args);
     Main.compile(_stringArray);
   }
   
   protected void startDebugProcess(final String className) throws ExecutionException, InterruptedException, InvocationTargetException {
-    Assert.assertTrue((this.myDebugProcess == null));
+    TestCase.assertTrue((this.myDebugProcess == null));
     JavaParameters _javaParameters = new JavaParameters();
     final Procedure1<JavaParameters> _function = (JavaParameters it) -> {
       try {
@@ -397,7 +396,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         if (_t instanceof ExecutionException) {
           final ExecutionException e = (ExecutionException)_t;
           String _message = e.getMessage();
-          Assert.fail(_message);
+          TestCase.fail(_message);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -421,7 +420,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     DebuggerManagerEx _instanceEx = DebuggerManagerEx.getInstanceEx(this.myProject);
     DebugProcess _debugProcess = _instanceEx.getDebugProcess(processHandler);
     DebugProcessImpl process = ((DebugProcessImpl) _debugProcess);
-    Assert.assertNotNull(process);
+    TestCase.assertNotNull(process);
     return debuggerSession[0];
   }
   

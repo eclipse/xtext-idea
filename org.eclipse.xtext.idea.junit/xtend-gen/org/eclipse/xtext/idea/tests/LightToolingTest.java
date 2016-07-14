@@ -57,7 +57,7 @@ import com.intellij.util.Consumer;
 import com.intellij.util.ui.tree.TreeUtil;
 import java.util.List;
 import javax.swing.JTree;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -67,7 +67,7 @@ import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
-import org.eclipse.xtext.junit4.internal.LineDelimiters;
+import org.eclipse.xtext.idea.tests.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
@@ -206,7 +206,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   protected void assertLookupStrings(final String... items) {
     List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(items)));
     List<String> _lookupElementStrings = this.myFixture.getLookupElementStrings();
-    Assert.assertEquals(_list, _lookupElementStrings);
+    TestCase.assertEquals(_list, _lookupElementStrings);
   }
   
   protected void assertHighlights(final String lineDelimitedHighlights) {
@@ -227,7 +227,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     final EditorHighlighter highlighter = ObjectExtensions.<EditorHighlighter>operator_doubleArrow(_createHighlighter, _function);
     final HighlighterIterator highlights = highlighter.createIterator(0);
     final String actualHighlights = this.compactHighlights(highlights);
-    Assert.assertEquals(expectedHighlights, actualHighlights);
+    TestCase.assertEquals(expectedHighlights, actualHighlights);
   }
   
   protected String compactHighlights(final HighlighterIterator highlights) {
