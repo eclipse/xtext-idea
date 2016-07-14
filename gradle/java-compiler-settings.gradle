@@ -38,6 +38,7 @@ configurations {
 
 eclipse {
 	classpath.plusConfigurations += [configurations.mwe2Runtime]
+	classpath.plusConfigurations += [configurations.mwe2Compile]
 
 	project {
 		natures 'org.eclipse.xtext.ui.shared.xtextNature'

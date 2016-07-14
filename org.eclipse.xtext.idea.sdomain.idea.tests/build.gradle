@@ -1,5 +1,7 @@
+apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+
 dependencies {
-	testCompile project(':org.eclipse.xtext.idea.junit')
+	compile project(':org.eclipse.xtext.idea.junit')
 }
 
 ideaDevelopment {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.xtext.xtext.idea.tests</name>
-	<comment>Project org.eclipse.xtext.xtext.idea.tests created by Buildship.</comment>
+	<name>org.eclipse.xtext.idea.sdomain</name>
+	<comment>Project org.eclipse.xtext.idea.sdomain created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>

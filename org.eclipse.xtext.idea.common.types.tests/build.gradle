@@ -1,16 +1,19 @@
-apply plugin : 'org.xtext.idea-plugin'
+apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
 dependencies {
-	compile project(':intellij:org.eclipse.xtext.idea.generator')
-	testCompile project(':intellij:org.eclipse.xtext.idea.junit')
-	testCompile project(":plugins:org.eclipse.xtend.lib")
-	testCompile project(':tests:org.eclipse.xtext.common.types.tests')
-	testCompile 'org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.7.1'
-	testCompile 'org.eclipse.emf:org.eclipse.emf.mwe2.runtime:2.7.1'
+	compile project(':org.eclipse.xtext.idea.junit')
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.common.types.tests:$versions.xtext"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+}
+
+sourceSets.test.java {
+	srcDir 'tests'
 }
 
 ideaDevelopment {
 	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
+		project ':org.eclipse.xtext.idea'
 	}
 }
