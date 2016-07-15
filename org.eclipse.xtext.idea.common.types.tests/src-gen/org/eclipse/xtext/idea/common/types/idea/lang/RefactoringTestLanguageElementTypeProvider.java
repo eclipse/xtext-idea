@@ -1,17 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.idea.common.types.idea.lang;
 
+import com.intellij.psi.tree.IFileElementType;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.idea.common.types.idea.lang.psi.impl.RefactoringTestLanguageFileImpl;
 import org.eclipse.xtext.idea.common.types.services.RefactoringTestLanguageGrammarAccess;
+import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-
-import com.intellij.psi.tree.IFileElementType;
 
 public class RefactoringTestLanguageElementTypeProvider implements IElementTypeProvider {
 
@@ -139,79 +144,79 @@ public class RefactoringTestLanguageElementTypeProvider implements IElementTypeP
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-
+	
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getModel_ReferenceHolderAssignmentElementType() {
 		return Model_ReferenceHolderAssignment_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType() {
 		return Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolderElementType() {
 		return ReferenceHolder_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolder_GroupElementType() {
 		return ReferenceHolder_Group_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolder_NameAssignment_0ElementType() {
 		return ReferenceHolder_NameAssignment_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolder_NameIDTerminalRuleCall_0_0ElementType() {
 		return ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolder_DefaultReferenceAssignment_1ElementType() {
 		return ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType() {
 		return ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1ElementType() {
 		return ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQNElementType() {
 		return FQN_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_GroupElementType() {
 		return FQN_Group_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_IDTerminalRuleCall_0ElementType() {
 		return FQN_IDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_Group_1ElementType() {
 		return FQN_Group_1_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_FullStopKeyword_1_0ElementType() {
 		return FQN_FullStopKeyword_1_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_IDTerminalRuleCall_1_1ElementType() {
 		return FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_Group_2ElementType() {
 		return FQN_Group_2_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_DollarSignKeyword_2_0ElementType() {
 		return FQN_DollarSignKeyword_2_0_ELEMENT_TYPE;
 	}
-
+	
 	public IGrammarAwareElementType getFQN_IDTerminalRuleCall_2_1ElementType() {
 		return FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE;
 	}

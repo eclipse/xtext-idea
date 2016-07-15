@@ -20,5 +20,3 @@ class RefactoringTestLanguageCompletionContributor extends AbstractRefactoringTe
 		//custom rules here
 	}
 }
-
-

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.idea.common.types.parser.antlr.internal; 
+package org.eclipse.xtext.idea.common.types.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -18,21 +18,28 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'$'"
     };
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -53,18 +60,18 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
      	private RefactoringTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalRefactoringTestLanguageParser(TokenStream input, RefactoringTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected RefactoringTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +79,9 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalRefactoringTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalRefactoringTestLanguage.g:68:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,7 +89,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalRefactoringTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalRefactoringTestLanguage.g:68:46: (iv_ruleModel= ruleModel EOF )
             // InternalRefactoringTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
@@ -96,11 +104,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,20 +117,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleModel"
-    // InternalRefactoringTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* ;
+    // InternalRefactoringTestLanguage.g:75:1: ruleModel returns [EObject current=null] : ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_referenceHolder_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalRefactoringTestLanguage.g:79:28: ( ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* )
-            // InternalRefactoringTestLanguage.g:80:1: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
+            // InternalRefactoringTestLanguage.g:81:2: ( ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* )
+            // InternalRefactoringTestLanguage.g:82:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
             {
-            // InternalRefactoringTestLanguage.g:80:1: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
+            // InternalRefactoringTestLanguage.g:82:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
             loop1:
             do {
                 int alt1=2;
@@ -135,30 +144,30 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:81:1: (lv_referenceHolder_0_0= ruleReferenceHolder )
+            	    // InternalRefactoringTestLanguage.g:83:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
             	    {
-            	    // InternalRefactoringTestLanguage.g:81:1: (lv_referenceHolder_0_0= ruleReferenceHolder )
-            	    // InternalRefactoringTestLanguage.g:82:3: lv_referenceHolder_0_0= ruleReferenceHolder
+            	    // InternalRefactoringTestLanguage.g:83:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
+            	    // InternalRefactoringTestLanguage.g:84:4: lv_referenceHolder_0_0= ruleReferenceHolder
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_referenceHolder_0_0=ruleReferenceHolder();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"referenceHolder",
-            	            		lv_referenceHolder_0_0, 
-            	            		"org.eclipse.xtext.idea.common.types.RefactoringTestLanguage.ReferenceHolder");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getModelRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"referenceHolder",
+            	    					lv_referenceHolder_0_0,
+            	    					"org.eclipse.xtext.idea.common.types.RefactoringTestLanguage.ReferenceHolder");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -174,13 +183,15 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -189,7 +200,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleReferenceHolder"
-    // InternalRefactoringTestLanguage.g:106:1: entryRuleReferenceHolder returns [EObject current=null] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
+    // InternalRefactoringTestLanguage.g:104:1: entryRuleReferenceHolder returns [EObject current=null] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
     public final EObject entryRuleReferenceHolder() throws RecognitionException {
         EObject current = null;
 
@@ -197,8 +208,8 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalRefactoringTestLanguage.g:107:2: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
-            // InternalRefactoringTestLanguage.g:108:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
+            // InternalRefactoringTestLanguage.g:104:56: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
+            // InternalRefactoringTestLanguage.g:105:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
             {
              newCompositeNode(grammarAccess.getReferenceHolderRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -212,11 +223,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -225,69 +236,70 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleReferenceHolder"
-    // InternalRefactoringTestLanguage.g:115:1: ruleReferenceHolder returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) ;
+    // InternalRefactoringTestLanguage.g:111:1: ruleReferenceHolder returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) ;
     public final EObject ruleReferenceHolder() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalRefactoringTestLanguage.g:118:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) )
-            // InternalRefactoringTestLanguage.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
+            // InternalRefactoringTestLanguage.g:117:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) )
+            // InternalRefactoringTestLanguage.g:118:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
             {
-            // InternalRefactoringTestLanguage.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
-            // InternalRefactoringTestLanguage.g:119:2: ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) )
+            // InternalRefactoringTestLanguage.g:118:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
+            // InternalRefactoringTestLanguage.g:119:3: ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) )
             {
-            // InternalRefactoringTestLanguage.g:119:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRefactoringTestLanguage.g:120:1: (lv_name_0_0= RULE_ID )
+            // InternalRefactoringTestLanguage.g:119:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRefactoringTestLanguage.g:120:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRefactoringTestLanguage.g:120:1: (lv_name_0_0= RULE_ID )
-            // InternalRefactoringTestLanguage.g:121:3: lv_name_0_0= RULE_ID
+            // InternalRefactoringTestLanguage.g:120:4: (lv_name_0_0= RULE_ID )
+            // InternalRefactoringTestLanguage.g:121:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getReferenceHolderAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getReferenceHolderAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getReferenceHolderRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getReferenceHolderRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalRefactoringTestLanguage.g:137:2: ( ( ruleFQN ) )
-            // InternalRefactoringTestLanguage.g:138:1: ( ruleFQN )
+
+            }
+
+            // InternalRefactoringTestLanguage.g:137:3: ( ( ruleFQN ) )
+            // InternalRefactoringTestLanguage.g:138:4: ( ruleFQN )
             {
-            // InternalRefactoringTestLanguage.g:138:1: ( ruleFQN )
-            // InternalRefactoringTestLanguage.g:139:3: ruleFQN
+            // InternalRefactoringTestLanguage.g:138:4: ( ruleFQN )
+            // InternalRefactoringTestLanguage.g:139:5: ruleFQN
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getReferenceHolderRule());
-            	        }
-                    
-             
-            	        newCompositeNode(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeCrossReference_1_0()); 
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getReferenceHolderRule());
+            					}
+            				
+
+            					newCompositeNode(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeCrossReference_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             ruleFQN();
 
             state._fsp--;
 
-             
-            	        afterParserOrEnumRuleCall();
-            	    
+
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -300,13 +312,15 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -315,7 +329,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalRefactoringTestLanguage.g:160:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalRefactoringTestLanguage.g:157:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -323,8 +337,8 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalRefactoringTestLanguage.g:161:2: (iv_ruleFQN= ruleFQN EOF )
-            // InternalRefactoringTestLanguage.g:162:2: iv_ruleFQN= ruleFQN EOF
+            // InternalRefactoringTestLanguage.g:157:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalRefactoringTestLanguage.g:158:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -338,11 +352,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -351,7 +365,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleFQN"
-    // InternalRefactoringTestLanguage.g:169:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
+    // InternalRefactoringTestLanguage.g:164:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -360,23 +374,24 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
         Token this_ID_2=null;
         Token this_ID_4=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalRefactoringTestLanguage.g:172:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
-            // InternalRefactoringTestLanguage.g:173:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // InternalRefactoringTestLanguage.g:170:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
+            // InternalRefactoringTestLanguage.g:171:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
             {
-            // InternalRefactoringTestLanguage.g:173:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
-            // InternalRefactoringTestLanguage.g:173:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
+            // InternalRefactoringTestLanguage.g:171:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // InternalRefactoringTestLanguage.g:172:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
-                
-            // InternalRefactoringTestLanguage.g:180:1: (kw= '.' this_ID_2= RULE_ID )*
+            			current.merge(this_ID_0);
+            		
+
+            			newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
+            		
+            // InternalRefactoringTestLanguage.g:179:3: (kw= '.' this_ID_2= RULE_ID )*
             loop2:
             do {
                 int alt2=2;
@@ -389,20 +404,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:181:2: kw= '.' this_ID_2= RULE_ID
+            	    // InternalRefactoringTestLanguage.g:180:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            	        
+            	    				current.merge(kw);
+            	    				newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0());
+            	    			
             	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
-            	    		current.merge(this_ID_2);
-            	        
-            	     
-            	        newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-            	        
+            	    				current.merge(this_ID_2);
+            	    			
+
+            	    				newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1());
+            	    			
 
             	    }
             	    break;
@@ -425,20 +440,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:194:2: kw= '$' this_ID_4= RULE_ID
+            	    // InternalRefactoringTestLanguage.g:194:4: kw= '$' this_ID_4= RULE_ID
             	    {
             	    kw=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getFQNAccess().getDollarSignKeyword_2_0()); 
-            	        
+            	    				current.merge(kw);
+            	    				newLeafNode(kw, grammarAccess.getFQNAccess().getDollarSignKeyword_2_0());
+            	    			
             	    this_ID_4=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
-            	    		current.merge(this_ID_4);
-            	        
-            	     
-            	        newLeafNode(this_ID_4, grammarAccess.getFQNAccess().getIDTerminalRuleCall_2_1()); 
-            	        
+            	    				current.merge(this_ID_4);
+            	    			
+
+            	    				newLeafNode(this_ID_4, grammarAccess.getFQNAccess().getIDTerminalRuleCall_2_1());
+            	    			
 
             	    }
             	    break;
@@ -454,13 +469,15 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
