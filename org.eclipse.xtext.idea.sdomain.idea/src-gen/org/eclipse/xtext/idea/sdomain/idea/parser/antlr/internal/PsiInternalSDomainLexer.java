@@ -13,20 +13,20 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class PsiInternalSDomainLexer extends Lexer {
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -190,10 +190,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:463:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalSDomain.g:463:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalSDomain.g:467:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalSDomain.g:467:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalSDomain.g:463:11: ( '^' )?
+            // PsiInternalSDomain.g:467:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -202,7 +202,7 @@ public class PsiInternalSDomainLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalSDomain.g:463:11: '^'
+                    // PsiInternalSDomain.g:467:11: '^'
                     {
                     match('^'); 
 
@@ -220,7 +220,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalSDomain.g:463:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalSDomain.g:467:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -269,10 +269,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:465:10: ( ( '0' .. '9' )+ )
-            // PsiInternalSDomain.g:465:12: ( '0' .. '9' )+
+            // PsiInternalSDomain.g:469:10: ( ( '0' .. '9' )+ )
+            // PsiInternalSDomain.g:469:12: ( '0' .. '9' )+
             {
-            // PsiInternalSDomain.g:465:12: ( '0' .. '9' )+
+            // PsiInternalSDomain.g:469:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -286,7 +286,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalSDomain.g:465:13: '0' .. '9'
+            	    // PsiInternalSDomain.g:469:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -318,10 +318,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:467:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalSDomain.g:467:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalSDomain.g:471:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalSDomain.g:471:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalSDomain.g:467:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalSDomain.g:471:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -339,10 +339,10 @@ public class PsiInternalSDomainLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalSDomain.g:467:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalSDomain.g:471:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalSDomain.g:467:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalSDomain.g:471:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -358,7 +358,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalSDomain.g:467:21: '\\\\' .
+                    	    // PsiInternalSDomain.g:471:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -366,7 +366,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalSDomain.g:467:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalSDomain.g:471:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -391,10 +391,10 @@ public class PsiInternalSDomainLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalSDomain.g:467:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalSDomain.g:471:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalSDomain.g:467:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalSDomain.g:471:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -410,7 +410,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalSDomain.g:467:54: '\\\\' .
+                    	    // PsiInternalSDomain.g:471:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -418,7 +418,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalSDomain.g:467:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalSDomain.g:471:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -461,12 +461,12 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:469:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalSDomain.g:469:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalSDomain.g:473:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalSDomain.g:473:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalSDomain.g:469:24: ( options {greedy=false; } : . )*
+            // PsiInternalSDomain.g:473:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -491,7 +491,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalSDomain.g:469:52: .
+            	    // PsiInternalSDomain.g:473:52: .
             	    {
             	    matchAny(); 
 
@@ -521,12 +521,12 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:471:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalSDomain.g:471:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalSDomain.g:475:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalSDomain.g:475:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalSDomain.g:471:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalSDomain.g:475:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -539,7 +539,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalSDomain.g:471:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalSDomain.g:475:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -559,7 +559,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalSDomain.g:471:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalSDomain.g:475:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -568,9 +568,9 @@ public class PsiInternalSDomainLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalSDomain.g:471:41: ( '\\r' )? '\\n'
+                    // PsiInternalSDomain.g:475:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalSDomain.g:471:41: ( '\\r' )?
+                    // PsiInternalSDomain.g:475:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -579,7 +579,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalSDomain.g:471:41: '\\r'
+                            // PsiInternalSDomain.g:475:41: '\\r'
                             {
                             match('\r'); 
 
@@ -611,10 +611,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:473:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalSDomain.g:473:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalSDomain.g:477:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalSDomain.g:477:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalSDomain.g:473:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalSDomain.g:477:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -668,8 +668,8 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSDomain.g:475:16: ( . )
-            // PsiInternalSDomain.g:475:18: .
+            // PsiInternalSDomain.g:479:16: ( . )
+            // PsiInternalSDomain.g:479:18: .
             {
             matchAny(); 
 
@@ -804,7 +804,7 @@ public class PsiInternalSDomainLexer extends Lexer {
     static final String DFA12_acceptS =
         "\3\uffff\1\4\1\5\3\uffff\1\10\1\11\3\uffff\1\15\1\16\1\uffff\1\10\1\2\1\3\1\4\1\5\2\uffff\1\11\1\12\1\13\1\14\1\15\14\uffff\1\1\1\6\2\uffff\1\7";
     static final String DFA12_specialS =
-        "\1\0\11\uffff\1\1\1\2\41\uffff}>";
+        "\1\0\11\uffff\1\2\1\1\41\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\6\16\1\2\1\14\12\11\7\16\32\10\3\16\1\7\1\10\1\16\3\10\1\6\1\5\3\10\1\1\21\10\1\3\1\16\1\4\uff82\16",
             "\1\17",
@@ -924,20 +924,20 @@ public class PsiInternalSDomainLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_10 = input.LA(1);
+                        int LA12_11 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 24;}
+                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 24;}
 
                         else s = 14;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_11 = input.LA(1);
+                        int LA12_10 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 24;}
+                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 24;}
 
                         else s = 14;
 

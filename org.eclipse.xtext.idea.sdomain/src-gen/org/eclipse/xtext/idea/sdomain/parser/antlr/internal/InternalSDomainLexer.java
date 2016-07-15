@@ -13,20 +13,20 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSDomainLexer extends Lexer {
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -190,10 +190,10 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:548:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalSDomain.g:548:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSDomain.g:529:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalSDomain.g:529:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalSDomain.g:548:11: ( '^' )?
+            // InternalSDomain.g:529:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -202,7 +202,7 @@ public class InternalSDomainLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalSDomain.g:548:11: '^'
+                    // InternalSDomain.g:529:11: '^'
                     {
                     match('^'); 
 
@@ -220,7 +220,7 @@ public class InternalSDomainLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalSDomain.g:548:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSDomain.g:529:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -269,10 +269,10 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:550:10: ( ( '0' .. '9' )+ )
-            // InternalSDomain.g:550:12: ( '0' .. '9' )+
+            // InternalSDomain.g:531:10: ( ( '0' .. '9' )+ )
+            // InternalSDomain.g:531:12: ( '0' .. '9' )+
             {
-            // InternalSDomain.g:550:12: ( '0' .. '9' )+
+            // InternalSDomain.g:531:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -286,7 +286,7 @@ public class InternalSDomainLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalSDomain.g:550:13: '0' .. '9'
+            	    // InternalSDomain.g:531:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -318,10 +318,10 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:552:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalSDomain.g:552:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSDomain.g:533:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalSDomain.g:533:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalSDomain.g:552:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSDomain.g:533:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -339,10 +339,10 @@ public class InternalSDomainLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalSDomain.g:552:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalSDomain.g:533:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalSDomain.g:552:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalSDomain.g:533:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -358,7 +358,7 @@ public class InternalSDomainLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalSDomain.g:552:21: '\\\\' .
+                    	    // InternalSDomain.g:533:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -366,7 +366,7 @@ public class InternalSDomainLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalSDomain.g:552:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalSDomain.g:533:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -391,10 +391,10 @@ public class InternalSDomainLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalSDomain.g:552:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalSDomain.g:533:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalSDomain.g:552:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalSDomain.g:533:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -410,7 +410,7 @@ public class InternalSDomainLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalSDomain.g:552:54: '\\\\' .
+                    	    // InternalSDomain.g:533:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -418,7 +418,7 @@ public class InternalSDomainLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalSDomain.g:552:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalSDomain.g:533:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -461,12 +461,12 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:554:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalSDomain.g:554:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalSDomain.g:535:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalSDomain.g:535:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalSDomain.g:554:24: ( options {greedy=false; } : . )*
+            // InternalSDomain.g:535:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -491,7 +491,7 @@ public class InternalSDomainLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalSDomain.g:554:52: .
+            	    // InternalSDomain.g:535:52: .
             	    {
             	    matchAny(); 
 
@@ -521,12 +521,12 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:556:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalSDomain.g:556:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalSDomain.g:537:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalSDomain.g:537:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalSDomain.g:556:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalSDomain.g:537:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -539,7 +539,7 @@ public class InternalSDomainLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalSDomain.g:556:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalSDomain.g:537:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -559,7 +559,7 @@ public class InternalSDomainLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalSDomain.g:556:40: ( ( '\\r' )? '\\n' )?
+            // InternalSDomain.g:537:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -568,9 +568,9 @@ public class InternalSDomainLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalSDomain.g:556:41: ( '\\r' )? '\\n'
+                    // InternalSDomain.g:537:41: ( '\\r' )? '\\n'
                     {
-                    // InternalSDomain.g:556:41: ( '\\r' )?
+                    // InternalSDomain.g:537:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -579,7 +579,7 @@ public class InternalSDomainLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalSDomain.g:556:41: '\\r'
+                            // InternalSDomain.g:537:41: '\\r'
                             {
                             match('\r'); 
 
@@ -611,10 +611,10 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:558:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalSDomain.g:558:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSDomain.g:539:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalSDomain.g:539:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalSDomain.g:558:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSDomain.g:539:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -668,8 +668,8 @@ public class InternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSDomain.g:560:16: ( . )
-            // InternalSDomain.g:560:18: .
+            // InternalSDomain.g:541:16: ( . )
+            // InternalSDomain.g:541:18: .
             {
             matchAny(); 
 
@@ -804,7 +804,7 @@ public class InternalSDomainLexer extends Lexer {
     static final String DFA12_acceptS =
         "\3\uffff\1\4\1\5\3\uffff\1\10\1\11\3\uffff\1\15\1\16\1\uffff\1\10\1\2\1\3\1\4\1\5\2\uffff\1\11\1\12\1\13\1\14\1\15\14\uffff\1\1\1\6\2\uffff\1\7";
     static final String DFA12_specialS =
-        "\1\0\11\uffff\1\1\1\2\41\uffff}>";
+        "\1\0\11\uffff\1\2\1\1\41\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\6\16\1\2\1\14\12\11\7\16\32\10\3\16\1\7\1\10\1\16\3\10\1\6\1\5\3\10\1\1\21\10\1\3\1\16\1\4\uff82\16",
             "\1\17",
@@ -924,20 +924,20 @@ public class InternalSDomainLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_10 = input.LA(1);
+                        int LA12_11 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 24;}
+                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 24;}
 
                         else s = 14;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_11 = input.LA(1);
+                        int LA12_10 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 24;}
+                        if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFF')) ) {s = 24;}
 
                         else s = 14;
 

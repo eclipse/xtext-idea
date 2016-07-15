@@ -5,8 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.sdomain.idea;
+package org.eclipse.xtext.idea.sdomain
 
-public class SDomainIdeaModule extends AbstractSDomainIdeaModule {
 
+/**
+ * Initialization support for running Xtext languages without Equinox extension registry.
+ */
+class SDomainStandaloneSetup extends SDomainStandaloneSetupGenerated {
+
+	def static void doSetup() {
+		new SDomainStandaloneSetup().createInjectorAndDoEMFRegistration()
+	}
 }

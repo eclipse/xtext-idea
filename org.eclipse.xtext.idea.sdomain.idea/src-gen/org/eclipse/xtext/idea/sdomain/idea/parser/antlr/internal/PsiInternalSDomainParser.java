@@ -15,26 +15,33 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'.*'", "'.'", "'{'", "'}'", "'entity'", "'datatype'"
     };
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -61,7 +68,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
     	public PsiInternalSDomainParser(PsiBuilder builder, TokenStream input, SDomainElementTypeProvider elementTypeProvider, SDomainGrammarAccess grammarAccess) {
     		this(input);
     		setPsiBuilder(builder);
-        	this.grammarAccess = grammarAccess;
+    		this.grammarAccess = grammarAccess;
     		this.elementTypeProvider = elementTypeProvider;
     	}
 
@@ -74,7 +81,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleFile"
-    // PsiInternalSDomain.g:52:1: entryRuleFile returns [Boolean current=false] : iv_ruleFile= ruleFile EOF ;
+    // PsiInternalSDomain.g:56:1: entryRuleFile returns [Boolean current=false] : iv_ruleFile= ruleFile EOF ;
     public final Boolean entryRuleFile() throws RecognitionException {
         Boolean current = false;
 
@@ -82,8 +89,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:52:46: (iv_ruleFile= ruleFile EOF )
-            // PsiInternalSDomain.g:53:2: iv_ruleFile= ruleFile EOF
+            // PsiInternalSDomain.g:56:46: (iv_ruleFile= ruleFile EOF )
+            // PsiInternalSDomain.g:57:2: iv_ruleFile= ruleFile EOF
             {
              markComposite(elementTypeProvider.getFileElementType()); 
             pushFollow(FOLLOW_1);
@@ -109,7 +116,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleFile"
-    // PsiInternalSDomain.g:59:1: ruleFile returns [Boolean current=false] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // PsiInternalSDomain.g:63:1: ruleFile returns [Boolean current=false] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final Boolean ruleFile() throws RecognitionException {
         Boolean current = false;
 
@@ -117,10 +124,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:60:1: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // PsiInternalSDomain.g:61:2: ( (lv_elements_0_0= ruleElement ) )*
+            // PsiInternalSDomain.g:64:1: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // PsiInternalSDomain.g:65:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // PsiInternalSDomain.g:61:2: ( (lv_elements_0_0= ruleElement ) )*
+            // PsiInternalSDomain.g:65:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -133,10 +140,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalSDomain.g:62:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalSDomain.g:66:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // PsiInternalSDomain.g:62:3: (lv_elements_0_0= ruleElement )
-            	    // PsiInternalSDomain.g:63:4: lv_elements_0_0= ruleElement
+            	    // PsiInternalSDomain.g:66:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalSDomain.g:67:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite(elementTypeProvider.getFile_ElementsElementParserRuleCall_0ElementType());
@@ -181,7 +188,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // PsiInternalSDomain.g:79:1: entryRuleImport returns [Boolean current=false] : iv_ruleImport= ruleImport EOF ;
+    // PsiInternalSDomain.g:83:1: entryRuleImport returns [Boolean current=false] : iv_ruleImport= ruleImport EOF ;
     public final Boolean entryRuleImport() throws RecognitionException {
         Boolean current = false;
 
@@ -189,8 +196,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:79:48: (iv_ruleImport= ruleImport EOF )
-            // PsiInternalSDomain.g:80:2: iv_ruleImport= ruleImport EOF
+            // PsiInternalSDomain.g:83:48: (iv_ruleImport= ruleImport EOF )
+            // PsiInternalSDomain.g:84:2: iv_ruleImport= ruleImport EOF
             {
              markComposite(elementTypeProvider.getImportElementType()); 
             pushFollow(FOLLOW_1);
@@ -216,7 +223,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // PsiInternalSDomain.g:86:1: ruleImport returns [Boolean current=false] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) ;
+    // PsiInternalSDomain.g:90:1: ruleImport returns [Boolean current=false] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) ;
     public final Boolean ruleImport() throws RecognitionException {
         Boolean current = false;
 
@@ -225,11 +232,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:87:1: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
-            // PsiInternalSDomain.g:88:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
+            // PsiInternalSDomain.g:91:1: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
+            // PsiInternalSDomain.g:92:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
             {
-            // PsiInternalSDomain.g:88:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
-            // PsiInternalSDomain.g:89:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
+            // PsiInternalSDomain.g:92:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
+            // PsiInternalSDomain.g:93:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
             {
 
             			markLeaf(elementTypeProvider.getImport_ImportKeyword_0ElementType());
@@ -238,11 +245,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSDomain.g:96:3: ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
-            // PsiInternalSDomain.g:97:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
+            // PsiInternalSDomain.g:100:3: ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
+            // PsiInternalSDomain.g:101:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
             {
-            // PsiInternalSDomain.g:97:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
-            // PsiInternalSDomain.g:98:5: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
+            // PsiInternalSDomain.g:101:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
+            // PsiInternalSDomain.g:102:5: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
             {
 
             					markComposite(elementTypeProvider.getImport_ImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0ElementType());
@@ -284,7 +291,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildCard"
-    // PsiInternalSDomain.g:115:1: entryRuleQualifiedNameWithWildCard returns [Boolean current=false] : iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF ;
+    // PsiInternalSDomain.g:119:1: entryRuleQualifiedNameWithWildCard returns [Boolean current=false] : iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF ;
     public final Boolean entryRuleQualifiedNameWithWildCard() throws RecognitionException {
         Boolean current = false;
 
@@ -292,8 +299,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:115:67: (iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF )
-            // PsiInternalSDomain.g:116:2: iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF
+            // PsiInternalSDomain.g:119:67: (iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF )
+            // PsiInternalSDomain.g:120:2: iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF
             {
              markComposite(elementTypeProvider.getQualifiedNameWithWildCardElementType()); 
             pushFollow(FOLLOW_1);
@@ -319,18 +326,18 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedNameWithWildCard"
-    // PsiInternalSDomain.g:122:1: ruleQualifiedNameWithWildCard returns [Boolean current=false] : ( ruleQualifiedName (kw= '.*' )? ) ;
+    // PsiInternalSDomain.g:126:1: ruleQualifiedNameWithWildCard returns [Boolean current=false] : ( ruleQualifiedName (kw= '.*' )? ) ;
     public final Boolean ruleQualifiedNameWithWildCard() throws RecognitionException {
         Boolean current = false;
 
         Token kw=null;
 
         try {
-            // PsiInternalSDomain.g:123:1: ( ( ruleQualifiedName (kw= '.*' )? ) )
-            // PsiInternalSDomain.g:124:2: ( ruleQualifiedName (kw= '.*' )? )
+            // PsiInternalSDomain.g:127:1: ( ( ruleQualifiedName (kw= '.*' )? ) )
+            // PsiInternalSDomain.g:128:2: ( ruleQualifiedName (kw= '.*' )? )
             {
-            // PsiInternalSDomain.g:124:2: ( ruleQualifiedName (kw= '.*' )? )
-            // PsiInternalSDomain.g:125:3: ruleQualifiedName (kw= '.*' )?
+            // PsiInternalSDomain.g:128:2: ( ruleQualifiedName (kw= '.*' )? )
+            // PsiInternalSDomain.g:129:3: ruleQualifiedName (kw= '.*' )?
             {
 
             			markComposite(elementTypeProvider.getQualifiedNameWithWildCard_QualifiedNameParserRuleCall_0ElementType());
@@ -343,7 +350,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneComposite();
             		
-            // PsiInternalSDomain.g:132:3: (kw= '.*' )?
+            // PsiInternalSDomain.g:136:3: (kw= '.*' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -352,7 +359,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalSDomain.g:133:4: kw= '.*'
+                    // PsiInternalSDomain.g:137:4: kw= '.*'
                     {
 
                     				markLeaf(elementTypeProvider.getQualifiedNameWithWildCard_FullStopAsteriskKeyword_1ElementType());
@@ -386,7 +393,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // PsiInternalSDomain.g:145:1: entryRuleQualifiedName returns [Boolean current=false] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // PsiInternalSDomain.g:149:1: entryRuleQualifiedName returns [Boolean current=false] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final Boolean entryRuleQualifiedName() throws RecognitionException {
         Boolean current = false;
 
@@ -394,8 +401,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:145:55: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // PsiInternalSDomain.g:146:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // PsiInternalSDomain.g:149:55: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // PsiInternalSDomain.g:150:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              markComposite(elementTypeProvider.getQualifiedNameElementType()); 
             pushFollow(FOLLOW_1);
@@ -421,7 +428,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedName"
-    // PsiInternalSDomain.g:152:1: ruleQualifiedName returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // PsiInternalSDomain.g:156:1: ruleQualifiedName returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final Boolean ruleQualifiedName() throws RecognitionException {
         Boolean current = false;
 
@@ -430,11 +437,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
         Token this_ID_2=null;
 
         try {
-            // PsiInternalSDomain.g:153:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // PsiInternalSDomain.g:154:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // PsiInternalSDomain.g:157:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // PsiInternalSDomain.g:158:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // PsiInternalSDomain.g:154:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // PsiInternalSDomain.g:155:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalSDomain.g:158:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // PsiInternalSDomain.g:159:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
 
             			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
@@ -443,7 +450,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(this_ID_0);
             		
-            // PsiInternalSDomain.g:162:3: (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalSDomain.g:166:3: (kw= '.' this_ID_2= RULE_ID )*
             loop3:
             do {
                 int alt3=2;
@@ -456,7 +463,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalSDomain.g:163:4: kw= '.' this_ID_2= RULE_ID
+            	    // PsiInternalSDomain.g:167:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
@@ -500,7 +507,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleNamespace"
-    // PsiInternalSDomain.g:182:1: entryRuleNamespace returns [Boolean current=false] : iv_ruleNamespace= ruleNamespace EOF ;
+    // PsiInternalSDomain.g:186:1: entryRuleNamespace returns [Boolean current=false] : iv_ruleNamespace= ruleNamespace EOF ;
     public final Boolean entryRuleNamespace() throws RecognitionException {
         Boolean current = false;
 
@@ -508,8 +515,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:182:51: (iv_ruleNamespace= ruleNamespace EOF )
-            // PsiInternalSDomain.g:183:2: iv_ruleNamespace= ruleNamespace EOF
+            // PsiInternalSDomain.g:186:51: (iv_ruleNamespace= ruleNamespace EOF )
+            // PsiInternalSDomain.g:187:2: iv_ruleNamespace= ruleNamespace EOF
             {
              markComposite(elementTypeProvider.getNamespaceElementType()); 
             pushFollow(FOLLOW_1);
@@ -535,7 +542,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleNamespace"
-    // PsiInternalSDomain.g:189:1: ruleNamespace returns [Boolean current=false] : ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) ;
+    // PsiInternalSDomain.g:193:1: ruleNamespace returns [Boolean current=false] : ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) ;
     public final Boolean ruleNamespace() throws RecognitionException {
         Boolean current = false;
 
@@ -547,17 +554,17 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:190:1: ( ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) )
-            // PsiInternalSDomain.g:191:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
+            // PsiInternalSDomain.g:194:1: ( ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) )
+            // PsiInternalSDomain.g:195:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
             {
-            // PsiInternalSDomain.g:191:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
-            // PsiInternalSDomain.g:192:3: ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}'
+            // PsiInternalSDomain.g:195:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
+            // PsiInternalSDomain.g:196:3: ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}'
             {
-            // PsiInternalSDomain.g:192:3: ( (lv_name_0_0= ruleQualifiedName ) )
-            // PsiInternalSDomain.g:193:4: (lv_name_0_0= ruleQualifiedName )
+            // PsiInternalSDomain.g:196:3: ( (lv_name_0_0= ruleQualifiedName ) )
+            // PsiInternalSDomain.g:197:4: (lv_name_0_0= ruleQualifiedName )
             {
-            // PsiInternalSDomain.g:193:4: (lv_name_0_0= ruleQualifiedName )
-            // PsiInternalSDomain.g:194:5: lv_name_0_0= ruleQualifiedName
+            // PsiInternalSDomain.g:197:4: (lv_name_0_0= ruleQualifiedName )
+            // PsiInternalSDomain.g:198:5: lv_name_0_0= ruleQualifiedName
             {
 
             					markComposite(elementTypeProvider.getNamespace_NameQualifiedNameParserRuleCall_0_0ElementType());
@@ -587,7 +594,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalSDomain.g:214:3: ( (lv_elements_2_0= ruleElement ) )*
+            // PsiInternalSDomain.g:218:3: ( (lv_elements_2_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -600,10 +607,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt4) {
             	case 1 :
-            	    // PsiInternalSDomain.g:215:4: (lv_elements_2_0= ruleElement )
+            	    // PsiInternalSDomain.g:219:4: (lv_elements_2_0= ruleElement )
             	    {
-            	    // PsiInternalSDomain.g:215:4: (lv_elements_2_0= ruleElement )
-            	    // PsiInternalSDomain.g:216:5: lv_elements_2_0= ruleElement
+            	    // PsiInternalSDomain.g:219:4: (lv_elements_2_0= ruleElement )
+            	    // PsiInternalSDomain.g:220:5: lv_elements_2_0= ruleElement
             	    {
 
             	    					markComposite(elementTypeProvider.getNamespace_ElementsElementParserRuleCall_2_0ElementType());
@@ -658,7 +665,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleElement"
-    // PsiInternalSDomain.g:240:1: entryRuleElement returns [Boolean current=false] : iv_ruleElement= ruleElement EOF ;
+    // PsiInternalSDomain.g:244:1: entryRuleElement returns [Boolean current=false] : iv_ruleElement= ruleElement EOF ;
     public final Boolean entryRuleElement() throws RecognitionException {
         Boolean current = false;
 
@@ -666,8 +673,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:240:49: (iv_ruleElement= ruleElement EOF )
-            // PsiInternalSDomain.g:241:2: iv_ruleElement= ruleElement EOF
+            // PsiInternalSDomain.g:244:49: (iv_ruleElement= ruleElement EOF )
+            // PsiInternalSDomain.g:245:2: iv_ruleElement= ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FOLLOW_1);
@@ -693,7 +700,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleElement"
-    // PsiInternalSDomain.g:247:1: ruleElement returns [Boolean current=false] : (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) ;
+    // PsiInternalSDomain.g:251:1: ruleElement returns [Boolean current=false] : (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) ;
     public final Boolean ruleElement() throws RecognitionException {
         Boolean current = false;
 
@@ -705,10 +712,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:248:1: ( (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) )
-            // PsiInternalSDomain.g:249:2: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
+            // PsiInternalSDomain.g:252:1: ( (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) )
+            // PsiInternalSDomain.g:253:2: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
             {
-            // PsiInternalSDomain.g:249:2: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
+            // PsiInternalSDomain.g:253:2: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
             int alt5=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -736,7 +743,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             switch (alt5) {
                 case 1 :
-                    // PsiInternalSDomain.g:250:3: this_Namespace_0= ruleNamespace
+                    // PsiInternalSDomain.g:254:3: this_Namespace_0= ruleNamespace
                     {
 
                     			markComposite(elementTypeProvider.getElement_NamespaceParserRuleCall_0ElementType());
@@ -754,7 +761,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalSDomain.g:259:3: this_Type_1= ruleType
+                    // PsiInternalSDomain.g:263:3: this_Type_1= ruleType
                     {
 
                     			markComposite(elementTypeProvider.getElement_TypeParserRuleCall_1ElementType());
@@ -772,7 +779,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalSDomain.g:268:3: this_Import_2= ruleImport
+                    // PsiInternalSDomain.g:272:3: this_Import_2= ruleImport
                     {
 
                     			markComposite(elementTypeProvider.getElement_ImportParserRuleCall_2ElementType());
@@ -808,7 +815,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleType"
-    // PsiInternalSDomain.g:280:1: entryRuleType returns [Boolean current=false] : iv_ruleType= ruleType EOF ;
+    // PsiInternalSDomain.g:284:1: entryRuleType returns [Boolean current=false] : iv_ruleType= ruleType EOF ;
     public final Boolean entryRuleType() throws RecognitionException {
         Boolean current = false;
 
@@ -816,8 +823,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:280:46: (iv_ruleType= ruleType EOF )
-            // PsiInternalSDomain.g:281:2: iv_ruleType= ruleType EOF
+            // PsiInternalSDomain.g:284:46: (iv_ruleType= ruleType EOF )
+            // PsiInternalSDomain.g:285:2: iv_ruleType= ruleType EOF
             {
              markComposite(elementTypeProvider.getTypeElementType()); 
             pushFollow(FOLLOW_1);
@@ -843,7 +850,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleType"
-    // PsiInternalSDomain.g:287:1: ruleType returns [Boolean current=false] : (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) ;
+    // PsiInternalSDomain.g:291:1: ruleType returns [Boolean current=false] : (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) ;
     public final Boolean ruleType() throws RecognitionException {
         Boolean current = false;
 
@@ -853,10 +860,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:288:1: ( (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) )
-            // PsiInternalSDomain.g:289:2: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
+            // PsiInternalSDomain.g:292:1: ( (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) )
+            // PsiInternalSDomain.g:293:2: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
             {
-            // PsiInternalSDomain.g:289:2: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
+            // PsiInternalSDomain.g:293:2: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -874,7 +881,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalSDomain.g:290:3: this_Entity_0= ruleEntity
+                    // PsiInternalSDomain.g:294:3: this_Entity_0= ruleEntity
                     {
 
                     			markComposite(elementTypeProvider.getType_EntityParserRuleCall_0ElementType());
@@ -892,7 +899,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalSDomain.g:299:3: this_Datatype_1= ruleDatatype
+                    // PsiInternalSDomain.g:303:3: this_Datatype_1= ruleDatatype
                     {
 
                     			markComposite(elementTypeProvider.getType_DatatypeParserRuleCall_1ElementType());
@@ -928,7 +935,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleEntity"
-    // PsiInternalSDomain.g:311:1: entryRuleEntity returns [Boolean current=false] : iv_ruleEntity= ruleEntity EOF ;
+    // PsiInternalSDomain.g:315:1: entryRuleEntity returns [Boolean current=false] : iv_ruleEntity= ruleEntity EOF ;
     public final Boolean entryRuleEntity() throws RecognitionException {
         Boolean current = false;
 
@@ -936,8 +943,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:311:48: (iv_ruleEntity= ruleEntity EOF )
-            // PsiInternalSDomain.g:312:2: iv_ruleEntity= ruleEntity EOF
+            // PsiInternalSDomain.g:315:48: (iv_ruleEntity= ruleEntity EOF )
+            // PsiInternalSDomain.g:316:2: iv_ruleEntity= ruleEntity EOF
             {
              markComposite(elementTypeProvider.getEntityElementType()); 
             pushFollow(FOLLOW_1);
@@ -963,7 +970,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleEntity"
-    // PsiInternalSDomain.g:318:1: ruleEntity returns [Boolean current=false] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) ;
+    // PsiInternalSDomain.g:322:1: ruleEntity returns [Boolean current=false] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) ;
     public final Boolean ruleEntity() throws RecognitionException {
         Boolean current = false;
 
@@ -975,11 +982,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:319:1: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) )
-            // PsiInternalSDomain.g:320:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
+            // PsiInternalSDomain.g:323:1: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) )
+            // PsiInternalSDomain.g:324:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
             {
-            // PsiInternalSDomain.g:320:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
-            // PsiInternalSDomain.g:321:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}'
+            // PsiInternalSDomain.g:324:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
+            // PsiInternalSDomain.g:325:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}'
             {
 
             			markLeaf(elementTypeProvider.getEntity_EntityKeyword_0ElementType());
@@ -988,11 +995,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSDomain.g:328:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSDomain.g:329:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSDomain.g:332:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSDomain.g:333:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSDomain.g:329:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSDomain.g:330:5: lv_name_1_0= RULE_ID
+            // PsiInternalSDomain.g:333:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSDomain.g:334:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEntity_NameIDTerminalRuleCall_1_0ElementType());
@@ -1020,7 +1027,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_2);
             		
-            // PsiInternalSDomain.g:352:3: ( (lv_properties_3_0= ruleProperty ) )*
+            // PsiInternalSDomain.g:356:3: ( (lv_properties_3_0= ruleProperty ) )*
             loop7:
             do {
                 int alt7=2;
@@ -1033,10 +1040,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalSDomain.g:353:4: (lv_properties_3_0= ruleProperty )
+            	    // PsiInternalSDomain.g:357:4: (lv_properties_3_0= ruleProperty )
             	    {
-            	    // PsiInternalSDomain.g:353:4: (lv_properties_3_0= ruleProperty )
-            	    // PsiInternalSDomain.g:354:5: lv_properties_3_0= ruleProperty
+            	    // PsiInternalSDomain.g:357:4: (lv_properties_3_0= ruleProperty )
+            	    // PsiInternalSDomain.g:358:5: lv_properties_3_0= ruleProperty
             	    {
 
             	    					markComposite(elementTypeProvider.getEntity_PropertiesPropertyParserRuleCall_3_0ElementType());
@@ -1091,7 +1098,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleDatatype"
-    // PsiInternalSDomain.g:378:1: entryRuleDatatype returns [Boolean current=false] : iv_ruleDatatype= ruleDatatype EOF ;
+    // PsiInternalSDomain.g:382:1: entryRuleDatatype returns [Boolean current=false] : iv_ruleDatatype= ruleDatatype EOF ;
     public final Boolean entryRuleDatatype() throws RecognitionException {
         Boolean current = false;
 
@@ -1099,8 +1106,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:378:50: (iv_ruleDatatype= ruleDatatype EOF )
-            // PsiInternalSDomain.g:379:2: iv_ruleDatatype= ruleDatatype EOF
+            // PsiInternalSDomain.g:382:50: (iv_ruleDatatype= ruleDatatype EOF )
+            // PsiInternalSDomain.g:383:2: iv_ruleDatatype= ruleDatatype EOF
             {
              markComposite(elementTypeProvider.getDatatypeElementType()); 
             pushFollow(FOLLOW_1);
@@ -1126,7 +1133,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleDatatype"
-    // PsiInternalSDomain.g:385:1: ruleDatatype returns [Boolean current=false] : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // PsiInternalSDomain.g:389:1: ruleDatatype returns [Boolean current=false] : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final Boolean ruleDatatype() throws RecognitionException {
         Boolean current = false;
 
@@ -1134,11 +1141,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalSDomain.g:386:1: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalSDomain.g:387:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSDomain.g:390:1: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSDomain.g:391:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalSDomain.g:387:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalSDomain.g:388:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSDomain.g:391:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSDomain.g:392:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getDatatype_DatatypeKeyword_0ElementType());
@@ -1147,11 +1154,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSDomain.g:395:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSDomain.g:396:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSDomain.g:399:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSDomain.g:400:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSDomain.g:396:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSDomain.g:397:5: lv_name_1_0= RULE_ID
+            // PsiInternalSDomain.g:400:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSDomain.g:401:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getDatatype_NameIDTerminalRuleCall_1_0ElementType());
@@ -1191,7 +1198,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleProperty"
-    // PsiInternalSDomain.g:416:1: entryRuleProperty returns [Boolean current=false] : iv_ruleProperty= ruleProperty EOF ;
+    // PsiInternalSDomain.g:420:1: entryRuleProperty returns [Boolean current=false] : iv_ruleProperty= ruleProperty EOF ;
     public final Boolean entryRuleProperty() throws RecognitionException {
         Boolean current = false;
 
@@ -1199,8 +1206,8 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalSDomain.g:416:50: (iv_ruleProperty= ruleProperty EOF )
-            // PsiInternalSDomain.g:417:2: iv_ruleProperty= ruleProperty EOF
+            // PsiInternalSDomain.g:420:50: (iv_ruleProperty= ruleProperty EOF )
+            // PsiInternalSDomain.g:421:2: iv_ruleProperty= ruleProperty EOF
             {
              markComposite(elementTypeProvider.getPropertyElementType()); 
             pushFollow(FOLLOW_1);
@@ -1226,24 +1233,24 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleProperty"
-    // PsiInternalSDomain.g:423:1: ruleProperty returns [Boolean current=false] : ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // PsiInternalSDomain.g:427:1: ruleProperty returns [Boolean current=false] : ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final Boolean ruleProperty() throws RecognitionException {
         Boolean current = false;
 
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalSDomain.g:424:1: ( ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalSDomain.g:425:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSDomain.g:428:1: ( ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSDomain.g:429:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalSDomain.g:425:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalSDomain.g:426:3: ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSDomain.g:429:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSDomain.g:430:3: ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) )
             {
-            // PsiInternalSDomain.g:426:3: ( ( ruleQualifiedName ) )
-            // PsiInternalSDomain.g:427:4: ( ruleQualifiedName )
+            // PsiInternalSDomain.g:430:3: ( ( ruleQualifiedName ) )
+            // PsiInternalSDomain.g:431:4: ( ruleQualifiedName )
             {
-            // PsiInternalSDomain.g:427:4: ( ruleQualifiedName )
-            // PsiInternalSDomain.g:428:5: ruleQualifiedName
+            // PsiInternalSDomain.g:431:4: ( ruleQualifiedName )
+            // PsiInternalSDomain.g:432:5: ruleQualifiedName
             {
 
             					if (!current) {
@@ -1268,11 +1275,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             }
 
-            // PsiInternalSDomain.g:443:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSDomain.g:444:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSDomain.g:447:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSDomain.g:448:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSDomain.g:444:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSDomain.g:445:5: lv_name_1_0= RULE_ID
+            // PsiInternalSDomain.g:448:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSDomain.g:449:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType());
