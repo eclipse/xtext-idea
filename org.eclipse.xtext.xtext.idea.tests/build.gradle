@@ -16,3 +16,6 @@ ideaDevelopment {
 		project ':org.eclipse.xtext.xtext.idea'
 	}
 }
+
+// TODO https://github.com/eclipse/xtext-idea/issues/5
+test.enabled = false

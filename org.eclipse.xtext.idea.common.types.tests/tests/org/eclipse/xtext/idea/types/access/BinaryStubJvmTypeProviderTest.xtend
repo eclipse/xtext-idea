@@ -12,9 +12,12 @@ import com.intellij.testFramework.PsiTestCase
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
 import org.eclipse.xtext.idea.tests.TestDecorator
+import org.junit.Ignore
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 
+// TODO https://github.com/eclipse/xtext-idea/issues/4
+@Ignore
 @TestDecorator
 class BinaryStubJvmTypeProviderTest extends PsiTestCase {
 

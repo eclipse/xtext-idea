@@ -36,12 +36,12 @@ public class DefaultResourceIdeaServiceProvider implements IResourceIdeaServiceP
   @Accessors(AccessorType.PUBLIC_GETTER)
   private IPsiModelAssociations psiModelAssociations;
   
-  public boolean canHandle(final URI uri) {
-    return this.delegate.canHandle(uri);
+  public boolean canHandle(final URI arg0) {
+    return this.delegate.canHandle(arg0);
   }
   
-  public <T extends Object> T get(final Class<T> t) {
-    return this.delegate.get(t);
+  public <T extends Object> T get(final Class<T> arg0) {
+    return this.delegate.get(arg0);
   }
   
   public IContainer.Manager getContainerManager() {

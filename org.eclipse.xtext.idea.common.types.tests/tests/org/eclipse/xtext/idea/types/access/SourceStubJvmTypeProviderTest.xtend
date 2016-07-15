@@ -15,9 +15,12 @@ import com.intellij.testFramework.PsiTestCase
 import com.intellij.testFramework.PsiTestUtil
 import java.io.File
 import org.eclipse.xtext.idea.tests.TestDecorator
+import org.junit.Ignore
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 
+// TODO https://github.com/eclipse/xtext-idea/issues/4
+@Ignore
 @TestDecorator
 class SourceStubJvmTypeProviderTest extends PsiTestCase {
 
@@ -28,7 +31,7 @@ class SourceStubJvmTypeProviderTest extends PsiTestCase {
 		LanguageLevelProjectExtension.getInstance(myJavaFacade.project).setLanguageLevel(LanguageLevel.JDK_1_5)
 		module.addGuavaLibrary
 		
-		val testDataFolder = new File("../../tests/org.eclipse.xtext.common.types.tests/testdata")
+		val testDataFolder = new File("testdata")
 		val testDataSourceRoot = LocalFileSystem.instance.refreshAndFindFileByIoFile(testDataFolder)
 		PsiTestUtil.addSourceRoot(myModule, testDataSourceRoot)
 		delegate.setUp(myModule)

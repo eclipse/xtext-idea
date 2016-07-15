@@ -12,6 +12,10 @@ sourceSets.test.java {
 	srcDir 'tests'
 }
 
+sourceSets.mwe2.java {
+	srcDir 'testdata'
+}
+
 ideaDevelopment {
 	pluginDependencies {
 		project ':org.eclipse.xtext.idea'

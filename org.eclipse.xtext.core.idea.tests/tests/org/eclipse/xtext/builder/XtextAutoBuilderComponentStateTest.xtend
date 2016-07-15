@@ -4,14 +4,14 @@ import com.google.inject.Inject
 import org.eclipse.xtext.build.Source2GeneratedMapping
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponentState.Codec
 import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
