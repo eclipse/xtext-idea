@@ -1,3 +1,6 @@
+apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+apply from: "${rootDir}/gradle/idea-development.gradle"
+
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.wizard:$versions.xtext"
 }

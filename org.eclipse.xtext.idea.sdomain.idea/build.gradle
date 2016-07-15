@@ -1,7 +1,8 @@
 apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+apply from: "${rootDir}/gradle/idea-development.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.idea.sdomain')
+	compile project(':org.eclipse.xtext.idea.sdomain.ide')
 }
 
 ideaDevelopment {
