@@ -33,7 +33,7 @@ public class Bug250313ParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getModelElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getModel_ChildrenChildParserRuleCall_8_0_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getModel_ChildrenChildParserRuleCall_8_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getChildElementType()) {

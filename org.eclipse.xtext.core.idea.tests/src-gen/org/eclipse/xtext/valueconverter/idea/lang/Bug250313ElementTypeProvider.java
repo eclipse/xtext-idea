@@ -162,41 +162,14 @@ public class Bug250313ElementTypeProvider implements IElementTypeProvider {
 		public static IGrammarAwareElementType createModel_Group_8ElementType() {
 			return new IGrammarAwareElementType("Model_Group_8_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getGroup_8());
 		}
-		public static IGrammarAwareElementType createModel_Group_8_0ElementType() {
-			return new IGrammarAwareElementType("Model_Group_8_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getGroup_8_0());
+		public static IGrammarAwareElementType createModel_ContentKeyword_8_0ElementType() {
+			return new IGrammarAwareElementType("Model_ContentKeyword_8_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getContentKeyword_8_0());
 		}
-		public static IGrammarAwareElementType createModel_ContentKeyword_8_0_0ElementType() {
-			return new IGrammarAwareElementType("Model_ContentKeyword_8_0_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getContentKeyword_8_0_0());
+		public static IGrammarAwareElementType createModel_ChildrenAssignment_8_1ElementType() {
+			return new IGrammarAwareElementType("Model_ChildrenAssignment_8_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getChildrenAssignment_8_1());
 		}
-		public static IGrammarAwareElementType createModel_ChildrenAssignment_8_0_1ElementType() {
-			return new IGrammarAwareElementType("Model_ChildrenAssignment_8_0_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getChildrenAssignment_8_0_1());
-		}
-		public static IGrammarAwareElementType createModel_ChildrenChildParserRuleCall_8_0_1_0ElementType() {
-			return new IGrammarAwareElementType("Model_ChildrenChildParserRuleCall_8_0_1_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getChildrenChildParserRuleCall_8_0_1_0());
-		}
-		public static IGrammarAwareElementType createModel_Group_8_1ElementType() {
-			return new IGrammarAwareElementType("Model_Group_8_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getGroup_8_1());
-		}
-		public static IGrammarAwareElementType createModel_RefKeyword_8_1_0ElementType() {
-			return new IGrammarAwareElementType("Model_RefKeyword_8_1_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefKeyword_8_1_0());
-		}
-		public static IGrammarAwareElementType createModel_RefAssignment_8_1_1ElementType() {
-			return new IGrammarAwareElementType("Model_RefAssignment_8_1_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefAssignment_8_1_1());
-		}
-		public static IGrammarAwareElementType createModel_RefAlternatives_8_1_1_0ElementType() {
-			return new IGrammarAwareElementType("Model_RefAlternatives_8_1_1_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefAlternatives_8_1_1_0());
-		}
-		public static IGrammarAwareElementType createModel_RefChild1CrossReference_8_1_1_0_0ElementType() {
-			return new IGrammarAwareElementType("Model_RefChild1CrossReference_8_1_1_0_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefChild1CrossReference_8_1_1_0_0());
-		}
-		public static IGrammarAwareElementType createModel_RefChild1STRINGTerminalRuleCall_8_1_1_0_0_1ElementType() {
-			return new IGrammarAwareElementType("Model_RefChild1STRINGTerminalRuleCall_8_1_1_0_0_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefChild1STRINGTerminalRuleCall_8_1_1_0_0_1());
-		}
-		public static IGrammarAwareElementType createModel_RefChild2CrossReference_8_1_1_0_1ElementType() {
-			return new IGrammarAwareElementType("Model_RefChild2CrossReference_8_1_1_0_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefChild2CrossReference_8_1_1_0_1());
-		}
-		public static IGrammarAwareElementType createModel_RefChild2IDTerminalRuleCall_8_1_1_0_1_1ElementType() {
-			return new IGrammarAwareElementType("Model_RefChild2IDTerminalRuleCall_8_1_1_0_1_1_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getRefChild2IDTerminalRuleCall_8_1_1_0_1_1());
+		public static IGrammarAwareElementType createModel_ChildrenChildParserRuleCall_8_1_0ElementType() {
+			return new IGrammarAwareElementType("Model_ChildrenChildParserRuleCall_8_1_0_ELEMENT_TYPE", Bug250313Language.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getChildrenChildParserRuleCall_8_1_0());
 		}
 	}
 
@@ -290,29 +263,11 @@ public class Bug250313ElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType Model_Group_8_ELEMENT_TYPE = associate(ModelFactory.createModel_Group_8ElementType());
 
-	public static final IGrammarAwareElementType Model_Group_8_0_ELEMENT_TYPE = associate(ModelFactory.createModel_Group_8_0ElementType());
+	public static final IGrammarAwareElementType Model_ContentKeyword_8_0_ELEMENT_TYPE = associate(ModelFactory.createModel_ContentKeyword_8_0ElementType());
 
-	public static final IGrammarAwareElementType Model_ContentKeyword_8_0_0_ELEMENT_TYPE = associate(ModelFactory.createModel_ContentKeyword_8_0_0ElementType());
+	public static final IGrammarAwareElementType Model_ChildrenAssignment_8_1_ELEMENT_TYPE = associate(ModelFactory.createModel_ChildrenAssignment_8_1ElementType());
 
-	public static final IGrammarAwareElementType Model_ChildrenAssignment_8_0_1_ELEMENT_TYPE = associate(ModelFactory.createModel_ChildrenAssignment_8_0_1ElementType());
-
-	public static final IGrammarAwareElementType Model_ChildrenChildParserRuleCall_8_0_1_0_ELEMENT_TYPE = associate(ModelFactory.createModel_ChildrenChildParserRuleCall_8_0_1_0ElementType());
-
-	public static final IGrammarAwareElementType Model_Group_8_1_ELEMENT_TYPE = associate(ModelFactory.createModel_Group_8_1ElementType());
-
-	public static final IGrammarAwareElementType Model_RefKeyword_8_1_0_ELEMENT_TYPE = associate(ModelFactory.createModel_RefKeyword_8_1_0ElementType());
-
-	public static final IGrammarAwareElementType Model_RefAssignment_8_1_1_ELEMENT_TYPE = associate(ModelFactory.createModel_RefAssignment_8_1_1ElementType());
-
-	public static final IGrammarAwareElementType Model_RefAlternatives_8_1_1_0_ELEMENT_TYPE = associate(ModelFactory.createModel_RefAlternatives_8_1_1_0ElementType());
-
-	public static final IGrammarAwareElementType Model_RefChild1CrossReference_8_1_1_0_0_ELEMENT_TYPE = associate(ModelFactory.createModel_RefChild1CrossReference_8_1_1_0_0ElementType());
-
-	public static final IGrammarAwareElementType Model_RefChild1STRINGTerminalRuleCall_8_1_1_0_0_1_ELEMENT_TYPE = associate(ModelFactory.createModel_RefChild1STRINGTerminalRuleCall_8_1_1_0_0_1ElementType());
-
-	public static final IGrammarAwareElementType Model_RefChild2CrossReference_8_1_1_0_1_ELEMENT_TYPE = associate(ModelFactory.createModel_RefChild2CrossReference_8_1_1_0_1ElementType());
-
-	public static final IGrammarAwareElementType Model_RefChild2IDTerminalRuleCall_8_1_1_0_1_1_ELEMENT_TYPE = associate(ModelFactory.createModel_RefChild2IDTerminalRuleCall_8_1_1_0_1_1ElementType());
+	public static final IGrammarAwareElementType Model_ChildrenChildParserRuleCall_8_1_0_ELEMENT_TYPE = associate(ModelFactory.createModel_ChildrenChildParserRuleCall_8_1_0ElementType());
 
 	private static class DatatypeFactory {
 		public static IGrammarAwareElementType createDatatypeElementType() {
@@ -619,52 +574,12 @@ public class Bug250313ElementTypeProvider implements IElementTypeProvider {
 		return Model_Group_8_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getModel_Group_8_0ElementType() {
-		return Model_Group_8_0_ELEMENT_TYPE;
+	public IGrammarAwareElementType getModel_ContentKeyword_8_0ElementType() {
+		return Model_ContentKeyword_8_0_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getModel_ContentKeyword_8_0_0ElementType() {
-		return Model_ContentKeyword_8_0_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_ChildrenAssignment_8_0_1ElementType() {
-		return Model_ChildrenAssignment_8_0_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_ChildrenChildParserRuleCall_8_0_1_0ElementType() {
-		return Model_ChildrenChildParserRuleCall_8_0_1_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_Group_8_1ElementType() {
-		return Model_Group_8_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefKeyword_8_1_0ElementType() {
-		return Model_RefKeyword_8_1_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefAssignment_8_1_1ElementType() {
-		return Model_RefAssignment_8_1_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefAlternatives_8_1_1_0ElementType() {
-		return Model_RefAlternatives_8_1_1_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefChild1CrossReference_8_1_1_0_0ElementType() {
-		return Model_RefChild1CrossReference_8_1_1_0_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefChild1STRINGTerminalRuleCall_8_1_1_0_0_1ElementType() {
-		return Model_RefChild1STRINGTerminalRuleCall_8_1_1_0_0_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefChild2CrossReference_8_1_1_0_1ElementType() {
-		return Model_RefChild2CrossReference_8_1_1_0_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getModel_RefChild2IDTerminalRuleCall_8_1_1_0_1_1ElementType() {
-		return Model_RefChild2IDTerminalRuleCall_8_1_1_0_1_1_ELEMENT_TYPE;
+	public IGrammarAwareElementType getModel_ChildrenChildParserRuleCall_8_1_0ElementType() {
+		return Model_ChildrenChildParserRuleCall_8_1_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getDatatypeElementType() {

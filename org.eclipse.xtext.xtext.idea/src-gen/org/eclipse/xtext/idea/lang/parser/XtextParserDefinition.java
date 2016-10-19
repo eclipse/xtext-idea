@@ -66,22 +66,28 @@ public class XtextParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getReferencedMetamodelElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
+			if (elementType == elementTypeProvider.getAnnotationElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
 			if (elementType == elementTypeProvider.getParserRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_0_0_1ElementType()) {
+			if (elementType == elementTypeProvider.getParserRule_AnnotationsAnnotationParserRuleCall_0_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParserRule_TypeTypeRefParserRuleCall_0_0_2_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_0_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_1_0_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParserRule_TypeTypeRefParserRuleCall_0_1_1_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getParserRule_TypeTypeRefParserRuleCall_1_0_2_1_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParserRule_AlternativesAlternativesParserRuleCall_3_0ElementType()) {
+			if (elementType == elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_1_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getParserRule_TypeTypeRefParserRuleCall_1_1_1_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getParserRule_AlternativesAlternativesParserRuleCall_4_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getRuleNameAndParamsElementType()) {
@@ -363,10 +369,13 @@ public class XtextParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getTerminalRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getTerminalRule_TypeTypeRefParserRuleCall_1_1_1_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getTerminalRule_AnnotationsAnnotationParserRuleCall_0_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTerminalRule_TypeTypeRefParserRuleCall_2_1_1_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getTerminalRule_AlternativesTerminalAlternativesParserRuleCall_3_0ElementType()) {
+			if (elementType == elementTypeProvider.getTerminalRule_AlternativesTerminalAlternativesParserRuleCall_4_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getTerminalAlternativesElementType()) {
@@ -474,10 +483,13 @@ public class XtextParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getEnumRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getEnumRule_TypeTypeRefParserRuleCall_2_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getEnumRule_AnnotationsAnnotationParserRuleCall_0_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getEnumRule_TypeTypeRefParserRuleCall_3_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getEnumRule_AlternativesEnumLiteralsParserRuleCall_4_0ElementType()) {
+			if (elementType == elementTypeProvider.getEnumRule_AlternativesEnumLiteralsParserRuleCall_5_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getEnumLiteralsElementType()) {
