@@ -23,14 +23,18 @@ sourceSets {
 
 jar {
 	from ('.') {
-		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
+		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', 'plugin.properties'
 	}
-	metaInf {
-		from 'META-INF'
-	}
+	if (isTestProject)
+		from(sourceSets.test.output)
 }
 
-if (isTestProject) {
-	jar.from(sourceSets.test.output)
+if (isTestProject || name.contains('example')) {
+	tasks.withType(Javadoc) {
+		enabled = false
+	}
+	javadocJar.enabled = false
 	uploadArchives.enabled = false
+} else {
+	artifacts.archives javadocJar
 }
