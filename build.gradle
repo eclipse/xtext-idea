@@ -1,3 +1,7 @@
+/*
+ * Root project for xtext-idea.
+ */
+
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
