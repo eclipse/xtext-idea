@@ -332,7 +332,7 @@ public class PsiInternalBug301935TestLanguageParser extends AbstractPsiAntlrPars
                     // PsiInternalBug301935TestLanguage.g:159:5: kw= '\\r'
                     {
 
-                    					markLeaf(elementTypeProvider.getNL_Control000dKeyword_1_0ElementType());
+                    					markLeaf(elementTypeProvider.getNL_CarriageReturnKeyword_1_0ElementType());
                     				
                     kw=(Token)match(input,7,FollowSets000.FOLLOW_6); 
 
@@ -345,7 +345,7 @@ public class PsiInternalBug301935TestLanguageParser extends AbstractPsiAntlrPars
             }
 
 
-            				markLeaf(elementTypeProvider.getNL_Control000aKeyword_1_1ElementType());
+            				markLeaf(elementTypeProvider.getLineFeedKeyword_1_1ElementType());
             			
             kw=(Token)match(input,8,FollowSets000.FOLLOW_7); 
 
