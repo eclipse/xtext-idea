@@ -436,13 +436,15 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
           if (Objects.equal(fieldType, _simpleName)) {
             _matched=true;
             String _text = initializer.getText();
-            switch (_text) {
-              case PsiBasedTypeFactory.DOUBLE_NAN:
-                return Double.valueOf(Double.NaN);
-              case PsiBasedTypeFactory.DOUBLE_POSITIVE_INF:
-                return Double.valueOf(Double.POSITIVE_INFINITY);
-              case PsiBasedTypeFactory.DOUBLE_NEGATIVE_INF:
-                return Double.valueOf(Double.NEGATIVE_INFINITY);
+            if (_text != null) {
+              switch (_text) {
+                case PsiBasedTypeFactory.DOUBLE_NAN:
+                  return Double.valueOf(Double.NaN);
+                case PsiBasedTypeFactory.DOUBLE_POSITIVE_INF:
+                  return Double.valueOf(Double.POSITIVE_INFINITY);
+                case PsiBasedTypeFactory.DOUBLE_NEGATIVE_INF:
+                  return Double.valueOf(Double.NEGATIVE_INFINITY);
+              }
             }
           }
           if (!_matched) {
@@ -450,13 +452,15 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
             if (Objects.equal(fieldType, _simpleName_1)) {
               _matched=true;
               String _text_1 = initializer.getText();
-              switch (_text_1) {
-                case PsiBasedTypeFactory.FLOAT_NAN:
-                  return Float.valueOf(Float.NaN);
-                case PsiBasedTypeFactory.FLOAT_POSITIVE_INF:
-                  return Float.valueOf(Float.POSITIVE_INFINITY);
-                case PsiBasedTypeFactory.FLOAT_NEGATIVE_INF:
-                  return Float.valueOf(Float.NEGATIVE_INFINITY);
+              if (_text_1 != null) {
+                switch (_text_1) {
+                  case PsiBasedTypeFactory.FLOAT_NAN:
+                    return Float.valueOf(Float.NaN);
+                  case PsiBasedTypeFactory.FLOAT_POSITIVE_INF:
+                    return Float.valueOf(Float.POSITIVE_INFINITY);
+                  case PsiBasedTypeFactory.FLOAT_NEGATIVE_INF:
+                    return Float.valueOf(Float.NEGATIVE_INFINITY);
+                }
               }
             }
           }

@@ -36,28 +36,30 @@ public class XtextPsiReferenceTestContext {
       {
         final int endIndex = this.text.indexOf(">");
         final String name = this.text.substring((startIndex + 1), endIndex);
-        switch (name) {
-          case "caret":
-            this.caretOffset = startIndex;
-            break;
-          case "crossReference":
-            this.startCrossReferenceOffset = startIndex;
-            break;
-          case "/crossReference":
-            this.endCrossReferenceOffset = startIndex;
-            break;
-          case "reference":
-            this.startReferenceOffset = startIndex;
-            break;
-          case "/reference":
-            this.endReferenceOffset = startIndex;
-            break;
-          case "referenceToHighlight":
-            this.startReferenceToHighlightOffset = startIndex;
-            break;
-          case "/referenceToHighlight":
-            this.endReferenceToHighlightOffset = startIndex;
-            break;
+        if (name != null) {
+          switch (name) {
+            case "caret":
+              this.caretOffset = startIndex;
+              break;
+            case "crossReference":
+              this.startCrossReferenceOffset = startIndex;
+              break;
+            case "/crossReference":
+              this.endCrossReferenceOffset = startIndex;
+              break;
+            case "reference":
+              this.startReferenceOffset = startIndex;
+              break;
+            case "/reference":
+              this.endReferenceOffset = startIndex;
+              break;
+            case "referenceToHighlight":
+              this.startReferenceToHighlightOffset = startIndex;
+              break;
+            case "/referenceToHighlight":
+              this.endReferenceToHighlightOffset = startIndex;
+              break;
+          }
         }
         String _substring = this.text.substring(0, startIndex);
         String _substring_1 = this.text.substring((endIndex + 1));
