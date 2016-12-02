@@ -108,7 +108,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 			ApplicationManager.application.<JvmDeclaredType>runReadAction[
 				val buffer = new StringBuilder(100)
 				val packageName = psiClass.packageName
-				if (packageName != null) {
+				if (packageName !== null) {
 					buffer.append(packageName).append('.')
 				}
 				val type = psiClass.createType(buffer)
@@ -162,7 +162,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 		val modifierList = psiModifierListOwner.modifierList
 		for (annotation : modifierList.annotations) {
 			val annotationReference = annotation.createAnnotationReference
-			if (annotationReference != null) {
+			if (annotationReference !== null) {
 				annotations.addUnique(annotationReference)
 			}
 		}
@@ -228,7 +228,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 			default:
 				createJvmField => [
 					val value = field.constantValue
-					if (value != null) {
+					if (value !== null) {
 						constant = true
 						constantValue = value
 					} else {
@@ -334,7 +334,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 	protected def setDefaultValue(JvmOperation operation, PsiMethod method) {
 		if (method instanceof PsiAnnotationMethod) {
 			val defaultValue = method.defaultValue.computeAnnotationValue(method.project)
-			if (defaultValue != null) {
+			if (defaultValue !== null) {
 				val annotationValue = defaultValue.createAnnotationValue(method)
 				operation.defaultValue = annotationValue
 				annotationValue.operation = operation
@@ -396,7 +396,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 				values.addUnique((value as PsiType).createTypeReference)
 			JvmAnnotationAnnotationValue: {
 				val annotationReference = (value as PsiAnnotation).createAnnotationReference
-				if (annotationReference != null) {
+				if (annotationReference !== null) {
 					values.addUnique(annotationReference)
 				}
 			}
@@ -695,7 +695,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 	}
 
 	protected def isInnerTypeReference(PsiClass psiClass) {
-		psiClass.containingClass != null && !psiClass.hasModifierProperty(PsiModifier.STATIC)
+		psiClass.containingClass !== null && !psiClass.hasModifierProperty(PsiModifier.STATIC)
 	}
 
 	protected def dispatch JvmTypeReference createTypeArgument(PsiType type) {

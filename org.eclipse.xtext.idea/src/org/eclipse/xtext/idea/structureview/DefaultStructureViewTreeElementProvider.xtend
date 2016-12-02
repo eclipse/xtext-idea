@@ -39,12 +39,12 @@ class DefaultStructureViewTreeElementProvider implements IStructureViewTreeEleme
 
 	def dispatch void buildChildren(XtextFileTreeElement it) {
 		val modelElement = element.resource.contents.head
-		if (modelElement == null) {
+		if (modelElement === null) {
 			return
 		}
 		val itemPresentation = modelElement.itemPresentation ?: new PresentationData
 		if (itemPresentation instanceof PresentationData)
-			if (itemPresentation.presentableText == null)
+			if (itemPresentation.presentableText === null)
 				itemPresentation.presentableText = modelElement.eResource.URI.trimFileExtension.lastSegment
 		addChild(
 			modelElement.createEObjectTreeElement(
@@ -81,7 +81,7 @@ class DefaultStructureViewTreeElementProvider implements IStructureViewTreeEleme
 
 	protected def createEObjectTreeElement(EObject modelElement, BaseXtextFile xtextFile, boolean leaf,
 		ItemPresentation itemPresentation) {
-		if (itemPresentation?.presentableText == null && leaf) {
+		if (itemPresentation?.presentableText === null && leaf) {
 			return null
 		}
 		objectTreeElementProvider.get => [ objectTreeElement |

@@ -45,26 +45,26 @@ class TraceBasedExceptionFilter extends ExceptionFilter {
 
 	override applyFilter(String line, int textEndOffset) {
 		val result = super.applyFilter(line, textEndOffset)
-		if (result == null)
+		if (result === null)
 			return null
 
-		val resultItem = result.resultItems.findFirst[getHyperlinkInfo != null]
+		val resultItem = result.resultItems.findFirst[getHyperlinkInfo !== null]
 		val hyperlinkInfo = resultItem.getHyperlinkInfo
 		if (hyperlinkInfo instanceof FileHyperlinkInfo) {
 			val descriptor = hyperlinkInfo.descriptor
-			if (descriptor != null) {
+			if (descriptor !== null) {
 				val fileInProject = new VirtualFileInProject(descriptor.file, descriptor.project)
 				if (traceProvider.isGenerated(fileInProject)) {
 					val trace = traceProvider.getTraceToSource(fileInProject)
 					val rangeMarker = descriptor.rangeMarker
-					if (trace != null && rangeMarker != null) {
+					if (trace !== null && rangeMarker !== null) {
 						val nonSpaceCharOffset = ApplicationManager.application.<Integer>runReadAction[
 							val document = FileDocumentManager.instance.getDocument(descriptor.file)
 							val lineNumber = document.getLineNumber(rangeMarker.startOffset)
 							DocumentUtil.getFirstNonSpaceCharOffset(document, lineNumber)
 						]
 						val location = trace.getBestAssociatedLocation(new TextRegion(nonSpaceCharOffset, 0))
-						if (location != null) {
+						if (location !== null) {
 							val sourceFileDescriptor = new OpenFileDescriptor(
 								location.platformResource.project,
 								location.platformResource.file,

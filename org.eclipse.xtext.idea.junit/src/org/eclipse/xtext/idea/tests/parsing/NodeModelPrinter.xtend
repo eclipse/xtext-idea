@@ -40,7 +40,7 @@ class NodeModelPrinter {
 		grammarElements: «grammarElement.printGrammarElement»
 		«IF hasDirectSemanticElement»directSemanticElement: «semanticElement.class.name»«ENDIF»
 		«IF it instanceof ICompositeNode»lookAhead: «lookAhead»«ENDIF»
-		«IF !ignoreSyntaxErrors && syntaxErrorMessage != null»syntaxErrorMessage: «syntaxErrorMessage»«ENDIF»'''
+		«IF !ignoreSyntaxErrors && syntaxErrorMessage !== null»syntaxErrorMessage: «syntaxErrorMessage»«ENDIF»'''
 
 	protected dispatch def String printGrammarElement(Void grammarElement) {
 		'null'
@@ -67,11 +67,11 @@ class NodeModelPrinter {
 	'''
 
 	protected dispatch def String printGrammarElement(CrossReference crossReference) '''
-		CrossReference [«crossReference.type.classifier.name»«IF crossReference.terminal != null» | «crossReference.terminal.printGrammarElement» «ENDIF»]
+		CrossReference [«crossReference.type.classifier.name»«IF crossReference.terminal !== null» | «crossReference.terminal.printGrammarElement» «ENDIF»]
 	'''
 
 	protected dispatch def String printGrammarElement(EnumLiteralDeclaration it) '''
-		EnumLiteralDeclaration [«enumLiteral.literal»«IF literal != null» = «literal.value»«ENDIF»]
+		EnumLiteralDeclaration [«enumLiteral.literal»«IF literal !== null» = «literal.value»«ENDIF»]
 	'''
 
 }

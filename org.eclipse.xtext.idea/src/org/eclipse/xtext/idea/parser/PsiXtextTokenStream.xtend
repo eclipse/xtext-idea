@@ -43,7 +43,7 @@ class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStream {
 	}
 	
 	override reportError(()=>String reporter) {
-		if (errorMessage == null) {
+		if (errorMessage === null) {
 			errorMessage = reporter.apply
 		}
 	}
@@ -58,7 +58,7 @@ class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStream {
 		while(!builder.eof) {
 			consume
 		}
-		if (errorMessage != null) {
+		if (errorMessage !== null) {
 			builder.error(errorMessage)
 			errorMessage = null
 		}
@@ -87,7 +87,7 @@ class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStream {
 		val token = get(builder.rawTokenIndex)
 		val hidden = token.channel == BaseRecognizer.HIDDEN
 		
-		val currentTokenType = if (tokenType == null) builder.tokenType else tokenType
+		val currentTokenType = if (tokenType === null) builder.tokenType else tokenType
 		builder.remapCurrentToken(
 			new CreateElementType(currentTokenType) [
 				putUserData(IASTNodeAwareNodeModelBuilder.HIDDEN_KEY, hidden)
@@ -95,7 +95,7 @@ class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStream {
 		)
 		
 		val errorMessage = token.errorMessage
-		if (errorMessage != null) {
+		if (errorMessage !== null) {
 			val errorMarker = builder.mark
 			builder.advanceLexer
 			errorMarker.error(errorMessage)
@@ -105,7 +105,7 @@ class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStream {
 	}
 	
 	protected def String getErrorMessage(Token token) {
-		if (token.channel != BaseRecognizer.HIDDEN && errorMessage != null) {
+		if (token.channel != BaseRecognizer.HIDDEN && errorMessage !== null) {
 			val result = errorMessage
 			errorMessage = null
 			return result

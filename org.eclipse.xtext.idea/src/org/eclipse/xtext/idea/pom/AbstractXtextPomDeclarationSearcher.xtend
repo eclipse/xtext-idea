@@ -29,7 +29,7 @@ abstract class AbstractXtextPomDeclarationSearcher extends PomDeclarationSearche
 		}
 		if (element instanceof PsiNamedEObject) {
 			val nameIdentifierRange = element.nameIdentifier?.textRange
-			if (nameIdentifierRange != null) {
+			if (nameIdentifierRange !== null) {
 				val offsetInDocument = element.textRange.startOffset + offsetInElement
 				if (nameIdentifierRange.contains(offsetInDocument)) {
 					consumer.consume(element)

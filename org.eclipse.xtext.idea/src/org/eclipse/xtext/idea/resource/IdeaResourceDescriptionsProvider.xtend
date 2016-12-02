@@ -18,7 +18,7 @@ class IdeaResourceDescriptionsProvider implements IResourceDescriptionsProvider 
 	
 	override getResourceDescriptions(ResourceSet resourceSet) {
 		val index = ChunkedResourceDescriptions.findInEmfObject(resourceSet)
-		if (index != null)
+		if (index !== null)
 			return index
 		throw new IllegalStateException("No index installed.")
 	}

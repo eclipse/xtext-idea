@@ -47,7 +47,7 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 		xtextFile.xtextLanguage.injectMembers(this)
 		sorters = newArrayList
 		val comparator = comparator
-		if (comparator != null) {
+		if (comparator !== null) {
 			sorters += new AlphaSorter => [
 				it.comparator = comparator
 			]

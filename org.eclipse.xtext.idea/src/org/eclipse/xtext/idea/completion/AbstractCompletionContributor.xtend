@@ -134,7 +134,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 			
 		val tokenSet = (parameters.editor as EditorEx).getTokenSet(parameters.offset)
 		val providers = myContributors.get(parameters.getCompletionType()).get(tokenSet)
-		if (providers == null)
+		if (providers === null)
 			return;
 			
 		val calledProviders = newHashSet
@@ -155,7 +155,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 			
 		val tokenSet = (parameters.editor as EditorEx).getTokenSet(parameters.offset)
 		val element2provider = myFollowElementBasedContributors.get(parameters.getCompletionType()).get(tokenSet)
-		if (element2provider == null)
+		if (element2provider === null)
 			return;
 		
 		val followElements = computeFollowElements(parameters)
@@ -206,7 +206,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 			return;
 
 		val delegate = parserBasedDelegate
-		if (delegate == null)
+		if (delegate === null)
 			return;
 		val contexts = delegate.create(parameters.text, parameters.selection, parameters.offset, parameters.resource)
 		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, parameters, result)]]
@@ -217,7 +217,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def getParserBasedDelegate() {
-		if (delegates == null)
+		if (delegates === null)
 			return null
 		delegates.get => [it.pool = pool]
 	}

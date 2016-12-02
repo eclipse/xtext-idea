@@ -24,7 +24,7 @@ class XbaseChildAttributesProvider extends DefaultChildAttributesProvider {
 	extension XbaseGrammarAccess
 
 	protected override getIndentAfter(EObject grammarElement) {
-		if (grammarElement == null)
+		if (grammarElement === null)
 			return null
 
 		switch grammarElement {

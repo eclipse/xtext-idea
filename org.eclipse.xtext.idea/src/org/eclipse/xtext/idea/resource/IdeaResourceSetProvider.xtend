@@ -114,7 +114,7 @@ class IdeaResourceSetProvider {
 				}
 				for (uri : localDeleted) {
 					val file = getVirtualFile(uri)
-					if (file != null && file.exists)
+					if (file !== null && file.exists)
 						file.delete(requestor)
 				}
 			]
@@ -132,12 +132,12 @@ class IdeaResourceSetProvider {
 				return new ByteArrayInputStream(writtenContents.get(uri).content)
 			}
 			val virtualFile = getVirtualFile(uri)
-			if (virtualFile == null) {
+			if (virtualFile === null) {
 				throw new FileNotFoundException("Couldn't find virtual file for " + uri)
 			}
 
 			val cachedDocument = FileDocumentManager.instance.getCachedDocument(virtualFile)
-			if (cachedDocument != null) {
+			if (cachedDocument !== null) {
 				return new LazyStringInputStream(cachedDocument.text, virtualFile.charset)
 			}
 
@@ -177,7 +177,7 @@ class IdeaResourceSetProvider {
 			if (writtenContents.containsKey(uri)) {
 				return true
 			}
-			if (uri.folderDescriptor != null) {
+			if (uri.folderDescriptor !== null) {
 				return true
 			}
 			return getVirtualFile(uri)?.exists
@@ -188,11 +188,11 @@ class IdeaResourceSetProvider {
 				return emptyMap
 
 			val requestedAttributes = options.get(OPTION_REQUESTED_ATTRIBUTES) as Set<String>
-			if (requestedAttributes == null || requestedAttributes.empty)
+			if (requestedAttributes === null || requestedAttributes.empty)
 				return emptyMap
 
 			val fileDescriptor = writtenContents.get(uri)
-			if (fileDescriptor != null) {
+			if (fileDescriptor !== null) {
 				val attributes = newHashMap
 				if (requestedAttributes.contains(ATTRIBUTE_DIRECTORY))
 					attributes.put(ATTRIBUTE_DIRECTORY, false)
@@ -202,7 +202,7 @@ class IdeaResourceSetProvider {
 			}
 
 			val folderDescriptor = uri.folderDescriptor
-			if (folderDescriptor != null) {
+			if (folderDescriptor !== null) {
 				val attributes = newHashMap
 				if (requestedAttributes.contains(ATTRIBUTE_DIRECTORY))
 					attributes.put(ATTRIBUTE_DIRECTORY, true)
@@ -212,7 +212,7 @@ class IdeaResourceSetProvider {
 			}
 
 			val file = uri.virtualFile
-			if (file != null) {
+			if (file !== null) {
 				val attributes = newHashMap
 				if (requestedAttributes.contains(ATTRIBUTE_DIRECTORY))
 					attributes.put(ATTRIBUTE_DIRECTORY, file.directory)
@@ -236,7 +236,7 @@ class IdeaResourceSetProvider {
 
 		def getChildren(URI uri) {
 			val file = uri.virtualFile
-			val children = if (file != null)
+			val children = if (file !== null)
 					file.children.map[URI].toSet
 				else
 					newLinkedHashSet

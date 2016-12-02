@@ -10,7 +10,7 @@ class GeneratorConfigurationState {
 
 	new(OutputConfiguration defOutput) {
 		activated = true
-		if (defOutput != null) {
+		if (defOutput !== null) {
 			var outputDir = defOutput.outputDirectory
 			if ("./src-gen" == outputDir) {
 				outputDir = "src-gen"

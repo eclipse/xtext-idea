@@ -52,7 +52,7 @@ abstract class AbstractXtextPsiParser implements PsiParser {
 		var rootMarker = builder.mark
 
 		val entryRuleName = root.entryRuleName
-		if (entryRuleName != null) {
+		if (entryRuleName !== null) {
 			parser.parse(entryRuleName)
 		} else {
 			parser.parse
@@ -77,7 +77,7 @@ abstract class AbstractXtextPsiParser implements PsiParser {
 		val tokenSource = builder.createTokenSource
 		new PsiXtextTokenStream(builder, tokenSource, tokenDefProvider) => [
 			val lookAhead = builder.getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY)
-			if (lookAhead != null) {
+			if (lookAhead !== null) {
 				initCurrentLookAhead(lookAhead)
 			}
 			initialHiddenTokens = initialHiddenTokens

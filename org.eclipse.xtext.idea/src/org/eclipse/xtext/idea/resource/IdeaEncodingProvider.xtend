@@ -24,7 +24,7 @@ class IdeaEncodingProvider implements IEncodingProvider {
 	override getEncoding(URI uri) {
 		val fileManager = ApplicationManager.getApplication().getComponent(VirtualFileManager);
 		// fall back when no file manager exists (parsing tests)
-		if (fileManager == null)
+		if (fileManager === null)
 			return new IEncodingProvider.Runtime().getEncoding(uri)
 
 		return uri.charset?.name ?: 'UTF-8'

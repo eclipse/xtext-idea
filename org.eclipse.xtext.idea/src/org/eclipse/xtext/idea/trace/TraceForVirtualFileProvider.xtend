@@ -154,7 +154,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 			} else {
 				for (contentRoot : ModuleRootManager.getInstance(module).contentRoots) {
 					val result = contentRoot.findFileByRelativePath(outputFolder)
-					if (result != null)
+					if (result !== null)
 						return result
 				}
 				return null

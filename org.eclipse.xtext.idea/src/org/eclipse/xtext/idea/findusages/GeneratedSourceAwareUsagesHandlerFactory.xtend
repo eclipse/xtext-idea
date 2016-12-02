@@ -103,7 +103,7 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 		val result = newArrayList
 		for (generatedElement : traceProvider.getGeneratedElements(element)) {
 			val parent = PsiTreeUtil.getParentOfType(generatedElement, PsiNamedElement, false)
-			if (parent != null && !result.contains(parent)) {
+			if (parent !== null && !result.contains(parent)) {
 				result.add(parent)
 			}	
 		}

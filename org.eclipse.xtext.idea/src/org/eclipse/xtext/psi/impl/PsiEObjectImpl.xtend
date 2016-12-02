@@ -122,14 +122,14 @@ class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>> exten
 			val textOffset = super.textOffset
 			
 			val rangeToHighlightInElement = reference.rangeToHighlightInElement
-			if (rangeToHighlightInElement != null)
+			if (rangeToHighlightInElement !== null)
 				return textOffset + rangeToHighlightInElement.startOffset
 				
 			return textOffset
 		}
 
 		val textRegion = significantTextRegion
-		if (textRegion != null)
+		if (textRegion !== null)
 			return textRegion.offset
 			 
 		return super.textOffset

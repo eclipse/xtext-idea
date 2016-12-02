@@ -100,7 +100,7 @@ class XbaseFacetForm extends GeneratorFacetForm {
 	override setData(GeneratorConfigurationState data) {
 		super.setData(data)
 		if (data instanceof XbaseGeneratorConfigurationState) {
-			if (LanguageLevel.values.findFirst[it.name() === data.targetJavaVersion] != null) {
+			if (LanguageLevel.values.findFirst[it.name() === data.targetJavaVersion] !== null) {
 				targetJavaVersion.selectedItem = LanguageLevel.valueOf(data.targetJavaVersion)
 			} else {
 				targetJavaVersion.selectedItem = null
@@ -166,7 +166,7 @@ class XbaseFacetForm extends GeneratorFacetForm {
 
 			override protected LanguageLevel getDefaultLevel() {
 				var langLevel = llExt.languageLevel
-				if (langLevel == null) {
+				if (langLevel === null) {
 					langLevel = LanguageLevelProjectExtensionImpl.getInstanceImpl(module.project).getCurrentLevel()
 				}
 				return langLevel
