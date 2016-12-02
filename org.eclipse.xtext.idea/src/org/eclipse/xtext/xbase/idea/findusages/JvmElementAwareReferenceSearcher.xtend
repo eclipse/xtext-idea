@@ -61,7 +61,7 @@ class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
 	}
 
 	protected def void accept(Set<String> words, String word) {
-		if (word != null)
+		if (word !== null)
 			words += word
 	}
 
@@ -81,10 +81,10 @@ class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
 		acceptor.apply(jvmElement.simpleName)
 		
 		val simpleOperator = QualifiedName.create(jvmElement.simpleName).operator
-		if (simpleOperator != null) {
+		if (simpleOperator !== null) {
 			acceptor.apply(simpleOperator.toString)
 			val compoundOperator = simpleOperator.compoundOperator
-			if (compoundOperator != null)
+			if (compoundOperator !== null)
 				acceptor.apply(compoundOperator.toString)
 		} else
 			acceptor.apply(jvmElement.propertyName)

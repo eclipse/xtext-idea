@@ -92,14 +92,14 @@ class XbaseItemPresentationProvider extends DefaultItemPresentationProvider {
 
 	def dispatch text(JvmFormalParameter parameter) {
 		val parameterType = parameter.parameterType
-		if (parameterType == null)
+		if (parameterType === null)
 			parameter.name
 		else
 			parameterType.getSimpleName + " " + parameter.name
 	}
 
 	def dispatch text(XImportDeclaration it) 
-		'''«importedTypeName»«IF wildcard».*«ELSEIF memberName != null».«memberName»«ENDIF»'''
+		'''«importedTypeName»«IF wildcard».*«ELSEIF memberName !== null».«memberName»«ENDIF»'''
 
 	def dispatch text(XImportSection element) {
 		'import declarations'
@@ -108,7 +108,7 @@ class XbaseItemPresentationProvider extends DefaultItemPresentationProvider {
 	def dispatch text(XVariableDeclaration variableDeclaration) {
 		val resolvedTypes = typeResolver.resolveTypes(variableDeclaration)
 		val type = resolvedTypes.getActualType(variableDeclaration as JvmIdentifiableElement)
-		if (type != null)
+		if (type !== null)
 			type.humanReadableName + " " + variableDeclaration.name
 		else 
 			variableDeclaration.name
@@ -123,7 +123,7 @@ class XbaseItemPresentationProvider extends DefaultItemPresentationProvider {
 				null
 			}
 		val owner = new StandardTypeReferenceOwner(services, element);
-		val returnTypeString = if (returnType == null) {
+		val returnTypeString = if (returnType === null) {
 				"void"
 			} else {
 				owner.toLightweightTypeReference(returnType).humanReadableName

@@ -54,7 +54,7 @@ import static extension com.intellij.openapi.module.EffectiveLanguageLevelUtil.*
 	protected def getTargetJavaVersion(XbaseGeneratorConfigurationState state, Module module) {
 		val version = state.targetJavaVersion
 		val languageLevel = 
-			if(version == null || version.equals('Module default')) {
+			if(version === null || version.equals('Module default')) {
 				val Computable<LanguageLevel> action = [  
 					module.effectiveLanguageLevel
 				]

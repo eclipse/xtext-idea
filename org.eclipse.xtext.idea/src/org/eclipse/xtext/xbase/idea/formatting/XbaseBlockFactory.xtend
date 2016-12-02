@@ -53,7 +53,7 @@ class XbaseBlockFactory extends DefaultBlockFactory {
 	}
 
 	protected override isContinuation(EObject grammarElement) {
-		if(grammarElement == null) return false
+		if(grammarElement === null) return false
 
 		switch grammarElement {
 			case XAssignmentAccess.XAssignmentAction_0_0,
@@ -78,7 +78,7 @@ class XbaseBlockFactory extends DefaultBlockFactory {
 	}
 
 	protected override isStructural(EObject grammarElement) {
-		if(grammarElement == null) return false
+		if(grammarElement === null) return false
 
 		switch grammarElement {
 			case XIfExpressionAccess.thenXExpressionParserRuleCall_5_0,

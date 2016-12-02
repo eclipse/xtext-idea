@@ -29,7 +29,7 @@ class XtextAutoEditEnterHandler extends EnterHandlerDelegateAdapter {
 		EditorActionHandler originalHandler
 	) {
 		val autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.language)
-		if (autoEditHandler == null)
+		if (autoEditHandler === null)
 			return super.preprocessEnter(
 				file,
 				editor,
@@ -50,7 +50,7 @@ class XtextAutoEditEnterHandler extends EnterHandlerDelegateAdapter {
 
 	override postProcessEnter(PsiFile file, Editor editor, DataContext dataContext) {
 		val autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.language)
-		if (autoEditHandler == null)
+		if (autoEditHandler === null)
 			return super.postProcessEnter(file, editor, dataContext)
 		return autoEditHandler.enterTyped(file, editor as EditorEx, dataContext).translateResult
 	}

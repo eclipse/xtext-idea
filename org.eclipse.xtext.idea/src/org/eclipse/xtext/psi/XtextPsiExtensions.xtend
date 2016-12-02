@@ -30,7 +30,7 @@ class XtextPsiExtensions {
 	}
 	
 	def PsiElement findEObjectAssociatedPsiElement(PsiElement element) {
-		return element.findFirstParent(false)[associations.getEObject(it) != null]
+		return element.findFirstParent(false)[associations.getEObject(it) !== null]
 	}
 	
 	def EObject findEObject(PsiElement ctx) {

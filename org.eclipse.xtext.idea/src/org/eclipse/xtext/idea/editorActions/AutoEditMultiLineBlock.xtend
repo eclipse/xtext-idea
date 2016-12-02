@@ -43,18 +43,18 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 
 	protected def findRegion(int offset, extension AutoEditContext context) {
 		val openingTerminal = findOpeningTerminal(offset, context)
-		if (openingTerminal == null)
+		if (openingTerminal === null)
 			return null
 
 		var closingTerminal = findClosingTerminal(offset, context)
 		if (closingTerminal != -1 && nested) {
 			var previousOpeningTerminal = openingTerminal
 			var previousClosingTerminal = closingTerminal
-			while (closingTerminal != null && previousOpeningTerminal != null && previousClosingTerminal != null) {
+			while (closingTerminal !== null && previousOpeningTerminal !== null && previousClosingTerminal !== null) {
 				previousOpeningTerminal = findOpeningTerminal(previousOpeningTerminal.offset, context)
-				if (previousOpeningTerminal != null) {
+				if (previousOpeningTerminal !== null) {
 					previousClosingTerminal = findClosingTerminal(previousClosingTerminal.offset + 1, context)
-					if (previousClosingTerminal == null)
+					if (previousClosingTerminal === null)
 						closingTerminal = null
 				}
 			}
@@ -69,10 +69,10 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 		var rightOffset = offset
 		while (true) {
 			val openingTerminal = text.searchBackward(this.openingTerminal, leftOffset, context)
-			if (openingTerminal == null)
+			if (openingTerminal === null)
 				return null
 			val closingTerminal = text.searchBackward(this.closingTerminal, rightOffset, context)
-			if (closingTerminal == null || closingTerminal.offset < openingTerminal.offset)
+			if (closingTerminal === null || closingTerminal.offset < openingTerminal.offset)
 				return openingTerminal
 
 			leftOffset = openingTerminal.offset
@@ -87,10 +87,10 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 		var rightOffset = offset
 		while (true) {
 			val closingTerminal = text.searchForward(this.closingTerminal, rightOffset, context)
-			if (closingTerminal == null)
+			if (closingTerminal === null)
 				return null
 			val openingTerminal = text.searchForward(this.openingTerminal, leftOffset, context)
-			if (openingTerminal == null || openingTerminal.offset > closingTerminal.offset)
+			if (openingTerminal === null || openingTerminal.offset > closingTerminal.offset)
 				return closingTerminal
 
 			rightOffset = findNextOffset(rightOffset, closingTerminal.offset + closingTerminal.length, context)
@@ -160,7 +160,7 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 		val caretOffset = caretOffset
 		if (region.openingTerminal.offset.isSameLine(caretOffset)) {
 			val closingTerminal = region.getClosingTerminal(context)
-			if (closingTerminal == null) {
+			if (closingTerminal === null) {
 				close(previousLineIndentation, context)
 			} else if (closingTerminal.offset.isSameLine(caretOffset) && closingTerminal.offset >= caretOffset) {
 				val text = getText(caretOffset, closingTerminal.offset).trim
@@ -169,7 +169,7 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 			return indentationTerminal
 		}
 
-		if (region.closingTerminal == null) {
+		if (region.closingTerminal === null) {
 			close(previousLineIndentation, context)
 			return ''
 		}
@@ -179,7 +179,7 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 
 	protected def getClosingTerminal(AutoEditBlockRegion region, extension AutoEditContext context) {
 		val closingTerminal = region.closingTerminal
-		if (closingTerminal == null)
+		if (closingTerminal === null)
 			return null
 
 		if (closingTerminal.length < this.closingTerminal.length && closingTerminal.offset.isSameLine(caretOffset))
@@ -204,13 +204,13 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 
 	override close(char c, extension AutoEditContext context) {
 		val region = caretOffset.findRegion(context)
-		if (region == null)
+		if (region === null)
 			return false
 
 		val openedRegion = region.findOpenedRegion(context)
-		if (openedRegion != null)
+		if (openedRegion !== null)
 			type(c)
-		else if (region.closingTerminal != null && region.closingTerminal.contains(caretOffset))
+		else if (region.closingTerminal !== null && region.closingTerminal.contains(caretOffset))
 			editor.moveCaretRelatively(1)
 		else
 			type(c)
@@ -219,9 +219,9 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 	}
 
 	protected def AutoEditBlockRegion findOpenedRegion(AutoEditBlockRegion region, extension AutoEditContext context) {
-		if (region == null)
+		if (region === null)
 			return null
-		if (region.closingTerminal == null)
+		if (region.closingTerminal === null)
 			return region
 		val nextRegion = region.openingTerminal.offset.findRegion(context)
 		return nextRegion.findOpenedRegion(context)

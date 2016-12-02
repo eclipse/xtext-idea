@@ -62,14 +62,14 @@ class IdeaProjectConfigProvider implements IProjectConfigProvider {
 
 	override IdeaSourceFolder findSourceFolderContaining(URI member) {
 		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
-		if (file == null)
+		if (file === null)
 			return null
 
 		val sourceRoot = ProjectRootManager.getInstance(module.project).fileIndex.getSourceRootForFile(file)
-		if (sourceRoot == null) return null
+		if (sourceRoot === null) return null
 		
 		val sourceFolder = module.findSourceFolder(sourceRoot)
-		if (sourceFolder == null || sourceFolder.contentEntry.file != contentRoot) return null
+		if (sourceFolder === null || sourceFolder.contentEntry.file != contentRoot) return null
 
 		return new IdeaSourceFolder(sourceFolder)
 	}

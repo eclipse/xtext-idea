@@ -40,7 +40,7 @@ class ResourceFactoryDescriptor implements Resource.Factory.Descriptor {
 	Resource.Factory factory
 
 	override createFactory() {
-		if (factory == null)
+		if (factory === null)
 			factory = extensionPoint.createInstance as Resource.Factory
 		return factory
 	}

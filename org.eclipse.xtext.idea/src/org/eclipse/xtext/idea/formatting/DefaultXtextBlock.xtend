@@ -52,14 +52,14 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 	}
 
 	override isIncomplete() {
-		if (incomplete != null)
+		if (incomplete !== null)
 			return incomplete
 
 		return super.isIncomplete()
 	}
 
 	override getTextRange() {
-		if (textRange != null)
+		if (textRange !== null)
 			return textRange
 		return super.textRange
 	}
@@ -79,7 +79,7 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 			if (block.closing) {
 				val bracePair = block.bracePairForClosingBrace
 				val index = openingBlockIndex.get(bracePair).last
-				if (index != null) {
+				if (index !== null) {
 					openingBlockIndex.remove(bracePair, index)
 
 					group(stack, index, bracePair, block)
@@ -104,7 +104,7 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 			return
 
 		val groupBlock = children.createGroup
-		groupBlock.incomplete = closingBlock == null || closingBlock.elementType == TokenType.ERROR_ELEMENT
+		groupBlock.incomplete = closingBlock === null || closingBlock.elementType == TokenType.ERROR_ELEMENT
 
 		val enforceIndentToChildren = children.shouldEnforceIndentToChildren
 		groupBlock.indent = bracePair.getIndent(enforceIndentToChildren)
@@ -129,7 +129,7 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 			return true
 
 		val bracePair = children.head.bracePairForOpeningBrace
-		if (bracePair == null || !bracePair.structural)
+		if (bracePair === null || !bracePair.structural)
 			return true
 
 		return children.last.bracePairForClosingBrace != bracePair
@@ -148,7 +148,7 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 	}
 
 	override isLeaf() {
-		myNode.firstChildNode == null
+		myNode.firstChildNode === null
 	}
 
 	override getSpacing(Block child1, Block child2) {

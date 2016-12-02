@@ -37,7 +37,7 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 			return block.getAfterChildIndent(children.size)
 
 		val indent = block.getBeforeChildIndent(newChildIndex)
-		if (indent == null)
+		if (indent === null)
 			return block.getAfterChildIndent(newChildIndex)
 
 		return indent
@@ -76,11 +76,11 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 	}
 
 	protected def Indent getAfterChildIndent(Block block) {
-		if (block == null)
+		if (block === null)
 			return null
 		
 		val grammarElementIndent = block.grammarElement.indentAfter
-		if (grammarElementIndent != null)
+		if (grammarElementIndent !== null)
 			return grammarElementIndent
 
 		if (block instanceof SyntheticXtextBlock)
@@ -97,11 +97,11 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 	}
 
 	protected def Indent getBeforeChildIndent(Block block) {
-		if (block == null)
+		if (block === null)
 			return null
 
 		val grammarElementIndent = block.grammarElement.indentBefore
-		if (grammarElementIndent != null)
+		if (grammarElementIndent !== null)
 			return grammarElementIndent
 
 		if (block instanceof SyntheticXtextBlock)

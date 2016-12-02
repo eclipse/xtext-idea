@@ -125,13 +125,13 @@ class PsiToEcoreTransformationContext {
 	}
 	
 	def merge(PsiToEcoreTransformationContext childTransformationContext, boolean forced) {
-		if (current == null || forced) {
+		if (current === null || forced) {
 			current = childTransformationContext.current
 		}
-		if (datatypeRuleToken != null && childTransformationContext.datatypeRuleToken != null) {
+		if (datatypeRuleToken !== null && childTransformationContext.datatypeRuleToken !== null) {
 			datatypeRuleToken.merge(childTransformationContext.datatypeRuleToken)
 		}
-		if (enumerator == null) {
+		if (enumerator === null) {
 			enumerator = childTransformationContext.enumerator
 		}
 		this
@@ -173,7 +173,7 @@ class PsiToEcoreTransformationContext {
 	}
 	
 	private def ensureModelElementCreated(EObject grammarElement, ICompositeNode currentNode) {
-		if (grammarElement == null) {
+		if (grammarElement === null) {
 			return false
 		}
 		if (grammarElement instanceof Action) {
@@ -183,7 +183,7 @@ class PsiToEcoreTransformationContext {
 		}
 		if (!grammarElement.assigned) {
 			if (grammarElement.isEObjectFragmentRuleCall) {
-				if (current != null) {
+				if (current !== null) {
 					return true
 				}
 				val classifier = grammarElement.containingParserRule.type.classifier
@@ -206,7 +206,7 @@ class PsiToEcoreTransformationContext {
 			}
 			return false
 		}
-		if (current != null) {
+		if (current !== null) {
 			return true
 		}
 		val classifier = grammarElement.containingParserRule.type.classifier
@@ -237,7 +237,7 @@ class PsiToEcoreTransformationContext {
 	}
 
 	protected def void mergeDatatypeRuleToken(LeafElement it) {
-		if (datatypeRuleToken != null) {
+		if (datatypeRuleToken !== null) {
 			datatypeRuleToken.merge(new AntlrDatatypeRuleToken => [ token |
 				token.text = text
 				token.startOffset = startOffset
@@ -246,7 +246,7 @@ class PsiToEcoreTransformationContext {
 	}
 
 	def assign(EObject value, Action action) {
-		if (action.feature != null) {
+		if (action.feature !== null) {
 			current.assign(action.operator, action.feature, value, null, currentNode)
 		}
 	}
@@ -275,7 +275,7 @@ class PsiToEcoreTransformationContext {
 	protected def associateWithSemanticElement(ICompositeNode node) {
 		node.associateWithSemanticElement(current)
 		val astNode = reverseNodesMapping.get(node)?.last
-		if (astNode != null) {
+		if (astNode !== null) {
 			psiModelAssociator.associate(current)[|astNode.psi]
 		}
 	}
@@ -342,7 +342,7 @@ class PsiToEcoreTransformationContext {
 	}
 
 	protected def appendError(INode node, SyntaxErrorMessage error) {
-		if (node.syntaxErrorMessage == null) {
+		if (node.syntaxErrorMessage === null) {
 			val newNode = node.syntaxError = error
 			if (node == currentNode)
 				currentNode = newNode as ICompositeNode
@@ -380,7 +380,7 @@ class ErrorContext {
 	val PsiToEcoreTransformationContext transformationContext
 
 	def getCurrentContext() {
-		if (currentNode != null)
+		if (currentNode !== null)
 			currentNode.semanticElement
 	}
 
@@ -397,11 +397,11 @@ class ValueConverterErrorContext extends ErrorContext implements ISyntaxErrorMes
 
 	override getDefaultMessage() {
 		val cause = valueConverterException.cause as Exception
-		var result = if(cause != null) cause.message else valueConverterException.message
-		if (result == null)
+		var result = if(cause !== null) cause.message else valueConverterException.message
+		if (result === null)
 			result = valueConverterException.message
-		if (result == null)
-			result == if(cause != null) cause.class.simpleName else valueConverterException.class.simpleName
+		if (result === null)
+			result == if(cause !== null) cause.class.simpleName else valueConverterException.class.simpleName
 		result
 	}
 

@@ -60,7 +60,7 @@ class DefaultItemPresentationProvider implements ItemPresentationProvider {
 	
 	def dispatch String text(EObject element) {
 		val labelFeature = element.eClass.labelFeature
-		if (labelFeature != null) {
+		if (labelFeature !== null) {
 			element.eGet(labelFeature)?.toString
 		}
 	}
@@ -71,7 +71,7 @@ class DefaultItemPresentationProvider implements ItemPresentationProvider {
 			if (!eAttribute.isMany() && eAttribute.getEType().getInstanceClass() != FeatureMap.Entry) {
 				if ("name".equalsIgnoreCase(eAttribute.getName())) {
 					return eAttribute
-				} else if (result == null) {
+				} else if (result === null) {
 					result = eAttribute
 				} else if (eAttribute.getEAttributeType().getInstanceClass() == String &&
 					result.getEAttributeType().getInstanceClass() != String) {

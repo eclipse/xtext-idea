@@ -54,7 +54,7 @@ class DefaultBlockFactory implements BlockFactory {
 			return null
 
 		val blockTextRange = node.createTextRange
-		if (blockTextRange == null || blockTextRange.empty || !parentBlock.textRange.contains(blockTextRange))
+		if (blockTextRange === null || blockTextRange.empty || !parentBlock.textRange.contains(blockTextRange))
 			return null
 
 		val spacingBuilder = if(parentBlock instanceof ModifiableBlock) parentBlock.spacingBuilder
@@ -103,13 +103,13 @@ class DefaultBlockFactory implements BlockFactory {
 			}
 			return textRange
 		}
-		if (node.firstChildNode == null)
+		if (node.firstChildNode === null)
 			return textRange
 
 		val firstNonHiddenLeafNode = node.findFirstLeaf.findNode([nextLeaf], [
 			!whitespaceOrEmpty || !textRange.contains(it.textRange)
 		])
-		if (firstNonHiddenLeafNode == null || !textRange.contains(firstNonHiddenLeafNode.textRange))
+		if (firstNonHiddenLeafNode === null || !textRange.contains(firstNonHiddenLeafNode.textRange))
 			return null
 
 		val startOffset = firstNonHiddenLeafNode.startOffset
@@ -118,7 +118,7 @@ class DefaultBlockFactory implements BlockFactory {
 	}
 
 	protected def ASTNode findNode(ASTNode node, (ASTNode)=>ASTNode provider, (ASTNode)=>boolean condition) {
-		if (node == null)
+		if (node === null)
 			return null
 
 		if (condition.apply(node))

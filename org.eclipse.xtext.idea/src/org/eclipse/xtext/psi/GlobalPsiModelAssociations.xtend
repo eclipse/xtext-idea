@@ -28,7 +28,7 @@ class GlobalPsiModelAssociations implements IPsiModelAssociations {
 	IResourceServiceProvider.Registry resourceServiceProviderRegistry
 
 	override getEObject(PsiElement element) {
-		if (element == null) return null
+		if (element === null) return null
 
 		val containingFile = element.containingFile
 		if (containingFile instanceof BaseXtextFile) {
@@ -41,7 +41,7 @@ class GlobalPsiModelAssociations implements IPsiModelAssociations {
 	}
 
 	override getPsiElement(EObject object) {
-		if (object == null) return null
+		if (object === null) return null
 
 		val resourceURI = EcoreUtil.getURI(object).trimFragment
 		val resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI)
@@ -50,7 +50,7 @@ class GlobalPsiModelAssociations implements IPsiModelAssociations {
 	}
 
 	override getPsiElement(IEObjectDescription objectDescription, Resource context) {
-		if (objectDescription == null || context == null) return null
+		if (objectDescription === null || context === null) return null
 		
 		val resourceURI = context.URI
 		val resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI)

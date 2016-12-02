@@ -23,7 +23,7 @@ class AlphaSorter implements Sorter {
 	Comparator<TreeElement> comparator
 
 	override isVisible() {
-		comparator != null
+		comparator !== null
 	}
 
 	override getName() {

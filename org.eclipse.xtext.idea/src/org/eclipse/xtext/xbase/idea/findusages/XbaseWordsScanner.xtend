@@ -37,7 +37,7 @@ class XbaseWordsScanner implements WordsScanner {
 
 	override void processWords(CharSequence fileText, Processor<WordOccurrence> processor) {
 		lexer.start(fileText)
-		while (lexer.tokenType != null) {
+		while (lexer.tokenType !== null) {
 			scanOperator(processor)
 			scanWords(processor)
 			lexer.advance
@@ -64,7 +64,7 @@ class XbaseWordsScanner implements WordsScanner {
 	}
 
 	protected def void scanWords(Processor<WordOccurrence> processor) {
-		if (lexer.tokenType == null)
+		if (lexer.tokenType === null)
 			return;
 
 		val kind = occurrenceKind

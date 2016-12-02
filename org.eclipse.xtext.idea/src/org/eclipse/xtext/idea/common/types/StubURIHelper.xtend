@@ -119,7 +119,7 @@ class StubURIHelper implements URIHelperConstants {
 			return builder.appendTypeParameterResourceURI(psiClass)
 		}
 		val containingClass = psiClass.containingClass
-		if (containingClass != null) {
+		if (containingClass !== null) {
 			builder.appendClassResourceURI(containingClass)
 		} else {
 			builder.append(OBJECTS).append(psiClass.qualifiedName)
@@ -156,7 +156,7 @@ class StubURIHelper implements URIHelperConstants {
 			return builder.appendTypeParameterFragment(psiClass);	
 		}
 		val containingClass = psiClass.containingClass
-		if (containingClass == null) {
+		if (containingClass === null) {
 			return builder.append(psiClass.qualifiedName)
 		} else {
 			return builder.appendClassFragment(containingClass).append('$').append(psiClass.name)
@@ -197,7 +197,7 @@ class StubURIHelper implements URIHelperConstants {
 				val resolved = type.resolve
 				switch resolved {
 					PsiTypeParameter: builder.append(resolved.name)
-					case resolved != null: builder.appendTypeName(resolved)
+					case resolved !== null: builder.appendTypeName(resolved)
 					default: builder.append(PsiNameHelper.getQualifiedClassName(type.canonicalText, false))
 				}
 			}
