@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.documentation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
@@ -72,11 +71,9 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
   @Override
   public String getQuickNavigateInfo(final PsiElement element, final PsiElement originalElement) {
     final IdeaDocumentationProvider.GeneratedCodeDelegate gen = this.findDocumentationInGeneratedCode(element, originalElement);
-    boolean _notEquals = (!Objects.equal(gen, null));
-    if (_notEquals) {
+    if ((gen != null)) {
       final String result = gen.delegate.getQuickNavigateInfo(gen.generatedElement, gen.generatedOriginalElement);
-      boolean _notEquals_1 = (!Objects.equal(result, null));
-      if (_notEquals_1) {
+      if ((result != null)) {
         return result;
       }
     }
@@ -88,8 +85,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
         _quickNavigateInfo=_calleeDocumentationProvider.getQuickNavigateInfo(((PsiEObject)element));
       }
       final String result_1 = _quickNavigateInfo;
-      boolean _notEquals_2 = (!Objects.equal(result_1, null));
-      if (_notEquals_2) {
+      if ((result_1 != null)) {
         return result_1;
       }
       URI _uRI = EcoreUtil.getURI(eobj);
@@ -101,11 +97,9 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
   @Override
   public String generateDoc(final PsiElement element, final PsiElement originalElement) {
     final IdeaDocumentationProvider.GeneratedCodeDelegate gen = this.findDocumentationInGeneratedCode(element, originalElement);
-    boolean _notEquals = (!Objects.equal(gen, null));
-    if (_notEquals) {
+    if ((gen != null)) {
       final String result = gen.delegate.generateDoc(gen.generatedElement, gen.generatedOriginalElement);
-      boolean _notEquals_1 = (!Objects.equal(result, null));
-      if (_notEquals_1) {
+      if ((result != null)) {
         return result;
       }
     }
@@ -117,8 +111,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
         _generateDoc=_calleeDocumentationProvider.generateDoc(((PsiEObject)element));
       }
       final String result_1 = _generateDoc;
-      boolean _notEquals_2 = (!Objects.equal(result_1, null));
-      if (_notEquals_2) {
+      if ((result_1 != null)) {
         return result_1;
       }
       URI _uRI = EcoreUtil.getURI(eobj);
@@ -128,14 +121,13 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
   }
   
   protected IdeaDeclarationDocumentationProvider getCalleeDocumentationProvider(final EObject object) {
-    if ((Objects.equal(object, null) || object.eIsProxy())) {
+    if (((object == null) || object.eIsProxy())) {
       return null;
     }
     Resource _eResource = object.eResource();
     final URI uri = _eResource.getURI();
     final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-    boolean _equals = Objects.equal(resourceServiceProvider, null);
-    if (_equals) {
+    if ((resourceServiceProvider == null)) {
       return null;
     }
     IdeaDeclarationDocumentationProvider _get = null;
@@ -147,8 +139,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
   
   protected IdeaDocumentationProvider.GeneratedCodeDelegate findDocumentationInGeneratedCode(final PsiElement element, final PsiElement originalElement) {
     final PsiElement generatedElement = this.getGeneratedElement(element);
-    boolean _equals = Objects.equal(generatedElement, null);
-    if (_equals) {
+    if ((generatedElement == null)) {
       return null;
     }
     PsiElement _elvis = null;
@@ -160,8 +151,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
     }
     final PsiElement generatedOriginalElement = _elvis;
     final DocumentationProvider delegate = DocumentationManager.getProviderFromElement(generatedElement, generatedOriginalElement);
-    boolean _equals_1 = Objects.equal(delegate, null);
-    if (_equals_1) {
+    if ((delegate == null)) {
       return null;
     }
     return new IdeaDocumentationProvider.GeneratedCodeDelegate(generatedElement, generatedOriginalElement, delegate);

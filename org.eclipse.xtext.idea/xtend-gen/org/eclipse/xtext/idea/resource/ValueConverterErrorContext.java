@@ -29,23 +29,19 @@ public class ValueConverterErrorContext extends ErrorContext implements ISyntaxE
       Throwable _cause = this.valueConverterException.getCause();
       final Exception cause = ((Exception) _cause);
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(cause, null));
-      if (_notEquals) {
+      if ((cause != null)) {
         _xifexpression = cause.getMessage();
       } else {
         _xifexpression = this.valueConverterException.getMessage();
       }
       String result = _xifexpression;
-      boolean _equals = Objects.equal(result, null);
-      if (_equals) {
+      if ((result == null)) {
         String _message = this.valueConverterException.getMessage();
         result = _message;
       }
-      boolean _equals_1 = Objects.equal(result, null);
-      if (_equals_1) {
+      if ((result == null)) {
         String _xifexpression_1 = null;
-        boolean _notEquals_1 = (!Objects.equal(cause, null));
-        if (_notEquals_1) {
+        if ((cause != null)) {
           Class<? extends Exception> _class = cause.getClass();
           _xifexpression_1 = _class.getSimpleName();
         } else {

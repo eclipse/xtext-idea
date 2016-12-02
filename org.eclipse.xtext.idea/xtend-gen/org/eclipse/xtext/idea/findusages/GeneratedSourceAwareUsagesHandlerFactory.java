@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.findusages;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.find.findUsages.FindUsagesHandler;
 import com.intellij.find.findUsages.FindUsagesHandlerFactory;
@@ -148,7 +147,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     for (final PsiElement generatedElement : _generatedElements) {
       {
         final PsiNamedElement parent = PsiTreeUtil.<PsiNamedElement>getParentOfType(generatedElement, PsiNamedElement.class, false);
-        if (((!Objects.equal(parent, null)) && (!result.contains(parent)))) {
+        if (((parent != null) && (!result.contains(parent)))) {
           result.add(parent);
         }
       }

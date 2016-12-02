@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.psi;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -34,8 +33,7 @@ public class XtextPsiUtils {
       return _viewProvider.getVirtualFile();
     } else {
       VirtualFile _xifexpression_1 = null;
-      boolean _equals = Objects.equal(element, null);
-      if (_equals) {
+      if ((element == null)) {
         return null;
       } else {
         PsiFile _containingFile = element.getContainingFile();

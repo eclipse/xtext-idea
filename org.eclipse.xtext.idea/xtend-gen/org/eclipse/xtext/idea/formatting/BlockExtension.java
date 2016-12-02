@@ -93,8 +93,7 @@ public class BlockExtension {
   public boolean isOpening(final ASTNode node) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(node, null);
-      if (_equals) {
+      if ((node == null)) {
         return false;
       }
       final String text = node.getText();
@@ -111,8 +110,7 @@ public class BlockExtension {
   public boolean isClosing(final ASTNode node) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(node, null);
-      if (_equals) {
+      if ((node == null)) {
         return false;
       }
       final String text = node.getText();
@@ -134,8 +132,7 @@ public class BlockExtension {
   public BracePair getBracePairForOpeningNode(final ASTNode node) {
     BracePair _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(node, null);
-      if (_equals) {
+      if ((node == null)) {
         return null;
       }
       final String openingBrace = node.getText();
@@ -157,8 +154,7 @@ public class BlockExtension {
   public BracePair getBracePairForClosingNode(final ASTNode node) {
     BracePair _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(node, null);
-      if (_equals) {
+      if ((node == null)) {
         return null;
       }
       final String openingBrace = node.getText();
@@ -182,7 +178,7 @@ public class BlockExtension {
       final int offset = (_startOffset - _startOffset_1);
       final ASTNode leafElement = node.findLeafElementAt(offset);
       final BracePair bracePair = this.getBracePairForOpeningNode(leafElement);
-      _xblockexpression = ((!Objects.equal(bracePair, null)) && bracePair.isStructural());
+      _xblockexpression = ((bracePair != null) && bracePair.isStructural());
     }
     return _xblockexpression;
   }
@@ -194,8 +190,7 @@ public class BlockExtension {
   public final static Indent STRUCTURAL_INDENT = Indent.getIndent(Indent.Type.NORMAL, false, true);
   
   public Indent getIndent(final BracePair bracePair, final boolean enforceIndentToChildren) {
-    boolean _equals = Objects.equal(bracePair, null);
-    if (_equals) {
+    if ((bracePair == null)) {
       return Indent.getNoneIndent();
     }
     boolean _isStructural = bracePair.isStructural();

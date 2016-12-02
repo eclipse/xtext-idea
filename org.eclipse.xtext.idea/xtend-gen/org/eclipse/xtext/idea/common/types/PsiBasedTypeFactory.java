@@ -167,8 +167,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
           {
             final StringBuilder buffer = new StringBuilder(100);
             final String packageName = this.getPackageName(psiClass);
-            boolean _notEquals = (!Objects.equal(packageName, null));
-            if (_notEquals) {
+            if ((packageName != null)) {
               StringBuilder _append = buffer.append(packageName);
               _append.append(".");
             }
@@ -261,8 +260,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     for (final PsiAnnotation annotation : _annotations) {
       {
         final JvmAnnotationReference annotationReference = this.createAnnotationReference(annotation);
-        boolean _notEquals = (!Objects.equal(annotationReference, null));
-        if (_notEquals) {
+        if ((annotationReference != null)) {
           EList<JvmAnnotationReference> _annotations_1 = it.getAnnotations();
           this.<JvmAnnotationReference>addUnique(_annotations_1, annotationReference);
         }
@@ -376,8 +374,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
         JvmField _createJvmField = this._typesFactory.createJvmField();
         final Procedure1<JvmField> _function = (JvmField it) -> {
           final Object value = this.getConstantValue(field);
-          boolean _notEquals = (!Objects.equal(value, null));
-          if (_notEquals) {
+          if ((value != null)) {
             it.setConstant(true);
             it.setConstantValue(value);
           } else {
@@ -559,8 +556,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       PsiAnnotationMemberValue _defaultValue = ((PsiAnnotationMethod)method).getDefaultValue();
       Project _project = ((PsiAnnotationMethod)method).getProject();
       final Object defaultValue = this.computeAnnotationValue(_defaultValue, _project);
-      boolean _notEquals = (!Objects.equal(defaultValue, null));
-      if (_notEquals) {
+      if ((defaultValue != null)) {
         final JvmAnnotationValue annotationValue = this.createAnnotationValue(defaultValue, method);
         operation.setDefaultValue(annotationValue);
         annotationValue.setOperation(operation);
@@ -694,8 +690,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       if (it instanceof JvmAnnotationAnnotationValue) {
         _matched=true;
         final JvmAnnotationReference annotationReference = this.createAnnotationReference(((PsiAnnotation) value));
-        boolean _notEquals = (!Objects.equal(annotationReference, null));
-        if (_notEquals) {
+        if ((annotationReference != null)) {
           EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)it).getValues();
           this.<JvmAnnotationReference>addUnique(_values, annotationReference);
         }
@@ -1328,7 +1323,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   }
   
   protected boolean isInnerTypeReference(final PsiClass psiClass) {
-    return ((!Objects.equal(psiClass.getContainingClass(), null)) && (!psiClass.hasModifierProperty(PsiModifier.STATIC)));
+    return ((psiClass.getContainingClass() != null) && (!psiClass.hasModifierProperty(PsiModifier.STATIC)));
   }
   
   protected JvmTypeReference _createTypeArgument(final PsiType type) {

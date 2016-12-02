@@ -86,7 +86,7 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
     {
       final String version = state.getTargetJavaVersion();
       LanguageLevel _xifexpression = null;
-      if ((Objects.equal(version, null) || version.equals("Module default"))) {
+      if (((version == null) || version.equals("Module default"))) {
         LanguageLevel _xblockexpression_1 = null;
         {
           final Computable<LanguageLevel> _function = () -> {

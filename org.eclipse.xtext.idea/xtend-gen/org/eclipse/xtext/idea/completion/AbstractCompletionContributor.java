@@ -250,8 +250,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     final Procedure1<CompletionResult> filteredConsumer = _function;
     CompletionService _completionService = CompletionService.getCompletionService();
     final CompletionResultSet filteredResult = _completionService.createResultSet(parameters, new Consumer<CompletionResult>() {
-        public void consume(CompletionResult arg0) {
-          filteredConsumer.apply(arg0);
+        public void consume(CompletionResult t) {
+          filteredConsumer.apply(t);
         }
     }, this);
     this.createMatcherBasedProposals(parameters, filteredResult);
@@ -272,8 +272,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     CompletionType _completionType = parameters.getCompletionType();
     Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(_completionType);
     final Collection<CompletionProvider<CompletionParameters>> providers = _get.get(tokenSet);
-    boolean _equals = Objects.equal(providers, null);
-    if (_equals) {
+    if ((providers == null)) {
       return;
     }
     final HashSet<CompletionProvider<CompletionParameters>> calledProviders = CollectionLiterals.<CompletionProvider<CompletionParameters>>newHashSet();
@@ -300,8 +299,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     CompletionType _completionType = parameters.getCompletionType();
     Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _get = this.myFollowElementBasedContributors.get(_completionType);
     final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = _get.get(tokenSet);
-    boolean _equals = Objects.equal(element2provider, null);
-    if (_equals) {
+    if ((element2provider == null)) {
       return;
     }
     final Set<AbstractElement> followElements = this.computeFollowElements(parameters);
@@ -371,8 +369,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       return;
     }
     final ContentAssistContextFactory delegate = this.getParserBasedDelegate();
-    boolean _equals = Objects.equal(delegate, null);
-    if (_equals) {
+    if ((delegate == null)) {
       return;
     }
     String _text = this.getText(parameters);
@@ -398,8 +395,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   protected ContentAssistContextFactory getParserBasedDelegate() {
     ContentAssistContextFactory _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this.delegates, null);
-      if (_equals) {
+      if ((this.delegates == null)) {
         return null;
       }
       ContentAssistContextFactory _get = this.delegates.get();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.extensions.AbstractExecutableExtensionPoint;
@@ -21,8 +20,7 @@ public class ResourceFactoryDescriptor implements Resource.Factory.Descriptor {
   
   @Override
   public Resource.Factory createFactory() {
-    boolean _equals = Objects.equal(this.factory, null);
-    if (_equals) {
+    if ((this.factory == null)) {
       Object _createInstance = this.extensionPoint.createInstance();
       this.factory = ((Resource.Factory) _createInstance);
     }

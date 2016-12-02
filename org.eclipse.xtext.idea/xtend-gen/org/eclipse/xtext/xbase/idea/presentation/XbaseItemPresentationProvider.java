@@ -154,8 +154,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
     {
       final JvmTypeReference parameterType = parameter.getParameterType();
       String _xifexpression = null;
-      boolean _equals = Objects.equal(parameterType, null);
-      if (_equals) {
+      if ((parameterType == null)) {
         _xifexpression = parameter.getName();
       } else {
         String _simpleName = parameterType.getSimpleName();
@@ -178,8 +177,8 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
         _builder.append(".*");
       } else {
         String _memberName = it.getMemberName();
-        boolean _notEquals = (!Objects.equal(_memberName, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (_memberName != null);
+        if (_tripleNotEquals) {
           _builder.append(".");
           String _memberName_1 = it.getMemberName();
           _builder.append(_memberName_1, "");
@@ -199,8 +198,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(variableDeclaration);
       final LightweightTypeReference type = resolvedTypes.getActualType(((JvmIdentifiableElement) variableDeclaration));
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(type, null));
-      if (_notEquals) {
+      if ((type != null)) {
         String _humanReadableName = type.getHumanReadableName();
         String _plus = (_humanReadableName + " ");
         String _name = variableDeclaration.getName();
@@ -231,8 +229,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
       final JvmTypeReference returnType = _xifexpression;
       final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, element);
       String _xifexpression_2 = null;
-      boolean _equals = Objects.equal(returnType, null);
-      if (_equals) {
+      if ((returnType == null)) {
         _xifexpression_2 = "void";
       } else {
         LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(returnType);

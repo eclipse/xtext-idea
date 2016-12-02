@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.tests;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
@@ -33,8 +32,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration cls, @Extension final TransformationContext context) {
     final MutableFieldDeclaration delegate = cls.findDeclaredField("delegate");
-    boolean _equals = Objects.equal(delegate, null);
-    if (_equals) {
+    if ((delegate == null)) {
       context.addWarning(cls, "Delegate is not declared");
       return;
     }
@@ -54,7 +52,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     final Function1<MethodDeclaration, Boolean> _function_2 = (MethodDeclaration it) -> {
       String _simpleName = it.getSimpleName();
       MutableMethodDeclaration _findDeclaredMethod = cls.findDeclaredMethod(_simpleName);
-      return Boolean.valueOf(Objects.equal(_findDeclaredMethod, null));
+      return Boolean.valueOf((_findDeclaredMethod == null));
     };
     Iterable<MethodDeclaration> _filter_1 = IterableExtensions.<MethodDeclaration>filter(_filter, _function_2);
     final Function1<MethodDeclaration, String> _function_3 = (MethodDeclaration it) -> {

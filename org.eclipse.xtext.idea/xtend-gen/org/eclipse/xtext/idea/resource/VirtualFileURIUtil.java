@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -57,8 +56,7 @@ public class VirtualFileURIUtil {
   private static VirtualFile getOrCreateFile(final URI uri, final boolean isDirectory) {
     try {
       final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
-      boolean _notEquals = (!Objects.equal(file, null));
-      if (_notEquals) {
+      if ((file != null)) {
         return file;
       }
       int _segmentCount = uri.segmentCount();

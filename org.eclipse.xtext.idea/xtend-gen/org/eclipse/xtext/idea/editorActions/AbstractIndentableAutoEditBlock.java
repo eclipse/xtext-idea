@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.formatting.IIndentationInformation;
@@ -49,8 +48,7 @@ public abstract class AbstractIndentableAutoEditBlock extends AbstractAutoEditBl
   private IIndentationInformation indentationInformation;
   
   protected String getIndentationTerminal() {
-    boolean _equals = Objects.equal(this.indentationTerminal, null);
-    if (_equals) {
+    if ((this.indentationTerminal == null)) {
       return this.indentationInformation.getIndentString();
     }
     return this.indentationTerminal;

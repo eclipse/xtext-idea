@@ -61,8 +61,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   public IdeaAutoEditHandler.Result beforeEnterTyped(final PsiFile file, final EditorEx editor, final Ref<Integer> caretOffset, final Ref<Integer> caretAdvance, final DataContext dataContext, final EditorActionHandler originalHandler) {
     final AutoEditContext context = new AutoEditContext(editor, this.tokenSetProvider);
     final AutoEditBlockRegion region = this.findBlockRegion(context);
-    boolean _equals = Objects.equal(region, null);
-    if (_equals) {
+    if ((region == null)) {
       return IdeaAutoEditHandler.Result.CONTINUE;
     }
     return this.handleIndentation(region, context);

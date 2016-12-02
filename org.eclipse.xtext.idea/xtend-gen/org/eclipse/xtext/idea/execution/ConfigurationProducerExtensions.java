@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.execution;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.execution.Location;
 import com.intellij.execution.PsiLocation;
@@ -100,8 +99,7 @@ public class ConfigurationProducerExtensions {
       return CollectionLiterals.<PsiFile>emptySet();
     }
     final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(xtextFile);
-    boolean _equals = Objects.equal(fileInProject, null);
-    if (_equals) {
+    if ((fileInProject == null)) {
       return CollectionLiterals.<PsiFile>emptySet();
     }
     final IIdeaTrace trace = this.traceProvider.getTraceToTarget(fileInProject);

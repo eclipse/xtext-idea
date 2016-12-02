@@ -62,7 +62,7 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
         PsiElement _position = $0.getPosition();
         final Condition<PsiElement> _function = (PsiElement it) -> {
           EObject _eObject = XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(it);
-          return (!Objects.equal(_eObject, null));
+          return (_eObject != null);
         };
         final PsiElement psiElement = PsiTreeUtil.findFirstParent(_position, false, _function);
         EObject _eObject = XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(psiElement);

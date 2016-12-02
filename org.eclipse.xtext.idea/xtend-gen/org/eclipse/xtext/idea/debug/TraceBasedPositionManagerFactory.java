@@ -163,8 +163,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
             return Boolean.valueOf((_lineNumber == line));
           };
           final AbstractTraceRegion region = IteratorExtensions.<AbstractTraceRegion>findFirst(_treeIterator, _function);
-          boolean _notEquals_1 = (!Objects.equal(region, null));
-          if (_notEquals_1) {
+          if ((region != null)) {
             URI _key = uri2trace.getKey();
             final PsiFile psiFile = this._debugProcessExtensions.getPsiFile(this.process, _key);
             PositionManagerImpl _javaPositionManger = this._debugProcessExtensions.getJavaPositionManger(this.process);
@@ -184,14 +183,12 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
       int _lineNumber = location.lineNumber();
       final int line = (_lineNumber - 1);
       final PsiFile psiFile = this._debugProcessExtensions.getPsiFile(this.process, location);
-      boolean _equals = Objects.equal(psiFile, null);
-      if (_equals) {
+      if ((psiFile == null)) {
         throw NoDataException.INSTANCE;
       }
       SourcePosition _createFromLine = SourcePosition.createFromLine(psiFile, line);
       final AbstractTraceRegion trace = this._debugProcessExtensions.getTraceForJava(_createFromLine);
-      boolean _equals_1 = Objects.equal(trace, null);
-      if (_equals_1) {
+      if ((trace == null)) {
         throw NoDataException.INSTANCE;
       }
       final URI sourceURI = this._debugProcessExtensions.findOriginalDeclaration(this.process, location);

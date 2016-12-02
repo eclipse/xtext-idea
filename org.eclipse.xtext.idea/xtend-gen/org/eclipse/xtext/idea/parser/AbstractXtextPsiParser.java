@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.parser;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.lang.ASTNode;
@@ -73,8 +72,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
         final AbstractPsiAntlrParser parser = ObjectExtensions.<AbstractPsiAntlrParser>operator_doubleArrow(_createParser, _function);
         PsiBuilder.Marker rootMarker = builder.mark();
         final String entryRuleName = this.getEntryRuleName(root);
-        boolean _notEquals = (!Objects.equal(entryRuleName, null));
-        if (_notEquals) {
+        if ((entryRuleName != null)) {
           parser.parse(entryRuleName);
         } else {
           parser.parse();
@@ -120,8 +118,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       PsiXtextTokenStream _psiXtextTokenStream = new PsiXtextTokenStream(builder, tokenSource, this.tokenDefProvider);
       final Procedure1<PsiXtextTokenStream> _function = (PsiXtextTokenStream it) -> {
         final Integer lookAhead = builder.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
-        boolean _notEquals = (!Objects.equal(lookAhead, null));
-        if (_notEquals) {
+        if ((lookAhead != null)) {
           it.initCurrentLookAhead((lookAhead).intValue());
         }
         Set<String> _initialHiddenTokens = this.getInitialHiddenTokens();

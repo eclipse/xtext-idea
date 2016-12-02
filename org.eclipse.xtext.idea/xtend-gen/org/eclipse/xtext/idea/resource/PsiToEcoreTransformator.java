@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.FileASTNode;
@@ -382,8 +381,7 @@ public class PsiToEcoreTransformator implements IParser {
             _xifexpression = childTransformationContext.getEnumerator();
           }
           final Object child = _xifexpression;
-          boolean _notEquals = (!Objects.equal(child, null));
-          if (_notEquals) {
+          if ((child != null)) {
             String _qualifiedName = this.ruleNames.getQualifiedName(rule);
             transformationContext.assign(child, ruleCall, _qualifiedName);
           }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.tests.parsing;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -108,7 +107,7 @@ public class NodeModelPrinter {
     }
     _builder.newLineIfNotEmpty();
     {
-      if (((!this.ignoreSyntaxErrors) && (!Objects.equal(it.getSyntaxErrorMessage(), null)))) {
+      if (((!this.ignoreSyntaxErrors) && (it.getSyntaxErrorMessage() != null))) {
         _builder.append("syntaxErrorMessage: ");
         SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
         _builder.append(_syntaxErrorMessage, "");
@@ -179,8 +178,8 @@ public class NodeModelPrinter {
     _builder.append(_name, "");
     {
       AbstractElement _terminal = crossReference.getTerminal();
-      boolean _notEquals = (!Objects.equal(_terminal, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_terminal != null);
+      if (_tripleNotEquals) {
         _builder.append(" | ");
         AbstractElement _terminal_1 = crossReference.getTerminal();
         String _printGrammarElement = this.printGrammarElement(_terminal_1);
@@ -201,8 +200,8 @@ public class NodeModelPrinter {
     _builder.append(_literal, "");
     {
       Keyword _literal_1 = it.getLiteral();
-      boolean _notEquals = (!Objects.equal(_literal_1, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_literal_1 != null);
+      if (_tripleNotEquals) {
         _builder.append(" = ");
         Keyword _literal_2 = it.getLiteral();
         String _value = _literal_2.getValue();
