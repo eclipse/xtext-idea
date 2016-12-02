@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.google.common.base.Objects;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
@@ -25,8 +24,7 @@ public class XtextAutoEditTypedHandler extends TypedHandlerDelegate {
   @Override
   public TypedHandlerDelegate.Result beforeCharTyped(final char c, final Project project, final Editor editor, final PsiFile file, final FileType fileType) {
     final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
-    boolean _equals = Objects.equal(autoEditHandler, null);
-    if (_equals) {
+    if ((autoEditHandler == null)) {
       return super.beforeCharTyped(c, project, editor, file, fileType);
     }
     return this.translateResult(autoEditHandler.beforeCharTyped(c, project, ((EditorEx) editor), file, fileType));
@@ -35,8 +33,7 @@ public class XtextAutoEditTypedHandler extends TypedHandlerDelegate {
   @Override
   public TypedHandlerDelegate.Result charTyped(final char c, final Project project, final Editor editor, final PsiFile file) {
     final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
-    boolean _equals = Objects.equal(autoEditHandler, null);
-    if (_equals) {
+    if ((autoEditHandler == null)) {
       return super.charTyped(c, project, editor, file);
     }
     return this.translateResult(autoEditHandler.charTyped(c, project, ((EditorEx) editor), file));

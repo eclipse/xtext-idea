@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
@@ -41,8 +40,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
     {
       this.children = null;
       this.structureViewTreeElementProvider.buildChildren(this);
-      boolean _equals = Objects.equal(this.children, null);
-      if (_equals) {
+      if ((this.children == null)) {
         return CollectionLiterals.<StructureViewTreeElement>emptyList();
       }
       _xblockexpression = this.children;
@@ -58,12 +56,10 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
   @Override
   public boolean addChild(final StructureViewTreeElement child) {
     boolean _xifexpression = false;
-    boolean _notEquals = (!Objects.equal(child, null));
-    if (_notEquals) {
+    if ((child != null)) {
       boolean _xblockexpression = false;
       {
-        boolean _equals = Objects.equal(this.children, null);
-        if (_equals) {
+        if ((this.children == null)) {
           this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
         }
         _xblockexpression = this.children.add(child);
@@ -86,8 +82,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
       if (_not) {
         boolean _xblockexpression_1 = false;
         {
-          boolean _equals = Objects.equal(this.children, null);
-          if (_equals) {
+          if ((this.children == null)) {
             this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
           }
           _xblockexpression_1 = Iterables.<StructureViewTreeElement>addAll(this.children, notNullChildren);

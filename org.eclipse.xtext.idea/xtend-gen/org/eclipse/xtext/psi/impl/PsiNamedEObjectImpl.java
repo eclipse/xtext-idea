@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.psi.impl;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -54,8 +53,7 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
     PsiEObjectIdentifierImpl _xblockexpression = null;
     {
       final ASTNode nameNode = this.findNameNode();
-      boolean _equals = Objects.equal(nameNode, null);
-      if (_equals) {
+      if ((nameNode == null)) {
         return null;
       }
       PsiElement _psi = nameNode.getPsi();
@@ -67,8 +65,7 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
   @Override
   public String getName() {
     final T stub = this.getStub();
-    boolean _notEquals = (!Objects.equal(stub, null));
-    if (_notEquals) {
+    if ((stub != null)) {
       return stub.getName();
     }
     final ITextRegion significantTextRegion = this.getSignificantTextRegion();

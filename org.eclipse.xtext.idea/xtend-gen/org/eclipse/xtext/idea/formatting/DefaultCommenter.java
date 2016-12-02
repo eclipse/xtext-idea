@@ -68,8 +68,7 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
       };
       final Map.Entry<Integer, String> mlCommentEntry = IterableExtensions.<Map.Entry<Integer, String>>findFirst(tokenDefProvider.getTokenDefMap().entrySet(), _function);
       IElementType _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(mlCommentEntry, null));
-      if (_notEquals) {
+      if ((mlCommentEntry != null)) {
         _xifexpression = tokenTypeProvider.getIElementType((mlCommentEntry.getKey()).intValue());
       }
       _xblockexpression = _xifexpression;
@@ -79,8 +78,7 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Override
   public String getLineCommentPrefix() {
-    boolean _notEquals = (!Objects.equal(this.slCommentTokenType, null));
-    if (_notEquals) {
+    if ((this.slCommentTokenType != null)) {
       return this.lineCommentPrefix;
     }
     return null;
@@ -88,8 +86,7 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Override
   public String getBlockCommentPrefix() {
-    boolean _notEquals = (!Objects.equal(this.mlCommentTokenType, null));
-    if (_notEquals) {
+    if ((this.mlCommentTokenType != null)) {
       return this.blockCommentPrefix;
     }
     return null;
@@ -97,8 +94,7 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Override
   public String getBlockCommentSuffix() {
-    boolean _notEquals = (!Objects.equal(this.mlCommentTokenType, null));
-    if (_notEquals) {
+    if ((this.mlCommentTokenType != null)) {
       return this.blockCommentSuffix;
     }
     return null;
@@ -121,8 +117,7 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Override
   public String getDocumentationCommentLinePrefix() {
-    boolean _notEquals = (!Objects.equal(this.mlCommentTokenType, null));
-    if (_notEquals) {
+    if ((this.mlCommentTokenType != null)) {
       return this.documentationCommentLinePrefix;
     }
     return null;

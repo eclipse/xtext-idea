@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.build;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
@@ -62,8 +61,7 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   
   public Set<OutputConfiguration> getOutputConfigurations(final Module module) {
     final Facet<? extends AbstractFacetConfiguration> facet = this.facetProvider.getFacet(module);
-    boolean _notEquals = (!Objects.equal(facet, null));
-    if (_notEquals) {
+    if ((facet != null)) {
       final GeneratorConfigurationState generatorConf = facet.getConfiguration().getState();
       final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
       defOut.setOutputDirectory(this.toModuleRelativePath(generatorConf.getOutputDirectory(), module));

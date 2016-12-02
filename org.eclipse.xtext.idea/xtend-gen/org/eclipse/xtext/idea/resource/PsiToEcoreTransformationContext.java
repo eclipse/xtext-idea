@@ -174,14 +174,13 @@ public class PsiToEcoreTransformationContext {
   public PsiToEcoreTransformationContext merge(final PsiToEcoreTransformationContext childTransformationContext, final boolean forced) {
     PsiToEcoreTransformationContext _xblockexpression = null;
     {
-      if ((Objects.equal(this.current, null) || forced)) {
+      if (((this.current == null) || forced)) {
         this.current = childTransformationContext.current;
       }
-      if (((!Objects.equal(this.datatypeRuleToken, null)) && (!Objects.equal(childTransformationContext.datatypeRuleToken, null)))) {
+      if (((this.datatypeRuleToken != null) && (childTransformationContext.datatypeRuleToken != null))) {
         this.datatypeRuleToken.merge(childTransformationContext.datatypeRuleToken);
       }
-      boolean _equals = Objects.equal(this.enumerator, null);
-      if (_equals) {
+      if ((this.enumerator == null)) {
         this.enumerator = childTransformationContext.enumerator;
       }
       _xblockexpression = this;
@@ -233,8 +232,7 @@ public class PsiToEcoreTransformationContext {
   private boolean ensureModelElementCreated(final EObject grammarElement, final ICompositeNode currentNode) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(grammarElement, null);
-      if (_equals) {
+      if ((grammarElement == null)) {
         return false;
       }
       if ((grammarElement instanceof Action)) {
@@ -247,8 +245,7 @@ public class PsiToEcoreTransformationContext {
       if (_not) {
         boolean _isEObjectFragmentRuleCall = GrammarUtil.isEObjectFragmentRuleCall(grammarElement);
         if (_isEObjectFragmentRuleCall) {
-          boolean _notEquals = (!Objects.equal(this.current, null));
-          if (_notEquals) {
+          if ((this.current != null)) {
             return true;
           }
           final EClassifier classifier = GrammarUtil.containingParserRule(grammarElement).getType().getClassifier();
@@ -272,8 +269,7 @@ public class PsiToEcoreTransformationContext {
         }
         return false;
       }
-      boolean _notEquals_1 = (!Objects.equal(this.current, null));
-      if (_notEquals_1) {
+      if ((this.current != null)) {
         return true;
       }
       final EClassifier classifier_1 = GrammarUtil.containingParserRule(grammarElement).getType().getClassifier();
@@ -336,8 +332,7 @@ public class PsiToEcoreTransformationContext {
   }
   
   protected void mergeDatatypeRuleToken(final LeafElement it) {
-    boolean _notEquals = (!Objects.equal(this.datatypeRuleToken, null));
-    if (_notEquals) {
+    if ((this.datatypeRuleToken != null)) {
       AntlrDatatypeRuleToken _antlrDatatypeRuleToken = new AntlrDatatypeRuleToken();
       final Procedure1<AntlrDatatypeRuleToken> _function = (AntlrDatatypeRuleToken token) -> {
         token.setText(it.getText());
@@ -351,8 +346,8 @@ public class PsiToEcoreTransformationContext {
   public ICompositeNode assign(final EObject value, final Action action) {
     ICompositeNode _xifexpression = null;
     String _feature = action.getFeature();
-    boolean _notEquals = (!Objects.equal(_feature, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_feature != null);
+    if (_tripleNotEquals) {
       _xifexpression = this.assign(this.current, action.getOperator(), action.getFeature(), value, null, this.currentNode);
     }
     return _xifexpression;
@@ -393,8 +388,7 @@ public class PsiToEcoreTransformationContext {
       }
       final ASTNode astNode = _last;
       boolean _xifexpression = false;
-      boolean _notEquals = (!Objects.equal(astNode, null));
-      if (_notEquals) {
+      if ((astNode != null)) {
         final PsiElementProvider _function = () -> {
           return astNode.getPsi();
         };
@@ -508,14 +502,14 @@ public class PsiToEcoreTransformationContext {
   protected ICompositeNode appendError(final INode node, final SyntaxErrorMessage error) {
     ICompositeNode _xifexpression = null;
     SyntaxErrorMessage _syntaxErrorMessage = node.getSyntaxErrorMessage();
-    boolean _equals = Objects.equal(_syntaxErrorMessage, null);
-    if (_equals) {
+    boolean _tripleEquals = (_syntaxErrorMessage == null);
+    if (_tripleEquals) {
       ICompositeNode _xblockexpression = null;
       {
         final INode newNode = this.nodeModelBuilder.setSyntaxError(node, error);
         ICompositeNode _xifexpression_1 = null;
-        boolean _equals_1 = Objects.equal(node, this.currentNode);
-        if (_equals_1) {
+        boolean _equals = Objects.equal(node, this.currentNode);
+        if (_equals) {
           _xifexpression_1 = this.currentNode = ((ICompositeNode) newNode);
         }
         _xblockexpression = _xifexpression_1;

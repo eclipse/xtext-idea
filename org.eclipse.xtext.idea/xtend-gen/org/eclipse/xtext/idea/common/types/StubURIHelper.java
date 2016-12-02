@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.common.types;
 
-import com.google.common.base.Objects;
 import com.intellij.psi.PsiArrayType;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassType;
@@ -154,8 +153,7 @@ public class StubURIHelper implements URIHelperConstants {
       }
       final PsiClass containingClass = psiClass.getContainingClass();
       StringBuilder _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(containingClass, null));
-      if (_notEquals) {
+      if ((containingClass != null)) {
         _xifexpression = this.appendClassResourceURI(builder, containingClass);
       } else {
         _xifexpression = builder.append(URIHelperConstants.OBJECTS).append(psiClass.getQualifiedName());
@@ -223,8 +221,7 @@ public class StubURIHelper implements URIHelperConstants {
       return this.appendTypeParameterFragment(builder, ((PsiTypeParameter)psiClass));
     }
     final PsiClass containingClass = psiClass.getContainingClass();
-    boolean _equals = Objects.equal(containingClass, null);
-    if (_equals) {
+    if ((containingClass == null)) {
       return builder.append(psiClass.getQualifiedName());
     } else {
       return this.appendClassFragment(builder, containingClass).append("$").append(psiClass.getName());
@@ -287,8 +284,7 @@ public class StubURIHelper implements URIHelperConstants {
             _switchResult_1 = builder.append(((PsiTypeParameter)resolved).getName());
           }
           if (!_matched_1) {
-            boolean _notEquals = (!Objects.equal(resolved, null));
-            if (_notEquals) {
+            if ((resolved != null)) {
               _matched_1=true;
               _switchResult_1 = this.appendTypeName(builder, resolved);
             }

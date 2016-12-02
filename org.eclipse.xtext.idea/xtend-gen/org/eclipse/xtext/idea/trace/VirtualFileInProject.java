@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.trace;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -26,8 +25,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class VirtualFileInProject {
   public static VirtualFileInProject forPsiElement(final PsiElement element) {
     final VirtualFile virtualFile = XtextPsiUtils.findVirtualFile(element);
-    boolean _equals = Objects.equal(virtualFile, null);
-    if (_equals) {
+    if ((virtualFile == null)) {
       return null;
     }
     Project _project = element.getProject();

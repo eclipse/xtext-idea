@@ -59,7 +59,7 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
         final Condition<PsiElement> _function = (PsiElement it) -> {
           EObject _eObject = XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(it);
-          return (!Objects.equal(_eObject, null));
+          return (_eObject != null);
         };
         final PsiElement psiElement = PsiTreeUtil.findFirstParent($0.getPosition(), false, _function);
         final XAnnotation annotation = EcoreUtil2.<XAnnotation>getContainerOfType(XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(psiElement), XAnnotation.class);

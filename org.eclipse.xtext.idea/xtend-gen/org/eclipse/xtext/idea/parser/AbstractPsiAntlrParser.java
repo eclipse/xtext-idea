@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.parser;
 
-import com.google.common.base.Objects;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.psi.tree.IElementType;
@@ -181,8 +180,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   protected void doneLeaf(final Token matchedToken) {
     final IElementType tokenType = this.psiInput.remapToken(null);
-    boolean _equals = Objects.equal(matchedToken, null);
-    if (_equals) {
+    if ((matchedToken == null)) {
       PsiBuilder.Marker _mark = this.psiBuilder.mark();
       GrammarAwareErrorElementType _grammarAwareErrorElementType = new GrammarAwareErrorElementType(tokenType);
       _mark.done(_grammarAwareErrorElementType);

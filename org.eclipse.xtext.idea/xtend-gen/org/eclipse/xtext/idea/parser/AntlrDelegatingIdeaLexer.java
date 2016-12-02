@@ -54,8 +54,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
   @Override
   public IElementType getTokenType() {
     this.locateToken();
-    boolean _equals = Objects.equal(this.token, null);
-    if (_equals) {
+    if ((this.token == null)) {
       return null;
     }
     final int type = this.token.getType();
@@ -103,8 +102,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
   }
   
   public void locateToken() {
-    boolean _equals = Objects.equal(this.token, null);
-    if (_equals) {
+    if ((this.token == null)) {
       try {
         Token _nextToken = this.tokenSource.nextToken();
         this.token = ((CommonToken) _nextToken);
@@ -116,8 +114,8 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      boolean _equals_1 = Objects.equal(this.token, Token.EOF_TOKEN);
-      if (_equals_1) {
+      boolean _equals = Objects.equal(this.token, Token.EOF_TOKEN);
+      if (_equals) {
         this.token = null;
       }
     }

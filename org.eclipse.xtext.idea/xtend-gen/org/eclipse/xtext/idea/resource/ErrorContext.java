@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformationContext;
@@ -21,8 +20,8 @@ public class ErrorContext {
   public EObject getCurrentContext() {
     EObject _xifexpression = null;
     ICompositeNode _currentNode = this.getCurrentNode();
-    boolean _notEquals = (!Objects.equal(_currentNode, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_currentNode != null);
+    if (_tripleNotEquals) {
       _xifexpression = this.getCurrentNode().getSemanticElement();
     }
     return _xifexpression;

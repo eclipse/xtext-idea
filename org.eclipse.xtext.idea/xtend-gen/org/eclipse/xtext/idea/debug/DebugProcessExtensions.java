@@ -65,7 +65,7 @@ public class DebugProcessExtensions {
       final URI uri = VirtualFileURIUtil.getURI(javaSource.getFile().getVirtualFile());
       final String lastSegmentOfTrace = this.traceFileNameProvider.getTraceFromJava(uri.lastSegment());
       final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri.trimSegments(1).appendSegment(lastSegmentOfTrace));
-      if ((Objects.equal(virtualFile, null) || (!virtualFile.exists()))) {
+      if (((virtualFile == null) || (!virtualFile.exists()))) {
         return null;
       }
       final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(virtualFile.getInputStream());
@@ -96,7 +96,7 @@ public class DebugProcessExtensions {
         {
           final String lastSegmentOfTrace = this.traceFileNameProvider.getTraceFromJava(uri.lastSegment());
           final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri.trimSegments(1).appendSegment(lastSegmentOfTrace));
-          if (((!Objects.equal(virtualFile, null)) && virtualFile.exists())) {
+          if (((virtualFile != null) && virtualFile.exists())) {
             final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(virtualFile.getInputStream());
             result.put(uri, trace);
           }
@@ -114,8 +114,7 @@ public class DebugProcessExtensions {
   
   public URI findOriginalDeclaration(final DebugProcess process, final Location location) {
     final PsiFile psiFile = this.getPsiFile(process, location);
-    boolean _equals = Objects.equal(psiFile, null);
-    if (_equals) {
+    if ((psiFile == null)) {
       return null;
     } else {
       return IterableExtensions.<URI>head(process.getProject().<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class).getSource4GeneratedSource(VirtualFileURIUtil.getURI(psiFile.getVirtualFile())));

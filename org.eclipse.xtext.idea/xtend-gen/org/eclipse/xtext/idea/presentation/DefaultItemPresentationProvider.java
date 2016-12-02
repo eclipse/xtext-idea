@@ -74,8 +74,7 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
     {
       final EAttribute labelFeature = this.getLabelFeature(element.eClass());
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(labelFeature, null));
-      if (_notEquals) {
+      if ((labelFeature != null)) {
         Object _eGet = element.eGet(labelFeature);
         String _string = null;
         if (_eGet!=null) {
@@ -97,8 +96,7 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
         if (_equalsIgnoreCase) {
           return eAttribute;
         } else {
-          boolean _equals = Objects.equal(result, null);
-          if (_equals) {
+          if ((result == null)) {
             result = eAttribute;
           } else {
             if ((Objects.equal(eAttribute.getEAttributeType().getInstanceClass(), String.class) && 

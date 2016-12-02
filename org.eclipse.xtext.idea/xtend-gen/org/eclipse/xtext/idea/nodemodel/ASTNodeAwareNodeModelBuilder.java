@@ -67,8 +67,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
   
   protected void replaceAssociations(final INode oldNode, final INode newNode) {
     final List<ASTNode> mapping = this.reverseNodesMapping.remove(oldNode);
-    boolean _notEquals = (!Objects.equal(mapping, null));
-    if (_notEquals) {
+    if ((mapping != null)) {
       for (final ASTNode astNode : mapping) {
         this.associate(astNode, newNode);
       }
@@ -117,8 +116,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
         {
           final IElementType tokenType = it.<IElementType>getUserData(IASTNodeAwareNodeModelBuilder.TOKEN_TYPE_KEY);
           AbstractRule _xifexpression_1 = null;
-          boolean _notEquals = (!Objects.equal(tokenType, null));
-          if (_notEquals) {
+          if ((tokenType != null)) {
             AbstractRule _xblockexpression_2 = null;
             {
               final String tokenName = tokenType.toString();
