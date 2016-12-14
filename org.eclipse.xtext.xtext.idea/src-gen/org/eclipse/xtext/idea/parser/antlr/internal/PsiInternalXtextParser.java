@@ -94,7 +94,7 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
     	public PsiInternalXtextParser(PsiBuilder builder, TokenStream input, XtextElementTypeProvider elementTypeProvider, XtextGrammarAccess grammarAccess) {
     		this(input);
     		setPsiBuilder(builder);
-        	this.grammarAccess = grammarAccess;
+    		this.grammarAccess = grammarAccess;
     		this.elementTypeProvider = elementTypeProvider;
     	}
 
