@@ -42,9 +42,9 @@ public class IdeaDeclarationDocumentationProvider {
       _builder.append("<b>");
       EClass _eClass = obj.eClass();
       String _name = _eClass.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(" \'");
-      _builder.append(name, "");
+      _builder.append(name);
       _builder.append("\'</b>");
       return _builder.toString();
     } else {
@@ -61,9 +61,9 @@ public class IdeaDeclarationDocumentationProvider {
       _builder_1.append("<b>");
       EClass _eClass_1 = obj.eClass();
       String _name_1 = _eClass_1.getName();
-      _builder_1.append(_name_1, "");
+      _builder_1.append(_name_1);
       _builder_1.append(" in \'");
-      _builder_1.append(container, "");
+      _builder_1.append(container);
       _builder_1.append("\'</b>");
       return _builder_1.toString();
     }
@@ -77,11 +77,11 @@ public class IdeaDeclarationDocumentationProvider {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("[");
       String _name = module.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append("] ");
       URI _uRI = resource.getURI();
       String _lastSegment = _uRI.lastSegment();
-      _builder.append(_lastSegment, "");
+      _builder.append(_lastSegment);
       return _builder.toString();
     }
     URI _uRI_1 = resource.getURI();
@@ -91,10 +91,10 @@ public class IdeaDeclarationDocumentationProvider {
   public String getQuickNavigateInfo(final PsiEObject element) {
     StringConcatenation _builder = new StringConcatenation();
     String _elementInfo = this.getElementInfo(element);
-    _builder.append(_elementInfo, "");
+    _builder.append(_elementInfo);
     _builder.newLineIfNotEmpty();
     String _fileInfo = this.getFileInfo(element);
-    _builder.append(_fileInfo, "");
+    _builder.append(_fileInfo);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }

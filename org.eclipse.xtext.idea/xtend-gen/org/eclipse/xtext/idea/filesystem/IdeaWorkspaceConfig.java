@@ -97,12 +97,12 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The file (");
-      _builder.append(member, "");
+      _builder.append(member);
       _builder.append(") should belong to the first content root (");
       VirtualFile _contentRoot_1 = result.getContentRoot();
-      _builder.append(_contentRoot_1, "");
+      _builder.append(_contentRoot_1);
       _builder.append(") but belongs to ");
-      _builder.append(contentRoot, "");
+      _builder.append(contentRoot);
       _builder.append(".");
       IdeaWorkspaceConfig.LOG.error(_builder);
     }

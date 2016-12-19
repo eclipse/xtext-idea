@@ -139,12 +139,12 @@ public abstract class AbstractPsiAntlrParser extends Parser {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("entry");
         String _firstUpper = StringExtensions.toFirstUpper(entryRuleName);
-        _builder.append(_firstUpper, "");
+        _builder.append(_firstUpper);
         return _builder.toString();
       }
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("entryRule");
-      _builder_1.append(entryRuleName, "");
+      _builder_1.append(entryRuleName);
       _xblockexpression = _builder_1.toString();
     }
     return _xblockexpression;

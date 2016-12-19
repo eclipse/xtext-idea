@@ -69,7 +69,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("delegate.");
             String _simpleName = declaredMethod.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append("();");
           }
         };

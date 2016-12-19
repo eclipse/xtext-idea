@@ -171,7 +171,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   protected String _text(final XImportDeclaration it) {
     StringConcatenation _builder = new StringConcatenation();
     String _importedTypeName = it.getImportedTypeName();
-    _builder.append(_importedTypeName, "");
+    _builder.append(_importedTypeName);
     {
       boolean _isWildcard = it.isWildcard();
       if (_isWildcard) {
@@ -182,7 +182,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
         if (_notEquals) {
           _builder.append(".");
           String _memberName_1 = it.getMemberName();
-          _builder.append(_memberName_1, "");
+          _builder.append(_memberName_1);
         }
       }
     }

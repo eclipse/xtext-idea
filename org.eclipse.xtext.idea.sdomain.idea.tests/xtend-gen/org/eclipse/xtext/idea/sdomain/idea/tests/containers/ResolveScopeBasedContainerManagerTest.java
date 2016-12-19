@@ -61,7 +61,7 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     final Module module = this.createModule("module");
     StringConcatenation _builder = new StringConcatenation();
     String _testDataPath = this.getTestDataPath();
-    _builder.append(_testDataPath, "");
+    _builder.append(_testDataPath);
     _builder.append("/module");
     File _file = new File(_builder.toString());
     VirtualFile _refreshAndFindFile = UsefulTestCase.refreshAndFindFile(_file);
@@ -69,7 +69,7 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     final Module module2 = this.createModule("module2");
     StringConcatenation _builder_1 = new StringConcatenation();
     String _testDataPath_1 = this.getTestDataPath();
-    _builder_1.append(_testDataPath_1, "");
+    _builder_1.append(_testDataPath_1);
     _builder_1.append("/module2");
     File _file_1 = new File(_builder_1.toString());
     VirtualFile _refreshAndFindFile_1 = UsefulTestCase.refreshAndFindFile(_file_1);
@@ -86,9 +86,9 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
       {
         StringConcatenation _builder_2 = new StringConcatenation();
         String _testDataPath_2 = this.getTestDataPath();
-        _builder_2.append(_testDataPath_2, "");
+        _builder_2.append(_testDataPath_2);
         _builder_2.append("/");
-        _builder_2.append(path, "");
+        _builder_2.append(path);
         final File file = new File(_builder_2.toString());
         final VirtualFile virtualFile = UsefulTestCase.refreshAndFindFile(file);
         PsiManager _psiManager = this.getPsiManager();

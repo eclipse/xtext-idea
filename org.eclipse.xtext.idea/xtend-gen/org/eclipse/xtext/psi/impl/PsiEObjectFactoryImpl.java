@@ -161,9 +161,9 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The value \'");
-      _builder.append(name, "");
+      _builder.append(name);
       _builder.append("\' is an invalid ");
-      _builder.append(ruleName, "");
+      _builder.append(ruleName);
       throw new IncorrectOperationException(_builder.toString());
     }
     Map<Integer, String> _tokenDefMap = this.tokenDefProvider.getTokenDefMap();
@@ -174,9 +174,9 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
     if (_notEquals_1) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("The value \'");
-      _builder_1.append(name, "");
+      _builder_1.append(name);
       _builder_1.append("\' is an invalid ");
-      _builder_1.append(ruleName, "");
+      _builder_1.append(ruleName);
       throw new IncorrectOperationException(_builder_1.toString());
     }
   }

@@ -250,12 +250,12 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
           boolean _notEquals = (!Objects.equal(_xtextStyle, HighlightingStyles.DEFAULT_ID));
           if (_notEquals) {
             StringConcatenation _builder = new StringConcatenation();
-            _builder.append(start, "");
+            _builder.append(start);
             _builder.append("-");
-            _builder.append(end, "");
+            _builder.append(end);
             _builder.append(":");
             String _xtextStyle_1 = this.getXtextStyle(tokenType);
-            _builder.append(_xtextStyle_1, "");
+            _builder.append(_xtextStyle_1);
             compactHighlights.append(_builder);
             compactHighlights.append("\n");
           }

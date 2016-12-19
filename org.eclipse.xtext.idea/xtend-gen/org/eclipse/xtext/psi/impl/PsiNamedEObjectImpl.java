@@ -144,7 +144,7 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(");
     IStubElementType _elementType = this.getElementType();
-    _builder.append(_elementType, "");
+    _builder.append(_elementType);
     _builder.append(":");
     Object _elvis = null;
     ASTNode _findNameNode = this.findNameNode();
@@ -157,7 +157,7 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
     } else {
       _elvis = "null";
     }
-    _builder.append(_elvis, "");
+    _builder.append(_elvis);
     _builder.append(")");
     {
       Class<? extends PsiNamedEObjectImpl> _class = this.getClass();

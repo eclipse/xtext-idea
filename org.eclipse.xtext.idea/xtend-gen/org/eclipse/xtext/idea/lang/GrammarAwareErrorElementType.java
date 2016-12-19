@@ -20,9 +20,9 @@ public class GrammarAwareErrorElementType extends IElementType {
     StringConcatenation _builder = new StringConcatenation();
     Class<? extends GrammarAwareErrorElementType> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(" [");
-    _builder.append(this.elementType, "");
+    _builder.append(this.elementType);
     _builder.append("]");
     return _builder.toString();
   }

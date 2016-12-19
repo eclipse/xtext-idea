@@ -68,10 +68,10 @@ public abstract class AbstractExecutableExtensionPoint extends AbstractExtension
   
   protected RuntimeException asRuntimeException(final CharSequence message) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(message, "");
+    _builder.append(message);
     _builder.append(", plugin id: ");
     String _contributor = this.getContributor();
-    _builder.append(_contributor, "");
+    _builder.append(_contributor);
     _builder.append(".");
     return new RuntimeException(_builder.toString());
   }

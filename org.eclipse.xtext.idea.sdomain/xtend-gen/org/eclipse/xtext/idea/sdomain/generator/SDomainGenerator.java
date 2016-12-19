@@ -43,11 +43,11 @@ public class SDomainGenerator extends AbstractGenerator {
     };
     Iterator<String> _map = IteratorExtensions.<Entity, String>map(_filter, _function);
     String _join = IteratorExtensions.join(_map, ", ");
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.newLineIfNotEmpty();
     _builder.append("updated ");
     long _currentTimeMillis = System.currentTimeMillis();
-    _builder.append(_currentTimeMillis, "");
+    _builder.append(_currentTimeMillis);
     _builder.newLineIfNotEmpty();
     fsa.generateFile(_plus, _builder);
   }

@@ -210,7 +210,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
           } else {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Can\'t start maven import. File ");
-            _builder.append(pomFilePath, "");
+            _builder.append(pomFilePath);
             _builder.append(" does not exists.");
             XtextModuleBuilder.LOG.error(_builder);
           }

@@ -146,7 +146,7 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Wrong .iml path  ");
     String _moduleFilePath_2 = rootModule.getModuleFilePath();
-    _builder.append(_moduleFilePath_2, "");
+    _builder.append(_moduleFilePath_2);
     Project _project_2 = this.getProject();
     String _basePath = _project_2.getBasePath();
     String _plus = (_basePath + "/mydsl2.parent/mydsl2.parent.iml");
