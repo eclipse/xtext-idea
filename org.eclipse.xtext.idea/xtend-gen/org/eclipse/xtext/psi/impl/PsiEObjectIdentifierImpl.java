@@ -115,10 +115,10 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
     StringConcatenation _builder = new StringConcatenation();
     Class<? extends PsiEObjectIdentifierImpl> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(": ");
     String _text = this.getText();
-    _builder.append(_text, "");
+    _builder.append(_text);
     return _builder.toString();
   }
 }

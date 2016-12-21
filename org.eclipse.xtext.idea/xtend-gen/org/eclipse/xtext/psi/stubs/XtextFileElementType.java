@@ -35,7 +35,7 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     StringConcatenation _builder = new StringConcatenation();
     Language _language = this.getLanguage();
     String _iD = _language.getID();
-    _builder.append(_iD, "");
+    _builder.append(_iD);
     _builder.append(".FILE");
     return _builder.toString();
   }

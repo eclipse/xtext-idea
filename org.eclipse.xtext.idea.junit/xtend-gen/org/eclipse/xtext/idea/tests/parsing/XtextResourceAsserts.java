@@ -98,13 +98,13 @@ public class XtextResourceAsserts extends Assert {
       final INode node = psiToEcoreAdapter.getINode(astNode);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The node is null the ast node: ");
-      _builder.append(astNode, "");
+      _builder.append(astNode);
       Assert.assertNotNull(_builder.toString(), node);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("The node ");
-      _builder_1.append(node, "");
+      _builder_1.append(node);
       _builder_1.append(" is not a part of the tree for the ast node: ");
-      _builder_1.append(astNode, "");
+      _builder_1.append(astNode);
       boolean _belongsTo = this.belongsTo(node, rootNode);
       Assert.assertTrue(_builder_1.toString(), _belongsTo);
       ASTNode _aSTNode = psiToEcoreAdapter.getASTNode(node);
@@ -147,7 +147,7 @@ public class XtextResourceAsserts extends Assert {
         return _printAST;
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(astNode, "");
+      _builder.append(astNode);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -193,7 +193,7 @@ public class XtextResourceAsserts extends Assert {
       }
       final Iterable<INode> children = _xifexpression;
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(astNode, "");
+      _builder.append(astNode);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

@@ -148,7 +148,7 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl(");
-    _builder.append(this.elementType, "");
+    _builder.append(this.elementType);
     _builder.append(")");
     {
       Class<? extends PsiEObjectImpl> _class = this.getClass();

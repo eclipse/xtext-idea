@@ -37,7 +37,7 @@ public class NodeModelPrinter {
   protected String _print(final ICompositeNode it) {
     StringConcatenation _builder = new StringConcatenation();
     String _doPrint = this.doPrint(it);
-    _builder.append(_doPrint, "");
+    _builder.append(_doPrint);
     _builder.newLineIfNotEmpty();
     _builder.append("{");
     _builder.newLine();
@@ -73,20 +73,20 @@ public class NodeModelPrinter {
         String _name = _class.getName();
         String _replaceFirst = _name.replaceFirst("AndSyntaxError", "");
         String _replaceFirst_1 = _replaceFirst.replaceFirst("WithSyntaxError", "");
-        _builder.append(_replaceFirst_1, "");
+        _builder.append(_replaceFirst_1);
       } else {
         Class<? extends INode> _class_1 = it.getClass();
-        _builder.append(_class_1, "");
+        _builder.append(_class_1);
       }
     }
     _builder.append(" ");
     ITextRegion _totalTextRegion = it.getTotalTextRegion();
-    _builder.append(_totalTextRegion, "");
+    _builder.append(_totalTextRegion);
     _builder.newLineIfNotEmpty();
     _builder.append("grammarElements: ");
     EObject _grammarElement = it.getGrammarElement();
     String _printGrammarElement = this.printGrammarElement(_grammarElement);
-    _builder.append(_printGrammarElement, "");
+    _builder.append(_printGrammarElement);
     _builder.newLineIfNotEmpty();
     {
       boolean _hasDirectSemanticElement = it.hasDirectSemanticElement();
@@ -95,7 +95,7 @@ public class NodeModelPrinter {
         EObject _semanticElement = it.getSemanticElement();
         Class<? extends EObject> _class_2 = _semanticElement.getClass();
         String _name_1 = _class_2.getName();
-        _builder.append(_name_1, "");
+        _builder.append(_name_1);
       }
     }
     _builder.newLineIfNotEmpty();
@@ -103,7 +103,7 @@ public class NodeModelPrinter {
       if ((it instanceof ICompositeNode)) {
         _builder.append("lookAhead: ");
         int _lookAhead = ((ICompositeNode)it).getLookAhead();
-        _builder.append(_lookAhead, "");
+        _builder.append(_lookAhead);
       }
     }
     _builder.newLineIfNotEmpty();
@@ -111,7 +111,7 @@ public class NodeModelPrinter {
       if (((!this.ignoreSyntaxErrors) && (!Objects.equal(it.getSyntaxErrorMessage(), null)))) {
         _builder.append("syntaxErrorMessage: ");
         SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-        _builder.append(_syntaxErrorMessage, "");
+        _builder.append(_syntaxErrorMessage);
       }
     }
     return _builder.toString();
@@ -129,10 +129,10 @@ public class NodeModelPrinter {
     StringConcatenation _builder = new StringConcatenation();
     Class<? extends AbstractRule> _class = rule.getClass();
     String _simpleName = _class.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(" [");
     String _name = rule.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("]");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -143,7 +143,7 @@ public class NodeModelPrinter {
     _builder.append("RuleCall --> ");
     AbstractRule _rule = grammarElement.getRule();
     String _printGrammarElement = this.printGrammarElement(_rule);
-    _builder.append(_printGrammarElement, "");
+    _builder.append(_printGrammarElement);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -152,7 +152,7 @@ public class NodeModelPrinter {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Keyword [");
     String _value = grammarElement.getValue();
-    _builder.append(_value, "");
+    _builder.append(_value);
     _builder.append("]");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -164,7 +164,7 @@ public class NodeModelPrinter {
     TypeRef _type = action.getType();
     EClassifier _classifier = _type.getClassifier();
     String _name = _classifier.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("]");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -176,7 +176,7 @@ public class NodeModelPrinter {
     TypeRef _type = crossReference.getType();
     EClassifier _classifier = _type.getClassifier();
     String _name = _classifier.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     {
       AbstractElement _terminal = crossReference.getTerminal();
       boolean _notEquals = (!Objects.equal(_terminal, null));
@@ -184,7 +184,7 @@ public class NodeModelPrinter {
         _builder.append(" | ");
         AbstractElement _terminal_1 = crossReference.getTerminal();
         String _printGrammarElement = this.printGrammarElement(_terminal_1);
-        _builder.append(_printGrammarElement, "");
+        _builder.append(_printGrammarElement);
         _builder.append(" ");
       }
     }
@@ -198,7 +198,7 @@ public class NodeModelPrinter {
     _builder.append("EnumLiteralDeclaration [");
     EEnumLiteral _enumLiteral = it.getEnumLiteral();
     String _literal = _enumLiteral.getLiteral();
-    _builder.append(_literal, "");
+    _builder.append(_literal);
     {
       Keyword _literal_1 = it.getLiteral();
       boolean _notEquals = (!Objects.equal(_literal_1, null));
@@ -206,7 +206,7 @@ public class NodeModelPrinter {
         _builder.append(" = ");
         Keyword _literal_2 = it.getLiteral();
         String _value = _literal_2.getValue();
-        _builder.append(_value, "");
+        _builder.append(_value);
       }
     }
     _builder.append("]");

@@ -221,7 +221,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         _builder.append("too long process, terminated=");
         ProcessHandler _processHandler_1 = this.myDebugProcess.getProcessHandler();
         boolean _isProcessTerminated_1 = _processHandler_1.isProcessTerminated();
-        _builder.append(_isProcessTerminated_1, "");
+        _builder.append(_isProcessTerminated_1);
         TestCase.fail(_builder.toString());
       }
       return suspendManager.getPausedContext();
@@ -251,7 +251,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     Character _valueOf_1 = Character.valueOf('/');
     char _charValue_1 = _valueOf_1.charValue();
     String _replace = _name.replace(_charValue, _charValue_1);
-    _builder.append(_replace, "");
+    _builder.append(_replace);
     _builder.append(".class");
     final String junitLibRoot = PathManager.getResourceRoot(testCaseClass, _builder.toString());
     if ((junitLibRoot != null)) {

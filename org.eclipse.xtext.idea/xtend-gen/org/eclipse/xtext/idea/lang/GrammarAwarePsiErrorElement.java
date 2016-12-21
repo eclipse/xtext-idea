@@ -32,10 +32,10 @@ public class GrammarAwarePsiErrorElement extends PsiErrorElementImpl implements 
     StringConcatenation _builder = new StringConcatenation();
     Class<? extends GrammarAwarePsiErrorElement> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(":");
     String _errorDescription = this.getErrorDescription();
-    _builder.append(_errorDescription, "");
+    _builder.append(_errorDescription);
     return _builder.toString();
   }
   
