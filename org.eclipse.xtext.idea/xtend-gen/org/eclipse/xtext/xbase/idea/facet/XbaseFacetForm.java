@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.idea.facet;
 
-import com.google.common.base.Objects;
 import com.intellij.facet.ui.FacetValidatorsManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -188,8 +187,8 @@ public class XbaseFacetForm extends GeneratorFacetForm {
         return Boolean.valueOf((_name == _targetJavaVersion));
       };
       LanguageLevel _findFirst = IterableExtensions.<LanguageLevel>findFirst(((Iterable<LanguageLevel>)Conversions.doWrapArray(_values)), _function);
-      boolean _notEquals = (!Objects.equal(_findFirst, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_findFirst != null);
+      if (_tripleNotEquals) {
         String _targetJavaVersion = ((XbaseGeneratorConfigurationState)data).getTargetJavaVersion();
         LanguageLevel _valueOf = LanguageLevel.valueOf(_targetJavaVersion);
         this.targetJavaVersion.setSelectedItem(_valueOf);
@@ -326,8 +325,7 @@ public class XbaseFacetForm extends GeneratorFacetForm {
       @Override
       protected LanguageLevel getDefaultLevel() {
         LanguageLevel langLevel = this.llExt.getLanguageLevel();
-        boolean _equals = Objects.equal(langLevel, null);
-        if (_equals) {
+        if ((langLevel == null)) {
           Module _module = XbaseFacetForm.this.getModule();
           Project _project = _module.getProject();
           LanguageLevelProjectExtensionImpl _instanceImpl = LanguageLevelProjectExtensionImpl.getInstanceImpl(_project);

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.extensions.AbstractExecutableExtensionPoint;
 import org.eclipse.xtext.internal.AbstractResourceServiceProviderDescriptor;
@@ -26,8 +25,7 @@ public class ResourceServiceProviderDescriptor extends AbstractResourceServicePr
   
   @Override
   protected Object getExtension() {
-    boolean _equals = Objects.equal(this.myExtension, null);
-    if (_equals) {
+    if ((this.myExtension == null)) {
       Object _createInstance = this.extensionPoint.createInstance();
       this.myExtension = _createInstance;
     }

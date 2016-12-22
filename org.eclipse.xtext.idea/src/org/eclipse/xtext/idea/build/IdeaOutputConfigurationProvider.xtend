@@ -50,7 +50,7 @@ class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationP
 	
 	def Set<OutputConfiguration> getOutputConfigurations(Module module) {
 		val facet = facetProvider.getFacet(module)
-		if (facet != null) {
+		if (facet !== null) {
 			val generatorConf = facet.configuration.state
 			val defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT)
 			defOut.outputDirectory = generatorConf.outputDirectory.toModuleRelativePath(module)

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.common.types;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
@@ -94,11 +93,11 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     JvmType _xblockexpression = null;
     {
       JvmType result = this.doFindTypeByName(name, false);
-      if (((!Objects.equal(result, null)) || this.isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter))) {
+      if (((result != null) || this.isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter))) {
         return result;
       }
       final AbstractJvmTypeProvider.ClassNameVariants nameVariants = new AbstractJvmTypeProvider.ClassNameVariants(name);
-      while ((Objects.equal(result, null) && nameVariants.hasNext())) {
+      while (((result == null) && nameVariants.hasNext())) {
         {
           final String nextVariant = nameVariants.next();
           JvmType _doFindTypeByName = this.doFindTypeByName(nextVariant, true);
@@ -180,13 +179,11 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       try {
         ResourceSet _resourceSet_1 = this.getResourceSet();
         final Resource existing = _resourceSet_1.getResource(resourceURI, false);
-        boolean _notEquals = (!Objects.equal(existing, null));
-        if (_notEquals) {
+        if ((existing != null)) {
           return this.findType(existing, fragment, traverseNestedTypes);
         }
         final IMirror mirror = this.createMirror(resourceURI);
-        boolean _equals = Objects.equal(mirror, null);
-        if (_equals) {
+        if ((mirror == null)) {
           return null;
         }
         final TypeResource resource = this.doCreateResource(resourceURI);
@@ -214,7 +211,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     final Computable<JvmType> _function = () -> {
       EObject _eObject = resource.getEObject(fragment);
       final JvmType result = ((JvmType) _eObject);
-      if (((!Objects.equal(result, null)) || (!traverseNestedTypes))) {
+      if (((result != null) || (!traverseNestedTypes))) {
         return result;
       }
       EList<EObject> _contents = resource.getContents();
@@ -244,7 +241,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
           Project _project = this.module.getProject();
           JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
           final PsiClass psiClass = _instance.findClass(name, this.searchScope);
-          if ((Objects.equal(psiClass, null) || (!Objects.equal(psiClass.getContainingClass(), null)))) {
+          if (((psiClass == null) || (psiClass.getContainingClass() != null))) {
             return null;
           }
           _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);

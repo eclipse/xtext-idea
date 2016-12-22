@@ -44,7 +44,7 @@ abstract class AbstractIndentableAutoEditBlock extends AbstractAutoEditBlock {
 	IIndentationInformation indentationInformation
 
 	protected def getIndentationTerminal() {
-		if (indentationTerminal == null)
+		if (indentationTerminal === null)
 			return indentationInformation.indentString
 		return indentationTerminal
 	}

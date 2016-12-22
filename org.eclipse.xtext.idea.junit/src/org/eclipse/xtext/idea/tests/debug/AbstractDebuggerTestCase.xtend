@@ -136,7 +136,7 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 		command.run
 		while (i++ < timeout / 10 &&
 			(oldSourcePosition == myDebugProcess.session.contextManager.context.sourcePosition ||
-				myDebugProcess.session.contextManager.context.sourcePosition == null)) {
+				myDebugProcess.session.contextManager.context.sourcePosition === null)) {
 			Thread.sleep(10)
 			UIUtil.dispatchAllInvocationEvents()
 		}

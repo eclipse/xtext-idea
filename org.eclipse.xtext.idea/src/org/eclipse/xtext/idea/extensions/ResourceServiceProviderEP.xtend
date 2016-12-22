@@ -52,7 +52,7 @@ class ResourceServiceProviderDescriptor extends AbstractResourceServiceProviderD
 	}
 
 	override protected getExtension() {
-		if (myExtension == null)
+		if (myExtension === null)
 			myExtension = extensionPoint.createInstance
 		return myExtension
 	}

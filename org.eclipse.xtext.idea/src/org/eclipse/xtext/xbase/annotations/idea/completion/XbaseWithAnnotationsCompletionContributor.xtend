@@ -41,7 +41,7 @@ class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionContribut
 			CompletionType.BASIC,
 			XAnnotationsPackage.Literals.XANNOTATION__VALUE
 		) [
-			val psiElement = $0.position.findFirstParent(false)[EObject != null]
+			val psiElement = $0.position.findFirstParent(false)[EObject !== null]
 			val annotation = psiElement.EObject.getContainerOfType(XAnnotation)
 			switch annotationType : annotation?.annotationType {
 				JvmAnnotationType case !annotationType.eIsProxy: {

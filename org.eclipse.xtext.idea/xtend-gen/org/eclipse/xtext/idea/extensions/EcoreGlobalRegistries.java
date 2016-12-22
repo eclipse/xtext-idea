@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.Extensions;
@@ -50,24 +49,24 @@ public class EcoreGlobalRegistries {
     ResourceServiceProviderEP[] _extensions_2 = Extensions.<ResourceServiceProviderEP>getExtensions(ResourceServiceProviderEP.EP_NAME);
     final Consumer<ResourceServiceProviderEP> _function_2 = (ResourceServiceProviderEP it) -> {
       String _uriExtension = it.getUriExtension();
-      boolean _notEquals = (!Objects.equal(_uriExtension, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_uriExtension != null);
+      if (_tripleNotEquals) {
         Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
         String _uriExtension_1 = it.getUriExtension();
         ResourceServiceProviderDescriptor _createDescriptor = it.createDescriptor();
         _extensionToFactoryMap.put(_uriExtension_1, _createDescriptor);
       }
       String _protocolName = it.getProtocolName();
-      boolean _notEquals_1 = (!Objects.equal(_protocolName, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_protocolName != null);
+      if (_tripleNotEquals_1) {
         Map<String, Object> _protocolToFactoryMap = registry.getProtocolToFactoryMap();
         String _protocolName_1 = it.getProtocolName();
         ResourceServiceProviderDescriptor _createDescriptor_1 = it.createDescriptor();
         _protocolToFactoryMap.put(_protocolName_1, _createDescriptor_1);
       }
       String _contentTypeIdentifier = it.getContentTypeIdentifier();
-      boolean _notEquals_2 = (!Objects.equal(_contentTypeIdentifier, null));
-      if (_notEquals_2) {
+      boolean _tripleNotEquals_2 = (_contentTypeIdentifier != null);
+      if (_tripleNotEquals_2) {
         Map<String, Object> _contentTypeToFactoryMap = registry.getContentTypeToFactoryMap();
         String _contentTypeIdentifier_1 = it.getContentTypeIdentifier();
         ResourceServiceProviderDescriptor _createDescriptor_2 = it.createDescriptor();

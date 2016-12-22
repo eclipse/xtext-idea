@@ -53,20 +53,18 @@ public class IdeaProjectConfig implements IProjectConfig {
     VirtualFileManager _instance = VirtualFileManager.getInstance();
     String _string = member.toString();
     final VirtualFile file = _instance.findFileByUrl(_string);
-    boolean _equals = Objects.equal(file, null);
-    if (_equals) {
+    if ((file == null)) {
       return null;
     }
     Project _project = this.module.getProject();
     ProjectRootManager _instance_1 = ProjectRootManager.getInstance(_project);
     ProjectFileIndex _fileIndex = _instance_1.getFileIndex();
     final VirtualFile sourceRoot = _fileIndex.getSourceRootForFile(file);
-    boolean _equals_1 = Objects.equal(sourceRoot, null);
-    if (_equals_1) {
+    if ((sourceRoot == null)) {
       return null;
     }
     final SourceFolder sourceFolder = ProjectRootsUtil.findSourceFolder(this.module, sourceRoot);
-    if ((Objects.equal(sourceFolder, null) || (!Objects.equal(sourceFolder.getContentEntry().getFile(), this.contentRoot)))) {
+    if (((sourceFolder == null) || (!Objects.equal(sourceFolder.getContentEntry().getFile(), this.contentRoot)))) {
       return null;
     }
     return new IdeaSourceFolder(sourceFolder);

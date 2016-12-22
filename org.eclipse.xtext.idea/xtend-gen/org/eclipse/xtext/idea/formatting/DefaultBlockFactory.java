@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.formatting;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -74,7 +73,7 @@ public class DefaultBlockFactory implements BlockFactory {
         return null;
       }
       final TextRange blockTextRange = this.createTextRange(node);
-      if (((Objects.equal(blockTextRange, null) || blockTextRange.isEmpty()) || (!parentBlock.getTextRange().contains(blockTextRange)))) {
+      if ((((blockTextRange == null) || blockTextRange.isEmpty()) || (!parentBlock.getTextRange().contains(blockTextRange)))) {
         return null;
       }
       SpacingBuilder _xifexpression = null;
@@ -142,8 +141,8 @@ public class DefaultBlockFactory implements BlockFactory {
         return textRange;
       }
       ASTNode _firstChildNode = node.getFirstChildNode();
-      boolean _equals_1 = Objects.equal(_firstChildNode, null);
-      if (_equals_1) {
+      boolean _tripleEquals = (_firstChildNode == null);
+      if (_tripleEquals) {
         return textRange;
       }
       LeafElement _findFirstLeaf = TreeUtil.findFirstLeaf(node);
@@ -154,7 +153,7 @@ public class DefaultBlockFactory implements BlockFactory {
         return Boolean.valueOf(((!FormatterUtil.isWhitespaceOrEmpty(it)) || (!textRange.contains(it.getTextRange()))));
       };
       final ASTNode firstNonHiddenLeafNode = this.findNode(_findFirstLeaf, _function, _function_1);
-      if ((Objects.equal(firstNonHiddenLeafNode, null) || (!textRange.contains(firstNonHiddenLeafNode.getTextRange())))) {
+      if (((firstNonHiddenLeafNode == null) || (!textRange.contains(firstNonHiddenLeafNode.getTextRange())))) {
         return null;
       }
       final int startOffset = firstNonHiddenLeafNode.getStartOffset();
@@ -175,8 +174,7 @@ public class DefaultBlockFactory implements BlockFactory {
   }
   
   protected ASTNode findNode(final ASTNode node, final Function1<? super ASTNode, ? extends ASTNode> provider, final Function1<? super ASTNode, ? extends Boolean> condition) {
-    boolean _equals = Objects.equal(node, null);
-    if (_equals) {
+    if ((node == null)) {
       return null;
     }
     Boolean _apply = condition.apply(node);

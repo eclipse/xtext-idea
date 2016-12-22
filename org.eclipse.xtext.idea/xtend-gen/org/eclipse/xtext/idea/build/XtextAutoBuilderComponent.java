@@ -234,8 +234,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         FileDocumentManager _instance = FileDocumentManager.getInstance();
         Document _document = event.getDocument();
         VirtualFile file = _instance.getFile(_document);
-        boolean _notEquals = (!Objects.equal(file, null));
-        if (_notEquals) {
+        if ((file != null)) {
           XtextAutoBuilderComponent.this.fileModified(file);
         } else {
           Document _document_1 = event.getDocument();
@@ -528,8 +527,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.chunkedResourceDescriptions.removeContainer(_name);
     String _name_1 = module.getName();
     final Source2GeneratedMapping before = this.moduleName2GeneratedMapping.remove(_name_1);
-    boolean _notEquals = (!Objects.equal(before, null));
-    if (_notEquals) {
+    if ((before != null)) {
       List<URI> _allGenerated = before.getAllGenerated();
       this.safeDeleteUris(_allGenerated);
     }
@@ -632,7 +630,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
       return true;
     }
-    return (Objects.equal(file, null) || file.isDirectory());
+    return ((file == null) || file.isDirectory());
   }
   
   protected boolean isLoaded() {
@@ -898,14 +896,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   public Function1<URI, IResourceServiceProvider> getServiceProviderProvider(final Module module) {
     final Function1<URI, IResourceServiceProvider> _function = (URI it) -> {
       final IResourceServiceProvider serviceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
-      boolean _notEquals = (!Objects.equal(serviceProvider, null));
-      if (_notEquals) {
+      if ((serviceProvider != null)) {
         final FacetProvider facetProvider = serviceProvider.<FacetProvider>get(FacetProvider.class);
-        boolean _notEquals_1 = (!Objects.equal(facetProvider, null));
-        if (_notEquals_1) {
+        if ((facetProvider != null)) {
           final Facet<? extends AbstractFacetConfiguration> facet = facetProvider.getFacet(module);
-          boolean _notEquals_2 = (!Objects.equal(facet, null));
-          if (_notEquals_2) {
+          if ((facet != null)) {
             return serviceProvider;
           }
         }
@@ -945,7 +940,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   _source=fileMappings.getSource(uri);
                 }
                 final List<URI> sourceUris = _source;
-                if (((!Objects.equal(sourceUris, null)) && (!sourceUris.isEmpty()))) {
+                if (((sourceUris != null) && (!sourceUris.isEmpty()))) {
                   for (final URI sourceUri : sourceUris) {
                     this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }
@@ -974,7 +969,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   _source=fileMappings.getSource(uri_1);
                 }
                 final List<URI> sourceUris = _source;
-                if (((!Objects.equal(sourceUris, null)) && (!sourceUris.isEmpty()))) {
+                if (((sourceUris != null) && (!sourceUris.isEmpty()))) {
                   for (final URI sourceUri : sourceUris) {
                     boolean _contains = deletedUris.contains(sourceUri);
                     boolean _not = (!_contains);
@@ -1061,13 +1056,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected Module findModule(final VirtualFile file, final ProjectFileIndex fileIndex) {
-    boolean _equals = Objects.equal(file, null);
-    if (_equals) {
+    if ((file == null)) {
       return null;
     }
     final Module module = fileIndex.getModuleForFile(file, true);
-    boolean _notEquals = (!Objects.equal(module, null));
-    if (_notEquals) {
+    if ((module != null)) {
       return module;
     }
     VirtualFile _parent = file.getParent();

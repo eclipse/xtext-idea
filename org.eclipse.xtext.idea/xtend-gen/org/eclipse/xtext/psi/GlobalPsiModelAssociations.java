@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.psi;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
@@ -33,8 +32,7 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
   
   @Override
   public EObject getEObject(final PsiElement element) {
-    boolean _equals = Objects.equal(element, null);
-    if (_equals) {
+    if ((element == null)) {
       return null;
     }
     final PsiFile containingFile = element.getContainingFile();
@@ -53,8 +51,7 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
   public PsiElement getPsiElement(final EObject object) {
     PsiElement _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(object, null);
-      if (_equals) {
+      if ((object == null)) {
         return null;
       }
       URI _uRI = EcoreUtil.getURI(object);
@@ -74,7 +71,7 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
   public PsiElement getPsiElement(final IEObjectDescription objectDescription, final Resource context) {
     PsiElement _xblockexpression = null;
     {
-      if ((Objects.equal(objectDescription, null) || Objects.equal(context, null))) {
+      if (((objectDescription == null) || (context == null))) {
         return null;
       }
       final URI resourceURI = context.getURI();

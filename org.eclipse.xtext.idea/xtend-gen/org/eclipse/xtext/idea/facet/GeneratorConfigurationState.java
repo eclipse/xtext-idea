@@ -13,8 +13,7 @@ public class GeneratorConfigurationState {
   
   public GeneratorConfigurationState(final OutputConfiguration defOutput) {
     this.activated = true;
-    boolean _notEquals = (!Objects.equal(defOutput, null));
-    if (_notEquals) {
+    if ((defOutput != null)) {
       String outputDir = defOutput.getOutputDirectory();
       boolean _equals = Objects.equal("./src-gen", outputDir);
       if (_equals) {

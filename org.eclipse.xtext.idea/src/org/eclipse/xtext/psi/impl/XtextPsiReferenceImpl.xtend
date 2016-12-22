@@ -116,7 +116,7 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 	override getVariants() {
 		ProgressIndicatorProvider.checkCanceled
 		var crossReferenceDescription = crossReferenceDescription
-		if (crossReferenceDescription == null) {
+		if (crossReferenceDescription === null) {
 			return emptyList
 		}
 		var variants = newArrayList
@@ -127,7 +127,7 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 			// see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=481381
 			if (objectDescription.EObjectOrProxy.eIsProxy || objectDescription.EObjectOrProxy.eResource !== null) {
 				var element = objectDescription.getPsiElement(myElement.xtextFile.resource)
-				if (element != null) {
+				if (element !== null) {
 					variants +=
 						LookupElementBuilder.create(name).withTypeText(element.navigationElement.containingFile.name)
 				}
@@ -139,7 +139,7 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 	override resolve() {
 		ProgressIndicatorProvider.checkCanceled
 		var crossReferenceDescription = crossReferenceDescription
-		if (crossReferenceDescription == null) {
+		if (crossReferenceDescription === null) {
 			return null
 		}
 		var object = crossReferenceDescription.resolve

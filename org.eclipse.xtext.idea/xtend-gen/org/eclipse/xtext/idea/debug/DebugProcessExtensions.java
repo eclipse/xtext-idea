@@ -74,7 +74,7 @@ public class DebugProcessExtensions {
       URI _trimSegments = uri.trimSegments(1);
       URI _appendSegment = _trimSegments.appendSegment(lastSegmentOfTrace);
       final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(_appendSegment);
-      if ((Objects.equal(virtualFile, null) || (!virtualFile.exists()))) {
+      if (((virtualFile == null) || (!virtualFile.exists()))) {
         return null;
       }
       InputStream _inputStream = virtualFile.getInputStream();
@@ -117,7 +117,7 @@ public class DebugProcessExtensions {
           URI _trimSegments = uri.trimSegments(1);
           URI _appendSegment = _trimSegments.appendSegment(lastSegmentOfTrace);
           final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(_appendSegment);
-          if (((!Objects.equal(virtualFile, null)) && virtualFile.exists())) {
+          if (((virtualFile != null) && virtualFile.exists())) {
             InputStream _inputStream = virtualFile.getInputStream();
             final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(_inputStream);
             result.put(uri, trace);
@@ -136,8 +136,7 @@ public class DebugProcessExtensions {
   
   public URI findOriginalDeclaration(final DebugProcess process, final Location location) {
     final PsiFile psiFile = this.getPsiFile(process, location);
-    boolean _equals = Objects.equal(psiFile, null);
-    if (_equals) {
+    if ((psiFile == null)) {
       return null;
     } else {
       Project _project = process.getProject();

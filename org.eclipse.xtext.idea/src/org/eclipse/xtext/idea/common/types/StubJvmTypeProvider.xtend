@@ -65,11 +65,11 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
 	override findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
 		var result = doFindTypeByName(name, false)
-		if (result != null || isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
+		if (result !== null || isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
 			return result
 		}
 		val nameVariants = new ClassNameVariants(name)
-		while (result == null && nameVariants.hasNext) {
+		while (result === null && nameVariants.hasNext) {
 			val nextVariant = nameVariants.next
 			result = doFindTypeByName(nextVariant, true)
 		}
@@ -115,11 +115,11 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		ProgressIndicatorProvider.checkCanceled
 		try {
 			val existing = resourceSet.getResource(resourceURI, false)
-			if (existing != null) {
+			if (existing !== null) {
 				return existing.findType(fragment, traverseNestedTypes)
 			}
 			val mirror = createMirror(resourceURI)
-			if (mirror == null) {
+			if (mirror === null) {
 				return null
 			}
 			val resource = doCreateResource(resourceURI)
@@ -135,7 +135,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	protected def findType(Resource resource, String fragment, boolean traverseNestedTypes) {
 		ApplicationManager.application.<JvmType>runReadAction[
 			val result = resource.getEObject(fragment) as JvmType
-			if (result != null || !traverseNestedTypes) {
+			if (result !== null || !traverseNestedTypes) {
 				return result
 			}
 			val rootType = resource.contents.head
@@ -153,7 +153,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		ApplicationManager.application.<IClassMirror>runReadAction[
 			try {
 				val psiClass = JavaPsiFacade.getInstance(module.project).findClass(name, searchScope)
-				if (psiClass == null || psiClass.containingClass != null) {
+				if (psiClass === null || psiClass.containingClass !== null) {
 					return null
 				}
 				new PsiClassMirror(psiClass, psiClassFactory)

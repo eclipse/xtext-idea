@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.execution;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.execution.filters.ExceptionFilter;
 import com.intellij.execution.filters.FileHyperlinkInfo;
@@ -50,21 +49,19 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
   @Override
   public Filter.Result applyFilter(final String line, final int textEndOffset) {
     final Filter.Result result = super.applyFilter(line, textEndOffset);
-    boolean _equals = Objects.equal(result, null);
-    if (_equals) {
+    if ((result == null)) {
       return null;
     }
     List<Filter.ResultItem> _resultItems = result.getResultItems();
     final Function1<Filter.ResultItem, Boolean> _function = (Filter.ResultItem it) -> {
       HyperlinkInfo _hyperlinkInfo = it.getHyperlinkInfo();
-      return Boolean.valueOf((!Objects.equal(_hyperlinkInfo, null)));
+      return Boolean.valueOf((_hyperlinkInfo != null));
     };
     final Filter.ResultItem resultItem = IterableExtensions.<Filter.ResultItem>findFirst(_resultItems, _function);
     final HyperlinkInfo hyperlinkInfo = resultItem.getHyperlinkInfo();
     if ((hyperlinkInfo instanceof FileHyperlinkInfo)) {
       final OpenFileDescriptor descriptor = ((FileHyperlinkInfo)hyperlinkInfo).getDescriptor();
-      boolean _notEquals = (!Objects.equal(descriptor, null));
-      if (_notEquals) {
+      if ((descriptor != null)) {
         VirtualFile _file = descriptor.getFile();
         Project _project = descriptor.getProject();
         final VirtualFileInProject fileInProject = new VirtualFileInProject(_file, _project);
@@ -72,7 +69,7 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
         if (_isGenerated) {
           final IIdeaTrace trace = this.traceProvider.getTraceToSource(fileInProject);
           final RangeMarker rangeMarker = descriptor.getRangeMarker();
-          if (((!Objects.equal(trace, null)) && (!Objects.equal(rangeMarker, null)))) {
+          if (((trace != null) && (rangeMarker != null))) {
             Application _application = ApplicationManager.getApplication();
             final Computable<Integer> _function_1 = () -> {
               int _xblockexpression = (int) 0;
@@ -89,8 +86,7 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
             final Integer nonSpaceCharOffset = _application.<Integer>runReadAction(_function_1);
             TextRegion _textRegion = new TextRegion((nonSpaceCharOffset).intValue(), 0);
             final ILocationInVirtualFile location = trace.getBestAssociatedLocation(_textRegion);
-            boolean _notEquals_1 = (!Objects.equal(location, null));
-            if (_notEquals_1) {
+            if ((location != null)) {
               VirtualFileInProject _platformResource = location.getPlatformResource();
               Project _project_1 = _platformResource.getProject();
               VirtualFileInProject _platformResource_1 = location.getPlatformResource();

@@ -132,7 +132,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     boolean _xblockexpression = false;
     {
       final Application application = ApplicationManager.getApplication();
-      _xblockexpression = (Objects.equal(application, null) || application.isUnitTestMode());
+      _xblockexpression = ((application == null) || application.isUnitTestMode());
     }
     return _xblockexpression;
   }

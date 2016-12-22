@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.psi.impl;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.icons.AllIcons;
@@ -166,16 +165,14 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
     if ((reference instanceof XtextPsiReference)) {
       final int textOffset = super.getTextOffset();
       final TextRange rangeToHighlightInElement = ((XtextPsiReference)reference).getRangeToHighlightInElement();
-      boolean _notEquals = (!Objects.equal(rangeToHighlightInElement, null));
-      if (_notEquals) {
+      if ((rangeToHighlightInElement != null)) {
         int _startOffset = rangeToHighlightInElement.getStartOffset();
         return (textOffset + _startOffset);
       }
       return textOffset;
     }
     final ITextRegion textRegion = this.getSignificantTextRegion();
-    boolean _notEquals_1 = (!Objects.equal(textRegion, null));
-    if (_notEquals_1) {
+    if ((textRegion != null)) {
       return textRegion.getOffset();
     }
     return super.getTextOffset();

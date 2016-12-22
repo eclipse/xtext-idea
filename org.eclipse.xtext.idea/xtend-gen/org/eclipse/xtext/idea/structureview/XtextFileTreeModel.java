@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
@@ -65,8 +64,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     ArrayList<Sorter> _newArrayList = CollectionLiterals.<Sorter>newArrayList();
     this.sorters = _newArrayList;
     final Comparator<TreeElement> comparator = this.getComparator();
-    boolean _notEquals = (!Objects.equal(comparator, null));
-    if (_notEquals) {
+    if ((comparator != null)) {
       AlphaSorter _alphaSorter = new AlphaSorter();
       final Procedure1<AlphaSorter> _function = (AlphaSorter it) -> {
         it.setComparator(comparator);

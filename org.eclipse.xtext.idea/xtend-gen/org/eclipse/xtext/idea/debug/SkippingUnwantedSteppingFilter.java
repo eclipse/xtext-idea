@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.debug;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.debugger.PositionManager;
 import com.intellij.debugger.SourcePosition;
@@ -49,7 +48,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
   @Override
   public boolean isApplicable(final SuspendContext context) {
     try {
-      if ((Objects.equal(context, null) || (!this.isXtextSourced(context)))) {
+      if (((context == null) || (!this.isXtextSourced(context)))) {
         return false;
       }
       final DebugProcess debugProcess = context.getDebugProcess();
@@ -61,7 +60,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
         return true;
       }
       SourcePosition _sourcePosition = positionManager.getSourcePosition(location);
-      final boolean result = Objects.equal(_sourcePosition, null);
+      final boolean result = (_sourcePosition == null);
       if (result) {
         return true;
       }
@@ -77,7 +76,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
       final Location location = _frameProxy.location();
       DebugProcess _debugProcess = context.getDebugProcess();
       URI _findOriginalDeclaration = this._debugProcessExtensions.findOriginalDeclaration(_debugProcess, location);
-      return (!Objects.equal(_findOriginalDeclaration, null));
+      return (_findOriginalDeclaration != null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -87,10 +86,9 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
     try {
       StackFrameProxy _frameProxy = context.getFrameProxy();
       final Location location = _frameProxy.location();
-      boolean _notEquals = (!Objects.equal(location, null));
-      if (_notEquals) {
+      if ((location != null)) {
         final Method method = location.method();
-        if (((((!Objects.equal(method, null)) && method.isConstructor()) && method.argumentTypes().isEmpty()) && (method.declaringType().name().indexOf("$") > 0))) {
+        if (((((method != null) && method.isConstructor()) && method.argumentTypes().isEmpty()) && (method.declaringType().name().indexOf("$") > 0))) {
           return true;
         }
       }

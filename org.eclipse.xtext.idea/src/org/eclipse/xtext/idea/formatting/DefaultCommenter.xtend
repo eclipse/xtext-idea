@@ -57,22 +57,22 @@ class DefaultCommenter implements CodeDocumentationAwareCommenter {
 		extension ITokenDefProvider tokenDefProvider
 	) {
 		val mlCommentEntry = tokenDefMap.entrySet.findFirst[value == tokenName]
-		if (mlCommentEntry != null)
+		if (mlCommentEntry !== null)
 			mlCommentEntry.key.getIElementType
 	}
 
 	override getLineCommentPrefix() {
-		if (slCommentTokenType != null)
+		if (slCommentTokenType !== null)
 			return lineCommentPrefix
 	}
 
 	override getBlockCommentPrefix() {
-		if (mlCommentTokenType != null)
+		if (mlCommentTokenType !== null)
 			return blockCommentPrefix
 	}
 
 	override getBlockCommentSuffix() {
-		if (mlCommentTokenType != null)
+		if (mlCommentTokenType !== null)
 			return blockCommentSuffix
 	}
 
@@ -89,7 +89,7 @@ class DefaultCommenter implements CodeDocumentationAwareCommenter {
 	}
 
 	override getDocumentationCommentLinePrefix() {
-		if (mlCommentTokenType != null)
+		if (mlCommentTokenType !== null)
 			return documentationCommentLinePrefix
 	}
 

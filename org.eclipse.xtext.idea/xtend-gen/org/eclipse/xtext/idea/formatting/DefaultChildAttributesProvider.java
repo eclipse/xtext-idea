@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.formatting;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.formatting.Block;
@@ -58,8 +57,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
       return this.getAfterChildIndent(block, _size_1);
     }
     final Indent indent = this.getBeforeChildIndent(block, newChildIndex);
-    boolean _equals = Objects.equal(indent, null);
-    if (_equals) {
+    if ((indent == null)) {
       return this.getAfterChildIndent(block, newChildIndex);
     }
     return indent;
@@ -104,14 +102,12 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
   }
   
   protected Indent getAfterChildIndent(final Block block) {
-    boolean _equals = Objects.equal(block, null);
-    if (_equals) {
+    if ((block == null)) {
       return null;
     }
     EObject _grammarElement = this._blockExtension.getGrammarElement(block);
     final Indent grammarElementIndent = this.getIndentAfter(_grammarElement);
-    boolean _notEquals = (!Objects.equal(grammarElementIndent, null));
-    if (_notEquals) {
+    if ((grammarElementIndent != null)) {
       return grammarElementIndent;
     }
     if ((block instanceof SyntheticXtextBlock)) {
@@ -130,14 +126,12 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
   }
   
   protected Indent getBeforeChildIndent(final Block block) {
-    boolean _equals = Objects.equal(block, null);
-    if (_equals) {
+    if ((block == null)) {
       return null;
     }
     EObject _grammarElement = this._blockExtension.getGrammarElement(block);
     final Indent grammarElementIndent = this.getIndentBefore(_grammarElement);
-    boolean _notEquals = (!Objects.equal(grammarElementIndent, null));
-    if (_notEquals) {
+    if ((grammarElementIndent != null)) {
       return grammarElementIndent;
     }
     if ((block instanceof SyntheticXtextBlock)) {

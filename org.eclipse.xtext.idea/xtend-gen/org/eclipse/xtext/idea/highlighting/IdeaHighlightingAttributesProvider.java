@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.highlighting;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
@@ -53,8 +52,7 @@ public class IdeaHighlightingAttributesProvider {
   private Map<String, String> xtextStyle2xtextStyleRedirectMap;
   
   protected void initialize() {
-    boolean _equals = Objects.equal(this.attributesDescriptors, null);
-    if (_equals) {
+    if ((this.attributesDescriptors == null)) {
       ArrayList<AttributesDescriptor> _newArrayList = CollectionLiterals.<AttributesDescriptor>newArrayList();
       this.attributesDescriptors = _newArrayList;
       HashMap<String, HighlightInfoType> _newHashMap = CollectionLiterals.<String, HighlightInfoType>newHashMap();

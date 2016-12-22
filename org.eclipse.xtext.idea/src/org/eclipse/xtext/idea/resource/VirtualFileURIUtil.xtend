@@ -48,7 +48,7 @@ class VirtualFileURIUtil {
 	
 	private def static VirtualFile getOrCreateFile(URI uri, boolean isDirectory) {
 		val file = getVirtualFile(uri)
-		if (file != null) {
+		if (file !== null) {
 			return file
 		}
 		if (uri.segmentCount==0) {

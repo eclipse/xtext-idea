@@ -83,8 +83,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
   
   @Override
   public boolean isIncomplete() {
-    boolean _notEquals = (!Objects.equal(this.incomplete, null));
-    if (_notEquals) {
+    if ((this.incomplete != null)) {
       return (this.incomplete).booleanValue();
     }
     return super.isIncomplete();
@@ -92,8 +91,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
   
   @Override
   public TextRange getTextRange() {
-    boolean _notEquals = (!Objects.equal(this.textRange, null));
-    if (_notEquals) {
+    if ((this.textRange != null)) {
       return this.textRange;
     }
     return super.getTextRange();
@@ -128,8 +126,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
             final BracePair bracePair_1 = this._blockExtension.getBracePairForClosingBrace(block);
             List<Integer> _get = openingBlockIndex.get(bracePair_1);
             final Integer index = IterableExtensions.<Integer>last(_get);
-            boolean _notEquals = (!Objects.equal(index, null));
-            if (_notEquals) {
+            if ((index != null)) {
               openingBlockIndex.remove(bracePair_1, index);
               this.group(stack, index, bracePair_1, block);
             }
@@ -162,7 +159,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
       return;
     }
     final SyntheticXtextBlock groupBlock = this.createGroup(children);
-    groupBlock.setIncomplete(Boolean.valueOf((Objects.equal(closingBlock, null) || Objects.equal(this._blockExtension.getElementType(closingBlock), TokenType.ERROR_ELEMENT))));
+    groupBlock.setIncomplete(Boolean.valueOf(((closingBlock == null) || Objects.equal(this._blockExtension.getElementType(closingBlock), TokenType.ERROR_ELEMENT))));
     final boolean enforceIndentToChildren = this.shouldEnforceIndentToChildren(children);
     Indent _indent = this._blockExtension.getIndent(bracePair, enforceIndentToChildren);
     groupBlock.setIndent(_indent);
@@ -201,7 +198,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     }
     Block _head = IterableExtensions.<Block>head(children);
     final BracePair bracePair = this._blockExtension.getBracePairForOpeningBrace(_head);
-    if ((Objects.equal(bracePair, null) || (!bracePair.isStructural()))) {
+    if (((bracePair == null) || (!bracePair.isStructural()))) {
       return true;
     }
     Block _last = IterableExtensions.<Block>last(children);
@@ -230,7 +227,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
   @Override
   public boolean isLeaf() {
     ASTNode _firstChildNode = this.myNode.getFirstChildNode();
-    return Objects.equal(_firstChildNode, null);
+    return (_firstChildNode == null);
   }
   
   @Override

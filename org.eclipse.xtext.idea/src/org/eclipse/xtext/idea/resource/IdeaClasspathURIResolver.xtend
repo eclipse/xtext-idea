@@ -35,7 +35,7 @@ class IdeaClasspathURIResolver implements IClasspathUriResolver {
 			val files = FilenameIndex.getFilesByName(module.project, classpathUri.lastSegment, scope)
 			for (file : files) {
 				val vf = XtextPsiUtils.findVirtualFile(file)
-				if (vf != null && vf.exists) {
+				if (vf !== null && vf.exists) {
 					val uri = VirtualFileURIUtil.getURI(vf);
 					if (uri.toString.endsWith(classpathUri.path)) {
 						return uri

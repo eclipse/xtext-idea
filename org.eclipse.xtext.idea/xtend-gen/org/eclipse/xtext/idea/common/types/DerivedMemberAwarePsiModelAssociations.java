@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.common.types;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
@@ -30,15 +29,13 @@ public class DerivedMemberAwarePsiModelAssociations extends PsiModelAssociations
   public PsiElement getPsiElement(final EObject object) {
     PsiElement _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(object, null);
-      if (_equals) {
+      if ((object == null)) {
         return null;
       }
       EObject _convertToSource = this.convertToSource(object);
       final PsiElement psiElement = super.getPsiElement(_convertToSource);
       PsiElement _xifexpression = null;
-      boolean _equals_1 = Objects.equal(psiElement, null);
-      if (_equals_1) {
+      if ((psiElement == null)) {
         EObject _eContainer = object.eContainer();
         _xifexpression = this.getPsiElement(_eContainer);
       } else {

@@ -127,8 +127,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
       @Override
       public void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
         final LanguageLevelModuleExtension languageLevelModuleExtension = model.<LanguageLevelModuleExtension>getModuleExtension(LanguageLevelModuleExtension.class);
-        boolean _notEquals = (!Objects.equal(languageLevelModuleExtension, null));
-        if (_notEquals) {
+        if ((languageLevelModuleExtension != null)) {
           LanguageLevel _languageLevel = LightToolingTest.this.getLanguageLevel();
           languageLevelModuleExtension.setLanguageLevel(_languageLevel);
         }

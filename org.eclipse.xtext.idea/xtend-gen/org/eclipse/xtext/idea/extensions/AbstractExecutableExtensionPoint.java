@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.extensions.AbstractExtensionPointBean;
 import com.intellij.openapi.extensions.ExtensionFactory;
 import com.intellij.openapi.extensions.PluginDescriptor;
@@ -44,13 +43,11 @@ public abstract class AbstractExecutableExtensionPoint extends AbstractExtension
     try {
       Object _xblockexpression = null;
       {
-        boolean _equals = Objects.equal(this.implementationClass, null);
-        if (_equals) {
+        if ((this.implementationClass == null)) {
           throw this.asRuntimeException("Class is not specified");
         }
         Object _xifexpression = null;
-        boolean _equals_1 = Objects.equal(this.factoryClass, null);
-        if (_equals_1) {
+        if ((this.factoryClass == null)) {
           Class<Object> _findClass = this.<Object>findClass(this.implementationClass);
           _xifexpression = _findClass.newInstance();
         } else {

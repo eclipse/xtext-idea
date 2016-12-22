@@ -125,7 +125,7 @@ abstract class AbstractPsiAntlrParser extends Parser {
 
 	protected def void doneLeaf(Token matchedToken) {
 		val tokenType = psiInput.remapToken(null)
-		if (matchedToken == null) {
+		if (matchedToken === null) {
 			psiBuilder.mark.done(new GrammarAwareErrorElementType(tokenType))
 			return
 		}

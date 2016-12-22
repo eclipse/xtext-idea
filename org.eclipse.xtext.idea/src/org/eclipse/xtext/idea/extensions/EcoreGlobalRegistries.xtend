@@ -31,11 +31,11 @@ class EcoreGlobalRegistries {
 
 		val registry = IResourceServiceProvider.Registry.INSTANCE
 		Extensions.getExtensions(ResourceServiceProviderEP.EP_NAME).forEach [
-			if (uriExtension != null)
+			if (uriExtension !== null)
 				registry.extensionToFactoryMap.put(uriExtension, createDescriptor)
-			if (protocolName != null)
+			if (protocolName !== null)
 				registry.protocolToFactoryMap.put(protocolName, createDescriptor)
-			if (contentTypeIdentifier != null)
+			if (contentTypeIdentifier !== null)
 				registry.contentTypeToFactoryMap.put(contentTypeIdentifier, createDescriptor)
 		]
 	}

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
@@ -54,14 +53,12 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
       if (this.leaf) {
         return ((TreeElement[])Conversions.unwrapArray(CollectionLiterals.<TreeElement>emptyList(), TreeElement.class));
       }
-      boolean _equals = Objects.equal(this.children, null);
-      if (_equals) {
+      if ((this.children == null)) {
         ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
         this.children = _newArrayList;
         this.structureViewTreeElementProvider.buildChildren(this);
       }
-      boolean _equals_1 = Objects.equal(this.children, null);
-      if (_equals_1) {
+      if ((this.children == null)) {
         return ((TreeElement[])Conversions.unwrapArray(CollectionLiterals.<TreeElement>emptyList(), TreeElement.class));
       }
       _xblockexpression = this.children;
@@ -72,12 +69,10 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
   @Override
   public boolean addChild(final StructureViewTreeElement child) {
     boolean _xifexpression = false;
-    boolean _notEquals = (!Objects.equal(child, null));
-    if (_notEquals) {
+    if ((child != null)) {
       boolean _xblockexpression = false;
       {
-        boolean _equals = Objects.equal(this.children, null);
-        if (_equals) {
+        if ((this.children == null)) {
           ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
           this.children = _newArrayList;
         }
@@ -102,8 +97,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
       if (_not) {
         boolean _xblockexpression_1 = false;
         {
-          boolean _equals = Objects.equal(this.children, null);
-          if (_equals) {
+          if ((this.children == null)) {
             ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
             this.children = _newArrayList;
           }
@@ -162,7 +156,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
       {
         final PsiElement element = this.getInternalNavigationElement();
         PsiElement _xifexpression = null;
-        if (((!Objects.equal(element, null)) && element.isValid())) {
+        if (((element != null) && element.isValid())) {
           _xifexpression = element;
         }
         _xblockexpression = _xifexpression;

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
@@ -49,7 +48,7 @@ public class IdeaClasspathURIResolver implements IClasspathUriResolver {
       for (final PsiFile file : files) {
         {
           final VirtualFile vf = XtextPsiUtils.findVirtualFile(file);
-          if (((!Objects.equal(vf, null)) && vf.exists())) {
+          if (((vf != null) && vf.exists())) {
             final URI uri = VirtualFileURIUtil.getURI(vf);
             String _string = uri.toString();
             String _path = classpathUri.path();

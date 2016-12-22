@@ -41,8 +41,7 @@ public abstract class AbstractXtextPomDeclarationSearcher extends PomDeclaration
         _textRange=_nameIdentifier.getTextRange();
       }
       final TextRange nameIdentifierRange = _textRange;
-      boolean _notEquals_1 = (!Objects.equal(nameIdentifierRange, null));
-      if (_notEquals_1) {
+      if ((nameIdentifierRange != null)) {
         TextRange _textRange_1 = ((PsiNamedEObject)element).getTextRange();
         int _startOffset = _textRange_1.getStartOffset();
         final int offsetInDocument = (_startOffset + offsetInElement);

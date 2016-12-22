@@ -40,7 +40,7 @@ class IdeaHighlightingAttributesProvider {
 	Map<String, String> xtextStyle2xtextStyleRedirectMap
 	
 	protected def void initialize() {
-		if (attributesDescriptors == null) {
+		if (attributesDescriptors === null) {
 			attributesDescriptors = newArrayList
 			name2highlightInfoType = newHashMap
 			xtextStyle2xtextStyleRedirectMap = newHashMap

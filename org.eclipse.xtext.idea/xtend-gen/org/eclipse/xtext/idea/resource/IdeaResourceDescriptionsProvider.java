@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
@@ -21,8 +20,7 @@ public class IdeaResourceDescriptionsProvider implements IResourceDescriptionsPr
   @Override
   public IResourceDescriptions getResourceDescriptions(final ResourceSet resourceSet) {
     final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(resourceSet);
-    boolean _notEquals = (!Objects.equal(index, null));
-    if (_notEquals) {
+    if ((index != null)) {
       return index;
     }
     throw new IllegalStateException("No index installed.");

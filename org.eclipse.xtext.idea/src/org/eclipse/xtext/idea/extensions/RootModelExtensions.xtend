@@ -19,7 +19,7 @@ class RootModelExtensions {
 	}
 	
 	static def getExistingSourceFolders(Module module) {
-		module.sourceFolders.filter[file != null]
+		module.sourceFolders.filter[file !== null]
 	}
 
 	static def getRelativePath(SourceFolder sourceFolder) {

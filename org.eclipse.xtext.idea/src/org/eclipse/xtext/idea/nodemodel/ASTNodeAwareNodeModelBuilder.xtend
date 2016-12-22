@@ -50,7 +50,7 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeA
 	
 	protected def replaceAssociations(INode oldNode, INode newNode) {
 		val mapping = reverseNodesMapping.remove(oldNode)
-		if (mapping != null) {
+		if (mapping !== null) {
 			for (astNode : mapping) {
 				associate(astNode, newNode)
 			}
@@ -84,7 +84,7 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeA
 				elementType.grammarElement
 			} else {
 				val tokenType = getUserData(TOKEN_TYPE_KEY)
-				if (tokenType != null) {
+				if (tokenType !== null) {
 					val tokenName = tokenType.toString
 					if (tokenName.lexerRule) {
 						val ruleName = tokenName.lexerRuleName

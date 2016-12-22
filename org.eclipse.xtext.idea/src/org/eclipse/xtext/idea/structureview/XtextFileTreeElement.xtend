@@ -30,7 +30,7 @@ class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> implements 
 	override getChildrenBase() {
 		children = null
 		structureViewTreeElementProvider.buildChildren(this)
-		if (children == null) {
+		if (children === null) {
 			return emptyList
 		}
 		children
@@ -41,8 +41,8 @@ class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> implements 
 	}
 
 	override addChild(StructureViewTreeElement child) {
-		if (child != null) {
-			if (children == null) {
+		if (child !== null) {
+			if (children === null) {
 				children = newArrayList
 			}
 			children += child
@@ -54,7 +54,7 @@ class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> implements 
 	override addChildren(Iterable<StructureViewTreeElement> children) {
 		val notNullChildren = children.filterNull
 		if (!notNullChildren.empty) {
-			if (this.children == null) {
+			if (this.children === null) {
 				this.children = newArrayList
 			}
 			this.children += notNullChildren

@@ -29,8 +29,7 @@ public class XbaseChildAttributesProvider extends DefaultChildAttributesProvider
   
   @Override
   protected Indent getIndentAfter(final EObject grammarElement) {
-    boolean _equals = Objects.equal(grammarElement, null);
-    if (_equals) {
+    if ((grammarElement == null)) {
       return null;
     }
     boolean _matched = false;
