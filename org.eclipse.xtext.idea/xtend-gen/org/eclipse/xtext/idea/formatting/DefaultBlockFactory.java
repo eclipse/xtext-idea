@@ -21,7 +21,6 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.FormatterUtil;
-import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.formatting.BlockExtension;
@@ -53,9 +52,7 @@ public class DefaultBlockFactory implements BlockFactory {
       ASTNode _node = element.getNode();
       final DefaultXtextBlock block = new DefaultXtextBlock(_node, null, null);
       this.injector.injectMembers(block);
-      Language _language = element.getLanguage();
-      SpacingBuilder _createSpacingBuilder = this.createSpacingBuilder(settings, _language);
-      block.setSpacingBuilder(_createSpacingBuilder);
+      block.setSpacingBuilder(this.createSpacingBuilder(settings, element.getLanguage()));
       _xblockexpression = block;
     }
     return _xblockexpression;
@@ -87,8 +84,7 @@ public class DefaultBlockFactory implements BlockFactory {
       block.setTextRange(blockTextRange);
       block.setSpacingBuilder(spacingBuilder);
       block.setParentBlock(parentBlock);
-      Indent _childIndent = this.getChildIndent(parentBlock, block);
-      block.setIndent(_childIndent);
+      block.setIndent(this.getChildIndent(parentBlock, block));
       _xblockexpression = block;
     }
     return _xblockexpression;
@@ -146,19 +142,17 @@ public class DefaultBlockFactory implements BlockFactory {
       if (_equals_1) {
         return textRange;
       }
-      LeafElement _findFirstLeaf = TreeUtil.findFirstLeaf(node);
       final Function1<ASTNode, ASTNode> _function = (ASTNode it) -> {
         return TreeUtil.nextLeaf(it);
       };
       final Function1<ASTNode, Boolean> _function_1 = (ASTNode it) -> {
         return Boolean.valueOf(((!FormatterUtil.isWhitespaceOrEmpty(it)) || (!textRange.contains(it.getTextRange()))));
       };
-      final ASTNode firstNonHiddenLeafNode = this.findNode(_findFirstLeaf, _function, _function_1);
+      final ASTNode firstNonHiddenLeafNode = this.findNode(TreeUtil.findFirstLeaf(node), _function, _function_1);
       if ((Objects.equal(firstNonHiddenLeafNode, null) || (!textRange.contains(firstNonHiddenLeafNode.getTextRange())))) {
         return null;
       }
       final int startOffset = firstNonHiddenLeafNode.getStartOffset();
-      ASTNode _findLastLeaf = TreeUtil.findLastLeaf(node);
       final Function1<ASTNode, ASTNode> _function_2 = (ASTNode it) -> {
         return TreeUtil.prevLeaf(it);
       };
@@ -166,9 +160,7 @@ public class DefaultBlockFactory implements BlockFactory {
         boolean _isWhitespaceOrEmpty = FormatterUtil.isWhitespaceOrEmpty(it);
         return Boolean.valueOf((!_isWhitespaceOrEmpty));
       };
-      ASTNode _findNode = this.findNode(_findLastLeaf, _function_2, _function_3);
-      TextRange _textRange = _findNode.getTextRange();
-      final int endOffset = _textRange.getEndOffset();
+      final int endOffset = this.findNode(TreeUtil.findLastLeaf(node), _function_2, _function_3).getTextRange().getEndOffset();
       _xblockexpression = new TextRange(startOffset, endOffset);
     }
     return _xblockexpression;
@@ -183,7 +175,6 @@ public class DefaultBlockFactory implements BlockFactory {
     if ((_apply).booleanValue()) {
       return node;
     }
-    ASTNode _apply_1 = provider.apply(node);
-    return this.findNode(_apply_1, provider, condition);
+    return this.findNode(provider.apply(node), provider, condition);
   }
 }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.util;
 
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
@@ -25,17 +24,14 @@ public class ProjectLifecycleUtil {
   public void executeWhenProjectReady(final Project project, final Runnable fun) {
     boolean _isInitialized = project.isInitialized();
     if (_isInitialized) {
-      DumbService _instance = DumbService.getInstance(project);
-      boolean _isDumb = _instance.isDumb();
+      boolean _isDumb = DumbService.getInstance(project).isDumb();
       if (_isDumb) {
-        DumbService _instance_1 = DumbService.getInstance(project);
-        _instance_1.runWhenSmart(fun);
+        DumbService.getInstance(project).runWhenSmart(fun);
       } else {
         fun.run();
       }
     } else {
-      StartupManager _instance_2 = StartupManager.getInstance(project);
-      _instance_2.registerPostStartupActivity(fun);
+      StartupManager.getInstance(project).registerPostStartupActivity(fun);
     }
   }
   
@@ -52,8 +48,7 @@ public class ProjectLifecycleUtil {
    */
   public void executeWritableWhenProjectReady(final Project project, final Runnable runnable) {
     final Runnable _function = () -> {
-      Application _application = ApplicationManager.getApplication();
-      _application.runWriteAction(runnable);
+      ApplicationManager.getApplication().runWriteAction(runnable);
     };
     this.executeWhenProjectReady(project, _function);
   }

@@ -84,16 +84,14 @@ public abstract class AbstractXtextParserDefinition implements ParserDefinition 
   
   @Override
   public ParserDefinition.SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
-    Lexer _get = this.lexerProvider.get();
-    return LanguageUtil.canStickTokensTogetherByLexer(left, right, _get);
+    return LanguageUtil.canStickTokensTogetherByLexer(left, right, this.lexerProvider.get());
   }
   
   @Override
   public PsiElement createElement(final ASTNode node) {
     PsiEObjectImpl<PsiElement, StubElement<PsiElement>> _xblockexpression = null;
     {
-      IElementType _elementType = node.getElementType();
-      boolean _isCrossReference = this.isCrossReference(_elementType);
+      boolean _isCrossReference = this.isCrossReference(node.getElementType());
       if (_isCrossReference) {
         return new PsiEObjectReference<PsiElement, StubElement<PsiElement>>(node);
       }

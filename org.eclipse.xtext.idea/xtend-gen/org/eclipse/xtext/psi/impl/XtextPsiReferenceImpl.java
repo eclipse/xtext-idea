@@ -15,10 +15,8 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import java.util.ArrayList;
@@ -33,17 +31,14 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.linking.lazy.CrossReferenceDescription;
 import org.eclipse.xtext.idea.linking.lazy.ICrossReferenceDescription;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.PsiEObjectFactory;
 import org.eclipse.xtext.psi.XtextPsiElement;
 import org.eclipse.xtext.psi.XtextPsiReference;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -86,11 +81,9 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
       }
       TextRange _xblockexpression = null;
       {
-        ICrossReferenceDescription _crossReferenceDescription = this.getCrossReferenceDescription();
-        final ITextRegion textRegion = _crossReferenceDescription.getTextRegion();
+        final ITextRegion textRegion = this.getCrossReferenceDescription().getTextRegion();
         int _offset = textRegion.getOffset();
-        TextRange _textRange = this.myElement.getTextRange();
-        int _startOffset = _textRange.getStartOffset();
+        int _startOffset = this.myElement.getTextRange().getStartOffset();
         int startOffset = (_offset - _startOffset);
         TextRange _xifexpression = null;
         if ((startOffset < 0)) {
@@ -124,11 +117,9 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     {
       final ASTNode referencenNode = this.getReferenceNode();
       int _startOffset = referencenNode.getStartOffset();
-      ASTNode _node = this.myElement.getNode();
-      int _startOffset_1 = _node.getStartOffset();
+      int _startOffset_1 = this.myElement.getNode().getStartOffset();
       final int startOffset = (_startOffset - _startOffset_1);
-      ASTNode _referenceNode = this.getReferenceNode();
-      int _textLength = _referenceNode.getTextLength();
+      int _textLength = this.getReferenceNode().getTextLength();
       final int endOffset = (startOffset + _textLength);
       _xblockexpression = new TextRange(startOffset, endOffset);
     }
@@ -158,8 +149,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     final ASTNode myNode = this.myElement.getNode();
     final ASTNode referenceNode = this.getReferenceNode();
     final ASTNode newReferenceNode = this.psiEObjectFactory.createLeafIdentifier(newElementName, referenceNode);
-    ASTNode _treeParent = referenceNode.getTreeParent();
-    _treeParent.replaceChild(referenceNode, newReferenceNode);
+    referenceNode.getTreeParent().replaceChild(referenceNode, newReferenceNode);
     boolean _equals = Objects.equal(referenceNode, myNode);
     if (_equals) {
       return newReferenceNode.getPsi();
@@ -172,8 +162,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     {
       ASTNode referenceNode = this.myElement.getNode();
       while ((referenceNode instanceof CompositeElement)) {
-        TreeElement _lastChildNode = ((CompositeElement)referenceNode).getLastChildNode();
-        referenceNode = _lastChildNode;
+        referenceNode = ((CompositeElement)referenceNode).getLastChildNode();
       }
       _xblockexpression = referenceNode;
     }
@@ -183,21 +172,16 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
   protected ICrossReferenceDescription getCrossReferenceDescription() {
     ICrossReferenceDescription _xblockexpression = null;
     {
-      ASTNode _node = this.myElement.getNode();
-      IElementType _elementType = _node.getElementType();
+      IElementType _elementType = this.myElement.getNode().getElementType();
       EObject _grammarElement = ((IGrammarAwareElementType) _elementType).getGrammarElement();
       final CrossReference crossReference = ((CrossReference) _grammarElement);
-      BaseXtextFile _xtextFile = this.myElement.getXtextFile();
-      ASTNode _node_1 = this.myElement.getNode();
-      final INode node = _xtextFile.getINode(_node_1);
+      final INode node = this.myElement.getXtextFile().getINode(this.myElement.getNode());
       final EObject context = NodeModelUtils.findActualSemanticObjectFor(node);
       final EReference reference = GrammarUtil.getReference(crossReference);
-      List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(context, reference);
-      Iterable<Pair<Integer, INode>> _indexed = IterableExtensions.<INode>indexed(_findNodesForFeature);
       final Function1<Pair<Integer, INode>, Boolean> _function = (Pair<Integer, INode> it) -> {
         return Boolean.valueOf(((it.getValue().getTotalOffset() <= node.getTotalOffset()) && (it.getValue().getTotalEndOffset() >= node.getTotalEndOffset())));
       };
-      Pair<Integer, INode> _findFirst = IterableExtensions.<Pair<Integer, INode>>findFirst(_indexed, _function);
+      Pair<Integer, INode> _findFirst = IterableExtensions.<Pair<Integer, INode>>findFirst(IterableExtensions.<INode>indexed(NodeModelUtils.findNodesForFeature(context, reference)), _function);
       Integer _key = null;
       if (_findFirst!=null) {
         _key=_findFirst.getKey();
@@ -223,19 +207,12 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
       for (final IEObjectDescription objectDescription : _variants) {
         {
           ProgressIndicatorProvider.checkCanceled();
-          QualifiedName _name = objectDescription.getName();
-          String name = this.qualifiedNameConverter.toString(_name);
+          String name = this.qualifiedNameConverter.toString(objectDescription.getName());
           if ((objectDescription.getEObjectOrProxy().eIsProxy() || (objectDescription.getEObjectOrProxy().eResource() != null))) {
-            BaseXtextFile _xtextFile = this.myElement.getXtextFile();
-            XtextResource _resource = _xtextFile.getResource();
-            PsiElement element = this.psiModelAssociations.getPsiElement(objectDescription, _resource);
+            PsiElement element = this.psiModelAssociations.getPsiElement(objectDescription, this.myElement.getXtextFile().getResource());
             boolean _notEquals = (!Objects.equal(element, null));
             if (_notEquals) {
-              LookupElementBuilder _create = LookupElementBuilder.create(name);
-              PsiElement _navigationElement = element.getNavigationElement();
-              PsiFile _containingFile = _navigationElement.getContainingFile();
-              String _name_1 = _containingFile.getName();
-              LookupElementBuilder _withTypeText = _create.withTypeText(_name_1);
+              LookupElementBuilder _withTypeText = LookupElementBuilder.create(name).withTypeText(element.getNavigationElement().getContainingFile().getName());
               variants.add(_withTypeText);
             }
           }
@@ -265,7 +242,6 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
   
   @Override
   public String toString() {
-    Class<? extends XtextPsiReferenceImpl> _class = this.getClass();
-    return _class.getSimpleName();
+    return this.getClass().getSimpleName();
   }
 }

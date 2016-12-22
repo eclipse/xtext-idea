@@ -29,8 +29,7 @@ public class VirtualFileURIUtil {
       String _plus = (_url + "/");
       return URI.createURI(_plus);
     }
-    String _url_1 = file.getUrl();
-    return URI.createURI(_url_1);
+    return URI.createURI(file.getUrl());
   }
   
   /**
@@ -40,10 +39,8 @@ public class VirtualFileURIUtil {
    * @return a VirtualFile for the given EMF URI, or <code>null</code> if no VirtualFile exists.
    */
   public static VirtualFile getVirtualFile(final URI uri) {
-    String _string = uri.toString();
-    final String url = VfsUtil.fixURLforIDEA(_string);
-    VirtualFileManager _instance = VirtualFileManager.getInstance();
-    return _instance.findFileByUrl(url);
+    final String url = VfsUtil.fixURLforIDEA(uri.toString());
+    return VirtualFileManager.getInstance().findFileByUrl(url);
   }
   
   /**
@@ -66,14 +63,11 @@ public class VirtualFileURIUtil {
       if (_equals) {
         throw new IllegalStateException(("couldn\'t find virtual file for " + uri));
       }
-      URI _trimSegments = uri.trimSegments(1);
-      final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(_trimSegments, true);
+      final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(uri.trimSegments(1), true);
       if (isDirectory) {
-        String _lastSegment = uri.lastSegment();
-        return VfsUtil.createDirectoryIfMissing(parent, _lastSegment);
+        return VfsUtil.createDirectoryIfMissing(parent, uri.lastSegment());
       } else {
-        String _lastSegment_1 = uri.lastSegment();
-        return parent.findOrCreateChildData(uri, _lastSegment_1);
+        return parent.findOrCreateChildData(uri, uri.lastSegment());
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

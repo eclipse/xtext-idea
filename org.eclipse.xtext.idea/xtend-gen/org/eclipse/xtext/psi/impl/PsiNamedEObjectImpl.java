@@ -11,11 +11,9 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -77,9 +75,7 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
     final int startIndex = significantTextRegion.getOffset();
     int _length = significantTextRegion.getLength();
     final int endIndex = (startIndex + _length);
-    PsiFile _containingFile = this.getContainingFile();
-    String _text = _containingFile.getText();
-    final String result = _text.substring(startIndex, endIndex);
+    final String result = this.getContainingFile().getText().substring(startIndex, endIndex);
     return result;
   }
   
@@ -98,12 +94,9 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
       boolean _isTerminalRuleCall = GrammarUtil.isTerminalRuleCall(grammarElement);
       if (_isTerminalRuleCall) {
         final ASTNode newNameNode = this.psiEObjectFactory.createLeafIdentifier(name, nameNode);
-        ASTNode _treeParent = nameNode.getTreeParent();
-        _treeParent.replaceChild(nameNode, newNameNode);
+        nameNode.getTreeParent().replaceChild(nameNode, newNameNode);
       } else {
-        String _name = this.getName();
-        ASTNode _createCompositeIdentifier = this.psiEObjectFactory.createCompositeIdentifier(name, _name, nameNode);
-        final ASTNode newNameNode_1 = _createCompositeIdentifier.getFirstChildNode();
+        final ASTNode newNameNode_1 = this.psiEObjectFactory.createCompositeIdentifier(name, this.getName(), nameNode).getFirstChildNode();
         nameNode.replaceAllChildrenToChildrenOf(newNameNode_1);
       }
       _xblockexpression = this;
@@ -118,16 +111,13 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
       if ((nameFeature == null)) {
         return null;
       }
-      ASTNode _node = this.getNode();
-      List<ASTNode> _findNodesForFeature = this._aSTNodeExtension.findNodesForFeature(_node, nameFeature);
-      _xblockexpression = IterableExtensions.<ASTNode>head(_findNodesForFeature);
+      _xblockexpression = IterableExtensions.<ASTNode>head(this._aSTNodeExtension.findNodesForFeature(this.getNode(), nameFeature));
     }
     return _xblockexpression;
   }
   
   protected EStructuralFeature getNameFeature() {
-    ASTNode _node = this.getNode();
-    EClass _eClass = this._aSTNodeExtension.getEClass(_node);
+    EClass _eClass = this._aSTNodeExtension.getEClass(this.getNode());
     EStructuralFeature _eStructuralFeature = null;
     if (_eClass!=null) {
       _eStructuralFeature=_eClass.getEStructuralFeature("name");

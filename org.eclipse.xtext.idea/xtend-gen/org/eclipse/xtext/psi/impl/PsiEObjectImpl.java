@@ -51,16 +51,13 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   protected PsiEObjectImpl(final T stub, final IStubElementType<T, PsiT> nodeType) {
     super(stub, nodeType);
     this.elementType = nodeType;
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
+    this.getXtextLanguage().injectMembers(this);
   }
   
   public PsiEObjectImpl(final ASTNode node) {
     super(node);
-    IElementType _elementType = node.getElementType();
-    this.elementType = _elementType;
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
+    this.elementType = node.getElementType();
+    this.getXtextLanguage().injectMembers(this);
   }
   
   @Override
@@ -68,8 +65,7 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
     INode node = this.getINode();
     boolean _hasDirectSemanticElement = node.hasDirectSemanticElement();
     if (_hasDirectSemanticElement) {
-      EObject _semanticElement = node.getSemanticElement();
-      return _semanticElement.eClass();
+      return node.getSemanticElement().eClass();
     }
     EReference eReference = this.getEReference();
     if ((eReference != null)) {
@@ -104,9 +100,7 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   
   @Override
   public INode getINode() {
-    BaseXtextFile _xtextFile = this.getXtextFile();
-    ASTNode _node = this.getNode();
-    return _xtextFile.getINode(_node);
+    return this.getXtextFile().getINode(this.getNode());
   }
   
   @Override
@@ -117,14 +111,12 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   
   @Override
   public EObject getEObject() {
-    INode _iNode = this.getINode();
-    return _iNode.getSemanticElement();
+    return this.getINode().getSemanticElement();
   }
   
   @Override
   public Resource getResource() {
-    BaseXtextFile _xtextFile = this.getXtextFile();
-    return _xtextFile.getResource();
+    return this.getXtextFile().getResource();
   }
   
   @Override
@@ -184,8 +176,7 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   protected ITextRegion getSignificantTextRegion() {
     ITextRegion _xtrycatchfinallyexpression = null;
     try {
-      EObject _eObject = this.getEObject();
-      _xtrycatchfinallyexpression = this.locationInFileProvider.getSignificantTextRegion(_eObject);
+      _xtrycatchfinallyexpression = this.locationInFileProvider.getSignificantTextRegion(this.getEObject());
     } catch (final Throwable _t) {
       if (_t instanceof OperationCanceledError) {
         final OperationCanceledError e = (OperationCanceledError)_t;

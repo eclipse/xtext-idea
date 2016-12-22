@@ -14,7 +14,6 @@ import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.tree.IElementType;
 import java.util.Map;
-import java.util.Set;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -56,27 +55,22 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Inject
   public void setTokenTypes(final TokenTypeProvider tokenTypeProvider, final ITokenDefProvider tokenDefProvider) {
-    IElementType _tokenType = this.getTokenType("RULE_SL_COMMENT", tokenTypeProvider, tokenDefProvider);
-    this.slCommentTokenType = _tokenType;
-    IElementType _tokenType_1 = this.getTokenType("RULE_ML_COMMENT", tokenTypeProvider, tokenDefProvider);
-    this.mlCommentTokenType = _tokenType_1;
+    this.slCommentTokenType = this.getTokenType("RULE_SL_COMMENT", tokenTypeProvider, tokenDefProvider);
+    this.mlCommentTokenType = this.getTokenType("RULE_ML_COMMENT", tokenTypeProvider, tokenDefProvider);
   }
   
   protected IElementType getTokenType(final String tokenName, @Extension final TokenTypeProvider tokenTypeProvider, @Extension final ITokenDefProvider tokenDefProvider) {
     IElementType _xblockexpression = null;
     {
-      Map<Integer, String> _tokenDefMap = tokenDefProvider.getTokenDefMap();
-      Set<Map.Entry<Integer, String>> _entrySet = _tokenDefMap.entrySet();
       final Function1<Map.Entry<Integer, String>, Boolean> _function = (Map.Entry<Integer, String> it) -> {
         String _value = it.getValue();
         return Boolean.valueOf(Objects.equal(_value, tokenName));
       };
-      final Map.Entry<Integer, String> mlCommentEntry = IterableExtensions.<Map.Entry<Integer, String>>findFirst(_entrySet, _function);
+      final Map.Entry<Integer, String> mlCommentEntry = IterableExtensions.<Map.Entry<Integer, String>>findFirst(tokenDefProvider.getTokenDefMap().entrySet(), _function);
       IElementType _xifexpression = null;
       boolean _notEquals = (!Objects.equal(mlCommentEntry, null));
       if (_notEquals) {
-        Integer _key = mlCommentEntry.getKey();
-        _xifexpression = tokenTypeProvider.getIElementType((_key).intValue());
+        _xifexpression = tokenTypeProvider.getIElementType((mlCommentEntry.getKey()).intValue());
       }
       _xblockexpression = _xifexpression;
     }

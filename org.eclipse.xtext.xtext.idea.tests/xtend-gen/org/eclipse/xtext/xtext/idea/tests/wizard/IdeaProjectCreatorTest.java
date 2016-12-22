@@ -2,7 +2,6 @@ package org.eclipse.xtext.xtext.idea.tests.wizard;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.testFramework.PsiTestCase;
 import java.io.IOException;
 import java.util.List;
@@ -26,8 +25,7 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     XtextModuleBuilder _xtextModuleBuilder = new XtextModuleBuilder();
     this.builder = _xtextModuleBuilder;
     this.builder.setName("mydsl");
-    WizardConfiguration _wizardConfiguration = this.builder.getWizardConfiguration();
-    LanguageDescriptor _language = _wizardConfiguration.getLanguage();
+    LanguageDescriptor _language = this.builder.getWizardConfiguration().getLanguage();
     _language.setName("org.xtext.MyDsl");
   }
   
@@ -39,20 +37,13 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
   @Test
   public void testCreateProject() {
     final List<Module> modules = this.executeModuleBuilder();
-    int _size = modules.size();
-    TestCase.assertEquals(1, _size);
-    Module _get = modules.get(0);
-    String _name = _get.getName();
-    TestCase.assertEquals("mydsl", _name);
-    Module _get_1 = modules.get(0);
-    String _moduleFilePath = _get_1.getModuleFilePath();
-    boolean _endsWith = _moduleFilePath.endsWith("/mydsl/mydsl.iml");
-    TestCase.assertTrue(_endsWith);
+    TestCase.assertEquals(1, modules.size());
+    TestCase.assertEquals("mydsl", modules.get(0).getName());
+    TestCase.assertTrue(modules.get(0).getModuleFilePath().endsWith("/mydsl/mydsl.iml"));
   }
   
   public List<Module> executeModuleBuilder() {
-    Project _project = this.getProject();
-    final List<Module> modules = this.builder.commit(_project);
+    final List<Module> modules = this.builder.commit(this.getProject());
     return modules;
   }
   
@@ -61,22 +52,11 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     WizardConfiguration _wizardConfiguration = this.builder.getWizardConfiguration();
     _wizardConfiguration.setPreferredBuildSystem(BuildSystem.GRADLE);
     final List<Module> modules = this.executeModuleBuilder();
-    int _size = modules.size();
-    TestCase.assertEquals(2, _size);
-    Module _get = modules.get(0);
-    String _name = _get.getName();
-    TestCase.assertEquals("mydsl.parent", _name);
-    Module _get_1 = modules.get(0);
-    String _moduleFilePath = _get_1.getModuleFilePath();
-    boolean _endsWith = _moduleFilePath.endsWith("/mydsl.parent/mydsl.parent.iml");
-    TestCase.assertTrue(_endsWith);
-    Module _get_2 = modules.get(1);
-    String _name_1 = _get_2.getName();
-    TestCase.assertEquals("mydsl", _name_1);
-    Module _get_3 = modules.get(1);
-    String _moduleFilePath_1 = _get_3.getModuleFilePath();
-    boolean _endsWith_1 = _moduleFilePath_1.endsWith("/mydsl/mydsl.iml");
-    TestCase.assertTrue(_endsWith_1);
+    TestCase.assertEquals(2, modules.size());
+    TestCase.assertEquals("mydsl.parent", modules.get(0).getName());
+    TestCase.assertTrue(modules.get(0).getModuleFilePath().endsWith("/mydsl.parent/mydsl.parent.iml"));
+    TestCase.assertEquals("mydsl", modules.get(1).getName());
+    TestCase.assertTrue(modules.get(1).getModuleFilePath().endsWith("/mydsl/mydsl.iml"));
   }
   
   @Test
@@ -86,71 +66,39 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     WizardConfiguration _wizardConfiguration_1 = this.builder.getWizardConfiguration();
     _wizardConfiguration_1.setProjectLayout(ProjectLayout.HIERARCHICAL);
     final List<Module> modules = this.executeModuleBuilder();
-    int _size = modules.size();
-    TestCase.assertEquals(2, _size);
-    Module _get = modules.get(0);
-    String _name = _get.getName();
-    TestCase.assertEquals("mydsl.parent", _name);
-    Module _get_1 = modules.get(0);
-    String _moduleFilePath = _get_1.getModuleFilePath();
-    boolean _endsWith = _moduleFilePath.endsWith("/mydsl.parent/mydsl.parent.iml");
-    TestCase.assertTrue(_endsWith);
-    Module _get_2 = modules.get(1);
-    String _name_1 = _get_2.getName();
-    TestCase.assertEquals("mydsl", _name_1);
-    Module _get_3 = modules.get(1);
-    String _moduleFilePath_1 = _get_3.getModuleFilePath();
-    boolean _endsWith_1 = _moduleFilePath_1.endsWith("/mydsl.parent/mydsl/mydsl.iml");
-    TestCase.assertTrue(_endsWith_1);
-    Project _project = this.getProject();
-    ModuleManager _instance = ModuleManager.getInstance(_project);
-    final Module[] allModules = _instance.getModules();
-    int _size_1 = ((List<Module>)Conversions.doWrapArray(allModules)).size();
-    TestCase.assertEquals(2, _size_1);
+    TestCase.assertEquals(2, modules.size());
+    TestCase.assertEquals("mydsl.parent", modules.get(0).getName());
+    TestCase.assertTrue(modules.get(0).getModuleFilePath().endsWith("/mydsl.parent/mydsl.parent.iml"));
+    TestCase.assertEquals("mydsl", modules.get(1).getName());
+    TestCase.assertTrue(modules.get(1).getModuleFilePath().endsWith("/mydsl.parent/mydsl/mydsl.iml"));
+    final Module[] allModules = ModuleManager.getInstance(this.getProject()).getModules();
+    TestCase.assertEquals(2, ((List<Module>)Conversions.doWrapArray(allModules)).size());
   }
   
   @Test
   public void testCreateTwoLanguagesProject() {
-    Project _project = this.getProject();
-    ModuleManager _instance = ModuleManager.getInstance(_project);
-    final Module[] allModules = _instance.getModules();
-    int _size = ((List<Module>)Conversions.doWrapArray(allModules)).size();
-    TestCase.assertEquals(0, _size);
+    final Module[] allModules = ModuleManager.getInstance(this.getProject()).getModules();
+    TestCase.assertEquals(0, ((List<Module>)Conversions.doWrapArray(allModules)).size());
     WizardConfiguration _wizardConfiguration = this.builder.getWizardConfiguration();
     _wizardConfiguration.setPreferredBuildSystem(BuildSystem.MAVEN);
     WizardConfiguration _wizardConfiguration_1 = this.builder.getWizardConfiguration();
     _wizardConfiguration_1.setProjectLayout(ProjectLayout.HIERARCHICAL);
     this.builder.setName("mydsl");
     final List<Module> modules = this.executeModuleBuilder();
-    int _size_1 = modules.size();
-    TestCase.assertEquals(2, _size_1);
-    Module _get = modules.get(0);
-    String _name = _get.getName();
-    TestCase.assertEquals("mydsl.parent", _name);
-    Module _get_1 = modules.get(0);
-    String _moduleFilePath = _get_1.getModuleFilePath();
-    boolean _endsWith = _moduleFilePath.endsWith("/mydsl.parent/mydsl.parent.iml");
-    TestCase.assertTrue(_endsWith);
-    Module _get_2 = modules.get(1);
-    String _name_1 = _get_2.getName();
-    TestCase.assertEquals("mydsl", _name_1);
-    Module _get_3 = modules.get(1);
-    String _moduleFilePath_1 = _get_3.getModuleFilePath();
-    boolean _endsWith_1 = _moduleFilePath_1.endsWith("/mydsl.parent/mydsl/mydsl.iml");
-    TestCase.assertTrue(_endsWith_1);
+    TestCase.assertEquals(2, modules.size());
+    TestCase.assertEquals("mydsl.parent", modules.get(0).getName());
+    TestCase.assertTrue(modules.get(0).getModuleFilePath().endsWith("/mydsl.parent/mydsl.parent.iml"));
+    TestCase.assertEquals("mydsl", modules.get(1).getName());
+    TestCase.assertTrue(modules.get(1).getModuleFilePath().endsWith("/mydsl.parent/mydsl/mydsl.iml"));
     this.builder.setName("mydsl2");
-    Project _project_1 = this.getProject();
-    final Module rootModule = this.builder.commitModule(_project_1, null);
-    String _name_2 = rootModule.getName();
-    TestCase.assertEquals("mydsl2.parent", _name_2);
+    final Module rootModule = this.builder.commitModule(this.getProject(), null);
+    TestCase.assertEquals("mydsl2.parent", rootModule.getName());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Wrong .iml path  ");
-    String _moduleFilePath_2 = rootModule.getModuleFilePath();
-    _builder.append(_moduleFilePath_2);
-    Project _project_2 = this.getProject();
-    String _basePath = _project_2.getBasePath();
+    String _moduleFilePath = rootModule.getModuleFilePath();
+    _builder.append(_moduleFilePath);
+    String _basePath = this.getProject().getBasePath();
     String _plus = (_basePath + "/mydsl2.parent/mydsl2.parent.iml");
-    String _moduleFilePath_3 = rootModule.getModuleFilePath();
-    TestCase.assertEquals(_builder.toString(), _plus, _moduleFilePath_3);
+    TestCase.assertEquals(_builder.toString(), _plus, rootModule.getModuleFilePath());
   }
 }

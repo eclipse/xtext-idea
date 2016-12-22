@@ -12,8 +12,7 @@ public class BeeLangTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      BeeLangTestLanguageStandaloneSetupIdea _beeLangTestLanguageStandaloneSetupIdea = new BeeLangTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _beeLangTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new BeeLangTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

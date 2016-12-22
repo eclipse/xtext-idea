@@ -25,7 +25,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -47,8 +46,7 @@ public class IdeaWidgetFactory {
       gbc.fill = GridBagConstraints.HORIZONTAL;
       gbc.gridwidth = 2;
       gbc.ipady = 4;
-      JComponent _apply = col.apply(gbc);
-      host.add(_apply, gbc);
+      host.add(col.apply(gbc), gbc);
       this.rowsAdded++;
       return host;
     }
@@ -59,16 +57,14 @@ public class IdeaWidgetFactory {
       gbc.gridy = this.rowsAdded;
       gbc.ipady = 4;
       gbc.anchor = GridBagConstraints.EAST;
-      JComponent _apply = col1.apply(gbc);
-      host.add(_apply, gbc);
+      host.add(col1.apply(gbc), gbc);
       GridBagConstraints _gridBagConstraints = new GridBagConstraints();
       gbc = _gridBagConstraints;
       gbc.gridx = 1;
       gbc.gridy = this.rowsAdded;
       gbc.anchor = GridBagConstraints.WEST;
       gbc.fill = GridBagConstraints.HORIZONTAL;
-      JComponent _apply_1 = col2.apply(gbc);
-      host.add(_apply_1, gbc);
+      host.add(col2.apply(gbc), gbc);
       this.rowsAdded++;
       return host;
     }
@@ -78,8 +74,7 @@ public class IdeaWidgetFactory {
       super.add(comp, constraints);
       if ((comp instanceof JComponent)) {
         if (IdeaWidgetFactory.debug) {
-          Border _createLineBorder = BorderFactory.createLineBorder(Color.BLACK);
-          ((JComponent)comp).setBorder(_createLineBorder);
+          ((JComponent)comp).setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
       }
     }
@@ -91,8 +86,7 @@ public class IdeaWidgetFactory {
     for (final Function1<? super GridBagConstraints, ? extends JComponent> childAddition : children) {
       {
         final GridBagConstraints ld = new GridBagConstraints();
-        JComponent _apply = childAddition.apply(ld);
-        flowPanel.add(_apply, ld);
+        flowPanel.add(childAddition.apply(ld), ld);
       }
     }
     return flowPanel;
@@ -111,8 +105,7 @@ public class IdeaWidgetFactory {
   public IdeaWidgetFactory.TwoColumnPanel twoColumnPanel(final Function1<? super IdeaWidgetFactory.TwoColumnPanel, ? extends IdeaWidgetFactory.TwoColumnPanel> additions) {
     IdeaWidgetFactory.TwoColumnPanel _twoColumnPanel = new IdeaWidgetFactory.TwoColumnPanel();
     final Procedure1<IdeaWidgetFactory.TwoColumnPanel> _function = (IdeaWidgetFactory.TwoColumnPanel it) -> {
-      EmptyBorder _emptyBorder = this.emptyBorder(10);
-      it.setBorder(_emptyBorder);
+      it.setBorder(this.emptyBorder(10));
       GridBagLayout _gridBagLayout = new GridBagLayout();
       it.setLayout(_gridBagLayout);
     };

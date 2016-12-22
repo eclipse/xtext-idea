@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -49,8 +48,7 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   
   @Override
   public Set<OutputConfiguration> getOutputConfigurations(final Resource context) {
-    ResourceSet _resourceSet = context.getResourceSet();
-    return this.getOutputConfigurations(_resourceSet);
+    return this.getOutputConfigurations(context.getResourceSet());
   }
   
   @Override
@@ -66,18 +64,12 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
     final Facet<? extends AbstractFacetConfiguration> facet = this.facetProvider.getFacet(module);
     boolean _notEquals = (!Objects.equal(facet, null));
     if (_notEquals) {
-      AbstractFacetConfiguration _configuration = facet.getConfiguration();
-      final GeneratorConfigurationState generatorConf = _configuration.getState();
+      final GeneratorConfigurationState generatorConf = facet.getConfiguration().getState();
       final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
-      String _outputDirectory = generatorConf.getOutputDirectory();
-      String _moduleRelativePath = this.toModuleRelativePath(_outputDirectory, module);
-      defOut.setOutputDirectory(_moduleRelativePath);
-      boolean _isCreateDirectory = generatorConf.isCreateDirectory();
-      defOut.setCreateOutputDirectory(_isCreateDirectory);
-      boolean _isDeleteGenerated = generatorConf.isDeleteGenerated();
-      defOut.setCanClearOutputDirectory(_isDeleteGenerated);
-      boolean _isOverwriteExisting = generatorConf.isOverwriteExisting();
-      defOut.setOverrideExistingResources(_isOverwriteExisting);
+      defOut.setOutputDirectory(this.toModuleRelativePath(generatorConf.getOutputDirectory(), module));
+      defOut.setCreateOutputDirectory(generatorConf.isCreateDirectory());
+      defOut.setCanClearOutputDirectory(generatorConf.isDeleteGenerated());
+      defOut.setOverrideExistingResources(generatorConf.isOverwriteExisting());
       defOut.setUseOutputPerSourceFolder(true);
       final Iterable<SourceFolder> allSrcFolders = RootModelExtensions.getExistingSourceFolders(module);
       for (final SourceFolder srcFolder : allSrcFolders) {
@@ -86,16 +78,11 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
           final OutputConfiguration.SourceMapping mapping = new OutputConfiguration.SourceMapping(_relativePath);
           boolean _isTestSource = srcFolder.isTestSource();
           if (_isTestSource) {
-            String _testOutputDirectory = generatorConf.getTestOutputDirectory();
-            String _moduleRelativePath_1 = this.toModuleRelativePath(_testOutputDirectory, module);
-            mapping.setOutputDirectory(_moduleRelativePath_1);
+            mapping.setOutputDirectory(this.toModuleRelativePath(generatorConf.getTestOutputDirectory(), module));
           } else {
-            String _outputDirectory_1 = generatorConf.getOutputDirectory();
-            String _moduleRelativePath_2 = this.toModuleRelativePath(_outputDirectory_1, module);
-            mapping.setOutputDirectory(_moduleRelativePath_2);
+            mapping.setOutputDirectory(this.toModuleRelativePath(generatorConf.getOutputDirectory(), module));
           }
-          Set<OutputConfiguration.SourceMapping> _sourceMappings = defOut.getSourceMappings();
-          _sourceMappings.add(mapping);
+          defOut.getSourceMappings().add(mapping);
         }
       }
       return Sets.<OutputConfiguration>newHashSet(defOut);
@@ -106,16 +93,12 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   public String toModuleRelativePath(final String path, final Module module) {
     boolean _isAbsolute = FileUtil.isAbsolute(path);
     if (_isAbsolute) {
-      Application _application = ApplicationManager.getApplication();
       final Computable<String> _function = () -> {
-        ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-        VirtualFile[] _contentRoots = _instance.getContentRoots();
-        final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-        String _path = root.getPath();
-        final String relativePath = FileUtil.getRelativePath(_path, path, File.separatorChar);
+        final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(ModuleRootManager.getInstance(module).getContentRoots())));
+        final String relativePath = FileUtil.getRelativePath(root.getPath(), path, File.separatorChar);
         return relativePath;
       };
-      return _application.<String>runReadAction(_function);
+      return ApplicationManager.getApplication().<String>runReadAction(_function);
     }
     return path;
   }

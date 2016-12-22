@@ -19,8 +19,7 @@ public class RefactoringTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      RefactoringTestLanguageStandaloneSetupIdea _refactoringTestLanguageStandaloneSetupIdea = new RefactoringTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _refactoringTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new RefactoringTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

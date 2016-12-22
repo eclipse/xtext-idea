@@ -60,8 +60,7 @@ public class EntitiesFormatter extends XbaseFormatter {
   private EntitiesGrammarAccess _entitiesGrammarAccess;
   
   protected void _format(final Entities entities, @Extension final IFormattableDocument document) {
-    XImportSection _importSection = entities.getImportSection();
-    document.<XImportSection>format(_importSection);
+    document.<XImportSection>format(entities.getImportSection());
     EList<AbstractElement> _elements = entities.getElements();
     for (final AbstractElement elements : _elements) {
       document.<AbstractElement>format(elements);

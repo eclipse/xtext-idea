@@ -23,9 +23,7 @@ public class SDomainValidator extends AbstractSDomainValidator {
   
   @Check
   public void checkEntityNameStartsWithCapital(final Entity entity) {
-    String _name = entity.getName();
-    char _charAt = _name.charAt(0);
-    boolean _isUpperCase = Character.isUpperCase(_charAt);
+    boolean _isUpperCase = Character.isUpperCase(entity.getName().charAt(0));
     boolean _not = (!_isUpperCase);
     if (_not) {
       this.warning("Name should start with a capital", 

@@ -14,14 +14,10 @@ import com.intellij.debugger.PositionManager;
 import com.intellij.debugger.PositionManagerFactory;
 import com.intellij.debugger.SourcePosition;
 import com.intellij.debugger.engine.DebugProcess;
-import com.intellij.debugger.engine.PositionManagerImpl;
 import com.intellij.debugger.requests.ClassPrepareRequestor;
-import com.intellij.debugger.requests.RequestManager;
 import com.intellij.lang.Language;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
@@ -40,14 +36,12 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
-import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.idea.debug.DebugProcessExtensions;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -83,17 +77,14 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
      */
     @Override
     public ClassPrepareRequest createPrepareRequest(final ClassPrepareRequestor requestor, final SourcePosition source) throws NoDataException {
-      PsiFile _file = source.getFile();
-      Language _language = _file.getLanguage();
+      Language _language = source.getFile().getLanguage();
       boolean _notEquals = (!Objects.equal(_language, this.language));
       if (_notEquals) {
         throw NoDataException.INSTANCE;
       }
-      Application _application = ApplicationManager.getApplication();
       final Computable<Set<String>> _function = () -> {
         try {
-          PsiElement _elementAt = source.getElementAt();
-          final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(_elementAt);
+          final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(source.getElementAt());
           if ((sourceResource == null)) {
             throw NoDataException.INSTANCE;
           }
@@ -101,28 +92,22 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           if ((trace == null)) {
             throw NoDataException.INSTANCE;
           }
-          Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();
           final Function1<ILocationInVirtualFile, String> _function_1 = (ILocationInVirtualFile it) -> {
-            SourceRelativeURI _srcRelativeResourceURI = it.getSrcRelativeResourceURI();
-            URI _uRI = _srcRelativeResourceURI.getURI();
-            return _uRI.lastSegment();
+            return it.getSrcRelativeResourceURI().getURI().lastSegment();
           };
-          Iterable<String> _map = IterableExtensions.map(_allAssociatedLocations, _function_1);
-          return IterableExtensions.<String>toSet(_map);
+          return IterableExtensions.<String>toSet(IterableExtensions.map(trace.getAllAssociatedLocations(), _function_1));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      final Set<String> names = _application.<Set<String>>runReadAction(_function);
+      final Set<String> names = ApplicationManager.getApplication().<Set<String>>runReadAction(_function);
       boolean _isEmpty = names.isEmpty();
       if (_isEmpty) {
         throw NoDataException.INSTANCE;
       }
-      RequestManager _requestsManager = this.process.getRequestsManager();
       final ClassPrepareRequestor _function_1 = (DebugProcess process, ReferenceType refType) -> {
         try {
-          String _sourceName = refType.sourceName();
-          boolean _contains = names.contains(_sourceName);
+          boolean _contains = names.contains(refType.sourceName());
           if (_contains) {
             requestor.processClassPrepare(process, refType);
           }
@@ -134,13 +119,12 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           }
         }
       };
-      return _requestsManager.createClassPrepareRequest(_function_1, "*");
+      return this.process.getRequestsManager().createClassPrepareRequest(_function_1, "*");
     }
     
     @Override
     public List<ReferenceType> getAllClasses(final SourcePosition source) throws NoDataException {
-      PsiFile _file = source.getFile();
-      Language _language = _file.getLanguage();
+      Language _language = source.getFile().getLanguage();
       boolean _notEquals = (!Objects.equal(_language, this.language));
       if (_notEquals) {
         throw NoDataException.INSTANCE;
@@ -151,27 +135,21 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
       Set<Map.Entry<URI, AbstractTraceRegion>> _entrySet = traces.entrySet();
       for (final Map.Entry<URI, AbstractTraceRegion> uri2trace : _entrySet) {
         {
-          AbstractTraceRegion _value = uri2trace.getValue();
-          TreeIterator<AbstractTraceRegion> _treeIterator = _value.treeIterator();
           final Function1<AbstractTraceRegion, Boolean> _function = (AbstractTraceRegion it) -> {
-            List<ILocationData> _associatedLocations = it.getAssociatedLocations();
-            ILocationData _head = IterableExtensions.<ILocationData>head(_associatedLocations);
+            ILocationData _head = IterableExtensions.<ILocationData>head(it.getAssociatedLocations());
             int _lineNumber = 0;
             if (_head!=null) {
               _lineNumber=_head.getLineNumber();
             }
             return Boolean.valueOf((_lineNumber == line));
           };
-          final AbstractTraceRegion region = IteratorExtensions.<AbstractTraceRegion>findFirst(_treeIterator, _function);
+          final AbstractTraceRegion region = IteratorExtensions.<AbstractTraceRegion>findFirst(uri2trace.getValue().treeIterator(), _function);
           boolean _notEquals_1 = (!Objects.equal(region, null));
           if (_notEquals_1) {
-            URI _key = uri2trace.getKey();
-            final PsiFile psiFile = this._debugProcessExtensions.getPsiFile(this.process, _key);
-            PositionManagerImpl _javaPositionManger = this._debugProcessExtensions.getJavaPositionManger(this.process);
+            final PsiFile psiFile = this._debugProcessExtensions.getPsiFile(this.process, uri2trace.getKey());
             int _myLineNumber = region.getMyLineNumber();
             int _plus = (_myLineNumber + 1);
-            SourcePosition _createFromLine = SourcePosition.createFromLine(psiFile, _plus);
-            final List<ReferenceType> classes = _javaPositionManger.getAllClasses(_createFromLine);
+            final List<ReferenceType> classes = this._debugProcessExtensions.getJavaPositionManger(this.process).getAllClasses(SourcePosition.createFromLine(psiFile, _plus));
             allClasses.addAll(classes);
           }
         }
@@ -188,8 +166,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
       if (_equals) {
         throw NoDataException.INSTANCE;
       }
-      SourcePosition _createFromLine = SourcePosition.createFromLine(psiFile, line);
-      final AbstractTraceRegion trace = this._debugProcessExtensions.getTraceForJava(_createFromLine);
+      final AbstractTraceRegion trace = this._debugProcessExtensions.getTraceForJava(SourcePosition.createFromLine(psiFile, line));
       boolean _equals_1 = Objects.equal(trace, null);
       if (_equals_1) {
         throw NoDataException.INSTANCE;
@@ -207,13 +184,10 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
             final ILocationData mergedAssociatedLocation = n.getMergedAssociatedLocation();
             if (((n.isUseForDebugging() && (n.getMyEndLineNumber() == line)) && (mergedAssociatedLocation.getLineNumber() == mergedAssociatedLocation.getEndLineNumber()))) {
               final PsiFile psi = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
-              int _offset = mergedAssociatedLocation.getOffset();
-              return SourcePosition.createFromOffset(psi, _offset);
+              return SourcePosition.createFromOffset(psi, mergedAssociatedLocation.getOffset());
             } else {
               final PsiFile psi_1 = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
-              int _offset_1 = mergedAssociatedLocation.getOffset();
-              SourcePosition _createFromOffset = SourcePosition.createFromOffset(psi_1, _offset_1);
-              fallBack = _createFromOffset;
+              fallBack = SourcePosition.createFromOffset(psi_1, mergedAssociatedLocation.getOffset());
             }
           }
           int _myEndLineNumber = n.getMyEndLineNumber();
@@ -221,9 +195,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           if (_tripleEquals_1) {
             final ILocationData mergedAssociatedLocation_1 = n.getMergedAssociatedLocation();
             final PsiFile psi_2 = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
-            int _endLineNumber = mergedAssociatedLocation_1.getEndLineNumber();
-            SourcePosition _createFromLine_1 = SourcePosition.createFromLine(psi_2, _endLineNumber);
-            secondaryFallBack = _createFromLine_1;
+            secondaryFallBack = SourcePosition.createFromLine(psi_2, mergedAssociatedLocation_1.getEndLineNumber());
           }
         }
       }
@@ -238,22 +210,16 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
     
     @Override
     public List<Location> locationsOfLine(final ReferenceType type, final SourcePosition position) throws NoDataException {
-      PsiFile _file = position.getFile();
-      Language _language = _file.getLanguage();
+      Language _language = position.getFile().getLanguage();
       boolean _notEquals = (!Objects.equal(_language, this.language));
       if (_notEquals) {
         throw NoDataException.INSTANCE;
       }
-      Application _application = ApplicationManager.getApplication();
       final Computable<List<Location>> _function = () -> {
         try {
           final PsiElement psi = position.getElementAt();
-          Project _project = psi.getProject();
-          PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
-          PsiFile _containingFile = psi.getContainingFile();
-          final Document document = _instance.getDocument(_containingFile);
-          int _line = position.getLine();
-          final TextRange range = DocumentUtil.getLineTextRange(document, _line);
+          final Document document = PsiDocumentManager.getInstance(psi.getProject()).getDocument(psi.getContainingFile());
+          final TextRange range = DocumentUtil.getLineTextRange(document, position.getLine());
           final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(psi);
           if ((sourceResource == null)) {
             throw NoDataException.INSTANCE;
@@ -266,16 +232,13 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           int _startOffset = range.getStartOffset();
           int _length = range.getLength();
           TextRegion _textRegion = new TextRegion(_startOffset, _length);
-          Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = traceToTarget.getAllAssociatedLocations(_textRegion);
           final Function1<ILocationInVirtualFile, Integer> _function_1 = (ILocationInVirtualFile it) -> {
-            ITextRegionWithLineInformation _textRegion_1 = it.getTextRegion();
-            return Integer.valueOf(_textRegion_1.getLineNumber());
+            return Integer.valueOf(it.getTextRegion().getLineNumber());
           };
-          List<? extends ILocationInVirtualFile> _sortBy = IterableExtensions.sortBy(_allAssociatedLocations, _function_1);
+          List<? extends ILocationInVirtualFile> _sortBy = IterableExtensions.sortBy(traceToTarget.getAllAssociatedLocations(_textRegion), _function_1);
           for (final ILocationInVirtualFile location : _sortBy) {
             if ((Objects.equal(type.sourceName(), location.getSrcRelativeResourceURI().getURI().lastSegment().toString()) && (location.getTextRegion().getLineNumber() == location.getTextRegion().getEndLineNumber()))) {
-              ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
-              int _lineNumber = _textRegion_1.getLineNumber();
+              int _lineNumber = location.getTextRegion().getLineNumber();
               int _plus = (_lineNumber + 1);
               final List<Location> locationsOfLine = type.locationsOfLine(_plus);
               boolean _isEmpty = locationsOfLine.isEmpty();
@@ -291,7 +254,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      return _application.<List<Location>>runReadAction(_function);
+      return ApplicationManager.getApplication().<List<Location>>runReadAction(_function);
     }
   }
   

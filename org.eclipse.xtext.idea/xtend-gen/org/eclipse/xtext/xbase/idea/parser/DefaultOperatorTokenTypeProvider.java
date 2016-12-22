@@ -34,12 +34,10 @@ public class DefaultOperatorTokenTypeProvider implements OperatorTokenTypeProvid
   @Inject
   public DefaultOperatorTokenTypeProvider(final OperatorMapping operatorMapping, final TokenTypeProvider tokenTypeProvider, final ITokenDefProvider tokenDefProvider) {
     final HashSet<IElementType> tokenTypes = CollectionLiterals.<IElementType>newHashSet();
-    Set<QualifiedName> _operators = operatorMapping.getOperators();
     final Function1<QualifiedName, String> _function = (QualifiedName it) -> {
       return it.toString();
     };
-    Iterable<String> _map = IterableExtensions.<QualifiedName, String>map(_operators, _function);
-    final Set<String> operators = IterableExtensions.<String>toSet(_map);
+    final Set<String> operators = IterableExtensions.<String>toSet(IterableExtensions.<QualifiedName, String>map(operatorMapping.getOperators(), _function));
     final Map<Integer, String> tokenDefMap = tokenDefProvider.getTokenDefMap();
     Set<Integer> _keySet = tokenDefMap.keySet();
     for (final Integer antlrTokenType : _keySet) {
@@ -62,8 +60,7 @@ public class DefaultOperatorTokenTypeProvider implements OperatorTokenTypeProvid
         }
       }
     }
-    TokenSet _create = TokenSet.create(((IElementType[])Conversions.unwrapArray(tokenTypes, IElementType.class)));
-    this.operatorTokens = _create;
+    this.operatorTokens = TokenSet.create(((IElementType[])Conversions.unwrapArray(tokenTypes, IElementType.class)));
   }
   
   @Override

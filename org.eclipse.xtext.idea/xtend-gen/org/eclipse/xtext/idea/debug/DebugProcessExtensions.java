@@ -13,7 +13,6 @@ import com.intellij.debugger.SourcePosition;
 import com.intellij.debugger.engine.DebugProcess;
 import com.intellij.debugger.engine.DebugProcessImpl;
 import com.intellij.debugger.engine.PositionManagerImpl;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
@@ -21,7 +20,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.sun.jdi.Location;
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,36 +47,28 @@ public class DebugProcessExtensions {
   
   public PsiFile getPsiFile(final DebugProcess process, final Location location) {
     final PositionManagerImpl delegate = this.getJavaPositionManger(process);
-    Application _application = ApplicationManager.getApplication();
     final Computable<PsiFile> _function = () -> {
       try {
         final Method method = PositionManagerImpl.class.getDeclaredMethod("getPsiFileByLocation", Project.class, Location.class);
         method.setAccessible(true);
-        Project _project = process.getProject();
-        final Object result = method.invoke(delegate, _project, location);
+        final Object result = method.invoke(delegate, process.getProject(), location);
         return ((PsiFile) result);
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    return _application.<PsiFile>runReadAction(_function);
+    return ApplicationManager.getApplication().<PsiFile>runReadAction(_function);
   }
   
   public AbstractTraceRegion getTraceForJava(final SourcePosition javaSource) {
     try {
-      PsiFile _file = javaSource.getFile();
-      VirtualFile _virtualFile = _file.getVirtualFile();
-      final URI uri = VirtualFileURIUtil.getURI(_virtualFile);
-      String _lastSegment = uri.lastSegment();
-      final String lastSegmentOfTrace = this.traceFileNameProvider.getTraceFromJava(_lastSegment);
-      URI _trimSegments = uri.trimSegments(1);
-      URI _appendSegment = _trimSegments.appendSegment(lastSegmentOfTrace);
-      final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(_appendSegment);
+      final URI uri = VirtualFileURIUtil.getURI(javaSource.getFile().getVirtualFile());
+      final String lastSegmentOfTrace = this.traceFileNameProvider.getTraceFromJava(uri.lastSegment());
+      final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri.trimSegments(1).appendSegment(lastSegmentOfTrace));
       if ((Objects.equal(virtualFile, null) || (!virtualFile.exists()))) {
         return null;
       }
-      InputStream _inputStream = virtualFile.getInputStream();
-      final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(_inputStream);
+      final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(virtualFile.getInputStream());
       return trace;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -86,24 +76,16 @@ public class DebugProcessExtensions {
   }
   
   public PsiFile getPsiFile(final DebugProcess process, final URI uri) {
-    Application _application = ApplicationManager.getApplication();
     final Computable<PsiFile> _function = () -> {
-      Project _project = process.getProject();
-      PsiManager _instance = PsiManager.getInstance(_project);
-      VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
-      return _instance.findFile(_virtualFile);
+      return PsiManager.getInstance(process.getProject()).findFile(VirtualFileURIUtil.getVirtualFile(uri));
     };
-    return _application.<PsiFile>runReadAction(_function);
+    return ApplicationManager.getApplication().<PsiFile>runReadAction(_function);
   }
   
   public Map<URI, AbstractTraceRegion> getTracesForSource(final DebugProcess process, final SourcePosition source) {
     try {
-      Project _project = process.getProject();
-      final XtextAutoBuilderComponent builder = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
-      PsiFile _file = source.getFile();
-      VirtualFile _virtualFile = _file.getVirtualFile();
-      URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-      final Iterable<URI> generated = builder.getGeneratedSources(_uRI);
+      final XtextAutoBuilderComponent builder = process.getProject().<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+      final Iterable<URI> generated = builder.getGeneratedSources(VirtualFileURIUtil.getURI(source.getFile().getVirtualFile()));
       final HashMap<URI, AbstractTraceRegion> result = CollectionLiterals.<URI, AbstractTraceRegion>newHashMap();
       final Function1<URI, Boolean> _function = (URI it) -> {
         String _fileExtension = it.fileExtension();
@@ -112,14 +94,10 @@ public class DebugProcessExtensions {
       Iterable<URI> _filter = IterableExtensions.<URI>filter(generated, _function);
       for (final URI uri : _filter) {
         {
-          String _lastSegment = uri.lastSegment();
-          final String lastSegmentOfTrace = this.traceFileNameProvider.getTraceFromJava(_lastSegment);
-          URI _trimSegments = uri.trimSegments(1);
-          URI _appendSegment = _trimSegments.appendSegment(lastSegmentOfTrace);
-          final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(_appendSegment);
+          final String lastSegmentOfTrace = this.traceFileNameProvider.getTraceFromJava(uri.lastSegment());
+          final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri.trimSegments(1).appendSegment(lastSegmentOfTrace));
           if (((!Objects.equal(virtualFile, null)) && virtualFile.exists())) {
-            InputStream _inputStream = virtualFile.getInputStream();
-            final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(_inputStream);
+            final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(virtualFile.getInputStream());
             result.put(uri, trace);
           }
         }
@@ -140,12 +118,7 @@ public class DebugProcessExtensions {
     if (_equals) {
       return null;
     } else {
-      Project _project = process.getProject();
-      XtextAutoBuilderComponent _component = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
-      VirtualFile _virtualFile = psiFile.getVirtualFile();
-      URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-      Iterable<URI> _source4GeneratedSource = _component.getSource4GeneratedSource(_uRI);
-      return IterableExtensions.<URI>head(_source4GeneratedSource);
+      return IterableExtensions.<URI>head(process.getProject().<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class).getSource4GeneratedSource(VirtualFileURIUtil.getURI(psiFile.getVirtualFile())));
     }
   }
 }

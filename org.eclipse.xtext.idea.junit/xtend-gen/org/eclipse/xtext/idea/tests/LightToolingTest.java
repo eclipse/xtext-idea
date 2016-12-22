@@ -17,26 +17,19 @@ import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.formatting.Block;
-import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.formatting.FormattingModelDumper;
 import com.intellij.ide.highlighter.HighlighterFactory;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
-import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageFormatting;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.StdModuleTypes;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.openapi.roots.ContentEntry;
@@ -45,7 +38,6 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -55,8 +47,6 @@ import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.util.Consumer;
 import com.intellij.util.ui.tree.TreeUtil;
-import java.util.List;
-import javax.swing.JTree;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -100,12 +90,10 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
+    this.getXtextLanguage().injectMembers(this);
     CodeInsightSettings _instance = CodeInsightSettings.getInstance();
     _instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false;
-    CodeStyleSettings _codeStyleSettings = this.getCodeStyleSettings();
-    CommonCodeStyleSettings.IndentOptions _indentOptions = _codeStyleSettings.getIndentOptions();
+    CommonCodeStyleSettings.IndentOptions _indentOptions = this.getCodeStyleSettings().getIndentOptions();
     _indentOptions.USE_TAB_CHARACTER = true;
   }
   
@@ -129,12 +117,9 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
         final LanguageLevelModuleExtension languageLevelModuleExtension = model.<LanguageLevelModuleExtension>getModuleExtension(LanguageLevelModuleExtension.class);
         boolean _notEquals = (!Objects.equal(languageLevelModuleExtension, null));
         if (_notEquals) {
-          LanguageLevel _languageLevel = LightToolingTest.this.getLanguageLevel();
-          languageLevelModuleExtension.setLanguageLevel(_languageLevel);
+          languageLevelModuleExtension.setLanguageLevel(LightToolingTest.this.getLanguageLevel());
         }
-        Language _language = LightToolingTest.this.fileType.getLanguage();
-        String _iD = _language.getID();
-        LightToolingTest.addFacetToModule(module, _iD);
+        LightToolingTest.addFacetToModule(module, LightToolingTest.this.fileType.getLanguage().getID());
         LightToolingTest.this.configureModule(module, model, contentEntry);
       }
       
@@ -152,25 +137,20 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   
   public static void addFacetToModule(final Module module, final String languageId) {
     final FacetManager mnr = FacetManager.getInstance(module);
-    FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
-    FacetType[] _facetTypes = _instance.getFacetTypes();
     final Function1<FacetType, Boolean> _function = (FacetType it) -> {
       String _stringId = it.getStringId();
       return Boolean.valueOf(Objects.equal(_stringId, languageId));
     };
-    final FacetType facetType = IterableExtensions.<FacetType>findFirst(((Iterable<FacetType>)Conversions.doWrapArray(_facetTypes)), _function);
-    Application _application = ApplicationManager.getApplication();
+    final FacetType facetType = IterableExtensions.<FacetType>findFirst(((Iterable<FacetType>)Conversions.doWrapArray(FacetTypeRegistry.getInstance().getFacetTypes())), _function);
     final Runnable _function_1 = () -> {
-      String _defaultFacetName = facetType.getDefaultFacetName();
-      mnr.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName, null);
+      mnr.<Facet, FacetConfiguration>addFacet(facetType, facetType.getDefaultFacetName(), null);
       return;
     };
-    _application.runWriteAction(_function_1);
+    ApplicationManager.getApplication().runWriteAction(_function_1);
   }
   
   protected Sdk getSdk() {
-    JavaAwareProjectJdkTableImpl _instanceEx = JavaAwareProjectJdkTableImpl.getInstanceEx();
-    return _instanceEx.getInternalJdk();
+    return JavaAwareProjectJdkTableImpl.getInstanceEx().getInternalJdk();
   }
   
   protected LanguageLevel getLanguageLevel() {
@@ -181,17 +161,14 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected PsiFile configureByText(final String code) {
-    String _unix = LineDelimiters.toUnix(code);
-    return this.myFixture.configureByText(this.fileType, _unix);
+    return this.myFixture.configureByText(this.fileType, LineDelimiters.toUnix(code));
   }
   
   protected void configureByText(final String path, final String code) {
     String _defaultExtension = this.fileType.getDefaultExtension();
     String _plus = ((path + ".") + _defaultExtension);
-    String _unix = LineDelimiters.toUnix(code);
-    final PsiFile psiFile = this.myFixture.addFileToProject(_plus, _unix);
-    VirtualFile _virtualFile = psiFile.getVirtualFile();
-    this.myFixture.configureFromExistingVirtualFile(_virtualFile);
+    final PsiFile psiFile = this.myFixture.addFileToProject(_plus, LineDelimiters.toUnix(code));
+    this.myFixture.configureFromExistingVirtualFile(psiFile.getVirtualFile());
   }
   
   protected LookupElement[] complete(final String text) {
@@ -204,25 +181,15 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void assertLookupStrings(final String... items) {
-    List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(items)));
-    List<String> _lookupElementStrings = this.myFixture.getLookupElementStrings();
-    TestCase.assertEquals(_list, _lookupElementStrings);
+    TestCase.assertEquals(IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(items))), this.myFixture.getLookupElementStrings());
   }
   
   protected void assertHighlights(final String lineDelimitedHighlights) {
     final String expectedHighlights = LineDelimiters.toUnix(lineDelimitedHighlights);
-    Project _project = this.getProject();
-    PsiFile _file = this.myFixture.getFile();
-    VirtualFile _virtualFile = _file.getVirtualFile();
-    EditorHighlighter _createHighlighter = HighlighterFactory.createHighlighter(_project, _virtualFile);
+    EditorHighlighter _createHighlighter = HighlighterFactory.createHighlighter(this.getProject(), this.myFixture.getFile().getVirtualFile());
     final Procedure1<EditorHighlighter> _function = (EditorHighlighter it) -> {
-      Editor _editor = this.myFixture.getEditor();
-      Document _document = _editor.getDocument();
-      String _text = _document.getText();
-      it.setText(_text);
-      Editor _editor_1 = this.myFixture.getEditor();
-      EditorColorsScheme _colorsScheme = _editor_1.getColorsScheme();
-      it.setColorScheme(_colorsScheme);
+      it.setText(this.myFixture.getEditor().getDocument().getText());
+      it.setColorScheme(this.myFixture.getEditor().getColorsScheme());
     };
     final EditorHighlighter highlighter = ObjectExtensions.<EditorHighlighter>operator_doubleArrow(_createHighlighter, _function);
     final HighlighterIterator highlights = highlighter.createIterator(0);
@@ -241,8 +208,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
           int end = highlights.getEnd();
           while (((!highlights.atEnd()) && Objects.equal(highlights.getTokenType(), tokenType))) {
             {
-              int _end = highlights.getEnd();
-              end = _end;
+              end = highlights.getEnd();
               highlights.advance();
             }
           }
@@ -267,8 +233,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected String getXtextStyle(final IElementType tokenType) {
-    int _antlrType = this.tokenTypeProvider.getAntlrType(tokenType);
-    return this.tokenToAttributeIdMapper.getId(_antlrType);
+    return this.tokenToAttributeIdMapper.getId(this.tokenTypeProvider.getAntlrType(tokenType));
   }
   
   protected BaseXtextFile getXtextFile() {
@@ -284,10 +249,8 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void assertTreeStructure(final StructureViewComponent component, final String expected) {
-    JTree _tree = component.getTree();
-    TreeUtil.expandAll(_tree);
-    AbstractTreeStructure _treeStructure = component.getTreeStructure();
-    PlatformTestUtil.assertTreeStructureEquals(_treeStructure, expected);
+    TreeUtil.expandAll(component.getTree());
+    PlatformTestUtil.assertTreeStructureEquals(component.getTreeStructure(), expected);
   }
   
   protected void testStructureView(final String model, final Consumer<StructureViewComponent> consumer) {
@@ -300,19 +263,14 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected CodeStyleSettings getCodeStyleSettings() {
-    Project _project = this.getProject();
-    return CodeStyleSettingsManager.getSettings(_project);
+    return CodeStyleSettingsManager.getSettings(this.getProject());
   }
   
   protected String dumpFormattingModel() {
     String _xblockexpression = null;
     {
-      PsiFile _file = this.getFile();
-      final FormattingModelBuilder formattingModelBuilder = LanguageFormatting.INSTANCE.forContext(_file);
-      PsiFile _file_1 = this.getFile();
-      CodeStyleSettings _codeStyleSettings = this.getCodeStyleSettings();
-      FormattingModel _createModel = formattingModelBuilder.createModel(_file_1, _codeStyleSettings);
-      final Block block = _createModel.getRootBlock();
+      final FormattingModelBuilder formattingModelBuilder = LanguageFormatting.INSTANCE.forContext(this.getFile());
+      final Block block = formattingModelBuilder.createModel(this.getFile(), this.getCodeStyleSettings()).getRootBlock();
       final StringBuilder builder = new StringBuilder();
       FormattingModelDumper.dumpFormattingModel(block, 0, builder);
       _xblockexpression = builder.toString();
@@ -321,46 +279,35 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected Iterable<PsiFile> getGeneratedSources(final PsiFile sourceFile, final Function1<? super VirtualFile, ? extends Boolean> filter) {
-    VirtualFile _virtualFile = sourceFile.getVirtualFile();
-    Iterable<VirtualFile> _generatedSources = this.getGeneratedSources(_virtualFile, filter);
     final Function1<VirtualFile, PsiFile> _function = (VirtualFile it) -> {
-      PsiManager _psiManager = this.getPsiManager();
-      return _psiManager.findFile(it);
+      return this.getPsiManager().findFile(it);
     };
-    Iterable<PsiFile> _map = IterableExtensions.<VirtualFile, PsiFile>map(_generatedSources, _function);
-    return IterableExtensions.<PsiFile>filterNull(_map);
+    return IterableExtensions.<PsiFile>filterNull(IterableExtensions.<VirtualFile, PsiFile>map(this.getGeneratedSources(sourceFile.getVirtualFile(), filter), _function));
   }
   
   protected Iterable<VirtualFile> getGeneratedSources(final VirtualFile sourceFile, final Function1<? super VirtualFile, ? extends Boolean> filter) {
-    Iterable<VirtualFile> _generatedSources = this.getGeneratedSources(sourceFile);
     final Function1<VirtualFile, Boolean> _function = (VirtualFile it) -> {
       return filter.apply(it);
     };
-    return IterableExtensions.<VirtualFile>filter(_generatedSources, _function);
+    return IterableExtensions.<VirtualFile>filter(this.getGeneratedSources(sourceFile), _function);
   }
   
   protected Iterable<VirtualFile> getGeneratedSources(final VirtualFile sourceFile) {
-    XtextAutoBuilderComponent _builder = this.getBuilder();
-    URI _uRI = VirtualFileURIUtil.getURI(sourceFile);
-    Iterable<URI> _generatedSources = _builder.getGeneratedSources(_uRI);
     final Function1<URI, VirtualFile> _function = (URI it) -> {
       return VirtualFileURIUtil.getVirtualFile(it);
     };
-    Iterable<VirtualFile> _map = IterableExtensions.<URI, VirtualFile>map(_generatedSources, _function);
-    return IterableExtensions.<VirtualFile>filterNull(_map);
+    return IterableExtensions.<VirtualFile>filterNull(IterableExtensions.<URI, VirtualFile>map(this.getBuilder().getGeneratedSources(VirtualFileURIUtil.getURI(sourceFile)), _function));
   }
   
   protected ChunkedResourceDescriptions getIndex() {
     final XtextResourceSet rs = new XtextResourceSet();
-    XtextAutoBuilderComponent _builder = this.getBuilder();
-    _builder.installCopyOfResourceDescriptions(rs);
+    this.getBuilder().installCopyOfResourceDescriptions(rs);
     final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(rs);
     return index;
   }
   
   protected XtextAutoBuilderComponent getBuilder() {
-    Project _project = this.getProject();
-    return _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+    return this.getProject().<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
   }
   
   @Pure

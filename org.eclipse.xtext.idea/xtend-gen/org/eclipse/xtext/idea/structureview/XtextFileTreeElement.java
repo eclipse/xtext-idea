@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -53,8 +52,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
   
   @Override
   public String getPresentableText() {
-    BaseXtextFile _element = this.getElement();
-    return _element.getName();
+    return this.getElement().getName();
   }
   
   @Override
@@ -66,8 +64,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
       {
         boolean _equals = Objects.equal(this.children, null);
         if (_equals) {
-          ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
-          this.children = _newArrayList;
+          this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
         }
         _xblockexpression = this.children.add(child);
       }
@@ -91,8 +88,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
         {
           boolean _equals = Objects.equal(this.children, null);
           if (_equals) {
-            ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
-            this.children = _newArrayList;
+            this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
           }
           _xblockexpression_1 = Iterables.<StructureViewTreeElement>addAll(this.children, notNullChildren);
         }

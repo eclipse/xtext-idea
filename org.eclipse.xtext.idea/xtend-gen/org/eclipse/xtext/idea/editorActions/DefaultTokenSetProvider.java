@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.openapi.editor.ex.DocumentEx;
 import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.tree.IElementType;
@@ -35,39 +34,30 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   
   @Inject
   public void setCommenter(final CodeDocumentationAwareCommenter commenter) {
-    IElementType _lineCommentTokenType = commenter.getLineCommentTokenType();
-    TokenSet _create = TokenSet.create(_lineCommentTokenType);
-    this.slCommentTokens = _create;
-    IElementType _blockCommentTokenType = commenter.getBlockCommentTokenType();
-    TokenSet _create_1 = TokenSet.create(_blockCommentTokenType);
-    this.mlCommentTokens = _create_1;
+    this.slCommentTokens = TokenSet.create(commenter.getLineCommentTokenType());
+    this.mlCommentTokens = TokenSet.create(commenter.getBlockCommentTokenType());
   }
   
   @Override
   public TokenSet getTokenSet(final EditorEx editor, final int offset) {
-    IElementType _tokenType = this.getTokenType(editor, offset);
-    return this.getTokenSet(_tokenType);
+    return this.getTokenSet(this.getTokenType(editor, offset));
   }
   
   @Override
   public TokenSet getTokenSet(final IElementType tokenType) {
-    TokenSet _stringLiteralTokens = this.getStringLiteralTokens();
-    boolean _contains = _stringLiteralTokens.contains(tokenType);
+    boolean _contains = this.getStringLiteralTokens().contains(tokenType);
     if (_contains) {
       return this.getStringLiteralTokens();
     }
-    TokenSet _singleLineCommentTokens = this.getSingleLineCommentTokens();
-    boolean _contains_1 = _singleLineCommentTokens.contains(tokenType);
+    boolean _contains_1 = this.getSingleLineCommentTokens().contains(tokenType);
     if (_contains_1) {
       return this.getSingleLineCommentTokens();
     }
-    TokenSet _multiLineCommentTokens = this.getMultiLineCommentTokens();
-    boolean _contains_2 = _multiLineCommentTokens.contains(tokenType);
+    boolean _contains_2 = this.getMultiLineCommentTokens().contains(tokenType);
     if (_contains_2) {
       return this.getMultiLineCommentTokens();
     }
-    TokenSet _commentTokens = this.getCommentTokens();
-    boolean _contains_3 = _commentTokens.contains(tokenType);
+    boolean _contains_3 = this.getCommentTokens().contains(tokenType);
     if (_contains_3) {
       return this.getCommentTokens();
     }
@@ -80,8 +70,7 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
       if (((offset < 0) || (offset > editor.getDocument().getTextLength()))) {
         return null;
       }
-      EditorHighlighter _highlighter = editor.getHighlighter();
-      final HighlighterIterator iterator = _highlighter.createIterator(offset);
+      final HighlighterIterator iterator = editor.getHighlighter().createIterator(offset);
       boolean _atEnd = iterator.atEnd();
       if (_atEnd) {
         return null;
@@ -113,38 +102,30 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   
   @Override
   public boolean isStartOfLine(final EditorEx editor, final int offset) {
-    TokenSet _tokenSet = this.getTokenSet(editor, offset);
-    return this.isStartOfLine(_tokenSet, editor, offset);
+    return this.isStartOfLine(this.getTokenSet(editor, offset), editor, offset);
   }
   
   @Override
   public boolean isStartOfLine(final TokenSet tokenSet, final EditorEx editor, final int offset) {
-    String _beginningOfLine = this.getBeginningOfLine(editor, offset);
-    String _trim = _beginningOfLine.trim();
-    return _trim.isEmpty();
+    return this.getBeginningOfLine(editor, offset).trim().isEmpty();
   }
   
   @Override
   public boolean isEndOfLine(final EditorEx editor, final int offset) {
-    TokenSet _tokenSet = this.getTokenSet(editor, offset);
-    return this.isEndOfLine(_tokenSet, editor, offset);
+    return this.isEndOfLine(this.getTokenSet(editor, offset), editor, offset);
   }
   
   @Override
   public boolean isEndOfLine(final TokenSet tokenSet, final EditorEx editor, final int offset) {
-    String _endOfLine = this.getEndOfLine(editor, offset);
-    String _trim = _endOfLine.trim();
-    return _trim.isEmpty();
+    return this.getEndOfLine(editor, offset).trim().isEmpty();
   }
   
   protected String getBeginningOfLine(final EditorEx editor, final int offset) {
     String _xblockexpression = null;
     {
       final DocumentEx document = editor.getDocument();
-      DocumentEx _document = editor.getDocument();
-      final int lineNumber = _document.getLineNumber(offset);
-      DocumentEx _document_1 = editor.getDocument();
-      final int lineStartOffset = _document_1.getLineStartOffset(lineNumber);
+      final int lineNumber = editor.getDocument().getLineNumber(offset);
+      final int lineStartOffset = editor.getDocument().getLineStartOffset(lineNumber);
       TextRange _textRange = new TextRange(lineStartOffset, offset);
       _xblockexpression = document.getText(_textRange);
     }
@@ -155,10 +136,8 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
     String _xblockexpression = null;
     {
       final DocumentEx document = editor.getDocument();
-      DocumentEx _document = editor.getDocument();
-      final int lineNumber = _document.getLineNumber(offset);
-      DocumentEx _document_1 = editor.getDocument();
-      final int lineEndOffset = _document_1.getLineEndOffset(lineNumber);
+      final int lineNumber = editor.getDocument().getLineNumber(offset);
+      final int lineEndOffset = editor.getDocument().getLineEndOffset(lineNumber);
       TextRange _textRange = new TextRange(offset, lineEndOffset);
       _xblockexpression = document.getText(_textRange);
     }

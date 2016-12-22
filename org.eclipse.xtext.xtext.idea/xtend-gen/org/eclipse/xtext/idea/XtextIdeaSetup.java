@@ -12,8 +12,7 @@ public class XtextIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      XtextStandaloneSetupIdea _xtextStandaloneSetupIdea = new XtextStandaloneSetupIdea();
-      _xblockexpression = _xtextStandaloneSetupIdea.createInjector();
+      _xblockexpression = new XtextStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

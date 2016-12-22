@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
 import org.eclipse.xtext.idea.common.types.StubJvmTypeProvider;
-import org.eclipse.xtext.idea.common.types.StubURIHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -35,8 +34,7 @@ public class StubBasedTypeScope extends AbstractTypeScope {
     InternalEObject _xblockexpression = null;
     {
       IJvmTypeProvider _typeProvider = this.getTypeProvider();
-      StubURIHelper _uriHelper = ((StubJvmTypeProvider) _typeProvider).getUriHelper();
-      final URI uri = _uriHelper.getFullURI(fullClassName);
+      final URI uri = ((StubJvmTypeProvider) _typeProvider).getUriHelper().getFullURI(fullClassName);
       JvmVoid _createJvmVoid = TypesFactory.eINSTANCE.createJvmVoid();
       final InternalEObject proxy = ((InternalEObject) _createJvmVoid);
       proxy.eSetProxyURI(uri);

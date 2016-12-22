@@ -1,10 +1,7 @@
 package org.eclipse.xtext.xtext.idea.tests.resource;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.JavaPsiFacadeEx;
 import com.intellij.psi.search.GlobalSearchScope;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
@@ -26,26 +23,14 @@ public class IdeaClasspathURIResolverTest extends LightToolingTest {
   @Test
   public void testResolveFromSourceFolder() {
     final PsiFile file = this.myFixture.addFileToProject("foo/MyFile.text", "My Contents");
-    Module _module = this.myFixture.getModule();
-    URI _createURI = URI.createURI((ClasspathUriUtil.CLASSPATH_SCHEME + "://foo/MyFile.text"));
-    final URI result = this.resolver.resolve(_module, _createURI);
-    VirtualFile _virtualFile = file.getVirtualFile();
-    URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-    TestCase.assertEquals(_uRI, result);
+    final URI result = this.resolver.resolve(this.myFixture.getModule(), URI.createURI((ClasspathUriUtil.CLASSPATH_SCHEME + "://foo/MyFile.text")));
+    TestCase.assertEquals(VirtualFileURIUtil.getURI(file.getVirtualFile()), result);
   }
   
   @Test
   public void testResolveFromLibrary() {
-    JavaPsiFacadeEx _javaFacade = this.myFixture.getJavaFacade();
-    Module _module = this.myFixture.getModule();
-    GlobalSearchScope _moduleWithLibrariesScope = GlobalSearchScope.moduleWithLibrariesScope(_module);
-    final PsiClass type = _javaFacade.findClass("java.lang.String", _moduleWithLibrariesScope);
-    Module _module_1 = this.myFixture.getModule();
-    URI _createURI = URI.createURI((ClasspathUriUtil.CLASSPATH_SCHEME + "://java/lang/String.class"));
-    final URI result = this.resolver.resolve(_module_1, _createURI);
-    PsiFile _containingFile = type.getContainingFile();
-    VirtualFile _virtualFile = _containingFile.getVirtualFile();
-    URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-    TestCase.assertEquals(_uRI, result);
+    final PsiClass type = this.myFixture.getJavaFacade().findClass("java.lang.String", GlobalSearchScope.moduleWithLibrariesScope(this.myFixture.getModule()));
+    final URI result = this.resolver.resolve(this.myFixture.getModule(), URI.createURI((ClasspathUriUtil.CLASSPATH_SCHEME + "://java/lang/String.class")));
+    TestCase.assertEquals(VirtualFileURIUtil.getURI(type.getContainingFile().getVirtualFile()), result);
   }
 }

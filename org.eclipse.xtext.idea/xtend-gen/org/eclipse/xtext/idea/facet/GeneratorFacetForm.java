@@ -4,7 +4,6 @@ import com.intellij.facet.ui.FacetEditorValidator;
 import com.intellij.facet.ui.FacetValidatorsManager;
 import com.intellij.facet.ui.ValidationResult;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.io.FileUtil;
@@ -96,9 +95,7 @@ public class GeneratorFacetForm {
       TextFieldWithBrowseButton _xblockexpression = null;
       {
         it_1.weightx = 1.0;
-        Project _project = this.module.getProject();
-        TextFieldWithBrowseButton _browseField = this._ideaWidgetFactory.browseField(_project);
-        _xblockexpression = this.directory = _browseField;
+        _xblockexpression = this.directory = this._ideaWidgetFactory.browseField(this.module.getProject());
       }
       return _xblockexpression;
     };
@@ -107,24 +104,19 @@ public class GeneratorFacetForm {
       return this._ideaWidgetFactory.label("Test Directory:");
     };
     final Function1<GridBagConstraints, JComponent> _function_3 = (GridBagConstraints it_1) -> {
-      Project _project = this.module.getProject();
-      TextFieldWithBrowseButton _browseField = this._ideaWidgetFactory.browseField(_project);
-      return this.testDirectory = _browseField;
+      return this.testDirectory = this._ideaWidgetFactory.browseField(this.module.getProject());
     };
     it.row(it, _function_2, _function_3);
     final Function1<GridBagConstraints, JComponent> _function_4 = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Create directory if it doesn\'t exist");
-      return this.createDirectory = _checkBox;
+      return this.createDirectory = this._ideaWidgetFactory.checkBox("Create directory if it doesn\'t exist");
     };
     it.row(it, _function_4);
     final Function1<GridBagConstraints, JComponent> _function_5 = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Overwrite existing files");
-      return this.overwriteFiles = _checkBox;
+      return this.overwriteFiles = this._ideaWidgetFactory.checkBox("Overwrite existing files");
     };
     it.row(it, _function_5);
     final Function1<GridBagConstraints, JComponent> _function_6 = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Delete generated files");
-      return this.deleteGenerated = _checkBox;
+      return this.deleteGenerated = this._ideaWidgetFactory.checkBox("Delete generated files");
     };
     it.row(it, _function_6);
     this.registerDirectoryValidator(this.directory, "The output directory should belong to the module.");
@@ -156,48 +148,33 @@ public class GeneratorFacetForm {
     if (_not) {
       return true;
     }
-    ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
-    VirtualFile[] _contentRoots = _instance.getContentRoots();
-    final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
+    final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(ModuleRootManager.getInstance(this.module).getContentRoots())));
     return ((root != null) && FileUtil.isAncestor(root.getPath(), path, false));
   }
   
   public IdeaWidgetFactory.TwoColumnPanel createGeneralSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
     final Function1<GridBagConstraints, JComponent> _function = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Compiler is activated");
-      return this.activated = _checkBox;
+      return this.activated = this._ideaWidgetFactory.checkBox("Compiler is activated");
     };
     return it.row(it, _function);
   }
   
   public void setData(final GeneratorConfigurationState data) {
-    boolean _isCreateDirectory = data.isCreateDirectory();
-    this.createDirectory.setSelected(_isCreateDirectory);
-    boolean _isOverwriteExisting = data.isOverwriteExisting();
-    this.overwriteFiles.setSelected(_isOverwriteExisting);
-    boolean _isDeleteGenerated = data.isDeleteGenerated();
-    this.deleteGenerated.setSelected(_isDeleteGenerated);
-    boolean _isActivated = data.isActivated();
-    this.activated.setSelected(_isActivated);
-    String _outputDirectory = data.getOutputDirectory();
-    this.directory.setText(_outputDirectory);
-    String _testOutputDirectory = data.getTestOutputDirectory();
-    this.testDirectory.setText(_testOutputDirectory);
+    this.createDirectory.setSelected(data.isCreateDirectory());
+    this.overwriteFiles.setSelected(data.isOverwriteExisting());
+    this.deleteGenerated.setSelected(data.isDeleteGenerated());
+    this.activated.setSelected(data.isActivated());
+    this.directory.setText(data.getOutputDirectory());
+    this.testDirectory.setText(data.getTestOutputDirectory());
   }
   
   public void getData(final GeneratorConfigurationState data) {
-    boolean _isSelected = this.createDirectory.isSelected();
-    data.setCreateDirectory(_isSelected);
-    boolean _isSelected_1 = this.overwriteFiles.isSelected();
-    data.setOverwriteExisting(_isSelected_1);
-    boolean _isSelected_2 = this.deleteGenerated.isSelected();
-    data.setDeleteGenerated(_isSelected_2);
-    boolean _isSelected_3 = this.activated.isSelected();
-    data.setActivated(_isSelected_3);
-    String _text = this.directory.getText();
-    data.setOutputDirectory(_text);
-    String _text_1 = this.testDirectory.getText();
-    data.setTestOutputDirectory(_text_1);
+    data.setCreateDirectory(this.createDirectory.isSelected());
+    data.setOverwriteExisting(this.overwriteFiles.isSelected());
+    data.setDeleteGenerated(this.deleteGenerated.isSelected());
+    data.setActivated(this.activated.isSelected());
+    data.setOutputDirectory(this.directory.getText());
+    data.setTestOutputDirectory(this.testDirectory.getText());
   }
   
   public boolean isModified(final GeneratorConfigurationState data) {
@@ -229,28 +206,24 @@ public class GeneratorFacetForm {
     String _text = this.directory.getText();
     boolean _tripleNotEquals_4 = (_text != null);
     if (_tripleNotEquals_4) {
-      String _text_1 = this.directory.getText();
-      String _outputDirectory = data.getOutputDirectory();
-      boolean _equals = _text_1.equals(_outputDirectory);
+      boolean _equals = this.directory.getText().equals(data.getOutputDirectory());
       _xifexpression = (!_equals);
     } else {
-      String _outputDirectory_1 = data.getOutputDirectory();
-      _xifexpression = (_outputDirectory_1 != null);
+      String _outputDirectory = data.getOutputDirectory();
+      _xifexpression = (_outputDirectory != null);
     }
     if (_xifexpression) {
       return true;
     }
     boolean _xifexpression_1 = false;
-    String _text_2 = this.testDirectory.getText();
-    boolean _tripleNotEquals_5 = (_text_2 != null);
+    String _text_1 = this.testDirectory.getText();
+    boolean _tripleNotEquals_5 = (_text_1 != null);
     if (_tripleNotEquals_5) {
-      String _text_3 = this.testDirectory.getText();
-      String _testOutputDirectory = data.getTestOutputDirectory();
-      boolean _equals_1 = _text_3.equals(_testOutputDirectory);
+      boolean _equals_1 = this.testDirectory.getText().equals(data.getTestOutputDirectory());
       _xifexpression_1 = (!_equals_1);
     } else {
-      String _testOutputDirectory_1 = data.getTestOutputDirectory();
-      _xifexpression_1 = (_testOutputDirectory_1 != null);
+      String _testOutputDirectory = data.getTestOutputDirectory();
+      _xifexpression_1 = (_testOutputDirectory != null);
     }
     if (_xifexpression_1) {
       return true;
@@ -260,8 +233,7 @@ public class GeneratorFacetForm {
   
   public JComponent getRootComponent() {
     if ((this.rootPanel == null)) {
-      JComponent _createComponent = this.createComponent();
-      this.rootPanel = _createComponent;
+      this.rootPanel = this.createComponent();
       this.postCreateComponent();
     }
     return this.rootPanel;

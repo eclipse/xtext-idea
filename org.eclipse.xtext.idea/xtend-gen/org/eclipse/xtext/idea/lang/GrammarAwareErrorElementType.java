@@ -18,8 +18,7 @@ public class GrammarAwareErrorElementType extends IElementType {
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
-    Class<? extends GrammarAwareErrorElementType> _class = this.getClass();
-    String _simpleName = _class.getSimpleName();
+    String _simpleName = this.getClass().getSimpleName();
     _builder.append(_simpleName);
     _builder.append(" [");
     _builder.append(this.elementType);

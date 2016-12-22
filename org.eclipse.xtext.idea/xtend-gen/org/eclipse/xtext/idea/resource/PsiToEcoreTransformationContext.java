@@ -31,12 +31,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.resource.ParserErrorContext;
 import org.eclipse.xtext.idea.resource.ValueConverterErrorContext;
-import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -70,8 +68,7 @@ public class PsiToEcoreTransformationContext {
       PsiToEcoreTransformationContext _xblockexpression = null;
       {
         final PsiToEcoreTransformationContext context = this.psiToEcoreTransformationContextProvider.get();
-        IASTNodeAwareNodeModelBuilder _get = this.astNodeModelBuilderProvider.get();
-        context.nodeModelBuilder = _get;
+        context.nodeModelBuilder = this.astNodeModelBuilderProvider.get();
         context.newRootNode(xtextFile);
         _xblockexpression = context;
       }
@@ -207,8 +204,7 @@ public class PsiToEcoreTransformationContext {
   }
   
   public void newLeafNode(final LeafElement it, final EObject grammarElement, final String ruleName) {
-    ILeafNode _newLeafNode = this.nodeModelBuilder.newLeafNode(it, grammarElement, this.currentNode);
-    this.lastConsumedNode = _newLeafNode;
+    this.lastConsumedNode = this.nodeModelBuilder.newLeafNode(it, grammarElement, this.currentNode);
     this.mergeDatatypeRuleToken(it);
     boolean _ensureModelElementCreated = this.ensureModelElementCreated(grammarElement);
     if (_ensureModelElementCreated) {
@@ -217,8 +213,7 @@ public class PsiToEcoreTransformationContext {
       if (_isBooleanAssignment) {
         this.assign(Boolean.valueOf(true), grammarElement, ruleName);
       } else {
-        String _text = it.getText();
-        this.assign(_text, grammarElement, ruleName);
+        this.assign(it.getText(), grammarElement, ruleName);
       }
     }
   }
@@ -228,13 +223,11 @@ public class PsiToEcoreTransformationContext {
   }
   
   public void newCompositeNode(final CompositeElement it) {
-    ICompositeNode _newCompositeNode = this.nodeModelBuilder.newCompositeNode(it, this.currentNode);
-    this.currentNode = _newCompositeNode;
+    this.currentNode = this.nodeModelBuilder.newCompositeNode(it, this.currentNode);
   }
   
   public boolean ensureModelElementCreatedInParent(final EObject grammarElement) {
-    ICompositeNode _parent = this.currentNode.getParent();
-    return this.ensureModelElementCreated(grammarElement, _parent);
+    return this.ensureModelElementCreated(grammarElement, this.currentNode.getParent());
   }
   
   private boolean ensureModelElementCreated(final EObject grammarElement, final ICompositeNode currentNode) {
@@ -245,10 +238,7 @@ public class PsiToEcoreTransformationContext {
         return false;
       }
       if ((grammarElement instanceof Action)) {
-        TypeRef _type = ((Action)grammarElement).getType();
-        EClassifier _classifier = _type.getClassifier();
-        EObject _create = this.semanticModelBuilder.create(_classifier);
-        this.current = _create;
+        this.current = this.semanticModelBuilder.create(((Action)grammarElement).getType().getClassifier());
         this.associateWithSemanticElement(currentNode);
         return true;
       }
@@ -261,26 +251,20 @@ public class PsiToEcoreTransformationContext {
           if (_notEquals) {
             return true;
           }
-          ParserRule _containingParserRule = GrammarUtil.containingParserRule(grammarElement);
-          TypeRef _type_1 = _containingParserRule.getType();
-          final EClassifier classifier = _type_1.getClassifier();
+          final EClassifier classifier = GrammarUtil.containingParserRule(grammarElement).getType().getClassifier();
           if ((classifier instanceof EClass)) {
             ICompositeNode node = currentNode;
             if (this.createModelInParentNode) {
-              ICompositeNode _parent = node.getParent();
-              node = _parent;
+              node = node.getParent();
               while ((node.getGrammarElement() instanceof Action)) {
-                ICompositeNode _parent_1 = node.getParent();
-                node = _parent_1;
+                node = node.getParent();
               }
             }
             boolean _hasDirectSemanticElement = node.hasDirectSemanticElement();
             if (_hasDirectSemanticElement) {
-              EObject _semanticElement = node.getSemanticElement();
-              this.current = _semanticElement;
+              this.current = node.getSemanticElement();
             } else {
-              EObject _create_1 = this.semanticModelBuilder.create(classifier);
-              this.current = _create_1;
+              this.current = this.semanticModelBuilder.create(classifier);
               this.associateWithSemanticElement(node);
             }
             return true;
@@ -292,11 +276,8 @@ public class PsiToEcoreTransformationContext {
       if (_notEquals_1) {
         return true;
       }
-      ParserRule _containingParserRule_1 = GrammarUtil.containingParserRule(grammarElement);
-      TypeRef _type_2 = _containingParserRule_1.getType();
-      final EClassifier classifier_1 = _type_2.getClassifier();
-      EObject _create_2 = this.semanticModelBuilder.create(classifier_1);
-      this.current = _create_2;
+      final EClassifier classifier_1 = GrammarUtil.containingParserRule(grammarElement).getType().getClassifier();
+      this.current = this.semanticModelBuilder.create(classifier_1);
       ICompositeNode _switchResult = null;
       boolean _matched = false;
       if (this.createModelInParentNode) {
@@ -305,8 +286,7 @@ public class PsiToEcoreTransformationContext {
         {
           ICompositeNode node_1 = currentNode.getParent();
           while ((node_1.getGrammarElement() instanceof Action)) {
-            ICompositeNode _parent_1 = node_1.getParent();
-            node_1 = _parent_1;
+            node_1 = node_1.getParent();
           }
           _xblockexpression_1 = node_1;
         }
@@ -324,8 +304,7 @@ public class PsiToEcoreTransformationContext {
         }
         if (!_matched) {
           if (grammarElement instanceof CrossReference) {
-            AbstractElement _terminal = ((CrossReference)grammarElement).getTerminal();
-            boolean _isTerminalRuleCall_1 = GrammarUtil.isTerminalRuleCall(_terminal);
+            boolean _isTerminalRuleCall_1 = GrammarUtil.isTerminalRuleCall(((CrossReference)grammarElement).getTerminal());
             if (_isTerminalRuleCall_1) {
               _matched=true;
             }
@@ -361,10 +340,8 @@ public class PsiToEcoreTransformationContext {
     if (_notEquals) {
       AntlrDatatypeRuleToken _antlrDatatypeRuleToken = new AntlrDatatypeRuleToken();
       final Procedure1<AntlrDatatypeRuleToken> _function = (AntlrDatatypeRuleToken token) -> {
-        String _text = it.getText();
-        token.setText(_text);
-        int _startOffset = it.getStartOffset();
-        token.setStartOffset(_startOffset);
+        token.setText(it.getText());
+        token.setStartOffset(it.getStartOffset());
       };
       AntlrDatatypeRuleToken _doubleArrow = ObjectExtensions.<AntlrDatatypeRuleToken>operator_doubleArrow(_antlrDatatypeRuleToken, _function);
       this.datatypeRuleToken.merge(_doubleArrow);
@@ -376,9 +353,7 @@ public class PsiToEcoreTransformationContext {
     String _feature = action.getFeature();
     boolean _notEquals = (!Objects.equal(_feature, null));
     if (_notEquals) {
-      String _operator = action.getOperator();
-      String _feature_1 = action.getFeature();
-      _xifexpression = this.assign(this.current, _operator, _feature_1, value, null, this.currentNode);
+      _xifexpression = this.assign(this.current, action.getOperator(), action.getFeature(), value, null, this.currentNode);
     }
     return _xifexpression;
   }
@@ -402,8 +377,8 @@ public class PsiToEcoreTransformationContext {
         _switchResult = this.lastConsumedNode;
       }
       final INode node = _switchResult;
-      Assignment _containingAssignment = GrammarUtil.containingAssignment(grammarElement);
-      this.assign(parent, _containingAssignment, value, ruleName, node);
+      this.assign(parent, 
+        GrammarUtil.containingAssignment(grammarElement), value, ruleName, node);
     }
   }
   
@@ -411,8 +386,7 @@ public class PsiToEcoreTransformationContext {
     boolean _xblockexpression = false;
     {
       this.nodeModelBuilder.associateWithSemanticElement(node, this.current);
-      Map<INode, List<ASTNode>> _reverseNodesMapping = this.getReverseNodesMapping();
-      List<ASTNode> _get = _reverseNodesMapping.get(node);
+      List<ASTNode> _get = this.getReverseNodesMapping().get(node);
       ASTNode _last = null;
       if (_get!=null) {
         _last=IterableExtensions.<ASTNode>last(_get);
@@ -432,9 +406,7 @@ public class PsiToEcoreTransformationContext {
   }
   
   protected ICompositeNode assign(final EObject parent, final Assignment assignment, final Object value, final String ruleName, final INode node) {
-    String _operator = assignment.getOperator();
-    String _feature = assignment.getFeature();
-    return this.assign(parent, _operator, _feature, value, ruleName, node);
+    return this.assign(parent, assignment.getOperator(), assignment.getFeature(), value, ruleName, node);
   }
   
   protected ICompositeNode assign(final EObject parent, final String operator, final String feature, final Object value, final String ruleName, final INode node) {
@@ -466,15 +438,13 @@ public class PsiToEcoreTransformationContext {
     this.hadErrors = true;
     final ISyntaxErrorMessageProvider.IParserErrorContext errorContext = this.createErrorContext(errorElement);
     final SyntaxErrorMessage error = this.syntaxErrorProvider.getSyntaxErrorMessage(errorContext);
-    INode _lastLeafNode = this.getLastLeafNode();
-    this.appendError(_lastLeafNode, error);
+    this.appendError(this.getLastLeafNode(), error);
   }
   
   protected INode getLastLeafNode() {
     INode _xblockexpression = null;
     {
-      BidiTreeIterable<INode> _asTreeIterable = this.currentNode.getAsTreeIterable();
-      BidiTreeIterator<INode> iter = _asTreeIterable.iterator();
+      BidiTreeIterator<INode> iter = this.currentNode.getAsTreeIterable().iterator();
       while (iter.hasPrevious()) {
         {
           INode previous = iter.previous();
@@ -560,9 +530,7 @@ public class PsiToEcoreTransformationContext {
     {
       this.hadErrors = false;
       this.xtextFile = xtextFile;
-      String _text = xtextFile.getText();
-      ICompositeNode _newRootNode = this.nodeModelBuilder.newRootNode(_text);
-      _xblockexpression = this.currentNode = _newRootNode;
+      _xblockexpression = this.currentNode = this.nodeModelBuilder.newRootNode(xtextFile.getText());
     }
     return _xblockexpression;
   }

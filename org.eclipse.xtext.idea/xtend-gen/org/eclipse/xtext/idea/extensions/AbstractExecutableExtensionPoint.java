@@ -51,12 +51,9 @@ public abstract class AbstractExecutableExtensionPoint extends AbstractExtension
         Object _xifexpression = null;
         boolean _equals_1 = Objects.equal(this.factoryClass, null);
         if (_equals_1) {
-          Class<Object> _findClass = this.<Object>findClass(this.implementationClass);
-          _xifexpression = _findClass.newInstance();
+          _xifexpression = this.<Object>findClass(this.implementationClass).newInstance();
         } else {
-          Class<ExtensionFactory> _findClass_1 = this.<ExtensionFactory>findClass(this.factoryClass);
-          ExtensionFactory _newInstance = _findClass_1.newInstance();
-          _xifexpression = _newInstance.createInstance(null, this.implementationClass);
+          _xifexpression = this.<ExtensionFactory>findClass(this.factoryClass).newInstance().createInstance(null, this.implementationClass);
         }
         _xblockexpression = _xifexpression;
       }

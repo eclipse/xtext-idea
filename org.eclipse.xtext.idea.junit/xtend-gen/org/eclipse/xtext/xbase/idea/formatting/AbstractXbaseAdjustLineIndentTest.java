@@ -8,11 +8,7 @@
 package org.eclipse.xtext.xbase.idea.formatting;
 
 import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import junit.framework.TestCase;
@@ -3657,25 +3653,15 @@ public abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest
   }
   
   protected void assertAdjustLineIndent(final CharSequence model, final String expectedAdjustedModel) {
-    String _string = model.toString();
-    final PsiFile file = this.configureByText(_string);
+    final PsiFile file = this.configureByText(model.toString());
     this.myFixture.checkHighlighting();
-    Project _project = this.getProject();
-    Runnable _adjustLineIndent = this.adjustLineIndent(file);
-    WriteCommandAction.runWriteCommandAction(_project, _adjustLineIndent);
-    String _dumpFormattingModel = this.dumpFormattingModel();
-    Editor _editor = this.myFixture.getEditor();
-    Document _document = _editor.getDocument();
-    String _text = _document.getText();
-    TestCase.assertEquals(_dumpFormattingModel, expectedAdjustedModel, _text);
+    WriteCommandAction.runWriteCommandAction(this.getProject(), this.adjustLineIndent(file));
+    TestCase.assertEquals(this.dumpFormattingModel(), expectedAdjustedModel, this.myFixture.getEditor().getDocument().getText());
   }
   
   protected Runnable adjustLineIndent(final PsiFile file) {
     final Runnable _function = () -> {
-      Project _project = this.getProject();
-      CodeStyleManager _instance = CodeStyleManager.getInstance(_project);
-      TextRange _textRange = file.getTextRange();
-      _instance.adjustLineIndent(file, _textRange);
+      CodeStyleManager.getInstance(this.getProject()).adjustLineIndent(file, file.getTextRange());
     };
     return _function;
   }

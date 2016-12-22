@@ -24,15 +24,12 @@ public class IdeaSharedInjectorProvider {
       _elvis = IdeaSharedInjectorProvider.injector;
     } else {
       IdeaSharedModule _ideaSharedModule = new IdeaSharedModule();
-      Injector _createInjector = Guice.createInjector(_ideaSharedModule);
-      Injector _injector = (IdeaSharedInjectorProvider.injector = _createInjector);
-      _elvis = _injector;
+      _elvis = (IdeaSharedInjectorProvider.injector = Guice.createInjector(_ideaSharedModule));
     }
     return _elvis;
   }
   
   public static void injectMembers(final Object o) {
-    Injector _injector = IdeaSharedInjectorProvider.getInjector();
-    _injector.injectMembers(o);
+    IdeaSharedInjectorProvider.getInjector().injectMembers(o);
   }
 }

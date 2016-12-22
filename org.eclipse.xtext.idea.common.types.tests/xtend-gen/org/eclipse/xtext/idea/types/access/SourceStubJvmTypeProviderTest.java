@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.idea.types.access;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.openapi.roots.LanguageLevelProjectExtension;
@@ -33,22 +31,17 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    Project _project = this.myJavaFacade.getProject();
-    LanguageLevelProjectExtension _instance = LanguageLevelProjectExtension.getInstance(_project);
-    _instance.setLanguageLevel(LanguageLevel.JDK_1_5);
-    Module _module = this.getModule();
-    LibraryUtil.addGuavaLibrary(_module);
+    LanguageLevelProjectExtension.getInstance(this.myJavaFacade.getProject()).setLanguageLevel(LanguageLevel.JDK_1_5);
+    LibraryUtil.addGuavaLibrary(this.getModule());
     final File testDataFolder = new File("testdata");
-    LocalFileSystem _instance_1 = LocalFileSystem.getInstance();
-    final VirtualFile testDataSourceRoot = _instance_1.refreshAndFindFileByIoFile(testDataFolder);
+    final VirtualFile testDataSourceRoot = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(testDataFolder);
     PsiTestUtil.addSourceRoot(this.myModule, testDataSourceRoot);
     this.delegate.setUp(this.myModule);
   }
   
   @Override
   protected Sdk getTestProjectJdk() {
-    JavaAwareProjectJdkTableImpl _instanceEx = JavaAwareProjectJdkTableImpl.getInstanceEx();
-    return _instanceEx.getInternalJdk();
+    return JavaAwareProjectJdkTableImpl.getInstanceEx().getInternalJdk();
   }
   
   @Override

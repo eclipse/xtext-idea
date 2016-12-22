@@ -8,11 +8,7 @@
 package org.eclipse.xtext.idea.sdomain.idea.tests.psi;
 
 import com.intellij.codeInsight.TargetElementUtilBase;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.util.IncorrectOperationException;
 import junit.framework.TestCase;
@@ -633,8 +629,7 @@ public class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void testNotPsiNamedEObject(final CharSequence text, final String textAfterCaret) {
-    String _string = text.toString();
-    this.testNotPsiNamedEObject(_string, textAfterCaret);
+    this.testNotPsiNamedEObject(text.toString(), textAfterCaret);
   }
   
   protected void testPsiNamedEObject(final CharSequence text, final String name, final String newName) {
@@ -642,8 +637,7 @@ public class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void testPsiNamedEObject(final CharSequence text, final String textAfterCaret, final String name, final String newName) {
-    String _string = text.toString();
-    this.testPsiNamedEObject(_string, textAfterCaret, name, newName);
+    this.testPsiNamedEObject(text.toString(), textAfterCaret, name, newName);
   }
   
   protected void testNotPsiNamedEObject(final String text, final String textAfterCaret) {
@@ -655,68 +649,41 @@ public class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
   
   protected void testPsiNamedEObject(final String text, final String textAfterCaret, final String name, final String newName) {
     this.myFixture.configureByText("aaa.sdomain", text);
-    Editor _editor = this.myFixture.getEditor();
-    Document _document = _editor.getDocument();
-    String _text = _document.getText();
-    final int offset = _text.indexOf(textAfterCaret);
+    final int offset = this.myFixture.getEditor().getDocument().getText().indexOf(textAfterCaret);
     final PsiNamedEObject element = this.findPsiNamedEObject(offset);
     TestCase.assertNotNull(element);
-    Editor _editor_1 = this.myFixture.getEditor();
-    Document _document_1 = _editor_1.getDocument();
-    String _text_1 = _document_1.getText();
-    final int nameOffset = _text_1.indexOf(name);
+    final int nameOffset = this.myFixture.getEditor().getDocument().getText().indexOf(name);
     this.assertPsiNamedEObject(element, name, nameOffset);
     this.myFixture.renameElement(element, newName);
-    Editor _editor_2 = this.myFixture.getEditor();
-    Document _document_2 = _editor_2.getDocument();
-    String _text_2 = _document_2.getText();
-    final int newNameOffset = _text_2.indexOf(newName);
-    PsiNamedEObject _findPsiNamedEObject = this.findPsiNamedEObject(newNameOffset);
-    this.assertPsiNamedEObject(_findPsiNamedEObject, newName, newNameOffset);
+    final int newNameOffset = this.myFixture.getEditor().getDocument().getText().indexOf(newName);
+    this.assertPsiNamedEObject(this.findPsiNamedEObject(newNameOffset), newName, newNameOffset);
   }
   
   protected void assertPsiNamedEObject(final PsiNamedEObject element, final String name, final int nameOffset) {
     TestCase.assertNotNull(element);
-    int _textOffset = element.getTextOffset();
-    TestCase.assertEquals(nameOffset, _textOffset);
-    String _name = element.getName();
-    TestCase.assertEquals(name, _name);
-    PsiEObjectIdentifier _nameIdentifier = element.getNameIdentifier();
-    this.assertPsiEObjectIdentifier(_nameIdentifier, element, name, nameOffset);
+    TestCase.assertEquals(nameOffset, element.getTextOffset());
+    TestCase.assertEquals(name, element.getName());
+    this.assertPsiEObjectIdentifier(element.getNameIdentifier(), element, name, nameOffset);
   }
   
   protected void assertPsiEObjectIdentifier(final PsiEObjectIdentifier identifier, final PsiNamedEObject element, final String name, final int nameOffset) {
     TestCase.assertNotNull(identifier);
-    boolean _isValid = identifier.isValid();
-    TestCase.assertTrue(_isValid);
-    PsiFile _containingFile = element.getContainingFile();
-    PsiFile _containingFile_1 = identifier.getContainingFile();
-    TestCase.assertEquals(_containingFile, _containingFile_1);
-    PsiElement _parent = identifier.getParent();
-    TestCase.assertEquals(element, _parent);
-    String _text = identifier.getText();
-    TestCase.assertEquals(name, _text);
-    TextRange _textRange = identifier.getTextRange();
-    int _startOffset = _textRange.getStartOffset();
-    TestCase.assertEquals(nameOffset, _startOffset);
+    TestCase.assertTrue(identifier.isValid());
+    TestCase.assertEquals(element.getContainingFile(), identifier.getContainingFile());
+    TestCase.assertEquals(element, identifier.getParent());
+    TestCase.assertEquals(name, identifier.getText());
+    TestCase.assertEquals(nameOffset, identifier.getTextRange().getStartOffset());
     int _length = name.length();
     int _plus = (nameOffset + _length);
-    TextRange _textRange_1 = identifier.getTextRange();
-    int _endOffset = _textRange_1.getEndOffset();
-    TestCase.assertEquals(_plus, _endOffset);
-    int _textOffset = identifier.getTextOffset();
-    TestCase.assertEquals(nameOffset, _textOffset);
-    int _length_1 = name.length();
-    int _textLength = identifier.getTextLength();
-    TestCase.assertEquals(_length_1, _textLength);
+    TestCase.assertEquals(_plus, identifier.getTextRange().getEndOffset());
+    TestCase.assertEquals(nameOffset, identifier.getTextOffset());
+    TestCase.assertEquals(name.length(), identifier.getTextLength());
   }
   
   protected PsiNamedEObject findPsiNamedEObject(final int offset) {
     PsiNamedEObject _xblockexpression = null;
     {
-      TargetElementUtilBase _instance = TargetElementUtilBase.getInstance();
-      Editor _editor = this.myFixture.getEditor();
-      final PsiElement targetElement = _instance.findTargetElement(_editor, TargetElementUtilBase.ELEMENT_NAME_ACCEPTED, offset);
+      final PsiElement targetElement = TargetElementUtilBase.getInstance().findTargetElement(this.myFixture.getEditor(), TargetElementUtilBase.ELEMENT_NAME_ACCEPTED, offset);
       PsiNamedEObject _xifexpression = null;
       if ((targetElement instanceof PsiNamedEObject)) {
         _xifexpression = ((PsiNamedEObject)targetElement);

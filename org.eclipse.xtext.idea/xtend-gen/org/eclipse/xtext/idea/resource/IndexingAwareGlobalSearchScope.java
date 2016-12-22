@@ -33,10 +33,8 @@ public class IndexingAwareGlobalSearchScope extends GlobalSearchScope {
       final IndexingAwareGlobalSearchScope indexingAwareGlobalSearchScope = this.provider.get();
       indexingAwareGlobalSearchScope.resourceSet = resourceSet;
       final Module context = ModuleProvider.findModule(resourceSet);
-      GlobalSearchScope _moduleScope = context.getModuleScope();
-      indexingAwareGlobalSearchScope.filterScope = _moduleScope;
-      GlobalSearchScope _moduleWithDependenciesAndLibrariesScope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(context);
-      indexingAwareGlobalSearchScope.searchScope = _moduleWithDependenciesAndLibrariesScope;
+      indexingAwareGlobalSearchScope.filterScope = context.getModuleScope();
+      indexingAwareGlobalSearchScope.searchScope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(context);
       return indexingAwareGlobalSearchScope;
     }
   }

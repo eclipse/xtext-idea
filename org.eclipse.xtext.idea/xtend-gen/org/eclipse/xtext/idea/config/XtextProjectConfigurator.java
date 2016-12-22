@@ -11,7 +11,6 @@ import com.intellij.facet.Facet;
 import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeId;
 import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.openapi.module.Module;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
@@ -23,22 +22,17 @@ import org.eclipse.xtext.idea.facet.AbstractFacetType;
 @SuppressWarnings("all")
 public class XtextProjectConfigurator {
   public AbstractFacetConfiguration createOrGetFacetConf(final Module module, final String id) {
-    FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
-    final FacetType facetType = _instance.findFacetType(id);
+    final FacetType facetType = FacetTypeRegistry.getInstance().findFacetType(id);
     if ((!(facetType instanceof AbstractFacetType<?>))) {
       return null;
     }
     final FacetManager mnr = FacetManager.getInstance(module);
     Facet _elvis = null;
-    FacetTypeId _id = facetType.getId();
-    String _defaultFacetName = facetType.getDefaultFacetName();
-    Facet _findFacet = mnr.<Facet>findFacet(_id, _defaultFacetName);
+    Facet _findFacet = mnr.<Facet>findFacet(facetType.getId(), facetType.getDefaultFacetName());
     if (_findFacet != null) {
       _elvis = _findFacet;
     } else {
-      FacetManager _instance_1 = FacetManager.getInstance(module);
-      String _defaultFacetName_1 = facetType.getDefaultFacetName();
-      Facet _addFacet = _instance_1.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName_1, null);
+      Facet _addFacet = FacetManager.getInstance(module).<Facet, FacetConfiguration>addFacet(facetType, facetType.getDefaultFacetName(), null);
       _elvis = _addFacet;
     }
     Facet facet = _elvis;

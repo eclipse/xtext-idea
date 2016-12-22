@@ -24,29 +24,21 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class RootModelExtensions {
   public static Iterable<SourceFolder> getSourceFolders(final Module module) {
-    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-    ContentEntry[] _contentEntries = _instance.getContentEntries();
     final Function1<ContentEntry, List<SourceFolder>> _function = (ContentEntry it) -> {
-      SourceFolder[] _sourceFolders = it.getSourceFolders();
-      return IterableExtensions.<SourceFolder>toList(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)));
+      return IterableExtensions.<SourceFolder>toList(((Iterable<SourceFolder>)Conversions.doWrapArray(it.getSourceFolders())));
     };
-    List<List<SourceFolder>> _map = ListExtensions.<ContentEntry, List<SourceFolder>>map(((List<ContentEntry>)Conversions.doWrapArray(_contentEntries)), _function);
-    return Iterables.<SourceFolder>concat(_map);
+    return Iterables.<SourceFolder>concat(ListExtensions.<ContentEntry, List<SourceFolder>>map(((List<ContentEntry>)Conversions.doWrapArray(ModuleRootManager.getInstance(module).getContentEntries())), _function));
   }
   
   public static Iterable<SourceFolder> getExistingSourceFolders(final Module module) {
-    Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(module);
     final Function1<SourceFolder, Boolean> _function = (SourceFolder it) -> {
       VirtualFile _file = it.getFile();
       return Boolean.valueOf((!Objects.equal(_file, null)));
     };
-    return IterableExtensions.<SourceFolder>filter(_sourceFolders, _function);
+    return IterableExtensions.<SourceFolder>filter(RootModelExtensions.getSourceFolders(module), _function);
   }
   
   public static String getRelativePath(final SourceFolder sourceFolder) {
-    VirtualFile _file = sourceFolder.getFile();
-    ContentEntry _contentEntry = sourceFolder.getContentEntry();
-    VirtualFile _file_1 = _contentEntry.getFile();
-    return VfsUtil.getRelativePath(_file, _file_1);
+    return VfsUtil.getRelativePath(sourceFolder.getFile(), sourceFolder.getContentEntry().getFile());
   }
 }

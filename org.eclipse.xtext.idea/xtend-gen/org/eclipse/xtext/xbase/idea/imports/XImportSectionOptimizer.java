@@ -11,16 +11,13 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.intellij.lang.ImportOptimizer;
-import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import java.util.List;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.ImportOrganizer;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -41,22 +38,15 @@ public class XImportSectionOptimizer implements ImportOptimizer {
   @Override
   public Runnable processFile(final PsiFile file) {
     if ((file instanceof BaseXtextFile)) {
-      XtextResource _resource = ((BaseXtextFile)file).getResource();
-      List<ReplaceRegion> _organizedImportChanges = this.importOrganizer.getOrganizedImportChanges(_resource);
       final Function1<ReplaceRegion, Integer> _function = (ReplaceRegion it) -> {
         int _offset = it.getOffset();
         return Integer.valueOf((_offset * (-1)));
       };
-      final List<ReplaceRegion> changes = IterableExtensions.<ReplaceRegion, Integer>sortBy(_organizedImportChanges, _function);
+      final List<ReplaceRegion> changes = IterableExtensions.<ReplaceRegion, Integer>sortBy(this.importOrganizer.getOrganizedImportChanges(((BaseXtextFile)file).getResource()), _function);
       final Runnable _function_1 = () -> {
-        Project _project = ((BaseXtextFile)file).getProject();
-        PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
-        final Document document = _instance.getDocument(file);
+        final Document document = PsiDocumentManager.getInstance(((BaseXtextFile)file).getProject()).getDocument(file);
         for (final ReplaceRegion change : changes) {
-          int _offset = change.getOffset();
-          int _endOffset = change.getEndOffset();
-          String _text = change.getText();
-          document.replaceString(_offset, _endOffset, _text);
+          document.replaceString(change.getOffset(), change.getEndOffset(), change.getText());
         }
       };
       return _function_1;
@@ -67,8 +57,7 @@ public class XImportSectionOptimizer implements ImportOptimizer {
   
   @Override
   public boolean supports(final PsiFile file) {
-    Language _language = file.getLanguage();
-    String _iD = _language.getID();
+    String _iD = file.getLanguage().getID();
     return Objects.equal(this.languageId, _iD);
   }
 }

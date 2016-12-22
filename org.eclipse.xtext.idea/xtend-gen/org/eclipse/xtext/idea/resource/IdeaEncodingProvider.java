@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -22,12 +21,10 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 public class IdeaEncodingProvider implements IEncodingProvider {
   @Override
   public String getEncoding(final URI uri) {
-    Application _application = ApplicationManager.getApplication();
-    final VirtualFileManager fileManager = _application.<VirtualFileManager>getComponent(VirtualFileManager.class);
+    final VirtualFileManager fileManager = ApplicationManager.getApplication().<VirtualFileManager>getComponent(VirtualFileManager.class);
     boolean _equals = Objects.equal(fileManager, null);
     if (_equals) {
-      IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
-      return _runtime.getEncoding(uri);
+      return new IEncodingProvider.Runtime().getEncoding(uri);
     }
     String _elvis = null;
     Charset _charset = this.getCharset(uri);
@@ -53,8 +50,7 @@ public class IdeaEncodingProvider implements IEncodingProvider {
     if (_charset != null) {
       _elvis = _charset;
     } else {
-      EncodingRegistry _instance = EncodingRegistry.getInstance();
-      Charset _defaultCharset = _instance.getDefaultCharset();
+      Charset _defaultCharset = EncodingRegistry.getInstance().getDefaultCharset();
       _elvis = _defaultCharset;
     }
     return _elvis;
@@ -75,8 +71,7 @@ public class IdeaEncodingProvider implements IEncodingProvider {
       if (_equals) {
         return null;
       }
-      URI _trimSegments = uri.trimSegments(1);
-      _xblockexpression = this.findVirtualFile(_trimSegments);
+      _xblockexpression = this.findVirtualFile(uri.trimSegments(1));
     }
     return _xblockexpression;
   }

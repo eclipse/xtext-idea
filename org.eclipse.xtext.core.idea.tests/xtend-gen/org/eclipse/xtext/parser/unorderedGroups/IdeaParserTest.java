@@ -28,8 +28,7 @@ public class IdeaParserTest extends AbstractLanguageParsingTestCase {
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = SimpleUnorderedGroupsTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(SimpleUnorderedGroupsTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

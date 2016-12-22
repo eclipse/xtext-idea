@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.extensions;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.Extensions;
 import java.util.List;
@@ -17,9 +16,7 @@ import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.idea.extensions.EPackageEP;
-import org.eclipse.xtext.idea.extensions.ResourceFactoryDescriptor;
 import org.eclipse.xtext.idea.extensions.ResourceFactoryEP;
-import org.eclipse.xtext.idea.extensions.ResourceServiceProviderDescriptor;
 import org.eclipse.xtext.idea.extensions.ResourceServiceProviderEP;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -31,54 +28,37 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 public class EcoreGlobalRegistries {
   public EcoreGlobalRegistries() {
     final EPackage.Registry packageRegistry = EPackage.Registry.INSTANCE;
-    EPackageEP[] _extensions = Extensions.<EPackageEP>getExtensions(EPackageEP.EP_NAME);
     final Consumer<EPackageEP> _function = (EPackageEP it) -> {
-      String _nsURI = it.getNsURI();
-      EPackageEP _createDescriptor = it.createDescriptor();
-      packageRegistry.put(_nsURI, _createDescriptor);
+      packageRegistry.put(it.getNsURI(), it.createDescriptor());
     };
-    ((List<EPackageEP>)Conversions.doWrapArray(_extensions)).forEach(_function);
+    ((List<EPackageEP>)Conversions.doWrapArray(Extensions.<EPackageEP>getExtensions(EPackageEP.EP_NAME))).forEach(_function);
     final Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-    ResourceFactoryEP[] _extensions_1 = Extensions.<ResourceFactoryEP>getExtensions(ResourceFactoryEP.EP_NAME);
     final Consumer<ResourceFactoryEP> _function_1 = (ResourceFactoryEP it) -> {
-      String _type = it.getType();
-      ResourceFactoryDescriptor _createDescriptor = it.createDescriptor();
-      extensionToFactoryMap.put(_type, _createDescriptor);
+      extensionToFactoryMap.put(it.getType(), it.createDescriptor());
     };
-    ((List<ResourceFactoryEP>)Conversions.doWrapArray(_extensions_1)).forEach(_function_1);
+    ((List<ResourceFactoryEP>)Conversions.doWrapArray(Extensions.<ResourceFactoryEP>getExtensions(ResourceFactoryEP.EP_NAME))).forEach(_function_1);
     final IResourceServiceProvider.Registry registry = IResourceServiceProvider.Registry.INSTANCE;
-    ResourceServiceProviderEP[] _extensions_2 = Extensions.<ResourceServiceProviderEP>getExtensions(ResourceServiceProviderEP.EP_NAME);
     final Consumer<ResourceServiceProviderEP> _function_2 = (ResourceServiceProviderEP it) -> {
       String _uriExtension = it.getUriExtension();
       boolean _notEquals = (!Objects.equal(_uriExtension, null));
       if (_notEquals) {
-        Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
-        String _uriExtension_1 = it.getUriExtension();
-        ResourceServiceProviderDescriptor _createDescriptor = it.createDescriptor();
-        _extensionToFactoryMap.put(_uriExtension_1, _createDescriptor);
+        registry.getExtensionToFactoryMap().put(it.getUriExtension(), it.createDescriptor());
       }
       String _protocolName = it.getProtocolName();
       boolean _notEquals_1 = (!Objects.equal(_protocolName, null));
       if (_notEquals_1) {
-        Map<String, Object> _protocolToFactoryMap = registry.getProtocolToFactoryMap();
-        String _protocolName_1 = it.getProtocolName();
-        ResourceServiceProviderDescriptor _createDescriptor_1 = it.createDescriptor();
-        _protocolToFactoryMap.put(_protocolName_1, _createDescriptor_1);
+        registry.getProtocolToFactoryMap().put(it.getProtocolName(), it.createDescriptor());
       }
       String _contentTypeIdentifier = it.getContentTypeIdentifier();
       boolean _notEquals_2 = (!Objects.equal(_contentTypeIdentifier, null));
       if (_notEquals_2) {
-        Map<String, Object> _contentTypeToFactoryMap = registry.getContentTypeToFactoryMap();
-        String _contentTypeIdentifier_1 = it.getContentTypeIdentifier();
-        ResourceServiceProviderDescriptor _createDescriptor_2 = it.createDescriptor();
-        _contentTypeToFactoryMap.put(_contentTypeIdentifier_1, _createDescriptor_2);
+        registry.getContentTypeToFactoryMap().put(it.getContentTypeIdentifier(), it.createDescriptor());
       }
     };
-    ((List<ResourceServiceProviderEP>)Conversions.doWrapArray(_extensions_2)).forEach(_function_2);
+    ((List<ResourceServiceProviderEP>)Conversions.doWrapArray(Extensions.<ResourceServiceProviderEP>getExtensions(ResourceServiceProviderEP.EP_NAME))).forEach(_function_2);
   }
   
   public static EcoreGlobalRegistries ensureInitialized() {
-    Application _application = ApplicationManager.getApplication();
-    return _application.<EcoreGlobalRegistries>getComponent(EcoreGlobalRegistries.class);
+    return ApplicationManager.getApplication().<EcoreGlobalRegistries>getComponent(EcoreGlobalRegistries.class);
   }
 }

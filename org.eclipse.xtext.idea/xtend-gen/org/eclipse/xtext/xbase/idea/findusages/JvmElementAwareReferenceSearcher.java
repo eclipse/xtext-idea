@@ -10,11 +10,8 @@ package org.eclipse.xtext.xbase.idea.findusages;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.SearchRequestCollector;
-import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import java.util.Arrays;
@@ -55,12 +52,10 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
     if (_isEmpty) {
       return;
     }
-    Language _language = element.getLanguage();
-    final boolean caseSensitive = _language.isCaseSensitive();
+    final boolean caseSensitive = element.getLanguage().isCaseSensitive();
     for (final String word : words) {
-      SearchRequestCollector _optimizer = queryParameters.getOptimizer();
-      SearchScope _effectiveSearchScope = queryParameters.getEffectiveSearchScope();
-      _optimizer.searchWord(word, _effectiveSearchScope, caseSensitive, element);
+      queryParameters.getOptimizer().searchWord(word, 
+        queryParameters.getEffectiveSearchScope(), caseSensitive, element);
     }
   }
   
@@ -73,8 +68,7 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
       };
       final Procedure1<String> acceptor = _function;
       if ((element instanceof PsiEObject)) {
-        EObject _eObject = ((PsiEObject)element).getEObject();
-        Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(_eObject);
+        Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(((PsiEObject)element).getEObject());
         for (final EObject jvmElement : _jvmElements) {
           this.collectWords(jvmElement, acceptor);
         }
@@ -98,29 +92,22 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
   }
   
   protected void _collectWords(final JvmIdentifiableElement jvmElement, final Procedure1<? super String> acceptor) {
-    String _simpleName = jvmElement.getSimpleName();
-    acceptor.apply(_simpleName);
+    acceptor.apply(jvmElement.getSimpleName());
   }
   
   protected void _collectWords(final JvmFeature jvmElement, final Procedure1<? super String> acceptor) {
-    String _simpleName = jvmElement.getSimpleName();
-    acceptor.apply(_simpleName);
-    String _simpleName_1 = jvmElement.getSimpleName();
-    QualifiedName _create = QualifiedName.create(_simpleName_1);
-    final QualifiedName simpleOperator = this._operatorMapping.getOperator(_create);
+    acceptor.apply(jvmElement.getSimpleName());
+    final QualifiedName simpleOperator = this._operatorMapping.getOperator(QualifiedName.create(jvmElement.getSimpleName()));
     boolean _notEquals = (!Objects.equal(simpleOperator, null));
     if (_notEquals) {
-      String _string = simpleOperator.toString();
-      acceptor.apply(_string);
+      acceptor.apply(simpleOperator.toString());
       final QualifiedName compoundOperator = this._operatorMapping.getCompoundOperator(simpleOperator);
       boolean _notEquals_1 = (!Objects.equal(compoundOperator, null));
       if (_notEquals_1) {
-        String _string_1 = compoundOperator.toString();
-        acceptor.apply(_string_1);
+        acceptor.apply(compoundOperator.toString());
       }
     } else {
-      String _propertyName = PropertyUtil.getPropertyName(jvmElement);
-      acceptor.apply(_propertyName);
+      acceptor.apply(PropertyUtil.getPropertyName(jvmElement));
     }
   }
   

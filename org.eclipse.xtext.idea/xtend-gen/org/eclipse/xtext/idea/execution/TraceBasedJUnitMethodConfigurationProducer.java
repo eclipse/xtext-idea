@@ -35,8 +35,7 @@ public class TraceBasedJUnitMethodConfigurationProducer extends TestMethodConfig
   public boolean setupConfigurationFromContext(final JUnitConfiguration configuration, final ConfigurationContext context, final Ref<PsiElement> sourceElement) {
     final PsiElement javaElement = this._configurationProducerExtensions.tracedJavaElement(context);
     if ((javaElement != null)) {
-      ConfigurationContext _prepareContextFor = this._configurationProducerExtensions.prepareContextFor(context, javaElement);
-      return super.setupConfigurationFromContext(configuration, _prepareContextFor, sourceElement);
+      return super.setupConfigurationFromContext(configuration, this._configurationProducerExtensions.prepareContextFor(context, javaElement), sourceElement);
     }
     return false;
   }
@@ -45,8 +44,7 @@ public class TraceBasedJUnitMethodConfigurationProducer extends TestMethodConfig
   public boolean isConfigurationFromContext(final JUnitConfiguration junitConf, final ConfigurationContext context) {
     final PsiElement javaElement = this._configurationProducerExtensions.tracedJavaElement(context);
     if ((javaElement != null)) {
-      ConfigurationContext _prepareContextFor = this._configurationProducerExtensions.prepareContextFor(context, javaElement);
-      return super.isConfigurationFromContext(junitConf, _prepareContextFor);
+      return super.isConfigurationFromContext(junitConf, this._configurationProducerExtensions.prepareContextFor(context, javaElement));
     }
     return false;
   }

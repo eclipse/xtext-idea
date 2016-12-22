@@ -28,8 +28,7 @@ public class IdeaBacktrackingBug325745ParserTest extends AbstractLanguageParsing
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = SimpleBacktrackingBug325745TestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(SimpleBacktrackingBug325745TestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

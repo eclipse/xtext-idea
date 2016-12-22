@@ -12,9 +12,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.vfs.VirtualFile;
 import java.io.IOException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,7 +24,6 @@ import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -70,8 +67,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
     {
       this.createFile(null, code);
       if (validate) {
-        XtextResource _actualResource = this.getActualResource();
-        this.validationHelper.assertNoErrors(_actualResource);
+        this.validationHelper.assertNoErrors(this.getActualResource());
       }
       _xblockexpression = this.getActualResource();
     }
@@ -88,9 +84,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
     T _xblockexpression = null;
     {
       this.createFile(path, code);
-      XtextResource _actualResource = this.getActualResource();
-      EList<EObject> _contents = _actualResource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
+      EObject _head = IterableExtensions.<EObject>head(this.getActualResource().getContents());
       final T model = ((T) _head);
       if (validate) {
         this.validationHelper.assertNoErrors(model);
@@ -112,21 +106,15 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   }
   
   protected XtextResource getActualResource() {
-    BaseXtextFile _xtextFile = this.getXtextFile();
-    return _xtextFile.getResource();
+    return this.getXtextFile().getResource();
   }
   
   protected XtextResource createExpectedResource() {
     XtextResourceSet resourceSet = this.resourceSetProvider.get(this.myModule);
-    BaseXtextFile _xtextFile = this.getXtextFile();
-    VirtualFile _virtualFile = _xtextFile.getVirtualFile();
-    String _url = _virtualFile.getUrl();
-    URI _createURI = URI.createURI(_url);
-    Resource _createResource = resourceSet.createResource(_createURI);
+    Resource _createResource = resourceSet.createResource(URI.createURI(this.getXtextFile().getVirtualFile().getUrl()));
     XtextResource resource = ((XtextResource) _createResource);
     try {
-      BaseXtextFile _xtextFile_1 = this.getXtextFile();
-      String _text = _xtextFile_1.getText();
+      String _text = this.getXtextFile().getText();
       LazyStringInputStream _lazyStringInputStream = new LazyStringInputStream(_text);
       resource.load(_lazyStringInputStream, null);
     } catch (final Throwable _t) {

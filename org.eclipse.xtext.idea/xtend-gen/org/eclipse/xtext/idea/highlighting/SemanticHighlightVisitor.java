@@ -11,12 +11,10 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -62,9 +60,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   @Override
   public boolean analyze(final PsiFile file, final boolean updateWholeFile, final HighlightInfoHolder holder, final Runnable action) {
     final VirtualFile virtualFile = XtextPsiUtils.findVirtualFile(file);
-    Project _project = file.getProject();
-    FileEditorManager _instance = FileEditorManager.getInstance(_project);
-    boolean _isFileOpen = _instance.isFileOpen(virtualFile);
+    boolean _isFileOpen = FileEditorManager.getInstance(file.getProject()).isFileOpen(virtualFile);
     boolean _not = (!_isFileOpen);
     if (_not) {
       return true;
@@ -74,11 +70,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
         ProgressIndicatorProvider.checkCanceled();
         if ((length > 0)) {
           final Consumer<String> _function_1 = (String it) -> {
-            HighlightInfoType _highlightInfoType = this._ideaHighlightingAttributesProvider.getHighlightInfoType(it);
-            HighlightInfo.Builder _newHighlightInfo = HighlightInfo.newHighlightInfo(_highlightInfoType);
-            HighlightInfo.Builder _range = _newHighlightInfo.range(offset, (offset + length));
-            HighlightInfo.Builder _description = _range.description(it);
-            final HighlightInfo info = _description.create();
+            final HighlightInfo info = HighlightInfo.newHighlightInfo(this._ideaHighlightingAttributesProvider.getHighlightInfoType(it)).range(offset, (offset + length)).description(it).create();
             holder.add(info);
           };
           ((List<String>)Conversions.doWrapArray(styles)).forEach(_function_1);
@@ -110,8 +102,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
     try {
       if ((element instanceof BaseXtextFile)) {
         final XtextResource resource = ((BaseXtextFile)element).getResource();
-        long _modificationStamp = resource.getModificationStamp();
-        this.lastRun = _modificationStamp;
+        this.lastRun = resource.getModificationStamp();
         CancelProgressIndicator _cancelProgressIndicator = new CancelProgressIndicator();
         this.highlightCalculator.provideHighlightingFor(resource, this.acceptor, _cancelProgressIndicator);
       }
@@ -128,8 +119,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   @Override
   public HighlightVisitor clone() {
     try {
-      Class<? extends SemanticHighlightVisitor> _class = this.getClass();
-      SemanticHighlightVisitor _newInstance = _class.newInstance();
+      SemanticHighlightVisitor _newInstance = this.getClass().newInstance();
       final Procedure1<SemanticHighlightVisitor> _function = (SemanticHighlightVisitor it) -> {
         it.acceptor = this.acceptor;
       };

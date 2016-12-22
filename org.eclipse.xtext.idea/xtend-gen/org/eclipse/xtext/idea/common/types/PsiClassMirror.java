@@ -7,12 +7,9 @@
  */
 package org.eclipse.xtext.idea.common.types;
 
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiClass;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
@@ -31,18 +28,15 @@ public class PsiClassMirror extends AbstractClassMirror {
   
   @Override
   protected String getTypeName() {
-    Application _application = ApplicationManager.getApplication();
     final Computable<String> _function = () -> {
       return this.psiClass.getQualifiedName();
     };
-    return _application.<String>runReadAction(_function);
+    return ApplicationManager.getApplication().<String>runReadAction(_function);
   }
   
   @Override
   public void initialize(final TypeResource typeResource) {
-    EList<EObject> _contents = typeResource.getContents();
-    JvmDeclaredType _createType = this.typeFactory.createType(this.psiClass);
-    _contents.add(_createType);
+    typeResource.getContents().add(this.typeFactory.createType(this.psiClass));
   }
   
   @Override

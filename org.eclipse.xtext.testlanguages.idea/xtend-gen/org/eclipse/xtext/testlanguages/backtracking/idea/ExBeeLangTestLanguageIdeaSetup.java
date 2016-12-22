@@ -12,8 +12,7 @@ public class ExBeeLangTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ExBeeLangTestLanguageStandaloneSetupIdea _exBeeLangTestLanguageStandaloneSetupIdea = new ExBeeLangTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _exBeeLangTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ExBeeLangTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

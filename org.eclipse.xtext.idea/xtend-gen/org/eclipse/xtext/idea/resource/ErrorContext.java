@@ -23,8 +23,7 @@ public class ErrorContext {
     ICompositeNode _currentNode = this.getCurrentNode();
     boolean _notEquals = (!Objects.equal(_currentNode, null));
     if (_notEquals) {
-      ICompositeNode _currentNode_1 = this.getCurrentNode();
-      _xifexpression = _currentNode_1.getSemanticElement();
+      _xifexpression = this.getCurrentNode().getSemanticElement();
     }
     return _xifexpression;
   }

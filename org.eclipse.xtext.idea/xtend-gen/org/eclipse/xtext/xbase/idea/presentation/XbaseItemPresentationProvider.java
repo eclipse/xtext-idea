@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import java.util.Arrays;
-import java.util.List;
 import javax.swing.Icon;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.idea.presentation.DefaultItemPresentationProvider;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -61,18 +59,15 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   }
   
   protected Icon _image(final IResolvedConstructor constructor) {
-    JvmConstructor _declaration = constructor.getDeclaration();
-    return this.image(_declaration);
+    return this.image(constructor.getDeclaration());
   }
   
   protected Icon _image(final IResolvedField field) {
-    JvmField _declaration = field.getDeclaration();
-    return this.image(_declaration);
+    return this.image(field.getDeclaration());
   }
   
   protected Icon _image(final IResolvedOperation operation) {
-    JvmOperation _declaration = operation.getDeclaration();
-    return this.image(_declaration);
+    return this.image(operation.getDeclaration());
   }
   
   protected String _text(final JvmGenericType genericType) {
@@ -80,36 +75,29 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   }
   
   protected String _text(final JvmOperation element) {
-    String _simpleName = element.getSimpleName();
-    return this.signature(_simpleName, element);
+    return this.signature(element.getSimpleName(), element);
   }
   
   protected String _text(final IResolvedOperation element) {
     String _xblockexpression = null;
     {
-      LightweightTypeReference _resolvedReturnType = element.getResolvedReturnType();
-      final String returnTypeString = _resolvedReturnType.getSimpleName();
+      final String returnTypeString = element.getResolvedReturnType().getSimpleName();
       String decoratedPart = (" : " + returnTypeString);
-      List<JvmTypeParameter> _typeParameters = element.getTypeParameters();
-      boolean _isEmpty = _typeParameters.isEmpty();
+      boolean _isEmpty = element.getTypeParameters().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        List<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
-        String _string = this.uiStrings.toString(_typeParameters_1);
+        String _string = this.uiStrings.toString(element.getTypeParameters());
         String _plus = (" <" + _string);
         String _plus_1 = (_plus + "> : ");
         String _plus_2 = (_plus_1 + returnTypeString);
         decoratedPart = _plus_2;
       }
-      JvmOperation _declaration = element.getDeclaration();
-      String _simpleName = _declaration.getSimpleName();
+      String _simpleName = element.getDeclaration().getSimpleName();
       String _plus_3 = (_simpleName + "(");
-      List<LightweightTypeReference> _resolvedParameterTypes = element.getResolvedParameterTypes();
       final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
         return it.getHumanReadableName();
       };
-      List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
-      String _join = IterableExtensions.join(_map, ", ");
+      String _join = IterableExtensions.join(ListExtensions.<LightweightTypeReference, String>map(element.getResolvedParameterTypes(), _function), ", ");
       String _plus_4 = (_plus_3 + _join);
       String _plus_5 = (_plus_4 + ")");
       _xblockexpression = (_plus_5 + decoratedPart);
@@ -123,12 +111,10 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   }
   
   protected String _text(final IResolvedConstructor constructor) {
-    List<LightweightTypeReference> _resolvedParameterTypes = constructor.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
       return it.getHumanReadableName();
     };
-    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
-    String _join = IterableExtensions.join(_map, ", ");
+    String _join = IterableExtensions.join(ListExtensions.<LightweightTypeReference, String>map(constructor.getResolvedParameterTypes(), _function), ", ");
     String _plus = ("new(" + _join);
     return (_plus + ")");
   }
@@ -136,16 +122,14 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   protected String _text(final IResolvedField field) {
     String _simpleSignature = field.getSimpleSignature();
     String _plus = (_simpleSignature + " : ");
-    LightweightTypeReference _resolvedType = field.getResolvedType();
-    String _humanReadableName = _resolvedType.getHumanReadableName();
+    String _humanReadableName = field.getResolvedType().getHumanReadableName();
     return (_plus + _humanReadableName);
   }
   
   protected String _text(final JvmField field) {
     String _simpleName = field.getSimpleName();
     String _plus = (_simpleName + " : ");
-    JvmTypeReference _type = field.getType();
-    String _simpleName_1 = _type.getSimpleName();
+    String _simpleName_1 = field.getType().getSimpleName();
     return (_plus + _simpleName_1);
   }
   
@@ -235,8 +219,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
       if (_equals) {
         _xifexpression_2 = "void";
       } else {
-        LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(returnType);
-        _xifexpression_2 = _lightweightTypeReference.getHumanReadableName();
+        _xifexpression_2 = owner.toLightweightTypeReference(returnType).getHumanReadableName();
       }
       final String returnTypeString = _xifexpression_2;
       String decoratedPart = (" : " + returnTypeString);

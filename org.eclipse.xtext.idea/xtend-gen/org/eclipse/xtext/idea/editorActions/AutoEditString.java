@@ -9,8 +9,6 @@ package org.eclipse.xtext.idea.editorActions;
 
 import com.google.common.base.Objects;
 import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.editor.ex.DocumentEx;
-import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
@@ -41,16 +39,13 @@ public class AutoEditString extends AbstractAutoEditBlock {
     final int newCaretOffset = context.type(c);
     boolean _shouldInsertClosingQuote = this.shouldInsertClosingQuote(newCaretOffset, context);
     if (_shouldInsertClosingQuote) {
-      DocumentEx _document = context.getDocument();
-      String _closingTerminal = this.getClosingTerminal();
-      _document.insertString(newCaretOffset, _closingTerminal);
+      context.getDocument().insertString(newCaretOffset, this.getClosingTerminal());
     }
   }
   
   @Override
   public boolean close(final char c, @Extension final AutoEditContext context) {
-    int _caretOffset = context.getCaretOffset();
-    final AutoEditStringRegion stringRegion = this.findRegion(_caretOffset, context);
+    final AutoEditStringRegion stringRegion = this.findRegion(context.getCaretOffset(), context);
     boolean _equals = Objects.equal(stringRegion, null);
     if (_equals) {
       return false;
@@ -60,12 +55,9 @@ public class AutoEditString extends AbstractAutoEditBlock {
     if (_equals_1) {
       context.type(c);
     } else {
-      TextRegion _closingTerminal_1 = stringRegion.getClosingTerminal();
-      int _caretOffset_1 = context.getCaretOffset();
-      boolean _contains = _closingTerminal_1.contains(_caretOffset_1);
+      boolean _contains = stringRegion.getClosingTerminal().contains(context.getCaretOffset());
       if (_contains) {
-        EditorEx _editor = context.getEditor();
-        EditorModificationUtil.moveCaretRelatively(_editor, 1);
+        EditorModificationUtil.moveCaretRelatively(context.getEditor(), 1);
       } else {
         context.type(c);
       }
@@ -79,18 +71,17 @@ public class AutoEditString extends AbstractAutoEditBlock {
     if (_equals) {
       return null;
     }
-    int _offset = openingTerminal.getOffset();
-    final TextRegion closingTerminal = this.findClosingTerminal(offset, _offset, context);
+    final TextRegion closingTerminal = this.findClosingTerminal(offset, openingTerminal.getOffset(), context);
     boolean _notEquals = (!Objects.equal(closingTerminal, null));
     if (_notEquals) {
-      int _offset_1 = openingTerminal.getOffset();
-      boolean _greaterEqualsThan = (_offset_1 >= offset);
+      int _offset = openingTerminal.getOffset();
+      boolean _greaterEqualsThan = (_offset >= offset);
       if (_greaterEqualsThan) {
         return null;
       }
-      int _offset_2 = closingTerminal.getOffset();
+      int _offset_1 = closingTerminal.getOffset();
       int _length = closingTerminal.getLength();
-      int _plus = (_offset_2 + _length);
+      int _plus = (_offset_1 + _length);
       boolean _lessEqualsThan = (_plus <= offset);
       if (_lessEqualsThan) {
         return null;
@@ -155,26 +146,23 @@ public class AutoEditString extends AbstractAutoEditBlock {
     int _end = iterator.getEnd();
     int _start = iterator.getStart();
     int _minus = (_end - _start);
-    String _openingTerminal = this.getOpeningTerminal();
-    int _length = _openingTerminal.length();
+    int _length = this.getOpeningTerminal().length();
     boolean _lessThan = (_minus < _length);
     if (_lessThan) {
       return null;
     }
     int _start_1 = iterator.getStart();
     int _start_2 = iterator.getStart();
-    String _openingTerminal_1 = this.getOpeningTerminal();
-    int _length_1 = _openingTerminal_1.length();
+    int _length_1 = this.getOpeningTerminal().length();
     int _plus = (_start_2 + _length_1);
     String _text = context.getText(_start_1, _plus);
-    String _openingTerminal_2 = this.getOpeningTerminal();
-    boolean _notEquals = (!Objects.equal(_text, _openingTerminal_2));
+    String _openingTerminal = this.getOpeningTerminal();
+    boolean _notEquals = (!Objects.equal(_text, _openingTerminal));
     if (_notEquals) {
       return null;
     }
     int _start_3 = iterator.getStart();
-    String _openingTerminal_3 = this.getOpeningTerminal();
-    int _length_2 = _openingTerminal_3.length();
+    int _length_2 = this.getOpeningTerminal().length();
     return new TextRegion(_start_3, _length_2);
   }
   
@@ -185,32 +173,26 @@ public class AutoEditString extends AbstractAutoEditBlock {
     }
     int _end = iterator.getEnd();
     int _minus = (_end - openingTokenOffset);
-    String _openingTerminal = this.getOpeningTerminal();
-    int _length = _openingTerminal.length();
-    String _closingTerminal = this.getClosingTerminal();
-    int _length_1 = _closingTerminal.length();
+    int _length = this.getOpeningTerminal().length();
+    int _length_1 = this.getClosingTerminal().length();
     int _plus = (_length + _length_1);
     boolean _lessThan = (_minus < _plus);
     if (_lessThan) {
       return null;
     }
     int _end_1 = iterator.getEnd();
-    String _closingTerminal_1 = this.getClosingTerminal();
-    int _length_2 = _closingTerminal_1.length();
+    int _length_2 = this.getClosingTerminal().length();
     int _minus_1 = (_end_1 - _length_2);
-    int _end_2 = iterator.getEnd();
-    String _text = context.getText(_minus_1, _end_2);
-    String _closingTerminal_2 = this.getClosingTerminal();
-    boolean _notEquals = (!Objects.equal(_text, _closingTerminal_2));
+    String _text = context.getText(_minus_1, iterator.getEnd());
+    String _closingTerminal = this.getClosingTerminal();
+    boolean _notEquals = (!Objects.equal(_text, _closingTerminal));
     if (_notEquals) {
       return null;
     }
-    int _end_3 = iterator.getEnd();
-    String _closingTerminal_3 = this.getClosingTerminal();
-    int _length_3 = _closingTerminal_3.length();
-    int _minus_2 = (_end_3 - _length_3);
-    String _closingTerminal_4 = this.getClosingTerminal();
-    int _length_4 = _closingTerminal_4.length();
+    int _end_2 = iterator.getEnd();
+    int _length_3 = this.getClosingTerminal().length();
+    int _minus_2 = (_end_2 - _length_3);
+    int _length_4 = this.getClosingTerminal().length();
     return new TextRegion(_minus_2, _length_4);
   }
   
@@ -226,8 +208,7 @@ public class AutoEditString extends AbstractAutoEditBlock {
       if (_atEnd) {
         return false;
       }
-      TokenSet _tokenSet = context.getTokenSet(iterator);
-      _xblockexpression = this.isStringLiteral(_tokenSet, context);
+      _xblockexpression = this.isStringLiteral(context.getTokenSet(iterator), context);
     }
     return _xblockexpression;
   }

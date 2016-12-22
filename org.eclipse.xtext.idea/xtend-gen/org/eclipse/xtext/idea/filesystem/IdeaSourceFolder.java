@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.filesystem;
 
 import com.intellij.openapi.roots.SourceFolder;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.idea.extensions.RootModelExtensions;
@@ -29,10 +28,7 @@ public class IdeaSourceFolder implements ISourceFolder {
   
   @Override
   public URI getPath() {
-    VirtualFile _file = this.folder.getFile();
-    String _url = _file.getUrl();
-    URI _createURI = URI.createURI(_url);
-    return UriUtil.toFolderURI(_createURI);
+    return UriUtil.toFolderURI(URI.createURI(this.folder.getFile().getUrl()));
   }
   
   public IdeaSourceFolder(final SourceFolder folder) {

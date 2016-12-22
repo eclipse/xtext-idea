@@ -11,8 +11,6 @@ import com.google.common.base.Objects;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.antlr.runtime.BaseRecognizer;
@@ -45,18 +43,15 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     super(tokenSource, tokenDefProvider);
     this.builder = builder;
     this.afterSeek = false;
-    ArrayList<PsiTokenStreamState> _newArrayList = CollectionLiterals.<PsiTokenStreamState>newArrayList();
-    this.states = _newArrayList;
-    HashMap<Integer, Integer> _newHashMap = CollectionLiterals.<Integer, Integer>newHashMap();
-    this.psiToOriginalMarkers = _newHashMap;
+    this.states = CollectionLiterals.<PsiTokenStreamState>newArrayList();
+    this.psiToOriginalMarkers = CollectionLiterals.<Integer, Integer>newHashMap();
   }
   
   @Override
   public void reportError(final Function0<? extends String> reporter) {
     boolean _equals = Objects.equal(this.errorMessage, null);
     if (_equals) {
-      String _apply = reporter.apply();
-      this.errorMessage = _apply;
+      this.errorMessage = reporter.apply();
     }
   }
   
@@ -105,8 +100,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     if (_eof) {
       return;
     }
-    int _rawTokenIndex = this.builder.rawTokenIndex();
-    final Token token = this.get(_rawTokenIndex);
+    final Token token = this.get(this.builder.rawTokenIndex());
     int _channel = token.getChannel();
     final boolean hidden = (_channel == BaseRecognizer.HIDDEN);
     IElementType _xifexpression = null;
@@ -152,8 +146,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     int _xblockexpression = (int) 0;
     {
       final int psiMarker = this.markPsi();
-      int _mark = super.mark();
-      this.psiToOriginalMarkers.put(Integer.valueOf(psiMarker), Integer.valueOf(_mark));
+      this.psiToOriginalMarkers.put(Integer.valueOf(psiMarker), Integer.valueOf(super.mark()));
       _xblockexpression = psiMarker;
     }
     return _xblockexpression;
@@ -177,37 +170,28 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
   
   @Override
   public void release(final int psiMarker) {
-    Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
-    super.release((_get).intValue());
+    super.release((this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker))).intValue());
     final PsiTokenStreamState state = this.states.get(psiMarker);
-    IElementType _tokenType = state.getTokenType();
-    this.tokenType = _tokenType;
-    String _errorMessage = state.getErrorMessage();
-    this.errorMessage = _errorMessage;
-    PsiBuilder.Marker _marker = state.getMarker();
-    _marker.drop();
+    this.tokenType = state.getTokenType();
+    this.errorMessage = state.getErrorMessage();
+    state.getMarker().drop();
   }
   
   @Override
   public void rewind() {
     super.rewind();
-    int _lastPsiMarker = this.getLastPsiMarker();
-    this.rewind(_lastPsiMarker);
+    this.rewind(this.getLastPsiMarker());
     this.mark();
     this.afterSeek = false;
   }
   
   @Override
   public void rewind(final int psiMarker) {
-    Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
-    super.rewind((_get).intValue());
+    super.rewind((this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker))).intValue());
     final PsiTokenStreamState state = this.states.get(psiMarker);
-    IElementType _tokenType = state.getTokenType();
-    this.tokenType = _tokenType;
-    String _errorMessage = state.getErrorMessage();
-    this.errorMessage = _errorMessage;
-    PsiBuilder.Marker _marker = state.getMarker();
-    _marker.rollbackTo();
+    this.tokenType = state.getTokenType();
+    this.errorMessage = state.getErrorMessage();
+    state.getMarker().rollbackTo();
     this.afterSeek = false;
   }
   

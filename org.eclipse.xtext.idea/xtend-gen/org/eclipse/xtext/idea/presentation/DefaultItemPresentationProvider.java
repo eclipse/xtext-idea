@@ -39,10 +39,8 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   public ItemPresentation getItemPresentation(final Object element) {
     PresentationData _presentationData = new PresentationData();
     final Procedure1<PresentationData> _function = (PresentationData it) -> {
-      Icon _image = this.image(element);
-      it.setIcon(_image);
-      String _text = this.text(element);
-      it.setPresentableText(_text);
+      it.setIcon(this.image(element));
+      it.setPresentableText(this.text(element));
     };
     return ObjectExtensions.<PresentationData>operator_doubleArrow(_presentationData, _function);
   }
@@ -56,8 +54,7 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   }
   
   protected Icon _image(final EObject element) {
-    PsiElement _psiElement = this.psiModelAssociations.getPsiElement(element);
-    return this.image(_psiElement);
+    return this.image(this.psiModelAssociations.getPsiElement(element));
   }
   
   protected Icon _image(final PsiElement element) {
@@ -75,8 +72,7 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   protected String _text(final EObject element) {
     String _xblockexpression = null;
     {
-      EClass _eClass = element.eClass();
-      final EAttribute labelFeature = this.getLabelFeature(_eClass);
+      final EAttribute labelFeature = this.getLabelFeature(element.eClass());
       String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(labelFeature, null));
       if (_notEquals) {
@@ -97,8 +93,7 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
     EList<EAttribute> _eAllAttributes = eClass.getEAllAttributes();
     for (final EAttribute eAttribute : _eAllAttributes) {
       if (((!eAttribute.isMany()) && (!Objects.equal(eAttribute.getEType().getInstanceClass(), FeatureMap.Entry.class)))) {
-        String _name = eAttribute.getName();
-        boolean _equalsIgnoreCase = "name".equalsIgnoreCase(_name);
+        boolean _equalsIgnoreCase = "name".equalsIgnoreCase(eAttribute.getName());
         if (_equalsIgnoreCase) {
           return eAttribute;
         } else {

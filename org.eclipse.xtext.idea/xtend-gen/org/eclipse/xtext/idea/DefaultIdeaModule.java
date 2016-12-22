@@ -8,9 +8,6 @@
 package org.eclipse.xtext.idea;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.lang.CodeDocumentationAwareCommenter;
@@ -78,9 +75,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   }
   
   public void configureLanguageSpecificPsiModelAssociations(final Binder binder) {
-    AnnotatedBindingBuilder<IPsiModelAssociations> _bind = binder.<IPsiModelAssociations>bind(IPsiModelAssociations.class);
-    LinkedBindingBuilder<IPsiModelAssociations> _annotatedWith = _bind.annotatedWith(LanguageSpecific.class);
-    _annotatedWith.to(PsiModelAssociations.class);
+    binder.<IPsiModelAssociations>bind(IPsiModelAssociations.class).annotatedWith(LanguageSpecific.class).to(PsiModelAssociations.class);
   }
   
   public Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {
@@ -97,10 +92,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   }
   
   public void configureHighlightingTokenDefProvider(final Binder binder) {
-    AnnotatedBindingBuilder<ITokenDefProvider> _bind = binder.<ITokenDefProvider>bind(ITokenDefProvider.class);
-    Named _named = Names.named(LexerIdeBindings.HIGHLIGHTING);
-    LinkedBindingBuilder<ITokenDefProvider> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(AntlrTokenDefProvider.class);
+    binder.<ITokenDefProvider>bind(ITokenDefProvider.class).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING)).to(AntlrTokenDefProvider.class);
   }
   
   @SingletonBinding
@@ -129,10 +121,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   }
   
   public void configureGlobalModificationTracker(final Binder binder) {
-    AnnotatedBindingBuilder<Key> _bind = binder.<Key>bind(Key.class);
-    Named _named = Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT);
-    LinkedBindingBuilder<Key> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.toInstance(PsiModificationTracker.MODIFICATION_COUNT);
+    binder.<Key>bind(Key.class).annotatedWith(Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT)).toInstance(PsiModificationTracker.MODIFICATION_COUNT);
   }
   
   public Class<? extends IEncodingProvider> bindEncodingProvider() {

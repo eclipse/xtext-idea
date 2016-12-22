@@ -73,8 +73,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   protected abstract String getFirstRuleName();
   
   public void parse() throws RecognitionException {
-    String _firstRuleName = this.getFirstRuleName();
-    this.parse(_firstRuleName);
+    this.parse(this.getFirstRuleName());
   }
   
   public void parse(final String entryRuleName) throws RecognitionException {
@@ -116,8 +115,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     try {
       Object _xblockexpression = null;
       {
-        Class<? extends AbstractPsiAntlrParser> _class = this.getClass();
-        final Method method = _class.getMethod(antlrEntryRuleName);
+        final Method method = this.getClass().getMethod(antlrEntryRuleName);
         method.setAccessible(true);
         _xblockexpression = method.invoke(this);
       }
@@ -173,14 +171,12 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   protected void precedeComposite(final IElementType elementType) {
     final CompositeMarker compositeMarker = this.compositeMarkers.pop();
-    CompositeMarker _precede = compositeMarker.precede(elementType);
-    this.compositeMarkers.push(_precede);
+    this.compositeMarkers.push(compositeMarker.precede(elementType));
     this.compositeMarkers.push(compositeMarker);
   }
   
   protected void doneComposite() {
-    CompositeMarker _pop = this.compositeMarkers.pop();
-    _pop.done();
+    this.compositeMarkers.pop().done();
   }
   
   protected void doneLeaf(final Token matchedToken) {
@@ -253,17 +249,13 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   public void setTokenTypeMap(final Map<Integer, String> tokenTypeMap) {
     String[] tokenNames = this.getTokenNames();
-    int _length = tokenNames.length;
-    String[] _newArrayOfSize = new String[_length];
-    this.readableTokenNames = ((List<String>)Conversions.doWrapArray(_newArrayOfSize));
+    this.readableTokenNames = ((List<String>)Conversions.doWrapArray(new String[tokenNames.length]));
     for (int i = 0; (i < tokenNames.length); i++) {
       boolean _containsKey = tokenTypeMap.containsKey(Integer.valueOf(i));
       if (_containsKey) {
-        String _get = tokenTypeMap.get(Integer.valueOf(i));
-        this.readableTokenNames.set(i, _get);
+        this.readableTokenNames.set(i, tokenTypeMap.get(Integer.valueOf(i)));
       } else {
-        String _get_1 = tokenNames[i];
-        this.readableTokenNames.set(i, _get_1);
+        this.readableTokenNames.set(i, tokenNames[i]);
       }
     }
   }

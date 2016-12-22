@@ -39,8 +39,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class ASTNodeExtension {
   public List<ASTNode> findNodesForFeature(final ASTNode node, final EStructuralFeature structuralFeature) {
-    EClass _eContainingClass = structuralFeature.getEContainingClass();
-    final ASTNode actualNode = this.findActualNodeFor(node, _eContainingClass);
+    final ASTNode actualNode = this.findActualNodeFor(node, structuralFeature.getEContainingClass());
     if ((actualNode instanceof TreeElement)) {
       return this.findNodesForFeature(((TreeElement)actualNode), structuralFeature);
     }
@@ -54,8 +53,7 @@ public class ASTNodeExtension {
     ASTNode result = node;
     while (((result != null) && 
       (!(ObjectExtensions.<Boolean>operator_elvis(result.<Boolean>getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY), Boolean.valueOf(false))).booleanValue()))) {
-      ASTNode _treeParent = result.getTreeParent();
-      result = _treeParent;
+      result = result.getTreeParent();
     }
     final EClass actualType = this.getEClass(result);
     boolean _isAssignableFrom = EcoreUtil2.isAssignableFrom(type, actualType);
@@ -82,11 +80,9 @@ public class ASTNodeExtension {
         if ((grammarElement instanceof Action)) {
           TreeElement firstChild = element.getFirstChildNode();
           while ((ASTNodeExtension.this.getGrammarElement(firstChild) instanceof Action)) {
-            TreeElement _firstChildNode = firstChild.getFirstChildNode();
-            firstChild = _firstChildNode;
+            firstChild = firstChild.getFirstChildNode();
           }
-          EObject _grammarElement = ASTNodeExtension.this.getGrammarElement(firstChild);
-          final Assignment assignment = GrammarUtil.containingAssignment(_grammarElement);
+          final Assignment assignment = GrammarUtil.containingAssignment(ASTNodeExtension.this.getGrammarElement(firstChild));
           if (((assignment != null) && Objects.equal(featureName, assignment.getFeature()))) {
             result.add(element);
           }
@@ -132,8 +128,7 @@ public class ASTNodeExtension {
       }
     }
     if (!_matched) {
-      AbstractRule _containingRule = GrammarUtil.containingRule(grammarElement);
-      _switchResult = _containingRule.getType();
+      _switchResult = GrammarUtil.containingRule(grammarElement).getType();
     }
     final TypeRef type = _switchResult;
     EClassifier _classifier = null;

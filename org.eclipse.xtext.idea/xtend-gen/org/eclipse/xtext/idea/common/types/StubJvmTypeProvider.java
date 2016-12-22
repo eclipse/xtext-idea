@@ -8,13 +8,11 @@
 package org.eclipse.xtext.idea.common.types;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.IndexNotReadyException;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
@@ -23,7 +21,6 @@ import com.intellij.psi.impl.compiled.StubBuildingVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import java.text.StringCharacterIterator;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -70,10 +67,8 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     super(resourceSet, indexedJvmTypeAccess, services);
     this.module = module;
     this.searchScope = searchScope;
-    StubURIHelper _createStubURIHelper = this.createStubURIHelper();
-    this.uriHelper = _createStubURIHelper;
-    PsiBasedTypeFactory _createPsiClassFactory = this.createPsiClassFactory(psiModelAssociator);
-    this.psiClassFactory = _createPsiClassFactory;
+    this.uriHelper = this.createStubURIHelper();
+    this.psiClassFactory = this.createPsiClassFactory(psiModelAssociator);
   }
   
   public PsiBasedTypeFactory createPsiClassFactory(final IPsiModelAssociator psiModelAssociator) {
@@ -101,8 +96,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       while ((Objects.equal(result, null) && nameVariants.hasNext())) {
         {
           final String nextVariant = nameVariants.next();
-          JvmType _doFindTypeByName = this.doFindTypeByName(nextVariant, true);
-          result = _doFindTypeByName;
+          result = this.doFindTypeByName(nextVariant, true);
         }
       }
       _xblockexpression = result;
@@ -162,8 +156,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       if ((indexedJvmTypeAccess != null)) {
         final URI proxyURI = resourceURI.appendFragment(fragment);
         try {
-          ResourceSet _resourceSet = this.getResourceSet();
-          final EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, _resourceSet);
+          final EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, this.getResourceSet());
           if ((candidate instanceof JvmType)) {
             return ((JvmType)candidate);
           }
@@ -178,8 +171,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       }
       ProgressIndicatorProvider.checkCanceled();
       try {
-        ResourceSet _resourceSet_1 = this.getResourceSet();
-        final Resource existing = _resourceSet_1.getResource(resourceURI, false);
+        final Resource existing = this.getResourceSet().getResource(resourceURI, false);
         boolean _notEquals = (!Objects.equal(existing, null));
         if (_notEquals) {
           return this.findType(existing, fragment, traverseNestedTypes);
@@ -191,9 +183,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         }
         final TypeResource resource = this.doCreateResource(resourceURI);
         resource.setMirror(mirror);
-        ResourceSet _resourceSet_2 = this.getResourceSet();
-        EList<Resource> _resources = _resourceSet_2.getResources();
-        _resources.add(resource);
+        this.getResourceSet().getResources().add(resource);
         resource.load(null);
         return this.findType(resource, fragment, traverseNestedTypes);
       } catch (final Throwable _t_1) {
@@ -210,18 +200,15 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   }
   
   protected JvmType findType(final Resource resource, final String fragment, final boolean traverseNestedTypes) {
-    Application _application = ApplicationManager.getApplication();
     final Computable<JvmType> _function = () -> {
       EObject _eObject = resource.getEObject(fragment);
       final JvmType result = ((JvmType) _eObject);
       if (((!Objects.equal(result, null)) || (!traverseNestedTypes))) {
         return result;
       }
-      EList<EObject> _contents = resource.getContents();
-      final EObject rootType = IterableExtensions.<EObject>head(_contents);
+      final EObject rootType = IterableExtensions.<EObject>head(resource.getContents());
       if ((rootType instanceof JvmDeclaredType)) {
-        URI _uRI = resource.getURI();
-        final String rootTypeName = _uRI.segment(1);
+        final String rootTypeName = resource.getURI().segment(1);
         int _length = rootTypeName.length();
         int _plus = (_length + 1);
         final String nestedTypeName = fragment.substring(_plus);
@@ -230,20 +217,17 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       }
       return null;
     };
-    return _application.<JvmType>runReadAction(_function);
+    return ApplicationManager.getApplication().<JvmType>runReadAction(_function);
   }
   
   @Override
   protected IMirror createMirrorForFQN(final String name) {
-    Application _application = ApplicationManager.getApplication();
     final Computable<IClassMirror> _function = () -> {
       PsiClassMirror _xtrycatchfinallyexpression = null;
       try {
         PsiClassMirror _xblockexpression = null;
         {
-          Project _project = this.module.getProject();
-          JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
-          final PsiClass psiClass = _instance.findClass(name, this.searchScope);
+          final PsiClass psiClass = JavaPsiFacade.getInstance(this.module.getProject()).findClass(name, this.searchScope);
           if ((Objects.equal(psiClass, null) || (!Objects.equal(psiClass.getContainingClass(), null)))) {
             return null;
           }
@@ -261,7 +245,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       }
       return _xtrycatchfinallyexpression;
     };
-    return _application.<IClassMirror>runReadAction(_function);
+    return ApplicationManager.getApplication().<IClassMirror>runReadAction(_function);
   }
   
   protected GlobalSearchScope getSearchScope() {

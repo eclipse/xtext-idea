@@ -17,7 +17,6 @@ import com.intellij.psi.PsiIdentifier;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.documentation.IdeaDeclarationDocumentationProvider;
@@ -92,8 +91,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
       if (_notEquals_2) {
         return result_1;
       }
-      URI _uRI = EcoreUtil.getURI(eobj);
-      return _uRI.toString();
+      return EcoreUtil.getURI(eobj).toString();
     }
     return null;
   }
@@ -121,8 +119,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
       if (_notEquals_2) {
         return result_1;
       }
-      URI _uRI = EcoreUtil.getURI(eobj);
-      return _uRI.toString();
+      return EcoreUtil.getURI(eobj).toString();
     }
     return null;
   }
@@ -131,8 +128,7 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
     if ((Objects.equal(object, null) || object.eIsProxy())) {
       return null;
     }
-    Resource _eResource = object.eResource();
-    final URI uri = _eResource.getURI();
+    final URI uri = object.eResource().getURI();
     final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(uri);
     boolean _equals = Objects.equal(resourceServiceProvider, null);
     if (_equals) {

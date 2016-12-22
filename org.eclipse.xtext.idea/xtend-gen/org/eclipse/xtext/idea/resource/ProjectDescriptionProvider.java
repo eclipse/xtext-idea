@@ -30,10 +30,8 @@ public class ProjectDescriptionProvider {
     if ((module instanceof Module)) {
       ProjectDescription _projectDescription = new ProjectDescription();
       final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
-        String _name = ((Module)module).getName();
-        it.setName(_name);
-        ModuleRootManager _instance = ModuleRootManager.getInstance(((Module)module));
-        final OrderEntry[] enumerator = _instance.getOrderEntries();
+        it.setName(((Module)module).getName());
+        final OrderEntry[] enumerator = ModuleRootManager.getInstance(((Module)module)).getOrderEntries();
         final ArrayList<String> dependencyNames = CollectionLiterals.<String>newArrayList();
         final Consumer<OrderEntry> _function_1 = (OrderEntry it_1) -> {
           boolean _matched = false;

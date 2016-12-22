@@ -25,8 +25,7 @@ public class FilteringClassLoader extends ClassLoader {
   @Override
   protected Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
     try {
-      ClassLoader _systemClassLoader = ClassLoader.getSystemClassLoader();
-      ClassLoader _parent = _systemClassLoader.getParent();
+      ClassLoader _parent = ClassLoader.getSystemClassLoader().getParent();
       Class<?> _loadClass = null;
       if (_parent!=null) {
         _loadClass=_parent.loadClass(name);

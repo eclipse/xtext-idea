@@ -7,7 +7,6 @@ import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.externalSystem.service.execution.ProgressExecutionMode;
@@ -46,7 +45,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 import org.jetbrains.idea.maven.project.MavenProjectsManager;
 import org.jetbrains.plugins.gradle.settings.DistributionType;
@@ -72,8 +70,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   public XtextModuleBuilder() {
     XtextLanguage.INSTANCE.injectMembers(this);
-    WizardConfiguration _get = this.wizardConfigProvider.get();
-    this.wizardConfiguration = _get;
+    this.wizardConfiguration = this.wizardConfigProvider.get();
   }
   
   @Override
@@ -129,12 +126,9 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   @Override
   public void setupRootModel(final ModifiableRootModel rootModel) throws ConfigurationException {
-    String _contentEntryPath = this.getContentEntryPath();
-    String path = FileUtil.toSystemIndependentName(_contentEntryPath);
-    File _file = new File(path);
-    _file.mkdirs();
-    LocalFileSystem _instance = LocalFileSystem.getInstance();
-    final VirtualFile root = _instance.refreshAndFindFileByPath(path);
+    String path = FileUtil.toSystemIndependentName(this.getContentEntryPath());
+    new File(path).mkdirs();
+    final VirtualFile root = LocalFileSystem.getInstance().refreshAndFindFileByPath(path);
     rootModel.addContentEntry(root);
     if ((this.myJdk != null)) {
       rootModel.setSdk(this.myJdk);
@@ -146,13 +140,11 @@ public class XtextModuleBuilder extends ModuleBuilder {
   @Override
   public Module commitModule(final Project project, final ModifiableModuleModel model) {
     final List<Module> modulesCreated = this.commit(project, model, null);
-    ParentProjectDescriptor _parentProject = this.wizardConfiguration.getParentProject();
-    boolean _isEnabled = _parentProject.isEnabled();
+    boolean _isEnabled = this.wizardConfiguration.getParentProject().isEnabled();
     if (_isEnabled) {
       final Function1<Module, Boolean> _function = (Module module) -> {
         String _name = module.getName();
-        ParentProjectDescriptor _parentProject_1 = this.wizardConfiguration.getParentProject();
-        String _name_1 = _parentProject_1.getName();
+        String _name_1 = this.wizardConfiguration.getParentProject().getName();
         return Boolean.valueOf(Objects.equal(_name, _name_1));
       };
       return IterableExtensions.<Module>findFirst(modulesCreated, _function);
@@ -171,40 +163,30 @@ public class XtextModuleBuilder extends ModuleBuilder {
     if ((model != null)) {
       _xifexpression = model;
     } else {
-      ModuleManager _instance = ModuleManager.getInstance(project);
-      _xifexpression = _instance.getModifiableModel();
+      _xifexpression = ModuleManager.getInstance(project).getModifiableModel();
     }
     final ModifiableModuleModel moduleModel = _xifexpression;
     this.setupWizardConfiguration(this.wizardConfiguration);
-    ProjectRootManagerEx _instanceEx = ProjectRootManagerEx.getInstanceEx(project);
-    String _projectSdkName = _instanceEx.getProjectSdkName();
-    final JavaVersion projectJavaVersion = JavaVersion.fromQualifier(_projectSdkName);
+    final JavaVersion projectJavaVersion = JavaVersion.fromQualifier(ProjectRootManagerEx.getInstanceEx(project).getProjectSdkName());
     if ((projectJavaVersion != null)) {
       this.wizardConfiguration.setJavaVersion(projectJavaVersion);
     }
-    VirtualFile _baseDir = project.getBaseDir();
-    String _path = _baseDir.getPath();
-    this.wizardConfiguration.setRootLocation(_path);
-    String _name = this.getName();
-    this.wizardConfiguration.setBaseName(_name);
-    Application _application = ApplicationManager.getApplication();
+    this.wizardConfiguration.setRootLocation(project.getBaseDir().getPath());
+    this.wizardConfiguration.setBaseName(this.getName());
     final Runnable _function = () -> {
-      IdeaProjectCreator _create = this.projectCreatorfactory.create(moduleModel);
-      _create.createProjects(this.wizardConfiguration);
+      this.projectCreatorfactory.create(moduleModel).createProjects(this.wizardConfiguration);
       moduleModel.commit();
     };
-    _application.runWriteAction(_function);
+    ApplicationManager.getApplication().runWriteAction(_function);
     boolean _needsMavenBuild = this.wizardConfiguration.needsMavenBuild();
     if (_needsMavenBuild) {
       final Runnable _function_1 = () -> {
         MavenProjectsManager manager = MavenProjectsManager.getInstance(project);
         if ((manager != null)) {
-          ParentProjectDescriptor _parentProject = this.wizardConfiguration.getParentProject();
-          String _location = _parentProject.getLocation();
+          String _location = this.wizardConfiguration.getParentProject().getLocation();
           String _plus = (_location + File.separator);
           final String pomFilePath = (_plus + "pom.xml");
-          LocalFileSystem _instance_1 = LocalFileSystem.getInstance();
-          final VirtualFile virtualFile = _instance_1.refreshAndFindFileByPath(pomFilePath);
+          final VirtualFile virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(pomFilePath);
           if ((virtualFile != null)) {
             manager.addManagedFilesOrUnignore(Collections.<VirtualFile>unmodifiableList(CollectionLiterals.<VirtualFile>newArrayList(virtualFile)));
           } else {
@@ -221,15 +203,12 @@ public class XtextModuleBuilder extends ModuleBuilder {
     boolean _needsGradleBuild = this.wizardConfiguration.needsGradleBuild();
     if (_needsGradleBuild) {
       final GradleProjectSettings gradleProjectSettings = new GradleProjectSettings();
-      ParentProjectDescriptor _parentProject = this.wizardConfiguration.getParentProject();
-      String _location = _parentProject.getLocation();
-      gradleProjectSettings.setExternalProjectPath(_location);
+      gradleProjectSettings.setExternalProjectPath(this.wizardConfiguration.getParentProject().getLocation());
       gradleProjectSettings.setDistributionType(DistributionType.DEFAULT_WRAPPED);
       final AbstractExternalSystemSettings settings = ExternalSystemApiUtil.getSettings(project, GradleConstants.SYSTEM_ID);
       settings.linkProject(gradleProjectSettings);
-      ParentProjectDescriptor _parentProject_1 = this.wizardConfiguration.getParentProject();
-      String _location_1 = _parentProject_1.getLocation();
-      ExternalSystemUtil.refreshProject(project, GradleConstants.SYSTEM_ID, _location_1, false, ProgressExecutionMode.IN_BACKGROUND_ASYNC);
+      ExternalSystemUtil.refreshProject(project, GradleConstants.SYSTEM_ID, 
+        this.wizardConfiguration.getParentProject().getLocation(), false, ProgressExecutionMode.IN_BACKGROUND_ASYNC);
     }
     return (List<Module>)Conversions.doWrapArray(moduleModel.getModules());
   }

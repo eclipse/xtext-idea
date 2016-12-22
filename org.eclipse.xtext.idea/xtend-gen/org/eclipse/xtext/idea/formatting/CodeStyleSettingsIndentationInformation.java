@@ -8,9 +8,7 @@
 package org.eclipse.xtext.idea.formatting;
 
 import com.intellij.formatting.IndentInfo;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import org.eclipse.xtext.formatting.IIndentationInformation;
@@ -25,10 +23,8 @@ public class CodeStyleSettingsIndentationInformation implements IIndentationInfo
   public String getIndentString() {
     String _xblockexpression = null;
     {
-      DataContext _dataContext = DataContextExtensions.getDataContext();
-      final Project project = DataContextExtensions.getProject(_dataContext);
-      CodeStyleSettings _settings = CodeStyleSettingsManager.getSettings(project);
-      final CommonCodeStyleSettings.IndentOptions indentOptions = _settings.getIndentOptions();
+      final Project project = DataContextExtensions.getProject(DataContextExtensions.getDataContext());
+      final CommonCodeStyleSettings.IndentOptions indentOptions = CodeStyleSettingsManager.getSettings(project).getIndentOptions();
       final IndentInfo indentInfo = new IndentInfo(0, 4, 0);
       _xblockexpression = indentInfo.generateNewWhiteSpace(indentOptions);
     }

@@ -11,13 +11,9 @@ import com.google.common.collect.Iterators;
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import java.util.Iterator;
 import java.util.Set;
 import junit.framework.TestCase;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.linking.lazy.CrossReferenceDescription;
@@ -60,34 +56,18 @@ public class ScopeProviderTest extends LightSdomainTestCase {
     final IQualifiedNameConverter nameConverter = language.<IQualifiedNameConverter>getInstance(IQualifiedNameConverter.class);
     final CrossReferenceDescription.CrossReferenceDescriptionProvider crossReferenceDescriptionProvider = language.<CrossReferenceDescription.CrossReferenceDescriptionProvider>getInstance(CrossReferenceDescription.CrossReferenceDescriptionProvider.class);
     PsiElement _firstChild = file.getFirstChild();
-    Resource _resource = ((PsiEObject) _firstChild).getResource();
-    EList<EObject> _contents = _resource.getContents();
-    final EObject fileRoot = IterableExtensions.<EObject>head(_contents);
+    final EObject fileRoot = IterableExtensions.<EObject>head(((PsiEObject) _firstChild).getResource().getContents());
     final ICrossReferenceDescription crossReferenceDescription = crossReferenceDescriptionProvider.get(fileRoot, SDomainPackage.Literals.FILE__ELEMENTS, null);
-    Iterable<IEObjectDescription> _variants = crossReferenceDescription.getVariants();
     final Function1<IEObjectDescription, QualifiedName> _function = (IEObjectDescription it) -> {
       return it.getName();
     };
-    Iterable<QualifiedName> _map = IterableExtensions.<IEObjectDescription, QualifiedName>map(_variants, _function);
-    final Set<QualifiedName> names = IterableExtensions.<QualifiedName>toSet(_map);
-    String _string = names.toString();
-    int _size = names.size();
-    TestCase.assertEquals(_string, 5, _size);
-    QualifiedName _qualifiedName = nameConverter.toQualifiedName("Person");
-    boolean _contains = names.contains(_qualifiedName);
-    TestCase.assertTrue(_contains);
-    QualifiedName _qualifiedName_1 = nameConverter.toQualifiedName("String");
-    boolean _contains_1 = names.contains(_qualifiedName_1);
-    TestCase.assertTrue(_contains_1);
-    QualifiedName _qualifiedName_2 = nameConverter.toQualifiedName("foo.bar");
-    boolean _contains_2 = names.contains(_qualifiedName_2);
-    TestCase.assertTrue(_contains_2);
-    QualifiedName _qualifiedName_3 = nameConverter.toQualifiedName("foo.bar.Person");
-    boolean _contains_3 = names.contains(_qualifiedName_3);
-    TestCase.assertTrue(_contains_3);
-    QualifiedName _qualifiedName_4 = nameConverter.toQualifiedName("foo.bar.String");
-    boolean _contains_4 = names.contains(_qualifiedName_4);
-    TestCase.assertTrue(_contains_4);
+    final Set<QualifiedName> names = IterableExtensions.<QualifiedName>toSet(IterableExtensions.<IEObjectDescription, QualifiedName>map(crossReferenceDescription.getVariants(), _function));
+    TestCase.assertEquals(names.toString(), 5, names.size());
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("String")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.Person")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.String")));
   }
   
   public void testRelativeContext() {
@@ -114,32 +94,17 @@ public class ScopeProviderTest extends LightSdomainTestCase {
     final IQualifiedNameConverter nameConverter = language.<IQualifiedNameConverter>getInstance(IQualifiedNameConverter.class);
     final CrossReferenceDescription.CrossReferenceDescriptionProvider crossReferenceDescriptionProvider = language.<CrossReferenceDescription.CrossReferenceDescriptionProvider>getInstance(CrossReferenceDescription.CrossReferenceDescriptionProvider.class);
     PsiElement _firstChild = file.getFirstChild();
-    Resource _resource = ((PsiEObject) _firstChild).getResource();
-    TreeIterator<EObject> _allContents = _resource.getAllContents();
-    Iterator<Entity> _filter = Iterators.<Entity>filter(_allContents, Entity.class);
-    final Entity entity = IteratorExtensions.<Entity>head(_filter);
+    final Entity entity = IteratorExtensions.<Entity>head(Iterators.<Entity>filter(((PsiEObject) _firstChild).getResource().getAllContents(), Entity.class));
     final ICrossReferenceDescription crossReferenceDescription = crossReferenceDescriptionProvider.get(entity, SDomainPackage.Literals.PROPERTY__TYPE, null);
-    Iterable<IEObjectDescription> _variants = crossReferenceDescription.getVariants();
     final Function1<IEObjectDescription, QualifiedName> _function = (IEObjectDescription it) -> {
       return it.getName();
     };
-    Iterable<QualifiedName> _map = IterableExtensions.<IEObjectDescription, QualifiedName>map(_variants, _function);
-    final Set<QualifiedName> names = IterableExtensions.<QualifiedName>toSet(_map);
-    String _string = names.toString();
-    int _size = names.size();
-    TestCase.assertEquals(_string, 4, _size);
-    QualifiedName _qualifiedName = nameConverter.toQualifiedName("Person");
-    boolean _contains = names.contains(_qualifiedName);
-    TestCase.assertTrue(_contains);
-    QualifiedName _qualifiedName_1 = nameConverter.toQualifiedName("stuff.Person");
-    boolean _contains_1 = names.contains(_qualifiedName_1);
-    TestCase.assertTrue(_contains_1);
-    QualifiedName _qualifiedName_2 = nameConverter.toQualifiedName("baz.String");
-    boolean _contains_2 = names.contains(_qualifiedName_2);
-    TestCase.assertTrue(_contains_2);
-    QualifiedName _qualifiedName_3 = nameConverter.toQualifiedName("stuff.baz.String");
-    boolean _contains_3 = names.contains(_qualifiedName_3);
-    TestCase.assertTrue(_contains_3);
+    final Set<QualifiedName> names = IterableExtensions.<QualifiedName>toSet(IterableExtensions.<IEObjectDescription, QualifiedName>map(crossReferenceDescription.getVariants(), _function));
+    TestCase.assertEquals(names.toString(), 4, names.size());
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("stuff.Person")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("baz.String")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("stuff.baz.String")));
   }
   
   public void testRelativePath() {
@@ -169,34 +134,17 @@ public class ScopeProviderTest extends LightSdomainTestCase {
     final IQualifiedNameConverter nameConverter = language.<IQualifiedNameConverter>getInstance(IQualifiedNameConverter.class);
     final CrossReferenceDescription.CrossReferenceDescriptionProvider crossReferenceDescriptionProvider = language.<CrossReferenceDescription.CrossReferenceDescriptionProvider>getInstance(CrossReferenceDescription.CrossReferenceDescriptionProvider.class);
     PsiElement _firstChild = file.getFirstChild();
-    Resource _resource = ((PsiEObject) _firstChild).getResource();
-    TreeIterator<EObject> _allContents = _resource.getAllContents();
-    Iterator<Entity> _filter = Iterators.<Entity>filter(_allContents, Entity.class);
-    final Entity entity = IteratorExtensions.<Entity>head(_filter);
+    final Entity entity = IteratorExtensions.<Entity>head(Iterators.<Entity>filter(((PsiEObject) _firstChild).getResource().getAllContents(), Entity.class));
     final ICrossReferenceDescription crossReferenceDescription = crossReferenceDescriptionProvider.get(entity, SDomainPackage.Literals.PROPERTY__TYPE, null);
-    Iterable<IEObjectDescription> _variants = crossReferenceDescription.getVariants();
     final Function1<IEObjectDescription, QualifiedName> _function = (IEObjectDescription it) -> {
       return it.getName();
     };
-    Iterable<QualifiedName> _map = IterableExtensions.<IEObjectDescription, QualifiedName>map(_variants, _function);
-    final Set<QualifiedName> names = IterableExtensions.<QualifiedName>toSet(_map);
-    String _string = names.toString();
-    int _size = names.size();
-    TestCase.assertEquals(_string, 5, _size);
-    QualifiedName _qualifiedName = nameConverter.toQualifiedName("Person");
-    boolean _contains = names.contains(_qualifiedName);
-    TestCase.assertTrue(_contains);
-    QualifiedName _qualifiedName_1 = nameConverter.toQualifiedName("stuff.Person");
-    boolean _contains_1 = names.contains(_qualifiedName_1);
-    TestCase.assertTrue(_contains_1);
-    QualifiedName _qualifiedName_2 = nameConverter.toQualifiedName("String");
-    boolean _contains_2 = names.contains(_qualifiedName_2);
-    TestCase.assertTrue(_contains_2);
-    QualifiedName _qualifiedName_3 = nameConverter.toQualifiedName("baz.String");
-    boolean _contains_3 = names.contains(_qualifiedName_3);
-    TestCase.assertTrue(_contains_3);
-    QualifiedName _qualifiedName_4 = nameConverter.toQualifiedName("stuff.baz.String");
-    boolean _contains_4 = names.contains(_qualifiedName_4);
-    TestCase.assertTrue(_contains_4);
+    final Set<QualifiedName> names = IterableExtensions.<QualifiedName>toSet(IterableExtensions.<IEObjectDescription, QualifiedName>map(crossReferenceDescription.getVariants(), _function));
+    TestCase.assertEquals(names.toString(), 5, names.size());
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("stuff.Person")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("String")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("baz.String")));
+    TestCase.assertTrue(names.contains(nameConverter.toQualifiedName("stuff.baz.String")));
   }
 }

@@ -33,8 +33,7 @@ public class XtextEnterBetweenBracesHandler extends EnterHandlerDelegateAdapter 
   }
   
   protected EnterHandlerDelegate.Result delegateLanguage(final IXtextLanguage language, final PsiFile file, final Editor editor, final Ref<Integer> caretOffsetRef, final Ref<Integer> caretAdvance, final DataContext dataContext, final EditorActionHandler originalHandler) {
-    LanguageSpecificBetweenBracesHandler _instance = language.<LanguageSpecificBetweenBracesHandler>getInstance(LanguageSpecificBetweenBracesHandler.class);
-    return _instance.preprocessEnter(file, editor, caretOffsetRef, caretAdvance, dataContext, originalHandler);
+    return language.<LanguageSpecificBetweenBracesHandler>getInstance(LanguageSpecificBetweenBracesHandler.class).preprocessEnter(file, editor, caretOffsetRef, caretAdvance, dataContext, originalHandler);
   }
   
   protected EnterHandlerDelegate.Result delegateSuper(final PsiFile file, final Editor editor, final Ref<Integer> caretOffsetRef, final Ref<Integer> caretAdvance, final DataContext dataContext, final EditorActionHandler originalHandler) {

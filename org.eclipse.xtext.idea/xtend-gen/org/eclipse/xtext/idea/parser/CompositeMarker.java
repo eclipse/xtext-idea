@@ -38,8 +38,7 @@ public class CompositeMarker {
   }
   
   public void done() {
-    CreateElementType _withUserData = this.withUserData(this.elementType);
-    this.marker.done(_withUserData);
+    this.marker.done(this.withUserData(this.elementType));
   }
   
   protected CreateElementType withUserData(final IElementType elementType) {

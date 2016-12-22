@@ -10,8 +10,6 @@ package org.eclipse.xtext.idea.documentation;
 import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -40,27 +38,23 @@ public class IdeaDeclarationDocumentationProvider {
     if ((name != null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<b>");
-      EClass _eClass = obj.eClass();
-      String _name = _eClass.getName();
+      String _name = obj.eClass().getName();
       _builder.append(_name);
       _builder.append(" \'");
       _builder.append(name);
       _builder.append("\'</b>");
       return _builder.toString();
     } else {
-      Iterable<EObject> _allContainers = EcoreUtil2.getAllContainers(obj);
       final Function1<EObject, QualifiedName> _function = (EObject it) -> {
         return this.qNameProvider.getFullyQualifiedName(it);
       };
-      Iterable<QualifiedName> _map = IterableExtensions.<EObject, QualifiedName>map(_allContainers, _function);
       final Function1<QualifiedName, Boolean> _function_1 = (QualifiedName it) -> {
         return Boolean.valueOf((it != null));
       };
-      final QualifiedName container = IterableExtensions.<QualifiedName>findFirst(_map, _function_1);
+      final QualifiedName container = IterableExtensions.<QualifiedName>findFirst(IterableExtensions.<EObject, QualifiedName>map(EcoreUtil2.getAllContainers(obj), _function), _function_1);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("<b>");
-      EClass _eClass_1 = obj.eClass();
-      String _name_1 = _eClass_1.getName();
+      String _name_1 = obj.eClass().getName();
       _builder_1.append(_name_1);
       _builder_1.append(" in \'");
       _builder_1.append(container);
@@ -70,8 +64,7 @@ public class IdeaDeclarationDocumentationProvider {
   }
   
   protected String getFileInfo(final PsiEObject element) {
-    EObject _eObject = element.getEObject();
-    final Resource resource = _eObject.eResource();
+    final Resource resource = element.getEObject().eResource();
     final Module module = ModuleUtilCore.findModuleForPsiElement(element);
     if ((module != null)) {
       StringConcatenation _builder = new StringConcatenation();
@@ -79,13 +72,11 @@ public class IdeaDeclarationDocumentationProvider {
       String _name = module.getName();
       _builder.append(_name);
       _builder.append("] ");
-      URI _uRI = resource.getURI();
-      String _lastSegment = _uRI.lastSegment();
+      String _lastSegment = resource.getURI().lastSegment();
       _builder.append(_lastSegment);
       return _builder.toString();
     }
-    URI _uRI_1 = resource.getURI();
-    return _uRI_1.lastSegment();
+    return resource.getURI().lastSegment();
   }
   
   public String getQuickNavigateInfo(final PsiEObject element) {
@@ -124,8 +115,7 @@ public class IdeaDeclarationDocumentationProvider {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t");
-    EObject _eObject = element.getEObject();
-    String _documentation = this.eObjectDocProvider.getDocumentation(_eObject);
+    String _documentation = this.eObjectDocProvider.getDocumentation(element.getEObject());
     _builder.append(_documentation, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("</p>");

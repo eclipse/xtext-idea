@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
@@ -98,9 +97,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
   public ILeafNode newLeafNode(final LeafElement it, final EObject grammarElement, final ICompositeNode parent) {
     ILeafNode _xblockexpression = null;
     {
-      int _startOffset = it.getStartOffset();
-      int _textLength = it.getTextLength();
-      final ILeafNode leafNode = this.newLeafNode(_startOffset, _textLength, grammarElement, false, null, parent);
+      final ILeafNode leafNode = this.newLeafNode(it.getStartOffset(), it.getTextLength(), grammarElement, false, null, parent);
       this.associate(it, leafNode);
       _xblockexpression = leafNode;
     }
@@ -131,8 +128,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
                 AbstractRule _xblockexpression_3 = null;
                 {
                   final String ruleName = TokenTool.getLexerRuleName(tokenName);
-                  Grammar _grammar = this.grammarAccess.getGrammar();
-                  _xblockexpression_3 = GrammarUtil.findRuleForName(_grammar, ruleName);
+                  _xblockexpression_3 = GrammarUtil.findRuleForName(this.grammarAccess.getGrammar(), ruleName);
                 }
                 _xifexpression_2 = _xblockexpression_3;
               }
@@ -153,9 +149,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
         _elvis = Boolean.valueOf(false);
       }
       final Boolean hidden = _elvis;
-      int _startOffset = it.getStartOffset();
-      int _textLength = it.getTextLength();
-      final ILeafNode leafNode = this.newLeafNode(_startOffset, _textLength, grammarElement, (hidden).booleanValue(), null, parent);
+      final ILeafNode leafNode = this.newLeafNode(it.getStartOffset(), it.getTextLength(), grammarElement, (hidden).booleanValue(), null, parent);
       this.associate(it, leafNode);
       _xblockexpression = leafNode;
     }

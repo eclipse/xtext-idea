@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.editorActions;
 import com.google.common.base.Objects;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.ex.DocumentEx;
-import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.tree.TokenSet;
 import java.util.Collections;
@@ -49,8 +48,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
   
   @Override
   public AutoEditBlockRegion findRegion(@Extension final AutoEditContext context) {
-    int _caretOffset = context.getCaretOffset();
-    return this.findRegion(_caretOffset, context);
+    return this.findRegion(context.getCaretOffset(), context);
   }
   
   protected AutoEditBlockRegion findRegion(final int offset, @Extension final AutoEditContext context) {
@@ -65,15 +63,12 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
       TextRegion previousClosingTerminal = closingTerminal;
       while ((((!Objects.equal(closingTerminal, null)) && (!Objects.equal(previousOpeningTerminal, null))) && (!Objects.equal(previousClosingTerminal, null)))) {
         {
-          int _offset = previousOpeningTerminal.getOffset();
-          TextRegion _findOpeningTerminal = this.findOpeningTerminal(_offset, context);
-          previousOpeningTerminal = _findOpeningTerminal;
+          previousOpeningTerminal = this.findOpeningTerminal(previousOpeningTerminal.getOffset(), context);
           boolean _notEquals = (!Objects.equal(previousOpeningTerminal, null));
           if (_notEquals) {
-            int _offset_1 = previousClosingTerminal.getOffset();
-            int _plus = (_offset_1 + 1);
-            TextRegion _findClosingTerminal = this.findClosingTerminal(_plus, context);
-            previousClosingTerminal = _findClosingTerminal;
+            int _offset = previousClosingTerminal.getOffset();
+            int _plus = (_offset + 1);
+            previousClosingTerminal = this.findClosingTerminal(_plus, context);
             boolean _equals_1 = Objects.equal(previousClosingTerminal, null);
             if (_equals_1) {
               closingTerminal = null;
@@ -86,61 +81,49 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
   }
   
   protected TextRegion findOpeningTerminal(final int offset, @Extension final AutoEditContext context) {
-    EditorEx _editor = context.getEditor();
-    DocumentEx _document = _editor.getDocument();
-    final String text = _document.getText();
+    final String text = context.getEditor().getDocument().getText();
     int leftOffset = offset;
     int rightOffset = offset;
     while (true) {
       {
-        String _openingTerminal = this.getOpeningTerminal();
-        final TextRegion openingTerminal = this.searchBackward(text, _openingTerminal, leftOffset, context);
+        final TextRegion openingTerminal = this.searchBackward(text, this.getOpeningTerminal(), leftOffset, context);
         boolean _equals = Objects.equal(openingTerminal, null);
         if (_equals) {
           return null;
         }
-        String _closingTerminal = this.getClosingTerminal();
-        final TextRegion closingTerminal = this.searchBackward(text, _closingTerminal, rightOffset, context);
+        final TextRegion closingTerminal = this.searchBackward(text, this.getClosingTerminal(), rightOffset, context);
         if ((Objects.equal(closingTerminal, null) || (closingTerminal.getOffset() < openingTerminal.getOffset()))) {
           return openingTerminal;
         }
-        int _offset = openingTerminal.getOffset();
-        leftOffset = _offset;
-        int _offset_1 = closingTerminal.getOffset();
-        rightOffset = _offset_1;
+        leftOffset = openingTerminal.getOffset();
+        rightOffset = closingTerminal.getOffset();
       }
     }
   }
   
   protected TextRegion findClosingTerminal(final int offset, @Extension final AutoEditContext context) {
-    EditorEx _editor = context.getEditor();
-    DocumentEx _document = _editor.getDocument();
-    final String text = _document.getText();
+    final String text = context.getEditor().getDocument().getText();
     int leftOffset = offset;
     int rightOffset = offset;
     while (true) {
       {
-        String _closingTerminal = this.getClosingTerminal();
-        final TextRegion closingTerminal = this.searchForward(text, _closingTerminal, rightOffset, context);
+        final TextRegion closingTerminal = this.searchForward(text, this.getClosingTerminal(), rightOffset, context);
         boolean _equals = Objects.equal(closingTerminal, null);
         if (_equals) {
           return null;
         }
-        String _openingTerminal = this.getOpeningTerminal();
-        final TextRegion openingTerminal = this.searchForward(text, _openingTerminal, leftOffset, context);
+        final TextRegion openingTerminal = this.searchForward(text, this.getOpeningTerminal(), leftOffset, context);
         if ((Objects.equal(openingTerminal, null) || (openingTerminal.getOffset() > closingTerminal.getOffset()))) {
           return closingTerminal;
         }
         int _offset = closingTerminal.getOffset();
         int _length = closingTerminal.getLength();
         int _plus = (_offset + _length);
-        int _findNextOffset = this.findNextOffset(rightOffset, _plus, context);
-        rightOffset = _findNextOffset;
+        rightOffset = this.findNextOffset(rightOffset, _plus, context);
         int _offset_1 = openingTerminal.getOffset();
         int _length_1 = openingTerminal.getLength();
         int _plus_1 = (_offset_1 + _length_1);
-        int _findNextOffset_1 = this.findNextOffset(leftOffset, _plus_1, context);
-        leftOffset = _findNextOffset_1;
+        leftOffset = this.findNextOffset(leftOffset, _plus_1, context);
       }
     }
   }
@@ -154,8 +137,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
         int _start = iterator.getStart();
         boolean _greaterThan = (_start > offset);
         if (_greaterThan) {
-          int _start_1 = iterator.getStart();
-          offset = _start_1;
+          offset = iterator.getStart();
         }
         TokenSet _tokenSet = context.getTokenSet(iterator);
         boolean _equals = Objects.equal(tokenSet, _tokenSet);
@@ -180,8 +162,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
           int _length = toFind.length();
           return new TextRegion(index, _length);
         }
-        int _indexOf = text.indexOf(toFind, (index + length));
-        index = _indexOf;
+        index = text.indexOf(toFind, (index + length));
       }
     }
     final String trimmed = toFind.trim();
@@ -203,8 +184,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
           int _length = toFind.length();
           return new TextRegion(index, _length);
         }
-        int _lastIndexOf = text.lastIndexOf(toFind, (index - length));
-        index = _lastIndexOf;
+        index = text.lastIndexOf(toFind, (index - length));
       }
     }
     final String trimmed = toFind.trim();
@@ -217,9 +197,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
   @Override
   public String indent(final AutoEditBlockRegion region, final String previousLineIndentation, @Extension final AutoEditContext context) {
     final int caretOffset = context.getCaretOffset();
-    TextRegion _openingTerminal = region.getOpeningTerminal();
-    int _offset = _openingTerminal.getOffset();
-    boolean _isSameLine = context.isSameLine(_offset, caretOffset);
+    boolean _isSameLine = context.isSameLine(region.getOpeningTerminal().getOffset(), caretOffset);
     if (_isSameLine) {
       final TextRegion closingTerminal = this.getClosingTerminal(region, context);
       boolean _equals = Objects.equal(closingTerminal, null);
@@ -227,14 +205,12 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
         this.close(previousLineIndentation, context);
       } else {
         if ((context.isSameLine(closingTerminal.getOffset(), caretOffset) && (closingTerminal.getOffset() >= caretOffset))) {
-          int _offset_1 = closingTerminal.getOffset();
-          String _text = context.getText(caretOffset, _offset_1);
-          final String text = _text.trim();
+          final String text = context.getText(caretOffset, closingTerminal.getOffset()).trim();
           DocumentEx _document = context.getDocument();
-          int _offset_2 = closingTerminal.getOffset();
+          int _offset = closingTerminal.getOffset();
           String _newLine = context.newLine(previousLineIndentation);
           String _plus = (text + _newLine);
-          _document.replaceString(caretOffset, _offset_2, _plus);
+          _document.replaceString(caretOffset, _offset, _plus);
         }
       }
       return this.getIndentationTerminal();
@@ -245,8 +221,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
       this.close(previousLineIndentation, context);
       return "";
     }
-    String _indentationTerminal = this.getIndentationTerminal();
-    return Strings.removeLeadingWhitespace(_indentationTerminal);
+    return Strings.removeLeadingWhitespace(this.getIndentationTerminal());
   }
   
   protected TextRegion getClosingTerminal(final AutoEditBlockRegion region, @Extension final AutoEditContext context) {
@@ -262,16 +237,12 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
   }
   
   protected void close(final String previousLineIndentation, @Extension final AutoEditContext context) {
-    int _caretOffset = context.getCaretOffset();
-    boolean _isEndOfLine = context.isEndOfLine(_caretOffset);
+    boolean _isEndOfLine = context.isEndOfLine(context.getCaretOffset());
     if (_isEndOfLine) {
-      DocumentEx _document = context.getDocument();
-      int _caretOffset_1 = context.getCaretOffset();
-      String _closingTerminal = this.getClosingTerminal();
-      String _removeLeadingWhitespace = Strings.removeLeadingWhitespace(_closingTerminal);
-      String _plus = (previousLineIndentation + _removeLeadingWhitespace);
-      String _newLine = context.newLine(_plus);
-      _document.insertString(_caretOffset_1, _newLine);
+      String _removeLeadingWhitespace = Strings.removeLeadingWhitespace(this.getClosingTerminal());
+      context.getDocument().insertString(
+        context.getCaretOffset(), 
+        context.newLine((previousLineIndentation + _removeLeadingWhitespace)));
     }
   }
   
@@ -280,16 +251,13 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
     final int newCaretOffset = context.type(c);
     boolean _shouldInsertClosingTerminal = this.shouldInsertClosingTerminal(newCaretOffset, context);
     if (_shouldInsertClosingTerminal) {
-      DocumentEx _document = context.getDocument();
-      String _closingTerminal = this.getClosingTerminal();
-      _document.insertString(newCaretOffset, _closingTerminal);
+      context.getDocument().insertString(newCaretOffset, this.getClosingTerminal());
     }
   }
   
   @Override
   public boolean close(final char c, @Extension final AutoEditContext context) {
-    int _caretOffset = context.getCaretOffset();
-    final AutoEditBlockRegion region = this.findRegion(_caretOffset, context);
+    final AutoEditBlockRegion region = this.findRegion(context.getCaretOffset(), context);
     boolean _equals = Objects.equal(region, null);
     if (_equals) {
       return false;
@@ -300,8 +268,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
       context.type(c);
     } else {
       if (((!Objects.equal(region.getClosingTerminal(), null)) && region.getClosingTerminal().contains(context.getCaretOffset()))) {
-        EditorEx _editor = context.getEditor();
-        EditorModificationUtil.moveCaretRelatively(_editor, 1);
+        EditorModificationUtil.moveCaretRelatively(context.getEditor(), 1);
       } else {
         context.type(c);
       }
@@ -319,9 +286,7 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
     if (_equals_1) {
       return region;
     }
-    TextRegion _openingTerminal = region.getOpeningTerminal();
-    int _offset = _openingTerminal.getOffset();
-    final AutoEditBlockRegion nextRegion = this.findRegion(_offset, context);
+    final AutoEditBlockRegion nextRegion = this.findRegion(region.getOpeningTerminal().getOffset(), context);
     return this.findOpenedRegion(nextRegion, context);
   }
   
@@ -334,15 +299,12 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
   private boolean shouldInsertClosingTerminalBeforeSpecialCharacters = false;
   
   protected boolean shouldInsertClosingTerminal(final int offset, @Extension final AutoEditContext context) {
-    DocumentEx _document = context.getDocument();
-    int _textLength = _document.getTextLength();
+    int _textLength = context.getDocument().getTextLength();
     boolean _lessEqualsThan = (_textLength <= offset);
     if (_lessEqualsThan) {
       return true;
     }
-    DocumentEx _document_1 = context.getDocument();
-    CharSequence _charsSequence = _document_1.getCharsSequence();
-    final char charAtOffset = _charsSequence.charAt(offset);
+    final char charAtOffset = context.getDocument().getCharsSequence().charAt(offset);
     if (((!this.shouldInsertClosingTerminalBeforeIndentifier) && Character.isJavaIdentifierStart(charAtOffset))) {
       return false;
     }

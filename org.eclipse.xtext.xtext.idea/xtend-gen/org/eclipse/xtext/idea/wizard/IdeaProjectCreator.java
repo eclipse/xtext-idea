@@ -13,9 +13,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.File;
-import java.net.URL;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtext.idea.config.XtextProjectConfigurator;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
@@ -31,7 +29,6 @@ import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
-import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 import org.jetbrains.jps.model.java.JavaSourceRootProperties;
@@ -59,33 +56,26 @@ public class IdeaProjectCreator implements ProjectsCreator {
   
   @Override
   public void createProjects(final WizardConfiguration config) {
-    Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
     final Consumer<ProjectDescriptor> _function = (ProjectDescriptor it) -> {
       this.createProject(it);
     };
-    _enabledProjects.forEach(_function);
+    config.getEnabledProjects().forEach(_function);
   }
   
   public Module createProject(final ProjectDescriptor project) {
     try {
-      String _location = project.getLocation();
-      final VirtualFile projectRoot = VfsUtil.createDirectories(_location);
+      final VirtualFile projectRoot = VfsUtil.createDirectories(project.getLocation());
       final LocalFileSystem fileSystem = LocalFileSystem.getInstance();
-      Iterable<? extends AbstractFile> _files = project.getFiles();
       final Consumer<AbstractFile> _function = (AbstractFile it) -> {
         try {
-          WizardConfiguration _config = project.getConfig();
-          SourceLayout _sourceLayout = _config.getSourceLayout();
-          Outlet _outlet = it.getOutlet();
-          String _pathFor = _sourceLayout.getPathFor(_outlet);
+          String _pathFor = project.getConfig().getSourceLayout().getPathFor(it.getOutlet());
           String _plus = (_pathFor + "/");
           String _relativePath = it.getRelativePath();
           final String projectRelativePath = (_plus + _relativePath);
           String _path = projectRoot.getPath();
           File _file = new File(_path);
           final File ioFile = new File(_file, projectRelativePath);
-          File _parentFile = ioFile.getParentFile();
-          _parentFile.mkdirs();
+          ioFile.getParentFile().mkdirs();
           ioFile.createNewFile();
           boolean _isExecutable = it.isExecutable();
           if (_isExecutable) {
@@ -95,59 +85,47 @@ public class IdeaProjectCreator implements ProjectsCreator {
           boolean _matched = false;
           if (it instanceof TextFile) {
             _matched=true;
-            String _content = ((TextFile)it).getContent();
-            VfsUtil.saveText(virtualFile, _content);
+            VfsUtil.saveText(virtualFile, ((TextFile)it).getContent());
           }
           if (!_matched) {
             if (it instanceof BinaryFile) {
               _matched=true;
-              URL _content = ((BinaryFile)it).getContent();
-              byte[] _byteArray = Resources.toByteArray(_content);
-              virtualFile.setBinaryContent(_byteArray);
+              virtualFile.setBinaryContent(Resources.toByteArray(((BinaryFile)it).getContent()));
             }
           }
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      _files.forEach(_function);
-      String _moduleFilePath = this.moduleFilePath(project);
-      String _id = StdModuleTypes.JAVA.getId();
-      final Module module = this.model.newModule(_moduleFilePath, _id);
-      ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-      final ModifiableRootModel rootModel = _instance.getModifiableModel();
+      project.getFiles().forEach(_function);
+      final Module module = this.model.newModule(this.moduleFilePath(project), StdModuleTypes.JAVA.getId());
+      final ModifiableRootModel rootModel = ModuleRootManager.getInstance(module).getModifiableModel();
       rootModel.inheritSdk();
-      String _location_1 = project.getLocation();
-      final VirtualFile modelContentRootDir = fileSystem.refreshAndFindFileByPath(_location_1);
+      final VirtualFile modelContentRootDir = fileSystem.refreshAndFindFileByPath(project.getLocation());
       final ContentEntry contentEntry = rootModel.addContentEntry(modelContentRootDir);
-      Outlet[] _generateOutlets = Outlet.generateOutlets();
       final Function1<Outlet, String> _function_1 = (Outlet it) -> {
         return project.sourceFolder(it);
       };
-      final List<String> genFolders = ListExtensions.<Outlet, String>map(((List<Outlet>)Conversions.doWrapArray(_generateOutlets)), _function_1);
-      Set<String> _sourceFolders = project.getSourceFolders();
+      final List<String> genFolders = ListExtensions.<Outlet, String>map(((List<Outlet>)Conversions.doWrapArray(Outlet.generateOutlets())), _function_1);
       final Consumer<String> _function_2 = (String it) -> {
         try {
           final VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it);
           JavaSourceRootType rootType = JavaSourceRootType.SOURCE;
           final boolean isGen = genFolders.contains(it);
-          JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
-          final JavaSourceRootProperties properties = _instance_1.createSourceRootProperties("", isGen);
+          final JavaSourceRootProperties properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", isGen);
           contentEntry.<JavaSourceRootProperties>addSourceFolder(sourceRoot, rootType, properties);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      _sourceFolders.forEach(_function_2);
+      project.getSourceFolders().forEach(_function_2);
       if ((!(project instanceof ParentProjectDescriptor))) {
         final AbstractFacetConfiguration conf = this.projectConfigrator.createOrGetFacetConf(module, "org.eclipse.xtend.core.Xtend");
         if ((conf != null)) {
           GeneratorConfigurationState _state = conf.getState();
-          String _absoluteSourceFolder = this.absoluteSourceFolder(project, Outlet.MAIN_XTEND_GEN);
-          _state.setOutputDirectory(_absoluteSourceFolder);
+          _state.setOutputDirectory(this.absoluteSourceFolder(project, Outlet.MAIN_XTEND_GEN));
           GeneratorConfigurationState _state_1 = conf.getState();
-          String _absoluteSourceFolder_1 = this.absoluteSourceFolder(project, Outlet.TEST_XTEND_GEN);
-          _state_1.setTestOutputDirectory(_absoluteSourceFolder_1);
+          _state_1.setTestOutputDirectory(this.absoluteSourceFolder(project, Outlet.TEST_XTEND_GEN));
         }
       }
       rootModel.commit();

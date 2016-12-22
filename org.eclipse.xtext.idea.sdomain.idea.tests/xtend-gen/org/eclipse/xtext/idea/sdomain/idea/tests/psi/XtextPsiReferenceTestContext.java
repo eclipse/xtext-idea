@@ -65,8 +65,7 @@ public class XtextPsiReferenceTestContext {
         String _substring_1 = this.text.substring((endIndex + 1));
         String _plus = (_substring + _substring_1);
         this.text = _plus;
-        int _indexOf = this.text.indexOf("<");
-        startIndex = _indexOf;
+        startIndex = this.text.indexOf("<");
       }
     }
   }

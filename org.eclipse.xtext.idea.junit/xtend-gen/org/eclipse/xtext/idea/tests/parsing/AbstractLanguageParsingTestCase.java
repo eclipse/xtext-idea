@@ -13,7 +13,6 @@ import com.intellij.lang.ASTFactory;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageASTFactory;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.mock.MockApplicationEx;
 import com.intellij.mock.MockEditorFactory;
 import com.intellij.mock.MockFileDocumentManagerImpl;
 import com.intellij.openapi.editor.Document;
@@ -24,7 +23,6 @@ import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.PlatformLiteFixture;
 import com.intellij.util.Function;
@@ -32,7 +30,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,7 +39,6 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.lang.LanguageSetup;
-import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
@@ -98,14 +94,11 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    ISetup _setup = this.getSetup();
-    this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, _setup);
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
+    this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, this.getSetup());
+    this.getXtextLanguage().injectMembers(this);
     this.configureFromParserDefinition(this.parserDefinition, this.myFileExt);
     this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
-    MockApplicationEx _application = PlatformLiteFixture.getApplication();
-    final MutablePicoContainer appContainer = _application.getPicoContainer();
+    final MutablePicoContainer appContainer = PlatformLiteFixture.getApplication().getPicoContainer();
     appContainer.unregisterComponent(EditorFactory.class);
     appContainer.unregisterComponent(FileDocumentManager.class);
     final MockEditorFactory editorFactory = new MockEditorFactory() {
@@ -177,8 +170,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       T _xblockexpression = null;
       {
         this.doCodeTest(code);
-        EList<EObject> _contents = this.actualResource.getContents();
-        EObject _head = IterableExtensions.<EObject>head(_contents);
+        EObject _head = IterableExtensions.<EObject>head(this.actualResource.getContents());
         final T model = ((T) _head);
         if (validate) {
           this.validationHelper.assertNoErrors(model);
@@ -216,10 +208,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   }
   
   protected void assertResource() {
-    XtextResource _createActualResource = this.createActualResource();
-    this.actualResource = _createActualResource;
-    XtextResource _createExpectedResource = this.createExpectedResource();
-    this.expectedResource = _createExpectedResource;
+    this.actualResource = this.createActualResource();
+    this.expectedResource = this.createExpectedResource();
     this.xtextResourceAsserts.assertResource(this.expectedResource, this.actualResource, false);
   }
   
@@ -231,19 +221,15 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
         it.setXtextFile(((BaseXtextFile) this.myFile));
       };
       final PsiToEcoreTransformator psiToEcoreTransformator = ObjectExtensions.<PsiToEcoreTransformator>operator_doubleArrow(_get, _function);
-      VirtualFile _virtualFile = this.myFile.getVirtualFile();
-      String _url = _virtualFile.getUrl();
-      final URI uri = URI.createURI(_url);
-      XtextResourceSet _createFreshResourceSet = this.createFreshResourceSet();
-      Resource _createResource = _createFreshResourceSet.createResource(uri);
+      final URI uri = URI.createURI(this.myFile.getVirtualFile().getUrl());
+      Resource _createResource = this.createFreshResourceSet().createResource(uri);
       final Procedure1<XtextResource> _function_1 = (XtextResource it) -> {
         try {
           it.setParser(psiToEcoreTransformator);
           byte[] _newByteArrayOfSize = new byte[0];
           ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
           it.load(_byteArrayInputStream, null);
-          PsiToEcoreAdapter _adapter = psiToEcoreTransformator.getAdapter();
-          _adapter.attachToEmfObject(it);
+          psiToEcoreTransformator.getAdapter().attachToEmfObject(it);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -271,14 +257,11 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     XtextResource _xblockexpression = null;
     {
       XtextResourceSet resourceSet = this.createFreshResourceSet();
-      VirtualFile _virtualFile = this.myFile.getVirtualFile();
-      String _url = _virtualFile.getUrl();
-      final URI uri = URI.createURI(_url);
+      final URI uri = URI.createURI(this.myFile.getVirtualFile().getUrl());
       Resource _createResource = resourceSet.createResource(uri);
       final Procedure1<XtextResource> _function = (XtextResource it) -> {
         try {
-          String _text = this.myFile.getText();
-          byte[] _bytes = _text.getBytes();
+          byte[] _bytes = this.myFile.getText().getBytes();
           ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
           it.load(_byteArrayInputStream, null);
         } catch (Throwable _e) {

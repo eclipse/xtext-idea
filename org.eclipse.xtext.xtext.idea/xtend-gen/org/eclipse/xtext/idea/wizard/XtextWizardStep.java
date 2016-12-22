@@ -7,9 +7,7 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.ui.ComboBox;
-import com.intellij.ui.components.JBTextField;
 import java.awt.GridBagConstraints;
-import java.util.Set;
 import java.util.function.Consumer;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -26,7 +24,6 @@ import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
-import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
@@ -71,8 +68,7 @@ public class XtextWizardStep extends ModuleWizardStep {
   public JComponent getComponent() {
     try {
       if ((this.mainPanel == null)) {
-        JPanel _createMainPanel = this.createMainPanel();
-        this.mainPanel = _createMainPanel;
+        this.mainPanel = this.createMainPanel();
         this.idea.setSelected(true);
       }
       return this.mainPanel;
@@ -102,8 +98,7 @@ public class XtextWizardStep extends ModuleWizardStep {
           JTextField _xblockexpression_1 = null;
           {
             this._ideaWidgetFactory.expand(it_1, GridBagConstraints.HORIZONTAL);
-            JBTextField _textField = this._ideaWidgetFactory.textField("org.xtext.example.mydsl.MyDsl");
-            _xblockexpression_1 = this.nameField = _textField;
+            _xblockexpression_1 = this.nameField = this._ideaWidgetFactory.textField("org.xtext.example.mydsl.MyDsl");
           }
           return _xblockexpression_1;
         };
@@ -112,8 +107,7 @@ public class XtextWizardStep extends ModuleWizardStep {
           return this._ideaWidgetFactory.label("Extension:");
         };
         final Function1<GridBagConstraints, JComponent> _function_5 = (GridBagConstraints it_1) -> {
-          JBTextField _textField = this._ideaWidgetFactory.textField("mydsl");
-          return this.extensionField = _textField;
+          return this.extensionField = this._ideaWidgetFactory.textField("mydsl");
         };
         it.row(it, _function_4, _function_5);
         final Function1<GridBagConstraints, JComponent> _function_6 = (GridBagConstraints it_1) -> {
@@ -125,18 +119,15 @@ public class XtextWizardStep extends ModuleWizardStep {
         };
         it.row(it, _function_7);
         final Function1<GridBagConstraints, JComponent> _function_8 = (GridBagConstraints it_1) -> {
-          JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Intellij Idea Plugin");
-          return this.idea = _checkBox;
+          return this.idea = this._ideaWidgetFactory.checkBox("Intellij Idea Plugin");
         };
         it.row(it, _function_8);
         final Function1<GridBagConstraints, JComponent> _function_9 = (GridBagConstraints it_1) -> {
-          JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Web Integration");
-          return this.web = _checkBox;
+          return this.web = this._ideaWidgetFactory.checkBox("Web Integration");
         };
         it.row(it, _function_9);
         final Function1<GridBagConstraints, JComponent> _function_10 = (GridBagConstraints it_1) -> {
-          JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Testing Support");
-          return this.test = _checkBox;
+          return this.test = this._ideaWidgetFactory.checkBox("Testing Support");
         };
         it.row(it, _function_10);
         final Function1<GridBagConstraints, JComponent> _function_11 = (GridBagConstraints it_1) -> {
@@ -173,8 +164,7 @@ public class XtextWizardStep extends ModuleWizardStep {
           ComboBox _xblockexpression_1 = null;
           {
             this._ideaWidgetFactory.indentRight(it_1, 400);
-            ComboBox _comboBox = this._ideaWidgetFactory.comboBox(SourceLayout.MAVEN, SourceLayout.PLAIN);
-            _xblockexpression_1 = this.layout = _comboBox;
+            _xblockexpression_1 = this.layout = this._ideaWidgetFactory.comboBox(SourceLayout.MAVEN, SourceLayout.PLAIN);
           }
           return _xblockexpression_1;
         };
@@ -200,30 +190,22 @@ public class XtextWizardStep extends ModuleWizardStep {
     final XtextModuleBuilder xtextBuilder = ((XtextModuleBuilder) _projectBuilder);
     final WizardConfiguration config = xtextBuilder.getWizardConfiguration();
     LanguageDescriptor _language = config.getLanguage();
-    String _text = this.nameField.getText();
-    _language.setName(_text);
+    _language.setName(this.nameField.getText());
     LanguageDescriptor _language_1 = config.getLanguage();
-    String _text_1 = this.extensionField.getText();
-    LanguageDescriptor.FileExtensions _fromString = LanguageDescriptor.FileExtensions.fromString(_text_1);
-    _language_1.setFileExtensions(_fromString);
+    _language_1.setFileExtensions(LanguageDescriptor.FileExtensions.fromString(this.extensionField.getText()));
     RuntimeProjectDescriptor _runtimeProject = config.getRuntimeProject();
     _runtimeProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = config.getIdeProject();
     _ideProject.setEnabled((this.idea.isSelected() || this.web.isSelected()));
     IntellijProjectDescriptor _intellijProject = config.getIntellijProject();
-    boolean _isSelected = this.idea.isSelected();
-    _intellijProject.setEnabled(_isSelected);
+    _intellijProject.setEnabled(this.idea.isSelected());
     WebProjectDescriptor _webProject = config.getWebProject();
-    boolean _isSelected_1 = this.web.isSelected();
-    _webProject.setEnabled(_isSelected_1);
-    Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
-    Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
+    _webProject.setEnabled(this.web.isSelected());
     final Consumer<TestedProjectDescriptor> _function = (TestedProjectDescriptor it) -> {
       TestProjectDescriptor _testProject = it.getTestProject();
-      boolean _isSelected_2 = this.test.isSelected();
-      _testProject.setEnabled(_isSelected_2);
+      _testProject.setEnabled(this.test.isSelected());
     };
-    _filter.forEach(_function);
+    Iterables.<TestedProjectDescriptor>filter(config.getEnabledProjects(), TestedProjectDescriptor.class).forEach(_function);
     Object _selectedItem = this.buildSystem.getSelectedItem();
     config.setPreferredBuildSystem(((BuildSystem) _selectedItem));
     Object _selectedItem_1 = this.layout.getSelectedItem();

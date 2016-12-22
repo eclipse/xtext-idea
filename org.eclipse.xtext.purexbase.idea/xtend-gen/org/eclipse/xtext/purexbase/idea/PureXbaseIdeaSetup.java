@@ -12,8 +12,7 @@ public class PureXbaseIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      PureXbaseStandaloneSetupIdea _pureXbaseStandaloneSetupIdea = new PureXbaseStandaloneSetupIdea();
-      _xblockexpression = _pureXbaseStandaloneSetupIdea.createInjector();
+      _xblockexpression = new PureXbaseStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }
