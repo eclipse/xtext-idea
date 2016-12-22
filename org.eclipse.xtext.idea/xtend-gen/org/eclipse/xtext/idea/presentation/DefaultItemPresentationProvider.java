@@ -39,10 +39,8 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   public ItemPresentation getItemPresentation(final Object element) {
     PresentationData _presentationData = new PresentationData();
     final Procedure1<PresentationData> _function = (PresentationData it) -> {
-      Icon _image = this.image(element);
-      it.setIcon(_image);
-      String _text = this.text(element);
-      it.setPresentableText(_text);
+      it.setIcon(this.image(element));
+      it.setPresentableText(this.text(element));
     };
     return ObjectExtensions.<PresentationData>operator_doubleArrow(_presentationData, _function);
   }

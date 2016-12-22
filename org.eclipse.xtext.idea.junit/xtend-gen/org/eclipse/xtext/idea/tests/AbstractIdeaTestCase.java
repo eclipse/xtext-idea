@@ -76,14 +76,10 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
         Project _project = this.getProject();
         VirtualFile _baseDir = _project.getBaseDir();
         final ContentEntry entry = model.addContentEntry(_baseDir);
-        Project _project_1 = this.getProject();
-        VirtualFile _baseDir_1 = _project_1.getBaseDir();
-        VirtualFile _createDirectoryIfMissing = VfsUtil.createDirectoryIfMissing(_baseDir_1, "src");
-        this.srcFolder = _createDirectoryIfMissing;
+        this.srcFolder = VfsUtil.createDirectoryIfMissing(this.getProject().getBaseDir(), "src");
         boolean _isTestSource = this.isTestSource(this.srcFolder);
         entry.addSourceFolder(this.srcFolder, _isTestSource);
-        Module _module_1 = this.getModule();
-        this.configureModule(_module_1, model, entry);
+        this.configureModule(this.getModule(), model, entry);
         model.commit();
         return null;
       } catch (Throwable _e) {
@@ -106,13 +102,10 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
       IResourceValidator _resourceValidator = _resourceServiceProvider.getResourceValidator();
       final List<Issue> issues = _resourceValidator.validate(resource, 
         CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-      String _string = issues.toString();
-      final Function1<Issue, Boolean> _function = (Issue it) -> {
+      TestCase.assertFalse(issues.toString(), IterableExtensions.<Issue>exists(issues, ((Function1<Issue, Boolean>) (Issue it) -> {
         Severity _severity = it.getSeverity();
         return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-      };
-      boolean _exists = IterableExtensions.<Issue>exists(issues, _function);
-      TestCase.assertFalse(_string, _exists);
+      })));
     }
   }
   

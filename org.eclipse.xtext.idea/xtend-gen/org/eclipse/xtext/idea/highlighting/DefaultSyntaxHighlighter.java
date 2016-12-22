@@ -46,7 +46,6 @@ public class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
   public TextAttributesKey[] getTokenHighlights(final IElementType tokenType) {
     int _antlrType = this.tokenTypeProvider.getAntlrType(tokenType);
     final String attribute = this.tokenToAttributeIdMapper.getId(_antlrType);
-    TextAttributesKey _textAttributesKey = this.textAttributeProvider.getTextAttributesKey(attribute);
-    return SyntaxHighlighterBase.pack(_textAttributesKey);
+    return SyntaxHighlighterBase.pack(this.textAttributeProvider.getTextAttributesKey(attribute));
   }
 }

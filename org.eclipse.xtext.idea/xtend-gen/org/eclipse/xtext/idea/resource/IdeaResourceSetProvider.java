@@ -29,7 +29,6 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -120,11 +119,9 @@ public class IdeaResourceSetProvider {
         IdeaResourceSetProvider.LOG.debug(_plus_1);
       }
       final Map<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> localWritten = this.writtenContents;
-      HashMap<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> _newHashMap = CollectionLiterals.<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>newHashMap();
-      this.writtenContents = _newHashMap;
+      this.writtenContents = CollectionLiterals.<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>newHashMap();
       final Set<URI> localDeleted = this.deleted;
-      HashSet<URI> _newHashSet = CollectionLiterals.<URI>newHashSet();
-      this.deleted = _newHashSet;
+      this.deleted = CollectionLiterals.<URI>newHashSet();
       if ((localDeleted.isEmpty() && localWritten.isEmpty())) {
         return;
       }
@@ -217,8 +214,7 @@ public class IdeaResourceSetProvider {
           VirtualFileBasedUriHandler.this.deleted.remove(uri);
           final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor contentDescriptor = new IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor();
           contentDescriptor.content = bytes;
-          long _currentTimeMillis = System.currentTimeMillis();
-          contentDescriptor.timeStamp = _currentTimeMillis;
+          contentDescriptor.timeStamp = System.currentTimeMillis();
           VirtualFileBasedUriHandler.this.writtenContents.put(uri, contentDescriptor);
         }
       };
@@ -416,8 +412,7 @@ public class IdeaResourceSetProvider {
   public XtextResourceSet get(final Module module) {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     resourceSet.setClasspathURIContext(module);
-    IdeaClasspathURIResolver _get = this.classpathURIResolverProvider.get();
-    resourceSet.setClasspathUriResolver(_get);
+    resourceSet.setClasspathUriResolver(this.classpathURIResolverProvider.get());
     URIConverter _uRIConverter = resourceSet.getURIConverter();
     EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
     _uRIHandlers.clear();

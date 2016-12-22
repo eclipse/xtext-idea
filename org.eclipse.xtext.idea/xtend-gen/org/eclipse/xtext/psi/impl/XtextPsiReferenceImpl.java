@@ -18,7 +18,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import java.util.ArrayList;
@@ -172,8 +171,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     {
       ASTNode referenceNode = this.myElement.getNode();
       while ((referenceNode instanceof CompositeElement)) {
-        TreeElement _lastChildNode = ((CompositeElement)referenceNode).getLastChildNode();
-        referenceNode = _lastChildNode;
+        referenceNode = ((CompositeElement)referenceNode).getLastChildNode();
       }
       _xblockexpression = referenceNode;
     }

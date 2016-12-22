@@ -53,9 +53,7 @@ public class DefaultBlockFactory implements BlockFactory {
       ASTNode _node = element.getNode();
       final DefaultXtextBlock block = new DefaultXtextBlock(_node, null, null);
       this.injector.injectMembers(block);
-      Language _language = element.getLanguage();
-      SpacingBuilder _createSpacingBuilder = this.createSpacingBuilder(settings, _language);
-      block.setSpacingBuilder(_createSpacingBuilder);
+      block.setSpacingBuilder(this.createSpacingBuilder(settings, element.getLanguage()));
       _xblockexpression = block;
     }
     return _xblockexpression;
@@ -87,8 +85,7 @@ public class DefaultBlockFactory implements BlockFactory {
       block.setTextRange(blockTextRange);
       block.setSpacingBuilder(spacingBuilder);
       block.setParentBlock(parentBlock);
-      Indent _childIndent = this.getChildIndent(parentBlock, block);
-      block.setIndent(_childIndent);
+      block.setIndent(this.getChildIndent(parentBlock, block));
       _xblockexpression = block;
     }
     return _xblockexpression;

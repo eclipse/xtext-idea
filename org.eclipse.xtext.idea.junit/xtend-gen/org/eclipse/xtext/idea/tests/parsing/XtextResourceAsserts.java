@@ -67,9 +67,7 @@ public class XtextResourceAsserts extends Assert {
     final ICompositeNode expectedRootNode = _parseResult.getRootNode();
     IParseResult _parseResult_1 = actualResource.getParseResult();
     final ICompositeNode actualRootNode = _parseResult_1.getRootNode();
-    String _print = this.nodeModelPrinter.print(expectedRootNode);
-    String _print_1 = this.nodeModelPrinter.print(actualRootNode);
-    Assert.assertEquals(_print, _print_1);
+    Assert.assertEquals(this.nodeModelPrinter.print(expectedRootNode), this.nodeModelPrinter.print(actualRootNode));
     if (resolve) {
       EcoreUtil2.resolveLazyCrossReferences(expectedResource, null);
       EcoreUtil2.resolveLazyCrossReferences(actualResource, null);
@@ -78,19 +76,16 @@ public class XtextResourceAsserts extends Assert {
     final EObject expectedRootASTElement = _parseResult_2.getRootASTElement();
     IParseResult _parseResult_3 = actualResource.getParseResult();
     final EObject actualRootASTElement = _parseResult_3.getRootASTElement();
-    String _objToStr = EmfFormatter.objToStr(expectedRootASTElement);
-    String _objToStr_1 = EmfFormatter.objToStr(actualRootASTElement);
-    Assert.assertEquals(_objToStr, _objToStr_1);
+    Assert.assertEquals(EmfFormatter.objToStr(expectedRootASTElement), EmfFormatter.objToStr(actualRootASTElement));
     this.invariantChecker.checkInvariant(actualRootNode);
     final PsiToEcoreAdapter psiToEcoreAdapter = PsiToEcoreAdapter.findInEmfObject(actualResource);
     BaseXtextFile _xtextFile = psiToEcoreAdapter.getXtextFile();
     PsiElement _firstChild = _xtextFile.getFirstChild();
     final ASTNode rootASTNode = _firstChild.getNode();
     this.assertASTNode(rootASTNode, actualRootNode, psiToEcoreAdapter);
-    String _printAST = this.printAST(rootASTNode);
-    INode _iNode = psiToEcoreAdapter.getINode(rootASTNode);
-    String _printAST_1 = this.printAST(_iNode, psiToEcoreAdapter);
-    Assert.assertEquals(_printAST, _printAST_1);
+    Assert.assertEquals(
+      this.printAST(rootASTNode), 
+      this.printAST(psiToEcoreAdapter.getINode(rootASTNode), psiToEcoreAdapter));
   }
   
   protected void assertASTNode(final ASTNode astNode, final ICompositeNode rootNode, final PsiToEcoreAdapter psiToEcoreAdapter) {
@@ -105,10 +100,9 @@ public class XtextResourceAsserts extends Assert {
       _builder_1.append(node);
       _builder_1.append(" is not a part of the tree for the ast node: ");
       _builder_1.append(astNode);
-      boolean _belongsTo = this.belongsTo(node, rootNode);
-      Assert.assertTrue(_builder_1.toString(), _belongsTo);
-      ASTNode _aSTNode = psiToEcoreAdapter.getASTNode(node);
-      Assert.assertEquals(astNode, _aSTNode);
+      Assert.assertTrue(_builder_1.toString(), 
+        this.belongsTo(node, rootNode));
+      Assert.assertEquals(astNode, psiToEcoreAdapter.getASTNode(node));
       final EObject semanticElement = node.getSemanticElement();
       if ((semanticElement != null)) {
         EClass _eClass = semanticElement.eClass();
@@ -117,14 +111,11 @@ public class XtextResourceAsserts extends Assert {
           EObject _semanticElement = node.getSemanticElement();
           final List<INode> nodes = NodeModelUtils.findNodesForFeature(_semanticElement, feature);
           final List<ASTNode> astNodes = this.astNodeExtension.findNodesForFeature(astNode, feature);
-          int _size = nodes.size();
-          int _size_1 = astNodes.size();
-          Assert.assertEquals(_size, _size_1);
+          Assert.assertEquals(nodes.size(), astNodes.size());
           for (int i = 0; (i < nodes.size()); i++) {
-            ASTNode _get = astNodes.get(i);
-            INode _get_1 = nodes.get(i);
-            ASTNode _aSTNode_1 = psiToEcoreAdapter.getASTNode(_get_1);
-            Assert.assertEquals(_get, _aSTNode_1);
+            Assert.assertEquals(
+              astNodes.get(i), 
+              psiToEcoreAdapter.getASTNode(nodes.get(i)));
           }
         }
       }

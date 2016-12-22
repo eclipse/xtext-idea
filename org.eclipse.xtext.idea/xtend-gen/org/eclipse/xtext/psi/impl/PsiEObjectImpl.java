@@ -57,8 +57,7 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   
   public PsiEObjectImpl(final ASTNode node) {
     super(node);
-    IElementType _elementType = node.getElementType();
-    this.elementType = _elementType;
+    this.elementType = node.getElementType();
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
     _xtextLanguage.injectMembers(this);
   }

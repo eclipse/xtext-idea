@@ -75,10 +75,8 @@ public class XtextPsiReferenceTest extends LightCodeInsightFixtureTestCase {
     int _startCrossReferenceOffset_1 = context.getStartCrossReferenceOffset();
     final int endReferenceOffsetInElement = (_endReferenceOffset - _startCrossReferenceOffset_1);
     final TextRange rangeInElement = reference.getRangeInElement();
-    int _startOffset = rangeInElement.getStartOffset();
-    TestCase.assertEquals(startReferneceOffsetInElement, _startOffset);
-    int _endOffset = rangeInElement.getEndOffset();
-    TestCase.assertEquals(endReferenceOffsetInElement, _endOffset);
+    TestCase.assertEquals(startReferneceOffsetInElement, rangeInElement.getStartOffset());
+    TestCase.assertEquals(endReferenceOffsetInElement, rangeInElement.getEndOffset());
     int _startReferenceToHighlightOffset = context.getStartReferenceToHighlightOffset();
     int _startCrossReferenceOffset_2 = context.getStartCrossReferenceOffset();
     final int startReferenceToHighlightOffsetInElement = (_startReferenceToHighlightOffset - _startCrossReferenceOffset_2);
@@ -86,9 +84,7 @@ public class XtextPsiReferenceTest extends LightCodeInsightFixtureTestCase {
     int _startCrossReferenceOffset_3 = context.getStartCrossReferenceOffset();
     final int endReferenceToHighlightOffsetInElement = (_endReferenceToHighlightOffset - _startCrossReferenceOffset_3);
     final TextRange rangeToHighlight = reference.getRangeToHighlightInElement();
-    int _startOffset_1 = rangeToHighlight.getStartOffset();
-    TestCase.assertEquals(startReferenceToHighlightOffsetInElement, _startOffset_1);
-    int _endOffset_1 = rangeToHighlight.getEndOffset();
-    TestCase.assertEquals(endReferenceToHighlightOffsetInElement, _endOffset_1);
+    TestCase.assertEquals(startReferenceToHighlightOffsetInElement, rangeToHighlight.getStartOffset());
+    TestCase.assertEquals(endReferenceToHighlightOffsetInElement, rangeToHighlight.getEndOffset());
   }
 }

@@ -77,9 +77,7 @@ public class XtextAutoBuilderComponentStateTest {
     ChunkedResourceDescriptions _chunkedResourceDescriptions = new ChunkedResourceDescriptions();
     final XtextAutoBuilderComponentState state = this._codec.encode(_resourceServiceProviderRegistryImpl, _chunkedResourceDescriptions, map);
     final Map<String, Source2GeneratedMapping> decodedState = this._codec.decodeModuleToGenerated(state);
-    Set<String> _keySet = decodedState.keySet();
-    int _size = _keySet.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, decodedState.keySet().size());
     final Source2GeneratedMapping _s2g0 = decodedState.get("module0");
     Assert.assertNotNull(_s2g0);
     URI _createURI_12 = URI.createURI("foo_");
@@ -169,27 +167,18 @@ public class XtextAutoBuilderComponentStateTest {
       }
       final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(map);
       ResourceServiceProviderRegistryImpl _resourceServiceProviderRegistryImpl = new ResourceServiceProviderRegistryImpl();
-      Map<String, Source2GeneratedMapping> _emptyMap = CollectionLiterals.<String, Source2GeneratedMapping>emptyMap();
-      final XtextAutoBuilderComponentState state = this._codec.encode(_resourceServiceProviderRegistryImpl, index, _emptyMap);
+      final XtextAutoBuilderComponentState state = this._codec.encode(_resourceServiceProviderRegistryImpl, index, CollectionLiterals.<String, Source2GeneratedMapping>emptyMap());
       final ChunkedResourceDescriptions _index = this._codec.decodeIndex(state);
+      Assert.assertEquals(IterableExtensions.size(index.getAllResourceDescriptions()), IterableExtensions.size(_index.getAllResourceDescriptions()));
       Iterable<IResourceDescription> _allResourceDescriptions = index.getAllResourceDescriptions();
-      int _size = IterableExtensions.size(_allResourceDescriptions);
-      Iterable<IResourceDescription> _allResourceDescriptions_1 = _index.getAllResourceDescriptions();
-      int _size_1 = IterableExtensions.size(_allResourceDescriptions_1);
-      Assert.assertEquals(_size, _size_1);
-      Iterable<IResourceDescription> _allResourceDescriptions_2 = index.getAllResourceDescriptions();
-      for (final IResourceDescription desc : _allResourceDescriptions_2) {
-        URI _uRI = desc.getURI();
-        IResourceDescription _resourceDescription = _index.getResourceDescription(_uRI);
-        IResourceDescription.Delta _createDelta = this._manager.createDelta(desc, _resourceDescription);
-        boolean _haveEObjectDescriptionsChanged = _createDelta.haveEObjectDescriptionsChanged();
-        Assert.assertFalse(_haveEObjectDescriptionsChanged);
+      for (final IResourceDescription desc : _allResourceDescriptions) {
+        Assert.assertFalse(this._manager.createDelta(desc, _index.getResourceDescription(desc.getURI())).haveEObjectDescriptionsChanged());
       }
       ResourceDescriptionsData _container = _index.getContainer("module1");
       final Iterable<IResourceDescription> _module0 = _container.getAllResourceDescriptions();
       final Function1<IResourceDescription, String> _function = (IResourceDescription it) -> {
-        URI _uRI_1 = it.getURI();
-        String _lastSegment = _uRI_1.lastSegment();
+        URI _uRI = it.getURI();
+        String _lastSegment = _uRI.lastSegment();
         return _lastSegment.toString();
       };
       Iterable<String> _map = IterableExtensions.<IResourceDescription, String>map(_module0, _function);
@@ -198,8 +187,8 @@ public class XtextAutoBuilderComponentStateTest {
       ResourceDescriptionsData _container_1 = _index.getContainer("module1");
       final Iterable<IResourceDescription> _module1 = _container_1.getAllResourceDescriptions();
       final Function1<IResourceDescription, String> _function_1 = (IResourceDescription it) -> {
-        URI _uRI_1 = it.getURI();
-        String _lastSegment = _uRI_1.lastSegment();
+        URI _uRI = it.getURI();
+        String _lastSegment = _uRI.lastSegment();
         return _lastSegment.toString();
       };
       Iterable<String> _map_1 = IterableExtensions.<IResourceDescription, String>map(_module1, _function_1);

@@ -49,8 +49,7 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   
   @Override
   public Set<OutputConfiguration> getOutputConfigurations(final Resource context) {
-    ResourceSet _resourceSet = context.getResourceSet();
-    return this.getOutputConfigurations(_resourceSet);
+    return this.getOutputConfigurations(context.getResourceSet());
   }
   
   @Override
@@ -69,15 +68,10 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
       AbstractFacetConfiguration _configuration = facet.getConfiguration();
       final GeneratorConfigurationState generatorConf = _configuration.getState();
       final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
-      String _outputDirectory = generatorConf.getOutputDirectory();
-      String _moduleRelativePath = this.toModuleRelativePath(_outputDirectory, module);
-      defOut.setOutputDirectory(_moduleRelativePath);
-      boolean _isCreateDirectory = generatorConf.isCreateDirectory();
-      defOut.setCreateOutputDirectory(_isCreateDirectory);
-      boolean _isDeleteGenerated = generatorConf.isDeleteGenerated();
-      defOut.setCanClearOutputDirectory(_isDeleteGenerated);
-      boolean _isOverwriteExisting = generatorConf.isOverwriteExisting();
-      defOut.setOverrideExistingResources(_isOverwriteExisting);
+      defOut.setOutputDirectory(this.toModuleRelativePath(generatorConf.getOutputDirectory(), module));
+      defOut.setCreateOutputDirectory(generatorConf.isCreateDirectory());
+      defOut.setCanClearOutputDirectory(generatorConf.isDeleteGenerated());
+      defOut.setOverrideExistingResources(generatorConf.isOverwriteExisting());
       defOut.setUseOutputPerSourceFolder(true);
       final Iterable<SourceFolder> allSrcFolders = RootModelExtensions.getExistingSourceFolders(module);
       for (final SourceFolder srcFolder : allSrcFolders) {
@@ -86,13 +80,9 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
           final OutputConfiguration.SourceMapping mapping = new OutputConfiguration.SourceMapping(_relativePath);
           boolean _isTestSource = srcFolder.isTestSource();
           if (_isTestSource) {
-            String _testOutputDirectory = generatorConf.getTestOutputDirectory();
-            String _moduleRelativePath_1 = this.toModuleRelativePath(_testOutputDirectory, module);
-            mapping.setOutputDirectory(_moduleRelativePath_1);
+            mapping.setOutputDirectory(this.toModuleRelativePath(generatorConf.getTestOutputDirectory(), module));
           } else {
-            String _outputDirectory_1 = generatorConf.getOutputDirectory();
-            String _moduleRelativePath_2 = this.toModuleRelativePath(_outputDirectory_1, module);
-            mapping.setOutputDirectory(_moduleRelativePath_2);
+            mapping.setOutputDirectory(this.toModuleRelativePath(generatorConf.getOutputDirectory(), module));
           }
           Set<OutputConfiguration.SourceMapping> _sourceMappings = defOut.getSourceMappings();
           _sourceMappings.add(mapping);

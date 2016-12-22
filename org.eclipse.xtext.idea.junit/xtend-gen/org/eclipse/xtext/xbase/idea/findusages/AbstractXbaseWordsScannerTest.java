@@ -112,7 +112,6 @@ public abstract class AbstractXbaseWordsScannerTest extends LightToolingTest {
       return words.add(_string);
     };
     wordsScanner.processWords(text, _function);
-    String _string = text.toString();
-    UsefulTestCase.<String>assertOrderedEquals(_string, words, expectedWords);
+    UsefulTestCase.<String>assertOrderedEquals(text.toString(), words, expectedWords);
   }
 }

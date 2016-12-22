@@ -28,8 +28,7 @@ public class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase 
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = SimpleBeeLangTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(SimpleBeeLangTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

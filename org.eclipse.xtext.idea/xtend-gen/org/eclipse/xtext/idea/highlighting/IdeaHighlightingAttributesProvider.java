@@ -15,11 +15,8 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -55,12 +52,9 @@ public class IdeaHighlightingAttributesProvider {
   protected void initialize() {
     boolean _equals = Objects.equal(this.attributesDescriptors, null);
     if (_equals) {
-      ArrayList<AttributesDescriptor> _newArrayList = CollectionLiterals.<AttributesDescriptor>newArrayList();
-      this.attributesDescriptors = _newArrayList;
-      HashMap<String, HighlightInfoType> _newHashMap = CollectionLiterals.<String, HighlightInfoType>newHashMap();
-      this.name2highlightInfoType = _newHashMap;
-      HashMap<String, String> _newHashMap_1 = CollectionLiterals.<String, String>newHashMap();
-      this.xtextStyle2xtextStyleRedirectMap = _newHashMap_1;
+      this.attributesDescriptors = CollectionLiterals.<AttributesDescriptor>newArrayList();
+      this.name2highlightInfoType = CollectionLiterals.<String, HighlightInfoType>newHashMap();
+      this.xtextStyle2xtextStyleRedirectMap = CollectionLiterals.<String, String>newHashMap();
       this.highlightingConfiguration.configure(new IHighlightingConfiguration.IHighlightingStyleAcceptor() {
         @Override
         public TextAttributesKey addStyle(final String xtextStyleId, final String displayName, final TextAttributesKey fallbackKey) {
@@ -128,15 +122,12 @@ public class IdeaHighlightingAttributesProvider {
   }
   
   public Map<String, TextAttributesKey> getXtextStyle2TextAttributes() {
-    Set<Map.Entry<String, HighlightInfoType>> _entrySet = this.name2highlightInfoType.entrySet();
-    final Function1<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>> _function = (Map.Entry<String, HighlightInfoType> it) -> {
+    return CollectionLiterals.<String, TextAttributesKey>newHashMap(((Pair<? extends String, ? extends TextAttributesKey>[])Conversions.unwrapArray(IterableExtensions.<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>>map(this.name2highlightInfoType.entrySet(), ((Function1<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>>) (Map.Entry<String, HighlightInfoType> it) -> {
       String _key = it.getKey();
       HighlightInfoType _value = it.getValue();
       TextAttributesKey _attributesKey = _value.getAttributesKey();
       return Pair.<String, TextAttributesKey>of(_key, _attributesKey);
-    };
-    Iterable<Pair<String, TextAttributesKey>> _map = IterableExtensions.<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>>map(_entrySet, _function);
-    return CollectionLiterals.<String, TextAttributesKey>newHashMap(((Pair<? extends String, ? extends TextAttributesKey>[])Conversions.unwrapArray(_map, Pair.class)));
+    })), Pair.class)));
   }
   
   public Iterable<AttributesDescriptor> getAttributesDescriptors() {

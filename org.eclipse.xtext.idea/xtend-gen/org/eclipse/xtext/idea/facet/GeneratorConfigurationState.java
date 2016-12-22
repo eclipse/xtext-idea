@@ -22,12 +22,9 @@ public class GeneratorConfigurationState {
       }
       this.outputDirectory = outputDir;
       this.testOutputDirectory = outputDir;
-      boolean _isCreateOutputDirectory = defOutput.isCreateOutputDirectory();
-      this.createDirectory = _isCreateOutputDirectory;
-      boolean _isCanClearOutputDirectory = defOutput.isCanClearOutputDirectory();
-      this.deleteGenerated = _isCanClearOutputDirectory;
-      boolean _isOverrideExistingResources = defOutput.isOverrideExistingResources();
-      this.overwriteExisting = _isOverrideExistingResources;
+      this.createDirectory = defOutput.isCreateOutputDirectory();
+      this.deleteGenerated = defOutput.isCanClearOutputDirectory();
+      this.overwriteExisting = defOutput.isOverrideExistingResources();
     }
   }
   

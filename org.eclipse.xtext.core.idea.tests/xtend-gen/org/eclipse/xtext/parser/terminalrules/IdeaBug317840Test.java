@@ -26,8 +26,7 @@ public class IdeaBug317840Test extends AbstractLanguageParsingTestCase {
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = Bug317840TestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(Bug317840TestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

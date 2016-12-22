@@ -38,8 +38,7 @@ public class ValueConverterErrorContext extends ErrorContext implements ISyntaxE
       String result = _xifexpression;
       boolean _equals = Objects.equal(result, null);
       if (_equals) {
-        String _message = this.valueConverterException.getMessage();
-        result = _message;
+        result = this.valueConverterException.getMessage();
       }
       boolean _equals_1 = Objects.equal(result, null);
       if (_equals_1) {

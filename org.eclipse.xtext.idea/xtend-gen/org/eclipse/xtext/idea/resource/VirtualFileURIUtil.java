@@ -66,8 +66,7 @@ public class VirtualFileURIUtil {
       if (_equals) {
         throw new IllegalStateException(("couldn\'t find virtual file for " + uri));
       }
-      URI _trimSegments = uri.trimSegments(1);
-      final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(_trimSegments, true);
+      final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(uri.trimSegments(1), true);
       if (isDirectory) {
         String _lastSegment = uri.lastSegment();
         return VfsUtil.createDirectoryIfMissing(parent, _lastSegment);

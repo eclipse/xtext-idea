@@ -35,12 +35,8 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   
   @Inject
   public void setCommenter(final CodeDocumentationAwareCommenter commenter) {
-    IElementType _lineCommentTokenType = commenter.getLineCommentTokenType();
-    TokenSet _create = TokenSet.create(_lineCommentTokenType);
-    this.slCommentTokens = _create;
-    IElementType _blockCommentTokenType = commenter.getBlockCommentTokenType();
-    TokenSet _create_1 = TokenSet.create(_blockCommentTokenType);
-    this.mlCommentTokens = _create_1;
+    this.slCommentTokens = TokenSet.create(commenter.getLineCommentTokenType());
+    this.mlCommentTokens = TokenSet.create(commenter.getBlockCommentTokenType());
   }
   
   @Override

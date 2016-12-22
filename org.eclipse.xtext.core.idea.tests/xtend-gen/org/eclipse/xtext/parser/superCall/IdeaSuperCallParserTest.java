@@ -26,8 +26,7 @@ public class IdeaSuperCallParserTest extends AbstractLanguageParsingTestCase {
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = InheritanceTest3LanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(InheritanceTest3LanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

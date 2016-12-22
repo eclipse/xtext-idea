@@ -27,9 +27,6 @@ import com.intellij.lang.Language;
 import com.intellij.lang.LanguageFormatting;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.LanguageFileType;
@@ -55,7 +52,6 @@ import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.util.Consumer;
 import com.intellij.util.ui.tree.TreeUtil;
-import java.util.List;
 import javax.swing.JTree;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
@@ -129,12 +125,9 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
         final LanguageLevelModuleExtension languageLevelModuleExtension = model.<LanguageLevelModuleExtension>getModuleExtension(LanguageLevelModuleExtension.class);
         boolean _notEquals = (!Objects.equal(languageLevelModuleExtension, null));
         if (_notEquals) {
-          LanguageLevel _languageLevel = LightToolingTest.this.getLanguageLevel();
-          languageLevelModuleExtension.setLanguageLevel(_languageLevel);
+          languageLevelModuleExtension.setLanguageLevel(LightToolingTest.this.getLanguageLevel());
         }
-        Language _language = LightToolingTest.this.fileType.getLanguage();
-        String _iD = _language.getID();
-        LightToolingTest.addFacetToModule(module, _iD);
+        LightToolingTest.addFacetToModule(module, LightToolingTest.this.fileType.getLanguage().getID());
         LightToolingTest.this.configureModule(module, model, contentEntry);
       }
       
@@ -204,9 +197,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void assertLookupStrings(final String... items) {
-    List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(items)));
-    List<String> _lookupElementStrings = this.myFixture.getLookupElementStrings();
-    TestCase.assertEquals(_list, _lookupElementStrings);
+    TestCase.assertEquals(IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(items))), this.myFixture.getLookupElementStrings());
   }
   
   protected void assertHighlights(final String lineDelimitedHighlights) {
@@ -216,13 +207,8 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     VirtualFile _virtualFile = _file.getVirtualFile();
     EditorHighlighter _createHighlighter = HighlighterFactory.createHighlighter(_project, _virtualFile);
     final Procedure1<EditorHighlighter> _function = (EditorHighlighter it) -> {
-      Editor _editor = this.myFixture.getEditor();
-      Document _document = _editor.getDocument();
-      String _text = _document.getText();
-      it.setText(_text);
-      Editor _editor_1 = this.myFixture.getEditor();
-      EditorColorsScheme _colorsScheme = _editor_1.getColorsScheme();
-      it.setColorScheme(_colorsScheme);
+      it.setText(this.myFixture.getEditor().getDocument().getText());
+      it.setColorScheme(this.myFixture.getEditor().getColorsScheme());
     };
     final EditorHighlighter highlighter = ObjectExtensions.<EditorHighlighter>operator_doubleArrow(_createHighlighter, _function);
     final HighlighterIterator highlights = highlighter.createIterator(0);
@@ -241,8 +227,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
           int end = highlights.getEnd();
           while (((!highlights.atEnd()) && Objects.equal(highlights.getTokenType(), tokenType))) {
             {
-              int _end = highlights.getEnd();
-              end = _end;
+              end = highlights.getEnd();
               highlights.advance();
             }
           }

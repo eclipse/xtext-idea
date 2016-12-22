@@ -13,7 +13,6 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.File;
-import java.net.URL;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -101,9 +100,7 @@ public class IdeaProjectCreator implements ProjectsCreator {
           if (!_matched) {
             if (it instanceof BinaryFile) {
               _matched=true;
-              URL _content = ((BinaryFile)it).getContent();
-              byte[] _byteArray = Resources.toByteArray(_content);
-              virtualFile.setBinaryContent(_byteArray);
+              virtualFile.setBinaryContent(Resources.toByteArray(((BinaryFile)it).getContent()));
             }
           }
         } catch (Throwable _e) {
@@ -143,11 +140,9 @@ public class IdeaProjectCreator implements ProjectsCreator {
         final AbstractFacetConfiguration conf = this.projectConfigrator.createOrGetFacetConf(module, "org.eclipse.xtend.core.Xtend");
         if ((conf != null)) {
           GeneratorConfigurationState _state = conf.getState();
-          String _absoluteSourceFolder = this.absoluteSourceFolder(project, Outlet.MAIN_XTEND_GEN);
-          _state.setOutputDirectory(_absoluteSourceFolder);
+          _state.setOutputDirectory(this.absoluteSourceFolder(project, Outlet.MAIN_XTEND_GEN));
           GeneratorConfigurationState _state_1 = conf.getState();
-          String _absoluteSourceFolder_1 = this.absoluteSourceFolder(project, Outlet.TEST_XTEND_GEN);
-          _state_1.setTestOutputDirectory(_absoluteSourceFolder_1);
+          _state_1.setTestOutputDirectory(this.absoluteSourceFolder(project, Outlet.TEST_XTEND_GEN));
         }
       }
       rootModel.commit();

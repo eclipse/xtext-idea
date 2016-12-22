@@ -28,8 +28,7 @@ public class IdeaMetamodelTransformationErrorTest extends AbstractLanguageParsin
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = XtextLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(XtextLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

@@ -146,9 +146,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
       List<Map.Entry<BracePair, Integer>> _sortWith = IterableExtensions.<Map.Entry<BracePair, Integer>>sortWith(_entries, _function);
       List<Map.Entry<BracePair, Integer>> _reverse = ListExtensions.<Map.Entry<BracePair, Integer>>reverse(_sortWith);
       for (final Map.Entry<BracePair, Integer> entry : _reverse) {
-        Integer _value = entry.getValue();
-        BracePair _key = entry.getKey();
-        this.group(stack, _value, _key, null);
+        this.group(stack, entry.getValue(), entry.getKey(), null);
       }
       _xblockexpression = stack;
     }
@@ -164,17 +162,13 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     final SyntheticXtextBlock groupBlock = this.createGroup(children);
     groupBlock.setIncomplete(Boolean.valueOf((Objects.equal(closingBlock, null) || Objects.equal(this._blockExtension.getElementType(closingBlock), TokenType.ERROR_ELEMENT))));
     final boolean enforceIndentToChildren = this.shouldEnforceIndentToChildren(children);
-    Indent _indent = this._blockExtension.getIndent(bracePair, enforceIndentToChildren);
-    groupBlock.setIndent(_indent);
+    groupBlock.setIndent(this._blockExtension.getIndent(bracePair, enforceIndentToChildren));
+    groupBlock.setParentBlock(IterableExtensions.<ModifiableBlock>head(Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class)).getParentBlock());
     Iterable<ModifiableBlock> _filter = Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class);
-    ModifiableBlock _head = IterableExtensions.<ModifiableBlock>head(_filter);
-    Block _parentBlock = _head.getParentBlock();
-    groupBlock.setParentBlock(_parentBlock);
-    Iterable<ModifiableBlock> _filter_1 = Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class);
     final Consumer<ModifiableBlock> _function = (ModifiableBlock child) -> {
       child.setParentBlock(groupBlock);
     };
-    _filter_1.forEach(_function);
+    _filter.forEach(_function);
     stack.addLast(groupBlock);
   }
   

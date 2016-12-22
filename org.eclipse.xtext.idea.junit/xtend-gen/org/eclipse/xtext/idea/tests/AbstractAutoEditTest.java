@@ -22,11 +22,9 @@ public abstract class AbstractAutoEditTest extends LightToolingTest {
   }
   
   protected void assertAutoIndentOnNewLine(final CharSequence model, final CharSequence expectedModel) {
-    String _string = model.toString();
-    this.configureByText(_string);
+    this.configureByText(model.toString());
     this.newLine();
-    String _string_1 = expectedModel.toString();
-    this.assertState(_string_1);
+    this.assertState(expectedModel.toString());
   }
   
   protected void selectText(final int relativeToCurrentOffset, final int length) {
@@ -75,8 +73,7 @@ public abstract class AbstractAutoEditTest extends LightToolingTest {
       _xblockexpression = ((beforeCaret + "|") + afterCaret);
     }
     final String actualState = _xblockexpression;
-    String _dumpFormattingModel = this.dumpFormattingModel();
-    TestCase.assertEquals(_dumpFormattingModel, expectedState, actualState);
+    TestCase.assertEquals(this.dumpFormattingModel(), expectedState, actualState);
   }
   
   protected void newLine() {

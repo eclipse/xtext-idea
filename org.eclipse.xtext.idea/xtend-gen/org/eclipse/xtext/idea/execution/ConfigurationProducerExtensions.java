@@ -85,9 +85,7 @@ public class ConfigurationProducerExtensions {
       List<? extends PsiElement> _generatedElements = this.traceProvider.getGeneratedElements(psiElement);
       PsiElement javaElement = IterableExtensions.head(_generatedElements);
       if ((javaElement == null)) {
-        Iterable<PsiFile> _javaFiles = this.getJavaFiles(psiElement);
-        PsiFile _head = IterableExtensions.<PsiFile>head(_javaFiles);
-        javaElement = _head;
+        javaElement = IterableExtensions.<PsiFile>head(this.getJavaFiles(psiElement));
       }
       return javaElement;
     }

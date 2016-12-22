@@ -72,8 +72,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   public XtextModuleBuilder() {
     XtextLanguage.INSTANCE.injectMembers(this);
-    WizardConfiguration _get = this.wizardConfigProvider.get();
-    this.wizardConfiguration = _get;
+    this.wizardConfiguration = this.wizardConfigProvider.get();
   }
   
   @Override
@@ -182,11 +181,8 @@ public class XtextModuleBuilder extends ModuleBuilder {
     if ((projectJavaVersion != null)) {
       this.wizardConfiguration.setJavaVersion(projectJavaVersion);
     }
-    VirtualFile _baseDir = project.getBaseDir();
-    String _path = _baseDir.getPath();
-    this.wizardConfiguration.setRootLocation(_path);
-    String _name = this.getName();
-    this.wizardConfiguration.setBaseName(_name);
+    this.wizardConfiguration.setRootLocation(project.getBaseDir().getPath());
+    this.wizardConfiguration.setBaseName(this.getName());
     Application _application = ApplicationManager.getApplication();
     final Runnable _function = () -> {
       IdeaProjectCreator _create = this.projectCreatorfactory.create(moduleModel);

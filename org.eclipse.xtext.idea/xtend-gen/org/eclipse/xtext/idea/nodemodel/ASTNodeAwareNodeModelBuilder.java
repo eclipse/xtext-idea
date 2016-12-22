@@ -98,9 +98,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
   public ILeafNode newLeafNode(final LeafElement it, final EObject grammarElement, final ICompositeNode parent) {
     ILeafNode _xblockexpression = null;
     {
-      int _startOffset = it.getStartOffset();
-      int _textLength = it.getTextLength();
-      final ILeafNode leafNode = this.newLeafNode(_startOffset, _textLength, grammarElement, false, null, parent);
+      final ILeafNode leafNode = this.newLeafNode(it.getStartOffset(), it.getTextLength(), grammarElement, false, null, parent);
       this.associate(it, leafNode);
       _xblockexpression = leafNode;
     }
@@ -153,9 +151,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
         _elvis = Boolean.valueOf(false);
       }
       final Boolean hidden = _elvis;
-      int _startOffset = it.getStartOffset();
-      int _textLength = it.getTextLength();
-      final ILeafNode leafNode = this.newLeafNode(_startOffset, _textLength, grammarElement, (hidden).booleanValue(), null, parent);
+      final ILeafNode leafNode = this.newLeafNode(it.getStartOffset(), it.getTextLength(), grammarElement, (hidden).booleanValue(), null, parent);
       this.associate(it, leafNode);
       _xblockexpression = leafNode;
     }

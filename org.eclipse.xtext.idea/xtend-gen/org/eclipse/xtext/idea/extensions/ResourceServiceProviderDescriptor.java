@@ -28,8 +28,7 @@ public class ResourceServiceProviderDescriptor extends AbstractResourceServicePr
   protected Object getExtension() {
     boolean _equals = Objects.equal(this.myExtension, null);
     if (_equals) {
-      Object _createInstance = this.extensionPoint.createInstance();
-      this.myExtension = _createInstance;
+      this.myExtension = this.extensionPoint.createInstance();
     }
     return this.myExtension;
   }

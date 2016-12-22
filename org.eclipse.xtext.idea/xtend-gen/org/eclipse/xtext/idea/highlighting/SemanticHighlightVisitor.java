@@ -110,8 +110,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
     try {
       if ((element instanceof BaseXtextFile)) {
         final XtextResource resource = ((BaseXtextFile)element).getResource();
-        long _modificationStamp = resource.getModificationStamp();
-        this.lastRun = _modificationStamp;
+        this.lastRun = resource.getModificationStamp();
         CancelProgressIndicator _cancelProgressIndicator = new CancelProgressIndicator();
         this.highlightCalculator.provideHighlightingFor(resource, this.acceptor, _cancelProgressIndicator);
       }

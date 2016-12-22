@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.build;
 
 import com.intellij.openapi.vfs.VirtualFile;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
@@ -38,8 +37,7 @@ public class BuildEvent {
   
   public BuildEvent(final BuildEvent.Type type, final VirtualFile... files) {
     this.type = type;
-    LinkedHashMap<URI, VirtualFile> _newLinkedHashMap = CollectionLiterals.<URI, VirtualFile>newLinkedHashMap();
-    this.filesByURI = _newLinkedHashMap;
+    this.filesByURI = CollectionLiterals.<URI, VirtualFile>newLinkedHashMap();
     for (final VirtualFile file : files) {
       URI _uRI = VirtualFileURIUtil.getURI(file);
       this.filesByURI.put(_uRI, file);

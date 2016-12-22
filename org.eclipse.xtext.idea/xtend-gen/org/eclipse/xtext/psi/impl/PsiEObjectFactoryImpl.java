@@ -121,8 +121,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       Lexer _createLexer = this.parserDefinition.createLexer(_project);
       PsiBuilder _createBuilder = _instance.createBuilder(this.parserDefinition, _createLexer, text);
       final Procedure1<PsiBuilder> _function = (PsiBuilder it) -> {
-        Integer _userData = context.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
-        it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, _userData);
+        it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, context.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY));
       };
       _xblockexpression = ObjectExtensions.<PsiBuilder>operator_doubleArrow(_createBuilder, _function);
     }

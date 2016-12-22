@@ -70,10 +70,8 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     super(resourceSet, indexedJvmTypeAccess, services);
     this.module = module;
     this.searchScope = searchScope;
-    StubURIHelper _createStubURIHelper = this.createStubURIHelper();
-    this.uriHelper = _createStubURIHelper;
-    PsiBasedTypeFactory _createPsiClassFactory = this.createPsiClassFactory(psiModelAssociator);
-    this.psiClassFactory = _createPsiClassFactory;
+    this.uriHelper = this.createStubURIHelper();
+    this.psiClassFactory = this.createPsiClassFactory(psiModelAssociator);
   }
   
   public PsiBasedTypeFactory createPsiClassFactory(final IPsiModelAssociator psiModelAssociator) {
@@ -101,8 +99,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       while ((Objects.equal(result, null) && nameVariants.hasNext())) {
         {
           final String nextVariant = nameVariants.next();
-          JvmType _doFindTypeByName = this.doFindTypeByName(nextVariant, true);
-          result = _doFindTypeByName;
+          result = this.doFindTypeByName(nextVariant, true);
         }
       }
       _xblockexpression = result;

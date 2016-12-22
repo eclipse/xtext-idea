@@ -198,17 +198,16 @@ public class AutoEditString extends AbstractAutoEditBlock {
     String _closingTerminal_1 = this.getClosingTerminal();
     int _length_2 = _closingTerminal_1.length();
     int _minus_1 = (_end_1 - _length_2);
-    int _end_2 = iterator.getEnd();
-    String _text = context.getText(_minus_1, _end_2);
+    String _text = context.getText(_minus_1, iterator.getEnd());
     String _closingTerminal_2 = this.getClosingTerminal();
     boolean _notEquals = (!Objects.equal(_text, _closingTerminal_2));
     if (_notEquals) {
       return null;
     }
-    int _end_3 = iterator.getEnd();
+    int _end_2 = iterator.getEnd();
     String _closingTerminal_3 = this.getClosingTerminal();
     int _length_3 = _closingTerminal_3.length();
-    int _minus_2 = (_end_3 - _length_3);
+    int _minus_2 = (_end_2 - _length_3);
     String _closingTerminal_4 = this.getClosingTerminal();
     int _length_4 = _closingTerminal_4.length();
     return new TextRegion(_minus_2, _length_4);
