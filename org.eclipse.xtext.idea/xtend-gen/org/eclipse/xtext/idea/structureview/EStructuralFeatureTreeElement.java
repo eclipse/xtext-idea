@@ -47,8 +47,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   
   public void setOwner(final EObject owner) {
     this.owner = owner;
-    URI _uRI = EcoreUtil.getURI(owner);
-    this.uri = _uRI;
+    this.uri = EcoreUtil.getURI(owner);
   }
   
   @Override

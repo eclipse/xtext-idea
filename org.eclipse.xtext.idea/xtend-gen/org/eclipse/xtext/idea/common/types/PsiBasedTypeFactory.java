@@ -212,10 +212,8 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
         JvmGenericType _xblockexpression_1 = null;
         {
           final JvmGenericType genericType = this._typesFactory.createJvmGenericType();
-          boolean _isInterface = psiClass.isInterface();
-          genericType.setInterface(_isInterface);
-          boolean _hasModifierProperty = psiClass.hasModifierProperty(PsiModifier.STRICTFP);
-          genericType.setStrictFloatingPoint(_hasModifierProperty);
+          genericType.setInterface(psiClass.isInterface());
+          genericType.setStrictFloatingPoint(psiClass.hasModifierProperty(PsiModifier.STRICTFP));
           this.createTypeParameters(genericType, psiClass);
           _xblockexpression_1 = genericType;
         }
@@ -224,14 +222,11 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       final Procedure1<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
         this.setTypeModifiers(it, psiClass);
         this.setVisibility(it, psiClass);
-        boolean _isDeprecated = psiClass.isDeprecated();
-        it.setDeprecated(_isDeprecated);
+        it.setDeprecated(psiClass.isDeprecated());
+        it.setSimpleName(psiClass.getName());
         String _name = psiClass.getName();
-        it.setSimpleName(_name);
-        String _name_1 = psiClass.getName();
-        fqn.append(_name_1);
-        String _string = fqn.toString();
-        it.internalSetIdentifier(_string);
+        fqn.append(_name);
+        it.internalSetIdentifier(fqn.toString());
         final Procedure0 _function_1 = () -> {
           this.createNestedTypes(it, psiClass, fqn);
         };
@@ -279,8 +274,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       if ((psiClass instanceof PsiClass)) {
         JvmAnnotationReference _createJvmAnnotationReference = this._typesFactory.createJvmAnnotationReference();
         final Procedure1<JvmAnnotationReference> _function = (JvmAnnotationReference it) -> {
-          JvmAnnotationType _createAnnotationProxy = this.createAnnotationProxy(((PsiClass)psiClass));
-          it.setAnnotation(_createAnnotationProxy);
+          it.setAnnotation(this.createAnnotationProxy(((PsiClass)psiClass)));
           PsiAnnotationParameterList _parameterList = annotation.getParameterList();
           PsiNameValuePair[] _attributes = _parameterList.getAttributes();
           for (final PsiNameValuePair attribute : _attributes) {
@@ -303,8 +297,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
               };
               final PsiMethod method = IterableExtensions.<PsiMethod>findFirst(((Iterable<PsiMethod>)Conversions.doWrapArray(_methods)), _function_1);
               final JvmAnnotationValue annotationValue = this.createAnnotationValue(value, method);
-              JvmOperation _createMethodProxy = this.createMethodProxy(method);
-              annotationValue.setOperation(_createMethodProxy);
+              annotationValue.setOperation(this.createMethodProxy(method));
               EList<JvmAnnotationValue> _explicitValues = it.getExplicitValues();
               this.<JvmAnnotationValue>addUnique(_explicitValues, annotationValue);
             }
@@ -387,26 +380,15 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
         _switchResult = ObjectExtensions.<JvmField>operator_doubleArrow(_createJvmField, _function);
       }
       final Procedure1<JvmField> _function_1 = (JvmField it) -> {
-        String _name = field.getName();
-        StringBuilder _append = fqn.append(_name);
-        String _string = _append.toString();
-        it.internalSetIdentifier(_string);
-        String _name_1 = field.getName();
-        it.setSimpleName(_name_1);
-        boolean _hasModifierProperty = field.hasModifierProperty(PsiModifier.FINAL);
-        it.setFinal(_hasModifierProperty);
-        boolean _hasModifierProperty_1 = field.hasModifierProperty(PsiModifier.STATIC);
-        it.setStatic(_hasModifierProperty_1);
-        boolean _hasModifierProperty_2 = field.hasModifierProperty(PsiModifier.TRANSIENT);
-        it.setTransient(_hasModifierProperty_2);
-        boolean _hasModifierProperty_3 = field.hasModifierProperty(PsiModifier.VOLATILE);
-        it.setVolatile(_hasModifierProperty_3);
-        boolean _isDeprecated = field.isDeprecated();
-        it.setDeprecated(_isDeprecated);
+        it.internalSetIdentifier(fqn.append(field.getName()).toString());
+        it.setSimpleName(field.getName());
+        it.setFinal(field.hasModifierProperty(PsiModifier.FINAL));
+        it.setStatic(field.hasModifierProperty(PsiModifier.STATIC));
+        it.setTransient(field.hasModifierProperty(PsiModifier.TRANSIENT));
+        it.setVolatile(field.hasModifierProperty(PsiModifier.VOLATILE));
+        it.setDeprecated(field.isDeprecated());
         this.setVisibility(it, field);
-        PsiType _type = field.getType();
-        JvmTypeReference _createTypeReference = this.createTypeReference(_type);
-        it.setType(_createTypeReference);
+        it.setType(this.createTypeReference(field.getType()));
         this.createAnnotationValues(it, field);
         final PsiElementProvider _function_2 = () -> {
           return field;
@@ -1000,19 +982,13 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected JvmOperation createValuesOperation(final PsiClass enumType, final StringBuilder fqn) {
     JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
     final Procedure1<JvmOperation> _function = (JvmOperation it) -> {
-      StringBuilder _append = fqn.append("values()");
-      String _string = _append.toString();
-      it.internalSetIdentifier(_string);
+      it.internalSetIdentifier(fqn.append("values()").toString());
       it.setSimpleName("values");
       it.setVisibility(JvmVisibility.PUBLIC);
       it.setStatic(true);
       JvmGenericArrayTypeReference _createJvmGenericArrayTypeReference = this._typesFactory.createJvmGenericArrayTypeReference();
       final Procedure1<JvmGenericArrayTypeReference> _function_1 = (JvmGenericArrayTypeReference it_1) -> {
-        Project _project = enumType.getProject();
-        PsiElementFactory _psiElementFactory = this.getPsiElementFactory(_project);
-        PsiClassType _createType = _psiElementFactory.createType(enumType);
-        JvmTypeReference _createTypeReference = this.createTypeReference(_createType);
-        it_1.setComponentType(_createTypeReference);
+        it_1.setComponentType(this.createTypeReference(this.getPsiElementFactory(enumType.getProject()).createType(enumType)));
       };
       JvmGenericArrayTypeReference _doubleArrow = ObjectExtensions.<JvmGenericArrayTypeReference>operator_doubleArrow(_createJvmGenericArrayTypeReference, _function_1);
       it.setReturnType(_doubleArrow);
@@ -1032,21 +1008,16 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       final PsiElementFactory psiElementFactory = this.getPsiElementFactory(_project);
       JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
       final Procedure1<JvmOperation> _function = (JvmOperation it) -> {
-        StringBuilder _append = fqn.append("valueOf(java.lang.String)");
-        String _string = _append.toString();
-        it.internalSetIdentifier(_string);
+        it.internalSetIdentifier(fqn.append("valueOf(java.lang.String)").toString());
         it.setSimpleName("valueOf");
         it.setVisibility(JvmVisibility.PUBLIC);
         it.setStatic(true);
-        PsiClassType _createType = psiElementFactory.createType(enumType);
-        JvmTypeReference _createTypeReference = this.createTypeReference(_createType);
-        it.setReturnType(_createTypeReference);
+        it.setReturnType(this.createTypeReference(psiElementFactory.createType(enumType)));
         EList<JvmFormalParameter> _parameters = it.getParameters();
         JvmFormalParameter _createJvmFormalParameter = this._typesFactory.createJvmFormalParameter();
         final Procedure1<JvmFormalParameter> _function_1 = (JvmFormalParameter it_1) -> {
           it_1.setName("name");
-          JvmParameterizedTypeReference _createStringReference = this.createStringReference();
-          it_1.setParameterType(_createStringReference);
+          it_1.setParameterType(this.createStringReference());
         };
         JvmFormalParameter _doubleArrow = ObjectExtensions.<JvmFormalParameter>operator_doubleArrow(_createJvmFormalParameter, _function_1);
         this.<JvmFormalParameter>addUnique(_parameters, _doubleArrow);
@@ -1064,13 +1035,8 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected JvmConstructor createDefaultConstructor(final PsiClass psiClass, final StringBuilder fqn) {
     JvmConstructor _createJvmConstructor = this._typesFactory.createJvmConstructor();
     final Procedure1<JvmConstructor> _function = (JvmConstructor it) -> {
-      String _name = psiClass.getName();
-      StringBuilder _append = fqn.append(_name);
-      StringBuilder _append_1 = _append.append("()");
-      String _string = _append_1.toString();
-      it.internalSetIdentifier(_string);
-      String _name_1 = psiClass.getName();
-      it.setSimpleName(_name_1);
+      it.internalSetIdentifier(fqn.append(psiClass.getName()).append("()").toString());
+      it.setSimpleName(psiClass.getName());
       it.setVisibility(JvmVisibility.PUBLIC);
       it.setDeprecated(false);
       final PsiElementProvider _function_1 = () -> {
@@ -1101,21 +1067,13 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
       final Procedure1<JvmOperation> _function = (JvmOperation it) -> {
         this.enhanceExecutable(it, method, fqn);
-        boolean _hasModifierProperty = method.hasModifierProperty(PsiModifier.ABSTRACT);
-        it.setAbstract(_hasModifierProperty);
-        boolean _hasModifierProperty_1 = method.hasModifierProperty(PsiModifier.FINAL);
-        it.setFinal(_hasModifierProperty_1);
-        boolean _hasModifierProperty_2 = method.hasModifierProperty(PsiModifier.STATIC);
-        it.setStatic(_hasModifierProperty_2);
-        boolean _hasModifierProperty_3 = method.hasModifierProperty(PsiModifier.STRICTFP);
-        it.setStrictFloatingPoint(_hasModifierProperty_3);
-        boolean _hasModifierProperty_4 = method.hasModifierProperty(PsiModifier.SYNCHRONIZED);
-        it.setSynchronized(_hasModifierProperty_4);
-        boolean _hasModifierProperty_5 = method.hasModifierProperty(PsiModifier.NATIVE);
-        it.setNative(_hasModifierProperty_5);
-        PsiType _returnType = method.getReturnType();
-        JvmTypeReference _createTypeReference = this.createTypeReference(_returnType);
-        it.setReturnType(_createTypeReference);
+        it.setAbstract(method.hasModifierProperty(PsiModifier.ABSTRACT));
+        it.setFinal(method.hasModifierProperty(PsiModifier.FINAL));
+        it.setStatic(method.hasModifierProperty(PsiModifier.STATIC));
+        it.setStrictFloatingPoint(method.hasModifierProperty(PsiModifier.STRICTFP));
+        it.setSynchronized(method.hasModifierProperty(PsiModifier.SYNCHRONIZED));
+        it.setNative(method.hasModifierProperty(PsiModifier.NATIVE));
+        it.setReturnType(this.createTypeReference(method.getReturnType()));
         this.createAnnotationValues(it, method);
         final PsiElementProvider _function_1 = () -> {
           return method;
@@ -1136,13 +1094,10 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     StringBuilder _append_1 = fqn.append(")");
     final String identifier = _append_1.toString();
     it.internalSetIdentifier(identifier);
-    String _name_1 = psiMethod.getName();
-    it.setSimpleName(_name_1);
+    it.setSimpleName(psiMethod.getName());
     this.setVisibility(it, psiMethod);
-    boolean _isDeprecated = psiMethod.isDeprecated();
-    it.setDeprecated(_isDeprecated);
-    boolean _isVarArgs = psiMethod.isVarArgs();
-    it.setVarArgs(_isVarArgs);
+    it.setDeprecated(psiMethod.isDeprecated());
+    it.setVarArgs(psiMethod.isVarArgs());
     PsiReferenceList _throwsList = psiMethod.getThrowsList();
     PsiClassType[] _referencedTypes = _throwsList.getReferencedTypes();
     for (final PsiClassType exceptionType : _referencedTypes) {
@@ -1183,11 +1138,8 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected JvmFormalParameter createFormalParameter(final PsiParameter parameter) {
     JvmFormalParameter _createJvmFormalParameter = this._typesFactory.createJvmFormalParameter();
     final Procedure1<JvmFormalParameter> _function = (JvmFormalParameter it) -> {
-      String _name = parameter.getName();
-      it.setName(_name);
-      PsiType _type = parameter.getType();
-      JvmTypeReference _createTypeReference = this.createTypeReference(_type);
-      it.setParameterType(_createTypeReference);
+      it.setName(parameter.getName());
+      it.setParameterType(this.createTypeReference(parameter.getType()));
       this.createAnnotationValues(it, parameter);
     };
     return ObjectExtensions.<JvmFormalParameter>operator_doubleArrow(_createJvmFormalParameter, _function);
@@ -1196,8 +1148,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected JvmTypeParameter createTypeParameter(final PsiTypeParameter parameter) {
     JvmTypeParameter _createJvmTypeParameter = this._typesFactory.createJvmTypeParameter();
     final Procedure1<JvmTypeParameter> _function = (JvmTypeParameter it) -> {
-      String _name = parameter.getName();
-      it.setName(_name);
+      it.setName(parameter.getName());
       final PsiClassType[] extendsListTypes = parameter.getExtendsListTypes();
       int _length = extendsListTypes.length;
       boolean _notEquals = (_length != 0);
@@ -1255,17 +1206,14 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
           if (_not) {
             JvmUnknownTypeReference _createJvmUnknownTypeReference = this._typesFactory.createJvmUnknownTypeReference();
             final Procedure1<JvmUnknownTypeReference> _function = (JvmUnknownTypeReference it) -> {
-              String _className = ((PsiClassType)psiType).getClassName();
-              it.setQualifiedName(_className);
+              it.setQualifiedName(((PsiClassType)psiType).getClassName());
             };
             return ObjectExtensions.<JvmUnknownTypeReference>operator_doubleArrow(_createJvmUnknownTypeReference, _function);
           } else {
             JvmParameterizedTypeReference _createClassTypeReference = this.createClassTypeReference(resolveResult);
             final Procedure1<JvmParameterizedTypeReference> _function_1 = (JvmParameterizedTypeReference it) -> {
               try {
-                PsiClassType _rawType = ((PsiClassType)psiType).rawType();
-                JvmType _createProxy = this.createProxy(_rawType);
-                it.setType(_createProxy);
+                it.setType(this.createProxy(((PsiClassType)psiType).rawType()));
                 PsiType[] _parameters = ((PsiClassType)psiType).getParameters();
                 for (final PsiType parameter : _parameters) {
                   EList<JvmTypeReference> _arguments = it.getArguments();
@@ -1283,8 +1231,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       JvmParameterizedTypeReference _createJvmParameterizedTypeReference = this._typesFactory.createJvmParameterizedTypeReference();
       final Procedure1<JvmParameterizedTypeReference> _function = (JvmParameterizedTypeReference it) -> {
         try {
-          JvmType _createProxy = this.createProxy(psiType);
-          it.setType(_createProxy);
+          it.setType(this.createProxy(psiType));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -1382,8 +1329,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected JvmGenericArrayTypeReference createArrayTypeReference(final PsiType psiComponentType) {
     JvmGenericArrayTypeReference _createJvmGenericArrayTypeReference = this._typesFactory.createJvmGenericArrayTypeReference();
     final Procedure1<JvmGenericArrayTypeReference> _function = (JvmGenericArrayTypeReference it) -> {
-      JvmTypeReference _createTypeReference = this.createTypeReference(psiComponentType);
-      it.setComponentType(_createTypeReference);
+      it.setComponentType(this.createTypeReference(psiComponentType));
     };
     return ObjectExtensions.<JvmGenericArrayTypeReference>operator_doubleArrow(_createJvmGenericArrayTypeReference, _function);
   }
@@ -1458,15 +1404,12 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   
   protected void setTypeModifiers(final JvmDeclaredType it, final PsiClass psiClass) {
     final PsiModifierList modifierList = psiClass.getModifierList();
-    boolean _hasModifierProperty = modifierList.hasModifierProperty(PsiModifier.ABSTRACT);
-    it.setAbstract(_hasModifierProperty);
-    boolean _hasModifierProperty_1 = modifierList.hasModifierProperty(PsiModifier.STATIC);
-    it.setStatic(_hasModifierProperty_1);
+    it.setAbstract(modifierList.hasModifierProperty(PsiModifier.ABSTRACT));
+    it.setStatic(modifierList.hasModifierProperty(PsiModifier.STATIC));
     boolean _isEnum = psiClass.isEnum();
     boolean _not = (!_isEnum);
     if (_not) {
-      boolean _hasModifierProperty_2 = modifierList.hasModifierProperty(PsiModifier.FINAL);
-      it.setFinal(_hasModifierProperty_2);
+      it.setFinal(modifierList.hasModifierProperty(PsiModifier.FINAL));
     }
   }
   

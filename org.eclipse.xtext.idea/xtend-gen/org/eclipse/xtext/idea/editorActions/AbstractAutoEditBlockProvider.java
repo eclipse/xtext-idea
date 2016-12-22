@@ -12,7 +12,6 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.intellij.psi.tree.TokenSet;
-import java.util.LinkedList;
 import java.util.List;
 import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
 import org.eclipse.xtext.idea.editorActions.AbstractIndentableAutoEditBlock;
@@ -32,10 +31,8 @@ public abstract class AbstractAutoEditBlockProvider implements AutoEditBlockProv
   private Injector injector;
   
   public AbstractAutoEditBlockProvider() {
-    LinkedList<AbstractAutoEditBlock> _newLinkedList = CollectionLiterals.<AbstractAutoEditBlock>newLinkedList();
-    this.quotes = _newLinkedList;
-    LinkedListMultimap<TokenSet, AbstractIndentableAutoEditBlock> _create = LinkedListMultimap.<TokenSet, AbstractIndentableAutoEditBlock>create();
-    this.blocks = _create;
+    this.quotes = CollectionLiterals.<AbstractAutoEditBlock>newLinkedList();
+    this.blocks = LinkedListMultimap.<TokenSet, AbstractIndentableAutoEditBlock>create();
   }
   
   protected void registerQuote(final AbstractAutoEditBlock quote) {

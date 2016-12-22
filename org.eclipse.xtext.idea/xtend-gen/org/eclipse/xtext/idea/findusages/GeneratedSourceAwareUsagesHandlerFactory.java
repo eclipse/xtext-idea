@@ -121,8 +121,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   
   protected List<? extends PsiElement> getOriginalElements(final PsiElement element) {
     if ((element instanceof PsiNameIdentifierOwner)) {
-      PsiElement _nameIdentifier = ((PsiNameIdentifierOwner)element).getNameIdentifier();
-      return this.getOriginalElements(_nameIdentifier);
+      return this.getOriginalElements(((PsiNameIdentifierOwner)element).getNameIdentifier());
     }
     List<? extends PsiElement> _originalElements = this.traceProvider.getOriginalElements(element);
     final Function1<PsiElement, PsiNamedElement> _function = (PsiElement it) -> {

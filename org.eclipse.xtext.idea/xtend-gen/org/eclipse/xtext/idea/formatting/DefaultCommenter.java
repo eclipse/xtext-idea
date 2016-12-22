@@ -56,10 +56,8 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Inject
   public void setTokenTypes(final TokenTypeProvider tokenTypeProvider, final ITokenDefProvider tokenDefProvider) {
-    IElementType _tokenType = this.getTokenType("RULE_SL_COMMENT", tokenTypeProvider, tokenDefProvider);
-    this.slCommentTokenType = _tokenType;
-    IElementType _tokenType_1 = this.getTokenType("RULE_ML_COMMENT", tokenTypeProvider, tokenDefProvider);
-    this.mlCommentTokenType = _tokenType_1;
+    this.slCommentTokenType = this.getTokenType("RULE_SL_COMMENT", tokenTypeProvider, tokenDefProvider);
+    this.mlCommentTokenType = this.getTokenType("RULE_ML_COMMENT", tokenTypeProvider, tokenDefProvider);
   }
   
   protected IElementType getTokenType(final String tokenName, @Extension final TokenTypeProvider tokenTypeProvider, @Extension final ITokenDefProvider tokenDefProvider) {

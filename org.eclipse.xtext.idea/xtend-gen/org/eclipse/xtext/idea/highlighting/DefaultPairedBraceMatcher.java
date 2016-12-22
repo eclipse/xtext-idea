@@ -46,12 +46,9 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   
   @Inject
   public DefaultPairedBraceMatcher(final ITokenDefProvider tokenDefProvider, final TokenTypeProvider tokenTypeProvider, final IBracePairProvider bracePairProvider, final IGrammarAccess grammarAccess) {
-    HashMap<String, IElementType> _createTokenTypes = this.createTokenTypes(tokenDefProvider, tokenTypeProvider);
-    this.tokenTypes = _createTokenTypes;
-    Iterable<BracePair> _createPairs = this.createPairs(bracePairProvider, grammarAccess);
-    this.pairs = ((BracePair[])Conversions.unwrapArray(_createPairs, BracePair.class));
-    TokenSet _createAllowedTypes = this.createAllowedTypes(tokenTypeProvider, grammarAccess);
-    this.allowedTypes = _createAllowedTypes;
+    this.tokenTypes = this.createTokenTypes(tokenDefProvider, tokenTypeProvider);
+    this.pairs = ((BracePair[])Conversions.unwrapArray(this.createPairs(bracePairProvider, grammarAccess), BracePair.class));
+    this.allowedTypes = this.createAllowedTypes(tokenTypeProvider, grammarAccess);
   }
   
   protected TokenSet createAllowedTypes(final TokenTypeProvider tokenTypeProvider, final IGrammarAccess grammarAccess) {
@@ -99,10 +96,7 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   protected Iterable<BracePair> createPairs(final IBracePairProvider bracePairProvider, final IGrammarAccess grammarAccess) {
     Set<org.eclipse.xtext.ide.editor.bracketmatching.BracePair> _pairs = bracePairProvider.getPairs();
     final Function1<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>> _function = (org.eclipse.xtext.ide.editor.bracketmatching.BracePair it) -> {
-      String _leftBrace = it.getLeftBrace();
-      String _rightBrace = it.getRightBrace();
-      boolean _isStructural = it.isStructural();
-      return this.findPairs(_leftBrace, _rightBrace, _isStructural, grammarAccess);
+      return this.findPairs(it.getLeftBrace(), it.getRightBrace(), it.isStructural(), grammarAccess);
     };
     Iterable<List<BracePair>> _map = IterableExtensions.<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>>map(_pairs, _function);
     return Iterables.<BracePair>concat(_map);
@@ -111,9 +105,7 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   protected List<BracePair> findPairs(final String leftBraceKeyword, final String rightBraceKeyword, final boolean structural, final IGrammarAccess grammarAccess) {
     List<Pair<Keyword, Keyword>> _findKeywordPairs = grammarAccess.findKeywordPairs(leftBraceKeyword, rightBraceKeyword);
     final Function1<Pair<Keyword, Keyword>, BracePair> _function = (Pair<Keyword, Keyword> it) -> {
-      Keyword _first = it.getFirst();
-      Keyword _second = it.getSecond();
-      return this.createPair(_first, _second, structural);
+      return this.createPair(it.getFirst(), it.getSecond(), structural);
     };
     return ListExtensions.<Pair<Keyword, Keyword>, BracePair>map(_findKeywordPairs, _function);
   }

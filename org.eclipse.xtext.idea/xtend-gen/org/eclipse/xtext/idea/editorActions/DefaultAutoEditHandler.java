@@ -266,26 +266,20 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       if (_equals) {
         _xifexpression = "";
       } else {
-        int _max = Math.max(0, startOffset);
-        int _caretOffset_2 = context.getCaretOffset();
-        _xifexpression = context.getText(_max, _caretOffset_2);
+        _xifexpression = context.getText(Math.max(0, startOffset), context.getCaretOffset());
       }
       final String startText = _xifexpression;
-      int _caretOffset_3 = context.getCaretOffset();
+      int _caretOffset_2 = context.getCaretOffset();
       int _length_1 = terminal.length();
-      int _plus = (_caretOffset_3 + _length_1);
+      int _plus = (_caretOffset_2 + _length_1);
       final int endOffset = (_plus - 1);
       String _xifexpression_1 = null;
-      int _caretOffset_4 = context.getCaretOffset();
-      boolean _equals_1 = (endOffset == _caretOffset_4);
+      int _caretOffset_3 = context.getCaretOffset();
+      boolean _equals_1 = (endOffset == _caretOffset_3);
       if (_equals_1) {
         _xifexpression_1 = "";
       } else {
-        int _caretOffset_5 = context.getCaretOffset();
-        DocumentEx _document = context.getDocument();
-        int _textLength = _document.getTextLength();
-        int _min = Math.min(endOffset, _textLength);
-        _xifexpression_1 = context.getText(_caretOffset_5, _min);
+        _xifexpression_1 = context.getText(context.getCaretOffset(), Math.min(endOffset, context.getDocument().getTextLength()));
       }
       final String endText = _xifexpression_1;
       final String text = ((startText + Character.valueOf(c)) + endText);

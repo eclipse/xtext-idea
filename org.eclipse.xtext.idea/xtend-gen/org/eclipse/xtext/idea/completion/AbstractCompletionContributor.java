@@ -240,11 +240,10 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     CompletionSorter _completionSorter = this.getCompletionSorter(parameters, result);
     final CompletionResultSet sortedResult = result.withRelevanceSorter(_completionSorter);
     final Procedure1<CompletionResult> _function = (CompletionResult it) -> {
-      LookupElement _lookupElement = it.getLookupElement();
-      boolean _isValidProposal = this.isValidProposal(_lookupElement, parameters);
+      boolean _isValidProposal = this.isValidProposal(it.getLookupElement(), parameters);
       if (_isValidProposal) {
-        LookupElement _lookupElement_1 = it.getLookupElement();
-        sortedResult.addElement(_lookupElement_1);
+        LookupElement _lookupElement = it.getLookupElement();
+        sortedResult.addElement(_lookupElement);
       }
     };
     final Procedure1<CompletionResult> filteredConsumer = _function;

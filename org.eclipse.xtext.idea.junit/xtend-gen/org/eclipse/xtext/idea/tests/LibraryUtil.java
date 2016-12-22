@@ -75,11 +75,9 @@ public class LibraryUtil {
     int _length = ignoredFilesList.length;
     boolean _greaterThan = (_length > 1);
     if (_greaterThan) {
-      final Function2<String, String, String> _function = (String p1, String p2) -> {
+      fileTypeManager.setIgnoredFilesList(IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(ignoredFilesList)), ((Function2<String, String, String>) (String p1, String p2) -> {
         return (p1 + p2);
-      };
-      String _reduce = IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(ignoredFilesList)), _function);
-      fileTypeManager.setIgnoredFilesList(_reduce);
+      })));
     }
   }
   

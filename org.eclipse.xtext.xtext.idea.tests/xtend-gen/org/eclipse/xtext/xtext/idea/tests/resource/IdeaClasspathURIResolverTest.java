@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xtext.idea.tests.resource;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.JavaPsiFacadeEx;
@@ -29,9 +28,7 @@ public class IdeaClasspathURIResolverTest extends LightToolingTest {
     Module _module = this.myFixture.getModule();
     URI _createURI = URI.createURI((ClasspathUriUtil.CLASSPATH_SCHEME + "://foo/MyFile.text"));
     final URI result = this.resolver.resolve(_module, _createURI);
-    VirtualFile _virtualFile = file.getVirtualFile();
-    URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-    TestCase.assertEquals(_uRI, result);
+    TestCase.assertEquals(VirtualFileURIUtil.getURI(file.getVirtualFile()), result);
   }
   
   @Test
@@ -43,9 +40,6 @@ public class IdeaClasspathURIResolverTest extends LightToolingTest {
     Module _module_1 = this.myFixture.getModule();
     URI _createURI = URI.createURI((ClasspathUriUtil.CLASSPATH_SCHEME + "://java/lang/String.class"));
     final URI result = this.resolver.resolve(_module_1, _createURI);
-    PsiFile _containingFile = type.getContainingFile();
-    VirtualFile _virtualFile = _containingFile.getVirtualFile();
-    URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-    TestCase.assertEquals(_uRI, result);
+    TestCase.assertEquals(VirtualFileURIUtil.getURI(type.getContainingFile().getVirtualFile()), result);
   }
 }

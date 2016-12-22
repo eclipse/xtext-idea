@@ -156,8 +156,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
           return null;
         }
         while ((!result.getTextRange().containsRange(textRegion.getOffset(), (textRegion.getOffset() + textRegion.getLength())))) {
-          PsiElement _parent = result.getParent();
-          result = _parent;
+          result = result.getParent();
         }
         int _textLength = result.getTextLength();
         boolean _equals = (_textLength == 0);
@@ -285,9 +284,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   public IIdeaTrace getTraceToTarget(final VirtualFileInProject sourceResource) {
-    AbsoluteURI _absoluteLocation = this.getAbsoluteLocation(sourceResource);
-    IdeaProjectConfig _projectConfig = this.getProjectConfig(sourceResource);
-    return this.getTraceToTarget(sourceResource, _absoluteLocation, _projectConfig);
+    return this.getTraceToTarget(sourceResource, this.getAbsoluteLocation(sourceResource), this.getProjectConfig(sourceResource));
   }
   
   @Override
@@ -299,8 +296,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   protected AbsoluteURI getAbsoluteLocation(final VirtualFileInProject file) {
-    VirtualFile _file = file.getFile();
-    return this.getAbsoluteLocation(_file);
+    return this.getAbsoluteLocation(file.getFile());
   }
   
   protected AbsoluteURI getAbsoluteLocation(final VirtualFile file) {
@@ -348,8 +344,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     if ((jarRoot != null)) {
       result.setJarRoot(jarRoot);
     } else {
-      IdeaProjectConfig _projectConfig = this.getProjectConfig(file);
-      result.setLocalProjectConfig(_projectConfig);
+      result.setLocalProjectConfig(this.getProjectConfig(file));
     }
     return result;
   }

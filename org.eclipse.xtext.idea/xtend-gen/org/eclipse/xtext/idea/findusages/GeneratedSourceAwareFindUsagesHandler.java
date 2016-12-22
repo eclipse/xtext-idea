@@ -20,7 +20,6 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.Processor;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -50,20 +49,16 @@ public class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
     boolean _isEmpty = IterableExtensions.isEmpty(secondaryHandlers);
     boolean _not = (!_isEmpty);
     GeneratedSourceAwareFindUsagesHandler.LOG.assertTrue(_not);
-    final Function1<FindUsagesHandler, PsiElement> _function = (FindUsagesHandler it) -> {
+    this.secondaryHandlers = IterableExtensions.<PsiElement, FindUsagesHandler>toMap(secondaryHandlers, ((Function1<FindUsagesHandler, PsiElement>) (FindUsagesHandler it) -> {
       return it.getPsiElement();
-    };
-    Map<PsiElement, FindUsagesHandler> _map = IterableExtensions.<PsiElement, FindUsagesHandler>toMap(secondaryHandlers, _function);
-    this.secondaryHandlers = _map;
+    }));
   }
   
   @Override
   public PsiElement[] getPrimaryElements() {
     Collection<PsiElement> _xblockexpression = null;
     {
-      PsiElement[] _primaryElements = this.primaryHandler.getPrimaryElements();
-      List<PsiElement> _list = IterableExtensions.<PsiElement>toList(((Iterable<PsiElement>)Conversions.doWrapArray(_primaryElements)));
-      this.primaryElements = _list;
+      this.primaryElements = IterableExtensions.<PsiElement>toList(((Iterable<PsiElement>)Conversions.doWrapArray(this.primaryHandler.getPrimaryElements())));
       _xblockexpression = this.primaryElements;
     }
     return ((PsiElement[])Conversions.unwrapArray(_xblockexpression, PsiElement.class));
@@ -73,9 +68,7 @@ public class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
   public PsiElement[] getSecondaryElements() {
     Iterable<PsiElement> _xblockexpression = null;
     {
-      PsiElement[] _secondaryElements = this.primaryHandler.getSecondaryElements();
-      List<PsiElement> _list = IterableExtensions.<PsiElement>toList(((Iterable<PsiElement>)Conversions.doWrapArray(_secondaryElements)));
-      this.secondaryElements = _list;
+      this.secondaryElements = IterableExtensions.<PsiElement>toList(((Iterable<PsiElement>)Conversions.doWrapArray(this.primaryHandler.getSecondaryElements())));
       Set<PsiElement> _keySet = this.secondaryHandlers.keySet();
       _xblockexpression = Iterables.<PsiElement>concat(this.secondaryElements, _keySet);
     }

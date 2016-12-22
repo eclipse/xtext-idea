@@ -38,7 +38,6 @@ import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
@@ -98,42 +97,33 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     DebuggerStateManager _contextManager = this.myDebuggerSession.getContextManager();
     DebuggerContextImpl _context = _contextManager.getContext();
     final SourcePosition sp = _context.getSourcePosition();
-    PsiFile _file = sp.getFile();
-    VirtualFile _virtualFile = _file.getVirtualFile();
-    TestCase.assertEquals(file, _virtualFile);
+    TestCase.assertEquals(file, sp.getFile().getVirtualFile());
     Project _project = this.getProject();
     PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
-    PsiFile _file_1 = sp.getFile();
-    final Document doc = _instance.getDocument(_file_1);
+    PsiFile _file = sp.getFile();
+    final Document doc = _instance.getDocument(_file);
     String _text = doc.getText();
     final int index = _text.indexOf(fragment);
     if ((index == (-1))) {
-      PsiFile _file_2 = sp.getFile();
-      VirtualFile _virtualFile_1 = _file_2.getVirtualFile();
-      String _name = _virtualFile_1.getName();
+      PsiFile _file_1 = sp.getFile();
+      VirtualFile _virtualFile = _file_1.getVirtualFile();
+      String _name = _virtualFile.getName();
       String _plus = ((("couldn\'t find \'" + fragment) + "\' in file ") + _name);
       TestCase.fail(_plus);
     }
-    int _lineNumber = doc.getLineNumber(index);
-    int _line = sp.getLine();
-    TestCase.assertEquals(_lineNumber, _line);
+    TestCase.assertEquals(doc.getLineNumber(index), sp.getLine());
   }
   
   protected void assertCurrentLine(final VirtualFile file, final int line) {
     DebuggerStateManager _contextManager = this.myDebuggerSession.getContextManager();
     DebuggerContextImpl _context = _contextManager.getContext();
     final SourcePosition sp = _context.getSourcePosition();
-    PsiFile _file = sp.getFile();
-    VirtualFile _virtualFile = _file.getVirtualFile();
-    TestCase.assertEquals(file, _virtualFile);
-    int _line = sp.getLine();
-    TestCase.assertEquals(line, _line);
+    TestCase.assertEquals(file, sp.getFile().getVirtualFile());
+    TestCase.assertEquals(line, sp.getLine());
   }
   
   protected void assertProcessTerminated() {
-    ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
-    boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-    TestCase.assertTrue(_isProcessTerminated);
+    TestCase.assertTrue(this.myDebugProcess.getProcessHandler().isProcessTerminated());
   }
   
   protected LineBreakpoint<?> addLineBreakpoint(final VirtualFile file, final int line) {
@@ -194,9 +184,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   
   private SuspendContextImpl waitForContextChange(final Runnable command) {
     try {
-      ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
-      boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-      TestCase.assertFalse(_isProcessTerminated);
+      TestCase.assertFalse(this.myDebugProcess.getProcessHandler().isProcessTerminated());
       int i = 0;
       final SuspendManager suspendManager = this.myDebugProcess.getSuspendManager();
       DebuggerSession _session = this.myDebugProcess.getSession();
@@ -219,9 +207,9 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       if (_equals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("too long process, terminated=");
-        ProcessHandler _processHandler_1 = this.myDebugProcess.getProcessHandler();
-        boolean _isProcessTerminated_1 = _processHandler_1.isProcessTerminated();
-        _builder.append(_isProcessTerminated_1);
+        ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
+        boolean _isProcessTerminated = _processHandler.isProcessTerminated();
+        _builder.append(_isProcessTerminated);
         TestCase.fail(_builder.toString());
       }
       return suspendManager.getPausedContext();
@@ -295,15 +283,12 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   
   protected void startDebugProcess(final String className) throws ExecutionException, InterruptedException, InvocationTargetException {
     TestCase.assertTrue((this.myDebugProcess == null));
-    JavaParameters _javaParameters = new JavaParameters();
-    final Procedure1<JavaParameters> _function = (JavaParameters it) -> {
+    this.myDebuggerSession = this.createLocalProcess(DebuggerSettings.SOCKET_TRANSPORT, ObjectExtensions.<JavaParameters>operator_doubleArrow(new JavaParameters(), ((Procedure1<JavaParameters>) (JavaParameters it) -> {
       try {
         it.setMainClass(className);
+        it.configureByModule(this.getModule(), JavaParameters.JDK_AND_CLASSES, this.getTestProjectJdk());
         Module _module = this.getModule();
-        Sdk _testProjectJdk = this.getTestProjectJdk();
-        it.configureByModule(_module, JavaParameters.JDK_AND_CLASSES, _testProjectJdk);
-        Module _module_1 = this.getModule();
-        VirtualFile _moduleFile = _module_1.getModuleFile();
+        VirtualFile _moduleFile = _module.getModuleFile();
         VirtualFile _parent = _moduleFile.getParent();
         final String modulePath = _parent.getPath();
         final File classesDir = new File(modulePath, "classes");
@@ -312,20 +297,16 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
-    };
-    JavaParameters _doubleArrow = ObjectExtensions.<JavaParameters>operator_doubleArrow(_javaParameters, _function);
-    DebuggerSession _createLocalProcess = this.createLocalProcess(DebuggerSettings.SOCKET_TRANSPORT, _doubleArrow);
-    this.myDebuggerSession = _createLocalProcess;
-    DebugProcessImpl _process = this.myDebuggerSession.getProcess();
-    this.myDebugProcess = _process;
-    final Disposable _function_1 = () -> {
+    })));
+    this.myDebugProcess = this.myDebuggerSession.getProcess();
+    final Disposable _function = () -> {
       this.myDebugProcess.dispose();
     };
-    this.<Disposable>disposeOnTearDown(_function_1);
-    final Runnable _function_2 = () -> {
+    this.<Disposable>disposeOnTearDown(_function);
+    final Runnable _function_1 = () -> {
       try {
-        DebugProcessImpl _process_1 = this.myDebuggerSession.getProcess();
-        ProcessHandler _processHandler = _process_1.getProcessHandler();
+        DebugProcessImpl _process = this.myDebuggerSession.getProcess();
+        ProcessHandler _processHandler = _process.getProcessHandler();
         _processHandler.startNotify();
         while ((!this.myDebuggerSession.isAttached())) {
           {
@@ -337,7 +318,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    this.waitForContextChange(_function_2);
+    this.waitForContextChange(_function_1);
   }
   
   private DebuggerSession createLocalProcess(final int transport, final JavaParameters myJavaParameters) throws ExecutionException, InterruptedException, InvocationTargetException {
@@ -388,15 +369,13 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final RemoteConnection debugParameters = DebuggerManagerImpl.createDebugParameters(_javaParameters, debuggerRunnerSettings, true);
     final Runnable _function = () -> {
       try {
-        ExecutionEnvironment _environment = javaCommandLineState.getEnvironment();
-        DebuggerSession _attachVirtualMachine = this.attachVirtualMachine(javaCommandLineState, _environment, debugParameters, 
+        DebuggerSession _attachVirtualMachine = this.attachVirtualMachine(javaCommandLineState, javaCommandLineState.getEnvironment(), debugParameters, 
           false);
         debuggerSession[0] = _attachVirtualMachine;
       } catch (final Throwable _t) {
         if (_t instanceof ExecutionException) {
           final ExecutionException e = (ExecutionException)_t;
-          String _message = e.getMessage();
-          TestCase.fail(_message);
+          TestCase.fail(e.getMessage());
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

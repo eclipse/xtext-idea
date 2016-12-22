@@ -73,8 +73,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   protected abstract String getFirstRuleName();
   
   public void parse() throws RecognitionException {
-    String _firstRuleName = this.getFirstRuleName();
-    this.parse(_firstRuleName);
+    this.parse(this.getFirstRuleName());
   }
   
   public void parse(final String entryRuleName) throws RecognitionException {
@@ -253,9 +252,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   public void setTokenTypeMap(final Map<Integer, String> tokenTypeMap) {
     String[] tokenNames = this.getTokenNames();
-    int _length = tokenNames.length;
-    String[] _newArrayOfSize = new String[_length];
-    this.readableTokenNames = ((List<String>)Conversions.doWrapArray(_newArrayOfSize));
+    this.readableTokenNames = ((List<String>)Conversions.doWrapArray(new String[tokenNames.length]));
     for (int i = 0; (i < tokenNames.length); i++) {
       boolean _containsKey = tokenTypeMap.containsKey(Integer.valueOf(i));
       if (_containsKey) {

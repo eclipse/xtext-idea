@@ -98,8 +98,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    ISetup _setup = this.getSetup();
-    this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, _setup);
+    this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, this.getSetup());
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
     _xtextLanguage.injectMembers(this);
     this.configureFromParserDefinition(this.parserDefinition, this.myFileExt);
@@ -216,10 +215,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   }
   
   protected void assertResource() {
-    XtextResource _createActualResource = this.createActualResource();
-    this.actualResource = _createActualResource;
-    XtextResource _createExpectedResource = this.createExpectedResource();
-    this.expectedResource = _createExpectedResource;
+    this.actualResource = this.createActualResource();
+    this.expectedResource = this.createExpectedResource();
     this.xtextResourceAsserts.assertResource(this.expectedResource, this.actualResource, false);
   }
   

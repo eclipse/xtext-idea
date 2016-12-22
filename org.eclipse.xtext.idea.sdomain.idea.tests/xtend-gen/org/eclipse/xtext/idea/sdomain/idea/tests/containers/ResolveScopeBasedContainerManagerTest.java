@@ -30,7 +30,6 @@ import org.eclipse.xtext.idea.sdomain.idea.tests.containers.URIBasedTestResource
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -81,7 +80,7 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     String _iD_1 = _language_1.getID();
     LightToolingTest.addFacetToModule(module2, _iD_1);
     ModuleRootModificationUtil.addDependency(module, module2);
-    final Function1<String, PsiFile> _function = (String path) -> {
+    this.files = IterableExtensions.<BaseXtextFile>toList(Iterables.<BaseXtextFile>filter(ListExtensions.<String, PsiFile>map(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("/module/file1.sdomain", "/module/file2.sdomain", "/module2/file3.sdomain")), ((Function1<String, PsiFile>) (String path) -> {
       PsiFile _xblockexpression = null;
       {
         StringConcatenation _builder_2 = new StringConcatenation();
@@ -95,11 +94,7 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
         _xblockexpression = _psiManager.findFile(virtualFile);
       }
       return _xblockexpression;
-    };
-    List<PsiFile> _map = ListExtensions.<String, PsiFile>map(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("/module/file1.sdomain", "/module/file2.sdomain", "/module2/file3.sdomain")), _function);
-    Iterable<BaseXtextFile> _filter = Iterables.<BaseXtextFile>filter(_map, BaseXtextFile.class);
-    List<BaseXtextFile> _list = IterableExtensions.<BaseXtextFile>toList(_filter);
-    this.files = _list;
+    })), BaseXtextFile.class));
     SDomainLanguage.INSTANCE.injectMembers(this);
   }
   
@@ -117,21 +112,10 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     XtextResource _resource = _head_1.getResource();
     final IResourceDescriptions resourceDescriptions = this.resourceDescriptionsProvider.getResourceDescriptions(_resource);
     final IContainer container = this.containerManager.getContainer(description, resourceDescriptions);
-    Iterable<IResourceDescription> _resourceDescriptions = container.getResourceDescriptions();
-    int _size = IterableExtensions.size(_resourceDescriptions);
-    TestCase.assertEquals(2, _size);
-    BaseXtextFile _head_2 = IterableExtensions.<BaseXtextFile>head(this.files);
-    URI _uRI_1 = _head_2.getURI();
-    IResourceDescription _resourceDescription = container.getResourceDescription(_uRI_1);
-    TestCase.assertNotNull(_resourceDescription);
-    BaseXtextFile _get = this.files.get(1);
-    URI _uRI_2 = _get.getURI();
-    IResourceDescription _resourceDescription_1 = container.getResourceDescription(_uRI_2);
-    TestCase.assertNotNull(_resourceDescription_1);
-    BaseXtextFile _last = IterableExtensions.<BaseXtextFile>last(this.files);
-    URI _uRI_3 = _last.getURI();
-    IResourceDescription _resourceDescription_2 = container.getResourceDescription(_uRI_3);
-    TestCase.assertNull(_resourceDescription_2);
+    TestCase.assertEquals(2, IterableExtensions.size(container.getResourceDescriptions()));
+    TestCase.assertNotNull(container.getResourceDescription(IterableExtensions.<BaseXtextFile>head(this.files).getURI()));
+    TestCase.assertNotNull(container.getResourceDescription(this.files.get(1).getURI()));
+    TestCase.assertNull(container.getResourceDescription(IterableExtensions.<BaseXtextFile>last(this.files).getURI()));
   }
   
   public void testGetContainer_02() {
@@ -142,21 +126,10 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     XtextResource _resource = _last_1.getResource();
     final IResourceDescriptions resourceDescriptions = this.resourceDescriptionsProvider.getResourceDescriptions(_resource);
     final IContainer container = this.containerManager.getContainer(description, resourceDescriptions);
-    Iterable<IResourceDescription> _resourceDescriptions = container.getResourceDescriptions();
-    int _size = IterableExtensions.size(_resourceDescriptions);
-    TestCase.assertEquals(1, _size);
-    BaseXtextFile _head = IterableExtensions.<BaseXtextFile>head(this.files);
-    URI _uRI_1 = _head.getURI();
-    IResourceDescription _resourceDescription = container.getResourceDescription(_uRI_1);
-    TestCase.assertNull(_resourceDescription);
-    BaseXtextFile _get = this.files.get(1);
-    URI _uRI_2 = _get.getURI();
-    IResourceDescription _resourceDescription_1 = container.getResourceDescription(_uRI_2);
-    TestCase.assertNull(_resourceDescription_1);
-    BaseXtextFile _last_2 = IterableExtensions.<BaseXtextFile>last(this.files);
-    URI _uRI_3 = _last_2.getURI();
-    IResourceDescription _resourceDescription_2 = container.getResourceDescription(_uRI_3);
-    TestCase.assertNotNull(_resourceDescription_2);
+    TestCase.assertEquals(1, IterableExtensions.size(container.getResourceDescriptions()));
+    TestCase.assertNull(container.getResourceDescription(IterableExtensions.<BaseXtextFile>head(this.files).getURI()));
+    TestCase.assertNull(container.getResourceDescription(this.files.get(1).getURI()));
+    TestCase.assertNotNull(container.getResourceDescription(IterableExtensions.<BaseXtextFile>last(this.files).getURI()));
   }
   
   public void testGetVisibleContainers_01() {
@@ -167,31 +140,12 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     XtextResource _resource = _head_1.getResource();
     final IResourceDescriptions resourceDescriptions = this.resourceDescriptionsProvider.getResourceDescriptions(_resource);
     final List<IContainer> visibleContainers = this.containerManager.getVisibleContainers(description, resourceDescriptions);
-    int _size = visibleContainers.size();
-    TestCase.assertEquals(2, _size);
-    IContainer _head_2 = IterableExtensions.<IContainer>head(visibleContainers);
-    Iterable<IResourceDescription> _resourceDescriptions = _head_2.getResourceDescriptions();
-    int _size_1 = IterableExtensions.size(_resourceDescriptions);
-    TestCase.assertEquals(2, _size_1);
-    IContainer _get = visibleContainers.get(1);
-    Iterable<IResourceDescription> _resourceDescriptions_1 = _get.getResourceDescriptions();
-    int _size_2 = IterableExtensions.size(_resourceDescriptions_1);
-    TestCase.assertEquals(1, _size_2);
-    IContainer _head_3 = IterableExtensions.<IContainer>head(visibleContainers);
-    BaseXtextFile _head_4 = IterableExtensions.<BaseXtextFile>head(this.files);
-    URI _uRI_1 = _head_4.getURI();
-    IResourceDescription _resourceDescription = _head_3.getResourceDescription(_uRI_1);
-    TestCase.assertNotNull(_resourceDescription);
-    IContainer _head_5 = IterableExtensions.<IContainer>head(visibleContainers);
-    BaseXtextFile _get_1 = this.files.get(1);
-    URI _uRI_2 = _get_1.getURI();
-    IResourceDescription _resourceDescription_1 = _head_5.getResourceDescription(_uRI_2);
-    TestCase.assertNotNull(_resourceDescription_1);
-    IContainer _get_2 = visibleContainers.get(1);
-    BaseXtextFile _last = IterableExtensions.<BaseXtextFile>last(this.files);
-    URI _uRI_3 = _last.getURI();
-    IResourceDescription _resourceDescription_2 = _get_2.getResourceDescription(_uRI_3);
-    TestCase.assertNotNull(_resourceDescription_2);
+    TestCase.assertEquals(2, visibleContainers.size());
+    TestCase.assertEquals(2, IterableExtensions.size(IterableExtensions.<IContainer>head(visibleContainers).getResourceDescriptions()));
+    TestCase.assertEquals(1, IterableExtensions.size(visibleContainers.get(1).getResourceDescriptions()));
+    TestCase.assertNotNull(IterableExtensions.<IContainer>head(visibleContainers).getResourceDescription(IterableExtensions.<BaseXtextFile>head(this.files).getURI()));
+    TestCase.assertNotNull(IterableExtensions.<IContainer>head(visibleContainers).getResourceDescription(this.files.get(1).getURI()));
+    TestCase.assertNotNull(visibleContainers.get(1).getResourceDescription(IterableExtensions.<BaseXtextFile>last(this.files).getURI()));
   }
   
   public void testGetVisibleContainers_02() {
@@ -202,16 +156,8 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     XtextResource _resource = _last_1.getResource();
     final IResourceDescriptions resourceDescriptions = this.resourceDescriptionsProvider.getResourceDescriptions(_resource);
     final List<IContainer> visibleContainers = this.containerManager.getVisibleContainers(description, resourceDescriptions);
-    int _size = visibleContainers.size();
-    TestCase.assertEquals(1, _size);
-    IContainer _head = IterableExtensions.<IContainer>head(visibleContainers);
-    Iterable<IResourceDescription> _resourceDescriptions = _head.getResourceDescriptions();
-    int _size_1 = IterableExtensions.size(_resourceDescriptions);
-    TestCase.assertEquals(1, _size_1);
-    IContainer _head_1 = IterableExtensions.<IContainer>head(visibleContainers);
-    BaseXtextFile _last_2 = IterableExtensions.<BaseXtextFile>last(this.files);
-    URI _uRI_1 = _last_2.getURI();
-    IResourceDescription _resourceDescription = _head_1.getResourceDescription(_uRI_1);
-    TestCase.assertNotNull(_resourceDescription);
+    TestCase.assertEquals(1, visibleContainers.size());
+    TestCase.assertEquals(1, IterableExtensions.size(IterableExtensions.<IContainer>head(visibleContainers).getResourceDescriptions()));
+    TestCase.assertNotNull(IterableExtensions.<IContainer>head(visibleContainers).getResourceDescription(IterableExtensions.<BaseXtextFile>last(this.files).getURI()));
   }
 }

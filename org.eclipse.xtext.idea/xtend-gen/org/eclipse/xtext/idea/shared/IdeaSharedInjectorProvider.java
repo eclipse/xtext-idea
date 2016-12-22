@@ -23,10 +23,7 @@ public class IdeaSharedInjectorProvider {
     if (IdeaSharedInjectorProvider.injector != null) {
       _elvis = IdeaSharedInjectorProvider.injector;
     } else {
-      IdeaSharedModule _ideaSharedModule = new IdeaSharedModule();
-      Injector _createInjector = Guice.createInjector(_ideaSharedModule);
-      Injector _injector = (IdeaSharedInjectorProvider.injector = _createInjector);
-      _elvis = _injector;
+      _elvis = (IdeaSharedInjectorProvider.injector = Guice.createInjector(new IdeaSharedModule()));
     }
     return _elvis;
   }

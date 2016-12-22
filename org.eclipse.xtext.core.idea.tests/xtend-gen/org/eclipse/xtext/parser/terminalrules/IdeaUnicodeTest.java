@@ -26,8 +26,7 @@ public class IdeaUnicodeTest extends AbstractLanguageParsingTestCase {
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = UnicodeTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(UnicodeTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

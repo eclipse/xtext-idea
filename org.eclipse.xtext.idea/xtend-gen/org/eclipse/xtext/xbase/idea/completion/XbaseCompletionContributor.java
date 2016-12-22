@@ -23,9 +23,7 @@ import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Document;
 import com.intellij.patterns.PlatformPatterns;
-import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.tree.IElementType;
@@ -152,7 +150,6 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
     TokenSet _multiLineCommentTokens = this._tokenSetProvider.getMultiLineCommentTokens();
     IElementType[] _types = _multiLineCommentTokens.getTypes();
     for (final IElementType mlCommentTokenType : _types) {
-      PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement(mlCommentTokenType);
       final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
         @Override
         protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
@@ -162,7 +159,7 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
           XbaseCompletionContributor.this.completeJavaTypes($0, $2, false, _function);
         }
       };
-      this.extend(CompletionType.BASIC, _psiElement, _function);
+      this.extend(CompletionType.BASIC, PlatformPatterns.psiElement(mlCommentTokenType), _function);
     }
   }
   

@@ -80,8 +80,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   }
   
   protected String _text(final JvmOperation element) {
-    String _simpleName = element.getSimpleName();
-    return this.signature(_simpleName, element);
+    return this.signature(element.getSimpleName(), element);
   }
   
   protected String _text(final IResolvedOperation element) {

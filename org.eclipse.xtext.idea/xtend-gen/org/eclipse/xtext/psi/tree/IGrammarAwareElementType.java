@@ -34,9 +34,7 @@ public class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, P
   public IGrammarAwareElementType(final String debugName, final Language language, final EObject grammarElement) {
     super(debugName, language);
     this.grammarElement = grammarElement;
-    AbstractRule _containingRule = GrammarUtil.containingRule(grammarElement);
-    boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_containingRule);
-    this.inFragmentRule = _isEObjectFragmentRule;
+    this.inFragmentRule = GrammarUtil.isEObjectFragmentRule(GrammarUtil.containingRule(grammarElement));
   }
   
   public AbstractRule getRule() {

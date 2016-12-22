@@ -42,8 +42,7 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
   protected boolean setupConfigurationFromContext(final ApplicationConfiguration conf, final ConfigurationContext context, final Ref<PsiElement> sourceElement) {
     final PsiElement javaElement = this._configurationProducerExtensions.tracedJavaElement(context);
     if ((javaElement != null)) {
-      ConfigurationContext _prepareContextFor = this._configurationProducerExtensions.prepareContextFor(context, javaElement);
-      return this.internalSetupConfigurationFromContext(conf, _prepareContextFor, sourceElement);
+      return this.internalSetupConfigurationFromContext(conf, this._configurationProducerExtensions.prepareContextFor(context, javaElement), sourceElement);
     }
     return false;
   }
@@ -52,8 +51,7 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
   public boolean isConfigurationFromContext(final ApplicationConfiguration appConf, final ConfigurationContext context) {
     final PsiElement javaElement = this._configurationProducerExtensions.tracedJavaElement(context);
     if ((javaElement != null)) {
-      ConfigurationContext _prepareContextFor = this._configurationProducerExtensions.prepareContextFor(context, javaElement);
-      return this.internalIsConfigurationFromContext(appConf, _prepareContextFor);
+      return this.internalIsConfigurationFromContext(appConf, this._configurationProducerExtensions.prepareContextFor(context, javaElement));
     }
     return false;
   }
@@ -84,8 +82,7 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
           this.setupConfiguration(configuration, aClass, context);
           return true;
         }
-        PsiElement _parent = method.getParent();
-        currentElement = _parent;
+        currentElement = method.getParent();
       }
     }
     final PsiClass aClass = ApplicationConfigurationType.getMainClass(element);
@@ -98,8 +95,7 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
   }
   
   private void setupConfiguration(final ApplicationConfiguration configuration, final PsiClass aClass, final ConfigurationContext context) {
-    String _runtimeQualifiedName = JavaExecutionUtil.getRuntimeQualifiedName(aClass);
-    configuration.MAIN_CLASS_NAME = _runtimeQualifiedName;
+    configuration.MAIN_CLASS_NAME = JavaExecutionUtil.getRuntimeQualifiedName(aClass);
     configuration.setGeneratedName();
     this.setupConfigurationModule(context, configuration);
   }
@@ -113,8 +109,7 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
       if (_isMainMethod) {
         return method;
       } else {
-        PsiElement _parent = method.getParent();
-        element = _parent;
+        element = method.getParent();
       }
     }
     return null;

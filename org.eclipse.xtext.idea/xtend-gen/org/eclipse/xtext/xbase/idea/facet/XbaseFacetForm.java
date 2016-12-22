@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.idea.facet;
 import com.google.common.base.Objects;
 import com.intellij.facet.ui.FacetValidatorsManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.LanguageLevelModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.impl.LanguageLevelProjectExtensionImpl;
@@ -69,15 +68,12 @@ public class XbaseFacetForm extends GeneratorFacetForm {
     this.generatedAnnotationComment.setEnabled(false);
     this.hideLocalSyntheticVariables.setEnabled(false);
     final ItemListener _function = (ItemEvent it) -> {
-      boolean _isSelected = this.generateGeneratedAnnotation.isSelected();
-      this.includeDateInGenerated.setEnabled(_isSelected);
-      boolean _isSelected_1 = this.generateGeneratedAnnotation.isSelected();
-      this.generatedAnnotationComment.setEnabled(_isSelected_1);
+      this.includeDateInGenerated.setEnabled(this.generateGeneratedAnnotation.isSelected());
+      this.generatedAnnotationComment.setEnabled(this.generateGeneratedAnnotation.isSelected());
     };
     this.generateGeneratedAnnotation.addItemListener(_function);
     final ItemListener _function_1 = (ItemEvent it) -> {
-      boolean _isSelected = this.installDslAsPrimarySource.isSelected();
-      this.hideLocalSyntheticVariables.setEnabled(_isSelected);
+      this.hideLocalSyntheticVariables.setEnabled(this.installDslAsPrimarySource.isSelected());
     };
     this.installDslAsPrimarySource.addItemListener(_function_1);
     return comp;
@@ -96,8 +92,7 @@ public class XbaseFacetForm extends GeneratorFacetForm {
           LanguageLevelCombo _xblockexpression_1 = null;
           {
             this._ideaWidgetFactory.expand(it_2, GridBagConstraints.HORIZONTAL);
-            LanguageLevelCombo _createLanguageLevelCombo = this.createLanguageLevelCombo();
-            _xblockexpression_1 = this.targetJavaVersion = _createLanguageLevelCombo;
+            _xblockexpression_1 = this.targetJavaVersion = this.createLanguageLevelCombo();
           }
           return _xblockexpression_1;
         };
@@ -105,21 +100,18 @@ public class XbaseFacetForm extends GeneratorFacetForm {
       };
       it.row(it, _function);
       final Function1<GridBagConstraints, JComponent> _function_1 = (GridBagConstraints it_1) -> {
-        JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Generate @SuppressWarnings annotations");
-        return this.generateSuppressWarnings = _checkBox;
+        return this.generateSuppressWarnings = this._ideaWidgetFactory.checkBox("Generate @SuppressWarnings annotations");
       };
       it.row(it, _function_1);
       final Function1<GridBagConstraints, JComponent> _function_2 = (GridBagConstraints it_1) -> {
-        JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Generate @Generated annotations");
-        return this.generateGeneratedAnnotation = _checkBox;
+        return this.generateGeneratedAnnotation = this._ideaWidgetFactory.checkBox("Generate @Generated annotations");
       };
       it.row(it, _function_2);
       final Function1<GridBagConstraints, JComponent> _function_3 = (GridBagConstraints it_1) -> {
         JCheckBox _xblockexpression_1 = null;
         {
           this._ideaWidgetFactory.indent(it_1);
-          JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Include current time information");
-          _xblockexpression_1 = this.includeDateInGenerated = _checkBox;
+          _xblockexpression_1 = this.includeDateInGenerated = this._ideaWidgetFactory.checkBox("Include current time information");
         }
         return _xblockexpression_1;
       };
@@ -136,8 +128,7 @@ public class XbaseFacetForm extends GeneratorFacetForm {
             {
               this._ideaWidgetFactory.expand(it_2, GridBagConstraints.HORIZONTAL);
               it_2.anchor = GridBagConstraints.WEST;
-              JBTextField _textField = this._ideaWidgetFactory.textField();
-              _xblockexpression_2 = this.generatedAnnotationComment = _textField;
+              _xblockexpression_2 = this.generatedAnnotationComment = this._ideaWidgetFactory.textField();
             }
             return _xblockexpression_2;
           };
@@ -154,16 +145,14 @@ public class XbaseFacetForm extends GeneratorFacetForm {
   public void createOutputSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
     super.createOutputSection(it);
     final Function1<GridBagConstraints, JComponent> _function = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Ignore generated Java source when debugging (Use for Android)");
-      return this.installDslAsPrimarySource = _checkBox;
+      return this.installDslAsPrimarySource = this._ideaWidgetFactory.checkBox("Ignore generated Java source when debugging (Use for Android)");
     };
     it.row(it, _function);
     final Function1<GridBagConstraints, JComponent> _function_1 = (GridBagConstraints it_1) -> {
       JCheckBox _xblockexpression = null;
       {
         this._ideaWidgetFactory.indent(it_1);
-        JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Hide synthetic local variables in the debugger");
-        _xblockexpression = this.hideLocalSyntheticVariables = _checkBox;
+        _xblockexpression = this.hideLocalSyntheticVariables = this._ideaWidgetFactory.checkBox("Hide synthetic local variables in the debugger");
       }
       return _xblockexpression;
     };
@@ -190,9 +179,7 @@ public class XbaseFacetForm extends GeneratorFacetForm {
       LanguageLevel _findFirst = IterableExtensions.<LanguageLevel>findFirst(((Iterable<LanguageLevel>)Conversions.doWrapArray(_values)), _function);
       boolean _notEquals = (!Objects.equal(_findFirst, null));
       if (_notEquals) {
-        String _targetJavaVersion = ((XbaseGeneratorConfigurationState)data).getTargetJavaVersion();
-        LanguageLevel _valueOf = LanguageLevel.valueOf(_targetJavaVersion);
-        this.targetJavaVersion.setSelectedItem(_valueOf);
+        this.targetJavaVersion.setSelectedItem(LanguageLevel.valueOf(((XbaseGeneratorConfigurationState)data).getTargetJavaVersion()));
       } else {
         this.targetJavaVersion.setSelectedItem(null);
       }
@@ -202,12 +189,10 @@ public class XbaseFacetForm extends GeneratorFacetForm {
       this.generateGeneratedAnnotation.setSelected(_isGenerateGeneratedAnnotation);
       boolean _isIncludeDateInGenerated = ((XbaseGeneratorConfigurationState)data).isIncludeDateInGenerated();
       this.includeDateInGenerated.setSelected(_isIncludeDateInGenerated);
-      String _generatedAnnotationComment = ((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment();
-      this.generatedAnnotationComment.setText(_generatedAnnotationComment);
+      this.generatedAnnotationComment.setText(((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment());
       boolean _isInstallDslAsPrimarySource = ((XbaseGeneratorConfigurationState)data).isInstallDslAsPrimarySource();
       this.installDslAsPrimarySource.setSelected(_isInstallDslAsPrimarySource);
-      boolean _isHideLocalSyntheticVariables = ((XbaseGeneratorConfigurationState)data).isHideLocalSyntheticVariables();
-      this.hideLocalSyntheticVariables.setSelected(_isHideLocalSyntheticVariables);
+      this.hideLocalSyntheticVariables.setSelected(((XbaseGeneratorConfigurationState)data).isHideLocalSyntheticVariables());
     }
   }
   
@@ -221,18 +206,12 @@ public class XbaseFacetForm extends GeneratorFacetForm {
         _string=_selectedItem.toString();
       }
       ((XbaseGeneratorConfigurationState)data).setTargetJavaVersion(_string);
-      boolean _isSelected = this.generateSuppressWarnings.isSelected();
-      ((XbaseGeneratorConfigurationState)data).setGenerateSuppressWarnings(_isSelected);
-      boolean _isSelected_1 = this.generateGeneratedAnnotation.isSelected();
-      ((XbaseGeneratorConfigurationState)data).setGenerateGeneratedAnnotation(_isSelected_1);
-      boolean _isSelected_2 = this.includeDateInGenerated.isSelected();
-      ((XbaseGeneratorConfigurationState)data).setIncludeDateInGenerated(_isSelected_2);
-      String _text = this.generatedAnnotationComment.getText();
-      ((XbaseGeneratorConfigurationState)data).setGeneratedAnnotationComment(_text);
-      boolean _isSelected_3 = this.installDslAsPrimarySource.isSelected();
-      ((XbaseGeneratorConfigurationState)data).setInstallDslAsPrimarySource(_isSelected_3);
-      boolean _isSelected_4 = this.hideLocalSyntheticVariables.isSelected();
-      ((XbaseGeneratorConfigurationState)data).setHideLocalSyntheticVariables(_isSelected_4);
+      ((XbaseGeneratorConfigurationState)data).setGenerateSuppressWarnings(this.generateSuppressWarnings.isSelected());
+      ((XbaseGeneratorConfigurationState)data).setGenerateGeneratedAnnotation(this.generateGeneratedAnnotation.isSelected());
+      ((XbaseGeneratorConfigurationState)data).setIncludeDateInGenerated(this.includeDateInGenerated.isSelected());
+      ((XbaseGeneratorConfigurationState)data).setGeneratedAnnotationComment(this.generatedAnnotationComment.getText());
+      ((XbaseGeneratorConfigurationState)data).setInstallDslAsPrimarySource(this.installDslAsPrimarySource.isSelected());
+      ((XbaseGeneratorConfigurationState)data).setHideLocalSyntheticVariables(this.hideLocalSyntheticVariables.isSelected());
     }
   }
   
@@ -328,11 +307,7 @@ public class XbaseFacetForm extends GeneratorFacetForm {
         LanguageLevel langLevel = this.llExt.getLanguageLevel();
         boolean _equals = Objects.equal(langLevel, null);
         if (_equals) {
-          Module _module = XbaseFacetForm.this.getModule();
-          Project _project = _module.getProject();
-          LanguageLevelProjectExtensionImpl _instanceImpl = LanguageLevelProjectExtensionImpl.getInstanceImpl(_project);
-          LanguageLevel _currentLevel = _instanceImpl.getCurrentLevel();
-          langLevel = _currentLevel;
+          langLevel = LanguageLevelProjectExtensionImpl.getInstanceImpl(XbaseFacetForm.this.getModule().getProject()).getCurrentLevel();
         }
         return langLevel;
       }

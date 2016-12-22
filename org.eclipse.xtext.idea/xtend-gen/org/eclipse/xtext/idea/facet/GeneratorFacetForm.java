@@ -4,7 +4,6 @@ import com.intellij.facet.ui.FacetEditorValidator;
 import com.intellij.facet.ui.FacetValidatorsManager;
 import com.intellij.facet.ui.ValidationResult;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.io.FileUtil;
@@ -96,9 +95,7 @@ public class GeneratorFacetForm {
       TextFieldWithBrowseButton _xblockexpression = null;
       {
         it_1.weightx = 1.0;
-        Project _project = this.module.getProject();
-        TextFieldWithBrowseButton _browseField = this._ideaWidgetFactory.browseField(_project);
-        _xblockexpression = this.directory = _browseField;
+        _xblockexpression = this.directory = this._ideaWidgetFactory.browseField(this.module.getProject());
       }
       return _xblockexpression;
     };
@@ -107,24 +104,19 @@ public class GeneratorFacetForm {
       return this._ideaWidgetFactory.label("Test Directory:");
     };
     final Function1<GridBagConstraints, JComponent> _function_3 = (GridBagConstraints it_1) -> {
-      Project _project = this.module.getProject();
-      TextFieldWithBrowseButton _browseField = this._ideaWidgetFactory.browseField(_project);
-      return this.testDirectory = _browseField;
+      return this.testDirectory = this._ideaWidgetFactory.browseField(this.module.getProject());
     };
     it.row(it, _function_2, _function_3);
     final Function1<GridBagConstraints, JComponent> _function_4 = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Create directory if it doesn\'t exist");
-      return this.createDirectory = _checkBox;
+      return this.createDirectory = this._ideaWidgetFactory.checkBox("Create directory if it doesn\'t exist");
     };
     it.row(it, _function_4);
     final Function1<GridBagConstraints, JComponent> _function_5 = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Overwrite existing files");
-      return this.overwriteFiles = _checkBox;
+      return this.overwriteFiles = this._ideaWidgetFactory.checkBox("Overwrite existing files");
     };
     it.row(it, _function_5);
     final Function1<GridBagConstraints, JComponent> _function_6 = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Delete generated files");
-      return this.deleteGenerated = _checkBox;
+      return this.deleteGenerated = this._ideaWidgetFactory.checkBox("Delete generated files");
     };
     it.row(it, _function_6);
     this.registerDirectoryValidator(this.directory, "The output directory should belong to the module.");
@@ -164,8 +156,7 @@ public class GeneratorFacetForm {
   
   public IdeaWidgetFactory.TwoColumnPanel createGeneralSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
     final Function1<GridBagConstraints, JComponent> _function = (GridBagConstraints it_1) -> {
-      JCheckBox _checkBox = this._ideaWidgetFactory.checkBox("Compiler is activated");
-      return this.activated = _checkBox;
+      return this.activated = this._ideaWidgetFactory.checkBox("Compiler is activated");
     };
     return it.row(it, _function);
   }
@@ -260,8 +251,7 @@ public class GeneratorFacetForm {
   
   public JComponent getRootComponent() {
     if ((this.rootPanel == null)) {
-      JComponent _createComponent = this.createComponent();
-      this.rootPanel = _createComponent;
+      this.rootPanel = this.createComponent();
       this.postCreateComponent();
     }
     return this.rootPanel;

@@ -64,16 +64,11 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
         final XbaseGeneratorConfigurationState state = ((XbaseFacetConfiguration)facetConfiguration).getState();
         GeneratorConfig _generatorConfig = new GeneratorConfig();
         final Procedure1<GeneratorConfig> _function = (GeneratorConfig it) -> {
-          String _generatedAnnotationComment = state.getGeneratedAnnotationComment();
-          it.setGeneratedAnnotationComment(_generatedAnnotationComment);
-          boolean _isGenerateGeneratedAnnotation = state.isGenerateGeneratedAnnotation();
-          it.setGenerateGeneratedAnnotation(_isGenerateGeneratedAnnotation);
-          boolean _isGenerateSuppressWarnings = state.isGenerateSuppressWarnings();
-          it.setGenerateSyntheticSuppressWarnings(_isGenerateSuppressWarnings);
-          boolean _isIncludeDateInGenerated = state.isIncludeDateInGenerated();
-          it.setIncludeDateInGeneratedAnnotation(_isIncludeDateInGenerated);
-          JavaVersion _targetJavaVersion = this.getTargetJavaVersion(state, module);
-          it.setJavaSourceVersion(_targetJavaVersion);
+          it.setGeneratedAnnotationComment(state.getGeneratedAnnotationComment());
+          it.setGenerateGeneratedAnnotation(state.isGenerateGeneratedAnnotation());
+          it.setGenerateSyntheticSuppressWarnings(state.isGenerateSuppressWarnings());
+          it.setIncludeDateInGeneratedAnnotation(state.isIncludeDateInGenerated());
+          it.setJavaSourceVersion(this.getTargetJavaVersion(state, module));
         };
         return ObjectExtensions.<GeneratorConfig>operator_doubleArrow(_generatorConfig, _function);
       }

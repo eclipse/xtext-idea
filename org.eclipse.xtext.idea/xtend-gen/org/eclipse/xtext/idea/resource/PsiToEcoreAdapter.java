@@ -58,14 +58,9 @@ public class PsiToEcoreAdapter {
   private final Map<INode, List<ASTNode>> reverseNodesMapping;
   
   public PsiToEcoreAdapter(final PsiToEcoreTransformationContext context) {
-    BaseXtextFile _xtextFile = context.getXtextFile();
-    this.xtextFile = _xtextFile;
-    Map<ASTNode, INode> _nodesMapping = context.getNodesMapping();
-    Map<ASTNode, INode> _unmodifiableView = Collections.<ASTNode, INode>unmodifiableMap(_nodesMapping);
-    this.nodesMapping = _unmodifiableView;
-    Map<INode, List<ASTNode>> _reverseNodesMapping = context.getReverseNodesMapping();
-    Map<INode, List<ASTNode>> _unmodifiableView_1 = Collections.<INode, List<ASTNode>>unmodifiableMap(_reverseNodesMapping);
-    this.reverseNodesMapping = _unmodifiableView_1;
+    this.xtextFile = context.getXtextFile();
+    this.nodesMapping = Collections.<ASTNode, INode>unmodifiableMap(context.getNodesMapping());
+    this.reverseNodesMapping = Collections.<INode, List<ASTNode>>unmodifiableMap(context.getReverseNodesMapping());
   }
   
   public INode getINode(final ASTNode astNode) {
@@ -77,8 +72,7 @@ public class PsiToEcoreAdapter {
     if ((elementType instanceof IGrammarAwareElementType)) {
       final EObject grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
       while (((node instanceof ICompositeNode) && (node.getGrammarElement() != grammarElement))) {
-        INode _firstChild = ((ICompositeNode) node).getFirstChild();
-        node = _firstChild;
+        node = ((ICompositeNode) node).getFirstChild();
       }
     }
     return node;
@@ -92,8 +86,7 @@ public class PsiToEcoreAdapter {
     INode originalNode = node;
     while ((originalNode instanceof SyntheticCompositeNode)) {
       {
-        ICompositeNode _parent = ((SyntheticCompositeNode)originalNode).getParent();
-        originalNode = _parent;
+        originalNode = ((SyntheticCompositeNode)originalNode).getParent();
         index++;
       }
     }

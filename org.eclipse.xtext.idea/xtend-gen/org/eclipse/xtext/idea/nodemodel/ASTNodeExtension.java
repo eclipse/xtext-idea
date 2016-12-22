@@ -54,8 +54,7 @@ public class ASTNodeExtension {
     ASTNode result = node;
     while (((result != null) && 
       (!(ObjectExtensions.<Boolean>operator_elvis(result.<Boolean>getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY), Boolean.valueOf(false))).booleanValue()))) {
-      ASTNode _treeParent = result.getTreeParent();
-      result = _treeParent;
+      result = result.getTreeParent();
     }
     final EClass actualType = this.getEClass(result);
     boolean _isAssignableFrom = EcoreUtil2.isAssignableFrom(type, actualType);
@@ -82,8 +81,7 @@ public class ASTNodeExtension {
         if ((grammarElement instanceof Action)) {
           TreeElement firstChild = element.getFirstChildNode();
           while ((ASTNodeExtension.this.getGrammarElement(firstChild) instanceof Action)) {
-            TreeElement _firstChildNode = firstChild.getFirstChildNode();
-            firstChild = _firstChildNode;
+            firstChild = firstChild.getFirstChildNode();
           }
           EObject _grammarElement = ASTNodeExtension.this.getGrammarElement(firstChild);
           final Assignment assignment = GrammarUtil.containingAssignment(_grammarElement);

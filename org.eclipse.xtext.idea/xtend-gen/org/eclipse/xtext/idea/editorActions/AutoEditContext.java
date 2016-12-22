@@ -96,8 +96,7 @@ public class AutoEditContext {
     while ((index > (-1))) {
       {
         count++;
-        int _indexOf = searchMe.indexOf(toFind, (index + length));
-        index = _indexOf;
+        index = searchMe.indexOf(toFind, (index + length));
       }
     }
     return count;

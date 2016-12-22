@@ -38,8 +38,7 @@ public class XtextPsiUtils {
       if (_equals) {
         return null;
       } else {
-        PsiFile _containingFile = element.getContainingFile();
-        _xifexpression_1 = XtextPsiUtils.findVirtualFile(_containingFile);
+        _xifexpression_1 = XtextPsiUtils.findVirtualFile(element.getContainingFile());
       }
       _xifexpression = _xifexpression_1;
     }

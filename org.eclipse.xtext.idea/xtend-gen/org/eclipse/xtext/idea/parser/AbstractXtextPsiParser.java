@@ -14,7 +14,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
-import java.util.Map;
 import java.util.Set;
 import org.antlr.runtime.TokenSource;
 import org.antlr.runtime.TokenStream;
@@ -63,10 +62,8 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
         PsiXtextTokenStream _createTokenStream = this.createTokenStream(builder);
         AbstractPsiAntlrParser _createParser = this.createParser(builder, _createTokenStream);
         final Procedure1<AbstractPsiAntlrParser> _function = (AbstractPsiAntlrParser it) -> {
-          Map<Integer, String> _tokenDefMap = this.tokenDefProvider.getTokenDefMap();
-          it.setTokenTypeMap(_tokenDefMap);
-          IUnorderedGroupHelper _get = this.unorderedGroupHelperProvider.get();
-          it.setUnorderedGroupHelper(_get);
+          it.setTokenTypeMap(this.tokenDefProvider.getTokenDefMap());
+          it.setUnorderedGroupHelper(this.unorderedGroupHelperProvider.get());
           IUnorderedGroupHelper _unorderedGroupHelper = it.getUnorderedGroupHelper();
           _unorderedGroupHelper.initializeWith(it);
         };
@@ -124,8 +121,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
         if (_notEquals) {
           it.initCurrentLookAhead((lookAhead).intValue());
         }
-        Set<String> _initialHiddenTokens = this.getInitialHiddenTokens();
-        it.setInitialHiddenTokens(((String[])Conversions.unwrapArray(_initialHiddenTokens, String.class)));
+        it.setInitialHiddenTokens(((String[])Conversions.unwrapArray(this.getInitialHiddenTokens(), String.class)));
       };
       _xblockexpression = ObjectExtensions.<PsiXtextTokenStream>operator_doubleArrow(_psiXtextTokenStream, _function);
     }

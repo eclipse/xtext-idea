@@ -72,8 +72,7 @@ public class XbaseWordsScanner implements WordsScanner {
     this.lexer.advance();
     while (this.isOperator()) {
       {
-        int _tokenEnd = this.lexer.getTokenEnd();
-        end = _tokenEnd;
+        end = this.lexer.getTokenEnd();
         this.lexer.advance();
       }
     }

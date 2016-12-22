@@ -18,7 +18,6 @@ import com.intellij.ide.util.treeView.smartTree.Sorter;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -62,8 +61,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     super(editor, xtextFile);
     IXtextLanguage _xtextLanguage = xtextFile.getXtextLanguage();
     _xtextLanguage.injectMembers(this);
-    ArrayList<Sorter> _newArrayList = CollectionLiterals.<Sorter>newArrayList();
-    this.sorters = _newArrayList;
+    this.sorters = CollectionLiterals.<Sorter>newArrayList();
     final Comparator<TreeElement> comparator = this.getComparator();
     boolean _notEquals = (!Objects.equal(comparator, null));
     if (_notEquals) {
@@ -74,14 +72,10 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
       AlphaSorter _doubleArrow = ObjectExtensions.<AlphaSorter>operator_doubleArrow(_alphaSorter, _function);
       this.sorters.add(_doubleArrow);
     }
-    ArrayList<Filter> _newArrayList_1 = CollectionLiterals.<Filter>newArrayList();
-    this.filters = _newArrayList_1;
-    ArrayList<Grouper> _newArrayList_2 = CollectionLiterals.<Grouper>newArrayList();
-    this.groupers = _newArrayList_2;
-    ArrayList<NodeProvider> _newArrayList_3 = CollectionLiterals.<NodeProvider>newArrayList();
-    this.nodeProviders = _newArrayList_3;
-    ArrayList<Class<?>> _newArrayList_4 = CollectionLiterals.<Class<?>>newArrayList(PsiEObject.class);
-    this.suitableClasses = _newArrayList_4;
+    this.filters = CollectionLiterals.<Filter>newArrayList();
+    this.groupers = CollectionLiterals.<Grouper>newArrayList();
+    this.nodeProviders = CollectionLiterals.<NodeProvider>newArrayList();
+    this.suitableClasses = CollectionLiterals.<Class<?>>newArrayList(PsiEObject.class);
   }
   
   @Override

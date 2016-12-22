@@ -62,8 +62,7 @@ public class DefaultOperatorTokenTypeProvider implements OperatorTokenTypeProvid
         }
       }
     }
-    TokenSet _create = TokenSet.create(((IElementType[])Conversions.unwrapArray(tokenTypes, IElementType.class)));
-    this.operatorTokens = _create;
+    this.operatorTokens = TokenSet.create(((IElementType[])Conversions.unwrapArray(tokenTypes, IElementType.class)));
   }
   
   @Override

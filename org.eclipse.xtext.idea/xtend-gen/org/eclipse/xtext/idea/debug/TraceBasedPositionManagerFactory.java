@@ -211,9 +211,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
               return SourcePosition.createFromOffset(psi, _offset);
             } else {
               final PsiFile psi_1 = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
-              int _offset_1 = mergedAssociatedLocation.getOffset();
-              SourcePosition _createFromOffset = SourcePosition.createFromOffset(psi_1, _offset_1);
-              fallBack = _createFromOffset;
+              fallBack = SourcePosition.createFromOffset(psi_1, mergedAssociatedLocation.getOffset());
             }
           }
           int _myEndLineNumber = n.getMyEndLineNumber();
@@ -221,9 +219,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           if (_tripleEquals_1) {
             final ILocationData mergedAssociatedLocation_1 = n.getMergedAssociatedLocation();
             final PsiFile psi_2 = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
-            int _endLineNumber = mergedAssociatedLocation_1.getEndLineNumber();
-            SourcePosition _createFromLine_1 = SourcePosition.createFromLine(psi_2, _endLineNumber);
-            secondaryFallBack = _createFromLine_1;
+            secondaryFallBack = SourcePosition.createFromLine(psi_2, mergedAssociatedLocation_1.getEndLineNumber());
           }
         }
       }

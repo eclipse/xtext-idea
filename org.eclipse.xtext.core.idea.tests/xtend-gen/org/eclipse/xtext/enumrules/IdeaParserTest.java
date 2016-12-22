@@ -23,8 +23,7 @@ public class IdeaParserTest extends AbstractLanguageParsingTestCase {
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      Injector _instance = EnumRulesTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class);
-      this.setInjector(_instance);
+      this.setInjector(EnumRulesTestLanguageLanguage.INSTANCE.<Injector>getInstance(Injector.class));
     }
     
     @Override

@@ -14,7 +14,6 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiElement;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.structureview.IStructureViewTreeElementProvider;
@@ -56,8 +55,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
       }
       boolean _equals = Objects.equal(this.children, null);
       if (_equals) {
-        ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
-        this.children = _newArrayList;
+        this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
         this.structureViewTreeElementProvider.buildChildren(this);
       }
       boolean _equals_1 = Objects.equal(this.children, null);
@@ -78,8 +76,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
       {
         boolean _equals = Objects.equal(this.children, null);
         if (_equals) {
-          ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
-          this.children = _newArrayList;
+          this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
         }
         this.leaf = false;
         _xblockexpression = this.children.add(child);
@@ -104,8 +101,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
         {
           boolean _equals = Objects.equal(this.children, null);
           if (_equals) {
-            ArrayList<StructureViewTreeElement> _newArrayList = CollectionLiterals.<StructureViewTreeElement>newArrayList();
-            this.children = _newArrayList;
+            this.children = CollectionLiterals.<StructureViewTreeElement>newArrayList();
           }
           this.leaf = false;
           _xblockexpression_1 = Iterables.<StructureViewTreeElement>addAll(this.children, notNullChildren);

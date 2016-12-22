@@ -18,12 +18,10 @@ import com.intellij.navigation.ItemPresentation;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.EObjectTreeElement;
 import org.eclipse.xtext.idea.structureview.EStructuralFeatureTreeElement;
@@ -79,27 +77,19 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
       String _presentableText = ((PresentationData)itemPresentation).getPresentableText();
       boolean _equals_1 = Objects.equal(_presentableText, null);
       if (_equals_1) {
-        Resource _eResource = modelElement.eResource();
-        URI _uRI = _eResource.getURI();
-        URI _trimFileExtension = _uRI.trimFileExtension();
-        String _lastSegment = _trimFileExtension.lastSegment();
-        ((PresentationData)itemPresentation).setPresentableText(_lastSegment);
+        ((PresentationData)itemPresentation).setPresentableText(modelElement.eResource().getURI().trimFileExtension().lastSegment());
       }
     }
-    BaseXtextFile _element_1 = it.getElement();
-    boolean _isLeaf = this.isLeaf(modelElement);
-    EObjectTreeElement _createEObjectTreeElement = this.createEObjectTreeElement(modelElement, _element_1, _isLeaf, itemPresentation);
-    it.addChild(_createEObjectTreeElement);
+    it.addChild(
+      this.createEObjectTreeElement(modelElement, 
+        it.getElement(), 
+        this.isLeaf(modelElement), itemPresentation));
   }
   
   protected void _buildChildren(final EObjectTreeElement it) {
-    EObject _object = it.getObject();
-    EList<EObject> _eContents = _object.eContents();
-    final Function1<EObject, StructureViewTreeElement> _function = (EObject child) -> {
+    it.addChildren(ListExtensions.<EObject, StructureViewTreeElement>map(it.getObject().eContents(), ((Function1<EObject, StructureViewTreeElement>) (EObject child) -> {
       return this.createEObjectTreeElement(child, it.xtextFile);
-    };
-    List<StructureViewTreeElement> _map = ListExtensions.<EObject, StructureViewTreeElement>map(_eContents, _function);
-    it.addChildren(_map);
+    })));
   }
   
   protected void _buildChildren(final EStructuralFeatureTreeElement it) {
@@ -110,25 +100,21 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
       EStructuralFeature _feature_1 = it.getFeature();
       boolean _isMany = _feature_1.isMany();
       if (_isMany) {
-        Iterable<EObject> _filter = Iterables.<EObject>filter(((Iterable<?>)values), EObject.class);
-        final Function1<EObject, StructureViewTreeElement> _function = (EObject value) -> {
+        it.addChildren(IterableExtensions.<EObject, StructureViewTreeElement>map(Iterables.<EObject>filter(((Iterable<?>)values), EObject.class), ((Function1<EObject, StructureViewTreeElement>) (EObject value) -> {
           return this.createEObjectTreeElement(value, it.xtextFile);
-        };
-        Iterable<StructureViewTreeElement> _map = IterableExtensions.<EObject, StructureViewTreeElement>map(_filter, _function);
-        it.addChildren(_map);
+        })));
       }
     } else {
       if ((values instanceof EObject)) {
-        EObjectTreeElement _createEObjectTreeElement = this.createEObjectTreeElement(((EObject)values), it.xtextFile);
-        it.addChild(_createEObjectTreeElement);
+        it.addChild(this.createEObjectTreeElement(((EObject)values), it.xtextFile));
       }
     }
   }
   
   protected EObjectTreeElement createEObjectTreeElement(final EObject modelElement, final BaseXtextFile xtextFile) {
-    boolean _isLeaf = this.isLeaf(modelElement);
-    ItemPresentation _itemPresentation = this.itemPresentationProvider.getItemPresentation(modelElement);
-    return this.createEObjectTreeElement(modelElement, xtextFile, _isLeaf, _itemPresentation);
+    return this.createEObjectTreeElement(modelElement, xtextFile, 
+      this.isLeaf(modelElement), 
+      this.itemPresentationProvider.getItemPresentation(modelElement));
   }
   
   protected EObjectTreeElement createEObjectTreeElement(final EObject modelElement, final BaseXtextFile xtextFile, final boolean leaf, final ItemPresentation itemPresentation) {

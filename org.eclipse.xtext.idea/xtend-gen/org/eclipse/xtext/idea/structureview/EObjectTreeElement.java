@@ -33,8 +33,7 @@ public class EObjectTreeElement extends AbstractStructureViewTreeElement {
   
   public void setObject(final EObject object) {
     this.object = object;
-    URI _uRI = EcoreUtil.getURI(object);
-    this.uri = _uRI;
+    this.uri = EcoreUtil.getURI(object);
   }
   
   @Override

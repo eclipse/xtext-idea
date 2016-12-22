@@ -10,9 +10,7 @@ package org.eclipse.xtext.idea.sdomain.idea.tests.psi;
 import com.intellij.codeInsight.TargetElementUtilBase;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.util.IncorrectOperationException;
 import junit.framework.TestCase;
@@ -677,38 +675,24 @@ public class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
   
   protected void assertPsiNamedEObject(final PsiNamedEObject element, final String name, final int nameOffset) {
     TestCase.assertNotNull(element);
-    int _textOffset = element.getTextOffset();
-    TestCase.assertEquals(nameOffset, _textOffset);
-    String _name = element.getName();
-    TestCase.assertEquals(name, _name);
+    TestCase.assertEquals(nameOffset, element.getTextOffset());
+    TestCase.assertEquals(name, element.getName());
     PsiEObjectIdentifier _nameIdentifier = element.getNameIdentifier();
     this.assertPsiEObjectIdentifier(_nameIdentifier, element, name, nameOffset);
   }
   
   protected void assertPsiEObjectIdentifier(final PsiEObjectIdentifier identifier, final PsiNamedEObject element, final String name, final int nameOffset) {
     TestCase.assertNotNull(identifier);
-    boolean _isValid = identifier.isValid();
-    TestCase.assertTrue(_isValid);
-    PsiFile _containingFile = element.getContainingFile();
-    PsiFile _containingFile_1 = identifier.getContainingFile();
-    TestCase.assertEquals(_containingFile, _containingFile_1);
-    PsiElement _parent = identifier.getParent();
-    TestCase.assertEquals(element, _parent);
-    String _text = identifier.getText();
-    TestCase.assertEquals(name, _text);
-    TextRange _textRange = identifier.getTextRange();
-    int _startOffset = _textRange.getStartOffset();
-    TestCase.assertEquals(nameOffset, _startOffset);
+    TestCase.assertTrue(identifier.isValid());
+    TestCase.assertEquals(element.getContainingFile(), identifier.getContainingFile());
+    TestCase.assertEquals(element, identifier.getParent());
+    TestCase.assertEquals(name, identifier.getText());
+    TestCase.assertEquals(nameOffset, identifier.getTextRange().getStartOffset());
     int _length = name.length();
     int _plus = (nameOffset + _length);
-    TextRange _textRange_1 = identifier.getTextRange();
-    int _endOffset = _textRange_1.getEndOffset();
-    TestCase.assertEquals(_plus, _endOffset);
-    int _textOffset = identifier.getTextOffset();
-    TestCase.assertEquals(nameOffset, _textOffset);
-    int _length_1 = name.length();
-    int _textLength = identifier.getTextLength();
-    TestCase.assertEquals(_length_1, _textLength);
+    TestCase.assertEquals(_plus, identifier.getTextRange().getEndOffset());
+    TestCase.assertEquals(nameOffset, identifier.getTextOffset());
+    TestCase.assertEquals(name.length(), identifier.getTextLength());
   }
   
   protected PsiNamedEObject findPsiNamedEObject(final int offset) {

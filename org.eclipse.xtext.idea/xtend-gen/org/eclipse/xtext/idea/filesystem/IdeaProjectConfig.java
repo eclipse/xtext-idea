@@ -42,10 +42,7 @@ public class IdeaProjectConfig implements IProjectConfig {
   
   public IdeaProjectConfig(final Module module) {
     this.module = module;
-    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-    VirtualFile[] _contentRoots = _instance.getContentRoots();
-    VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-    this.contentRoot = _head;
+    this.contentRoot = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(ModuleRootManager.getInstance(module).getContentRoots())));
   }
   
   @Override

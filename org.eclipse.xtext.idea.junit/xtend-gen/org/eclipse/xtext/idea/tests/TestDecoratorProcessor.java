@@ -74,8 +74,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
           }
         };
         it.setBody(_client);
-        Iterable<? extends TypeReference> _exceptions = declaredMethod.getExceptions();
-        it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
+        it.setExceptions(((TypeReference[])Conversions.unwrapArray(declaredMethod.getExceptions(), TypeReference.class)));
       };
       cls.addMethod(_simpleName, _function_5);
     };

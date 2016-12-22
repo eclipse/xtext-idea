@@ -42,14 +42,12 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
   
   @Override
   public void serialize(final T stub, final StubOutputStream it) throws IOException {
-    URI _uri = stub.getUri();
-    this.writeURI(it, _uri);
+    this.writeURI(it, stub.getUri());
   }
   
   protected void writeURI(final StubOutputStream it, final URI uri) {
     try {
-      String _string = uri.toString();
-      it.writeUTF(_string);
+      it.writeUTF(uri.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -60,8 +58,7 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     T _xblockexpression = null;
     {
       final XtextFileStub<BaseXtextFile> stub = new XtextFileStub<BaseXtextFile>(null, this);
-      URI _readURI = this.readURI(it);
-      stub.setUri(_readURI);
+      stub.setUri(this.readURI(it));
       _xblockexpression = ((T) stub);
     }
     return _xblockexpression;
