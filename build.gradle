@@ -2,22 +2,34 @@
  * Root project for xtext-idea.
  */
 
+buildscript {
+	apply from: "${rootDir}/gradle/versions.gradle"
+	repositories.jcenter()
+	dependencies {
+		classpath "org.xtext:xtext-gradle-plugin:$versions.xtend_plugin"
+	}
+}
+
+apply from: "${rootDir}/gradle/versions.gradle"
+
 subprojects {
+	group = 'org.eclipse.xtext'
+	version = rootProject.version
+	
 	apply plugin: 'java'
+	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
 	
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
-	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
-	apply from: "${rootDir}/gradle/maven-deployment.gradle"
+	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-	
-	group = 'org.eclipse.xtext'
+	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 }
 
-task cleanLocalMavenRepo(type: Delete) {
-	group = 'Upload'
-	description = 'Delete the local Maven repository'
-	delete 'build/maven-repository'
+task clean(type: Delete) {
+	group 'Build'
+	description 'Deletes the local repositories'
+	delete 'build'
 }
