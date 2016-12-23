@@ -11,6 +11,7 @@ buildscript {
 }
 
 apply from: "${rootDir}/gradle/versions.gradle"
+apply from: "${rootDir}/gradle/bootstrap-setup.gradle"
 
 subprojects {
 	group = 'org.eclipse.xtext'

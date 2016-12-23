@@ -2,7 +2,9 @@
  * Configuration of Xtend compiler.
  */
 
-xtext.version = versions.xtext
+[generateXtext, generateTestXtext].each { gen ->
+	gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+}
 
 sourcesJar {
 	from (sourceSets.main.xtendOutputDir) {
