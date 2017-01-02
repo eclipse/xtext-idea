@@ -12,8 +12,7 @@ public class CommentAssociationTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      CommentAssociationTestLanguageStandaloneSetupIdea _commentAssociationTestLanguageStandaloneSetupIdea = new CommentAssociationTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _commentAssociationTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new CommentAssociationTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

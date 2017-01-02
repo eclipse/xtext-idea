@@ -12,8 +12,7 @@ public class EcoreFragmentTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EcoreFragmentTestLanguageStandaloneSetupIdea _ecoreFragmentTestLanguageStandaloneSetupIdea = new EcoreFragmentTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _ecoreFragmentTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EcoreFragmentTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

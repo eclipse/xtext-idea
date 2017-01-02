@@ -12,8 +12,7 @@ public class QualifiedNameTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      QualifiedNameTestLanguageStandaloneSetupIdea _qualifiedNameTestLanguageStandaloneSetupIdea = new QualifiedNameTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _qualifiedNameTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new QualifiedNameTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

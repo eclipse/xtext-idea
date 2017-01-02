@@ -12,8 +12,7 @@ public class LiveContainerBuilderIntegerationTestLanguageIdeaSetup implements IS
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      LiveContainerBuilderIntegerationTestLanguageStandaloneSetupIdea _liveContainerBuilderIntegerationTestLanguageStandaloneSetupIdea = new LiveContainerBuilderIntegerationTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _liveContainerBuilderIntegerationTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new LiveContainerBuilderIntegerationTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

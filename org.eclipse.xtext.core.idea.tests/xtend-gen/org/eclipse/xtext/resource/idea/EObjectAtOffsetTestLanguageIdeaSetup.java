@@ -12,8 +12,7 @@ public class EObjectAtOffsetTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EObjectAtOffsetTestLanguageStandaloneSetupIdea _eObjectAtOffsetTestLanguageStandaloneSetupIdea = new EObjectAtOffsetTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _eObjectAtOffsetTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EObjectAtOffsetTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

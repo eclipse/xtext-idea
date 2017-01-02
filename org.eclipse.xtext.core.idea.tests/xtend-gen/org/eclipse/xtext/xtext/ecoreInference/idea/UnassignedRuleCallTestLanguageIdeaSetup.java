@@ -12,8 +12,7 @@ public class UnassignedRuleCallTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      UnassignedRuleCallTestLanguageStandaloneSetupIdea _unassignedRuleCallTestLanguageStandaloneSetupIdea = new UnassignedRuleCallTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _unassignedRuleCallTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new UnassignedRuleCallTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

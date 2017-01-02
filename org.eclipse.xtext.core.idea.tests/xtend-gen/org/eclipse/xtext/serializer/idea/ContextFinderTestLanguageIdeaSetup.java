@@ -12,8 +12,7 @@ public class ContextFinderTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ContextFinderTestLanguageStandaloneSetupIdea _contextFinderTestLanguageStandaloneSetupIdea = new ContextFinderTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _contextFinderTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ContextFinderTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

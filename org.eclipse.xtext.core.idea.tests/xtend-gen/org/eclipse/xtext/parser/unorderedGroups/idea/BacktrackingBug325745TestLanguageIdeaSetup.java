@@ -12,8 +12,7 @@ public class BacktrackingBug325745TestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      BacktrackingBug325745TestLanguageStandaloneSetupIdea _backtrackingBug325745TestLanguageStandaloneSetupIdea = new BacktrackingBug325745TestLanguageStandaloneSetupIdea();
-      _xblockexpression = _backtrackingBug325745TestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new BacktrackingBug325745TestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

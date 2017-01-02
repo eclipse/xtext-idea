@@ -12,8 +12,7 @@ public class AssignmentFinderTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      AssignmentFinderTestLanguageStandaloneSetupIdea _assignmentFinderTestLanguageStandaloneSetupIdea = new AssignmentFinderTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _assignmentFinderTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new AssignmentFinderTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

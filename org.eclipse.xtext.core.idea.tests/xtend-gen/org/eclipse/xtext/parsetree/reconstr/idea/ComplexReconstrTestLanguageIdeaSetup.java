@@ -12,8 +12,7 @@ public class ComplexReconstrTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ComplexReconstrTestLanguageStandaloneSetupIdea _complexReconstrTestLanguageStandaloneSetupIdea = new ComplexReconstrTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _complexReconstrTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ComplexReconstrTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

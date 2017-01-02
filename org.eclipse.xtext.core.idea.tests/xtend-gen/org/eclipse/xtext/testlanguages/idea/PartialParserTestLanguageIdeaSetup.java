@@ -12,8 +12,7 @@ public class PartialParserTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      PartialParserTestLanguageStandaloneSetupIdea _partialParserTestLanguageStandaloneSetupIdea = new PartialParserTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _partialParserTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new PartialParserTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -12,8 +12,7 @@ public class DummyTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      DummyTestLanguageStandaloneSetupIdea _dummyTestLanguageStandaloneSetupIdea = new DummyTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _dummyTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new DummyTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

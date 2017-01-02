@@ -12,8 +12,7 @@ public class LiveContainerTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      LiveContainerTestLanguageStandaloneSetupIdea _liveContainerTestLanguageStandaloneSetupIdea = new LiveContainerTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _liveContainerTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new LiveContainerTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -34,9 +34,7 @@ public class IdeaBacktrackingBug325745ParserTest extends AbstractLanguageParsing
     @Override
     protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
       InputStreamReader _inputStreamReader = new InputStreamReader(in);
-      String _string = CharStreams.toString(_inputStreamReader);
-      EObject _checkModel = this.modelChecker.<EObject>checkModel(_string, false);
-      Resource _eResource = _checkModel.eResource();
+      Resource _eResource = this.modelChecker.<EObject>checkModel(CharStreams.toString(_inputStreamReader), false).eResource();
       return ((XtextResource) _eResource);
     }
     

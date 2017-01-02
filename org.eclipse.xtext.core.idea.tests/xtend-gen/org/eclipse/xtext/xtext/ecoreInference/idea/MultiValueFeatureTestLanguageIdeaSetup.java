@@ -12,8 +12,7 @@ public class MultiValueFeatureTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      MultiValueFeatureTestLanguageStandaloneSetupIdea _multiValueFeatureTestLanguageStandaloneSetupIdea = new MultiValueFeatureTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _multiValueFeatureTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new MultiValueFeatureTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

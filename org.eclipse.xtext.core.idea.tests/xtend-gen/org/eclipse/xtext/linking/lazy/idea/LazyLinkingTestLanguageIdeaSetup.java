@@ -12,8 +12,7 @@ public class LazyLinkingTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      LazyLinkingTestLanguageStandaloneSetupIdea _lazyLinkingTestLanguageStandaloneSetupIdea = new LazyLinkingTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _lazyLinkingTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new LazyLinkingTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

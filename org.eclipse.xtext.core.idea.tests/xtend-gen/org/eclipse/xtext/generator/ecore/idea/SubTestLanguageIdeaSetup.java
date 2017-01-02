@@ -15,8 +15,7 @@ public class SubTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      SubTestLanguageStandaloneSetupIdea _subTestLanguageStandaloneSetupIdea = new SubTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _subTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new SubTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

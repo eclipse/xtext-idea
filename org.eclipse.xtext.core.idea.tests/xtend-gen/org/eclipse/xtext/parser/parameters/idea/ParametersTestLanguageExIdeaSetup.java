@@ -12,8 +12,7 @@ public class ParametersTestLanguageExIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ParametersTestLanguageExStandaloneSetupIdea _parametersTestLanguageExStandaloneSetupIdea = new ParametersTestLanguageExStandaloneSetupIdea();
-      _xblockexpression = _parametersTestLanguageExStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ParametersTestLanguageExStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

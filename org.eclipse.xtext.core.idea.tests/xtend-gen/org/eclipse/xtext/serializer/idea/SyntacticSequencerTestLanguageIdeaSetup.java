@@ -12,8 +12,7 @@ public class SyntacticSequencerTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      SyntacticSequencerTestLanguageStandaloneSetupIdea _syntacticSequencerTestLanguageStandaloneSetupIdea = new SyntacticSequencerTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _syntacticSequencerTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new SyntacticSequencerTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

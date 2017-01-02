@@ -11,7 +11,6 @@ import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
-import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.parser.antlr.Bug378967Test;
 import org.eclipse.xtext.parser.antlr.idea.Bug378967TestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug378967TestLanguageFileType;
@@ -34,8 +33,7 @@ public class IdeaBug378967Test extends AbstractLanguageParsingTestCase {
     @Override
     protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
       InputStreamReader _inputStreamReader = new InputStreamReader(in);
-      String _string = CharStreams.toString(_inputStreamReader);
-      return this.modelChecker.checkResource(_string, false);
+      return this.modelChecker.checkResource(CharStreams.toString(_inputStreamReader), false);
     }
     
     @Override
@@ -70,8 +68,7 @@ public class IdeaBug378967Test extends AbstractLanguageParsingTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    XtextResourceAsserts _xtextResourceAsserts = this.getXtextResourceAsserts();
-    NodeModelPrinter _nodeModelPrinter = _xtextResourceAsserts.getNodeModelPrinter();
+    NodeModelPrinter _nodeModelPrinter = this.getXtextResourceAsserts().getNodeModelPrinter();
     _nodeModelPrinter.setIgnoreSyntaxErrors(true);
     this.delegate.setUp();
   }

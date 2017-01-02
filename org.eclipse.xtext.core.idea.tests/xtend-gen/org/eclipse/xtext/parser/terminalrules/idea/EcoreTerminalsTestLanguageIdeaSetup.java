@@ -12,8 +12,7 @@ public class EcoreTerminalsTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EcoreTerminalsTestLanguageStandaloneSetupIdea _ecoreTerminalsTestLanguageStandaloneSetupIdea = new EcoreTerminalsTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _ecoreTerminalsTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EcoreTerminalsTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -12,8 +12,7 @@ public class FowlerDslTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      FowlerDslTestLanguageStandaloneSetupIdea _fowlerDslTestLanguageStandaloneSetupIdea = new FowlerDslTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _fowlerDslTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new FowlerDslTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

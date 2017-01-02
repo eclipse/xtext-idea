@@ -12,8 +12,7 @@ public class LookaheadTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      LookaheadTestLanguageStandaloneSetupIdea _lookaheadTestLanguageStandaloneSetupIdea = new LookaheadTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _lookaheadTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new LookaheadTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -15,8 +15,7 @@ public class SuperTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      SuperTestLanguageStandaloneSetupIdea _superTestLanguageStandaloneSetupIdea = new SuperTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _superTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new SuperTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

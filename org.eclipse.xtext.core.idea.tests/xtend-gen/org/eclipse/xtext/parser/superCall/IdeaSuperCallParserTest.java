@@ -32,8 +32,7 @@ public class IdeaSuperCallParserTest extends AbstractLanguageParsingTestCase {
     @Override
     protected XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
       InputStreamReader _inputStreamReader = new InputStreamReader(in);
-      String _string = CharStreams.toString(_inputStreamReader);
-      return this.modelChecker.checkResource(_string, false);
+      return this.modelChecker.checkResource(CharStreams.toString(_inputStreamReader), false);
     }
     
     public Delegate(final ModelChecker modelChecker) {

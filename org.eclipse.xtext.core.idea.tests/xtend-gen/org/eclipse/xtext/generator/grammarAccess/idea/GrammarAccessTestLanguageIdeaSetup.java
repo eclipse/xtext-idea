@@ -12,8 +12,7 @@ public class GrammarAccessTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      GrammarAccessTestLanguageStandaloneSetupIdea _grammarAccessTestLanguageStandaloneSetupIdea = new GrammarAccessTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _grammarAccessTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new GrammarAccessTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

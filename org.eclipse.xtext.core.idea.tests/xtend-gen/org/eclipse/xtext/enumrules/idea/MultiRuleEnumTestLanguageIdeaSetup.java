@@ -12,8 +12,7 @@ public class MultiRuleEnumTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      MultiRuleEnumTestLanguageStandaloneSetupIdea _multiRuleEnumTestLanguageStandaloneSetupIdea = new MultiRuleEnumTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _multiRuleEnumTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new MultiRuleEnumTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }
