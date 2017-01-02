@@ -12,10 +12,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.codeInsight.CodeInsightSettings;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
-import com.intellij.openapi.editor.ex.DocumentEx;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -30,7 +28,6 @@ import org.eclipse.xtext.idea.editorActions.AutoEditBlockRegion;
 import org.eclipse.xtext.idea.editorActions.AutoEditContext;
 import org.eclipse.xtext.idea.editorActions.IdeaAutoEditHandler;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -51,10 +48,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   private AutoEditBlockProvider blockProvider;
   
   protected Iterable<AbstractIndentableAutoEditBlock> getBlocks(final EditorEx editor) {
-    CaretModel _caretModel = editor.getCaretModel();
-    int _offset = _caretModel.getOffset();
-    TokenSet _tokenSet = this.tokenSetProvider.getTokenSet(editor, _offset);
-    return this.blockProvider.getBlocks(_tokenSet);
+    return this.blockProvider.getBlocks(this.tokenSetProvider.getTokenSet(editor, editor.getCaretModel().getOffset()));
   }
   
   @Override
@@ -75,18 +69,15 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
     final String blockIndentaion = this.indentBlock(region, previousLineIndentation, context);
     final String string = context.newLine((previousLineIndentation + blockIndentaion));
     final int cursorShift = string.length();
-    EditorEx _editor = context.getEditor();
-    EditorModificationUtil.insertStringAtCaret(_editor, string, false, false);
-    EditorEx _editor_1 = context.getEditor();
-    EditorModificationUtil.moveCaretRelatively(_editor_1, cursorShift);
+    EditorModificationUtil.insertStringAtCaret(context.getEditor(), string, false, false);
+    EditorModificationUtil.moveCaretRelatively(context.getEditor(), cursorShift);
     return IdeaAutoEditHandler.Result.STOP;
   }
   
   protected String indentBlock(final AutoEditBlockRegion region, final String previousLineIndentation, final AutoEditContext context) {
     boolean _shouldIndentBlock = this.shouldIndentBlock(region, previousLineIndentation, context);
     if (_shouldIndentBlock) {
-      AbstractIndentableAutoEditBlock _block = region.getBlock();
-      return _block.indent(region, previousLineIndentation, context);
+      return region.getBlock().indent(region, previousLineIndentation, context);
     }
     return "";
   }
@@ -104,15 +95,11 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       if (_not) {
         return "";
       }
-      DocumentEx _document = context.getDocument();
-      int _caretOffset = context.getCaretOffset();
-      final int lineNumber = _document.getLineNumber(_caretOffset);
-      DocumentEx _document_1 = context.getDocument();
-      final int lineStartOffset = _document_1.getLineStartOffset(lineNumber);
-      DocumentEx _document_2 = context.getDocument();
-      String _text = _document_2.getText();
-      int _caretOffset_1 = context.getCaretOffset();
-      final int textStartOffset = CharArrayUtil.shiftForward(_text, lineStartOffset, _caretOffset_1, 
+      final int lineNumber = context.getDocument().getLineNumber(context.getCaretOffset());
+      final int lineStartOffset = context.getDocument().getLineStartOffset(lineNumber);
+      final int textStartOffset = CharArrayUtil.shiftForward(
+        context.getDocument().getText(), lineStartOffset, 
+        context.getCaretOffset(), 
         DefaultAutoEditHandler.WHITESPACE_CHARACTERS);
       String _xifexpression = null;
       if ((textStartOffset > lineStartOffset)) {
@@ -126,26 +113,19 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   }
   
   protected boolean shouldIndent(@Extension final AutoEditContext context) {
-    int _caretOffset = context.getCaretOffset();
-    TokenSet _tokenSet = context.getTokenSet(_caretOffset);
+    TokenSet _tokenSet = context.getTokenSet(context.getCaretOffset());
     TokenSet _stringLiteralTokens = this.tokenSetProvider.getStringLiteralTokens();
     return (!Objects.equal(_tokenSet, _stringLiteralTokens));
   }
   
   protected AutoEditBlockRegion findBlockRegion(@Extension final AutoEditContext context) {
-    EditorEx _editor = context.getEditor();
-    Iterable<AbstractIndentableAutoEditBlock> _blocks = this.getBlocks(_editor);
     final Function1<AbstractIndentableAutoEditBlock, AutoEditBlockRegion> _function = (AbstractIndentableAutoEditBlock it) -> {
       return it.findRegion(context);
     };
-    Iterable<AutoEditBlockRegion> _map = IterableExtensions.<AbstractIndentableAutoEditBlock, AutoEditBlockRegion>map(_blocks, _function);
-    Iterable<AutoEditBlockRegion> _filterNull = IterableExtensions.<AutoEditBlockRegion>filterNull(_map);
     final Function2<AutoEditBlockRegion, AutoEditBlockRegion, AutoEditBlockRegion> _function_1 = (AutoEditBlockRegion $0, AutoEditBlockRegion $1) -> {
       AutoEditBlockRegion _xifexpression = null;
-      TextRegion _openingTerminal = $0.getOpeningTerminal();
-      int _offset = _openingTerminal.getOffset();
-      TextRegion _openingTerminal_1 = $1.getOpeningTerminal();
-      int _offset_1 = _openingTerminal_1.getOffset();
+      int _offset = $0.getOpeningTerminal().getOffset();
+      int _offset_1 = $1.getOpeningTerminal().getOffset();
       boolean _lessThan = (_offset < _offset_1);
       if (_lessThan) {
         _xifexpression = $1;
@@ -154,58 +134,50 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       }
       return _xifexpression;
     };
-    return IterableExtensions.<AutoEditBlockRegion>reduce(_filterNull, _function_1);
+    return IterableExtensions.<AutoEditBlockRegion>reduce(IterableExtensions.<AutoEditBlockRegion>filterNull(IterableExtensions.<AbstractIndentableAutoEditBlock, AutoEditBlockRegion>map(this.getBlocks(context.getEditor()), _function)), _function_1);
   }
   
   @Override
   public IdeaAutoEditHandler.Result beforeCharTyped(final char c, final Project project, final EditorEx editor, final PsiFile file, final FileType fileType) {
     final AutoEditContext context = new AutoEditContext(editor, this.tokenSetProvider);
-    CodeInsightSettings _instance = CodeInsightSettings.getInstance();
-    if (_instance.AUTOINSERT_PAIR_BRACKET) {
-      Iterable<AbstractIndentableAutoEditBlock> _blocks = this.getBlocks(editor);
+    if (CodeInsightSettings.getInstance().AUTOINSERT_PAIR_BRACKET) {
       final Function1<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result> _function = (AbstractIndentableAutoEditBlock it) -> {
         return this.closeBlock(it, c, context);
       };
-      Iterable<IdeaAutoEditHandler.Result> _map = IterableExtensions.<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>map(_blocks, _function);
+      Iterable<IdeaAutoEditHandler.Result> _map = IterableExtensions.<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>map(this.getBlocks(editor), _function);
       for (final IdeaAutoEditHandler.Result result : _map) {
         if ((Objects.equal(result, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result, IdeaAutoEditHandler.Result.STOP))) {
           return result;
         }
       }
     }
-    CodeInsightSettings _instance_1 = CodeInsightSettings.getInstance();
-    if (_instance_1.AUTOINSERT_PAIR_QUOTE) {
-      Iterable<AbstractAutoEditBlock> _quotes = this.blockProvider.getQuotes();
+    if (CodeInsightSettings.getInstance().AUTOINSERT_PAIR_QUOTE) {
       final Function1<AbstractAutoEditBlock, IdeaAutoEditHandler.Result> _function_1 = (AbstractAutoEditBlock it) -> {
         return this.closeBlock(it, c, context);
       };
-      Iterable<IdeaAutoEditHandler.Result> _map_1 = IterableExtensions.<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>map(_quotes, _function_1);
+      Iterable<IdeaAutoEditHandler.Result> _map_1 = IterableExtensions.<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>map(this.blockProvider.getQuotes(), _function_1);
       for (final IdeaAutoEditHandler.Result result_1 : _map_1) {
         if ((Objects.equal(result_1, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result_1, IdeaAutoEditHandler.Result.STOP))) {
           return result_1;
         }
       }
     }
-    CodeInsightSettings _instance_2 = CodeInsightSettings.getInstance();
-    if (_instance_2.AUTOINSERT_PAIR_BRACKET) {
-      Iterable<AbstractIndentableAutoEditBlock> _blocks_1 = this.getBlocks(editor);
+    if (CodeInsightSettings.getInstance().AUTOINSERT_PAIR_BRACKET) {
       final Function1<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result> _function_2 = (AbstractIndentableAutoEditBlock it) -> {
         return this.openBlock(it, c, context);
       };
-      Iterable<IdeaAutoEditHandler.Result> _map_2 = IterableExtensions.<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>map(_blocks_1, _function_2);
+      Iterable<IdeaAutoEditHandler.Result> _map_2 = IterableExtensions.<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>map(this.getBlocks(editor), _function_2);
       for (final IdeaAutoEditHandler.Result result_2 : _map_2) {
         if ((Objects.equal(result_2, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result_2, IdeaAutoEditHandler.Result.STOP))) {
           return result_2;
         }
       }
     }
-    CodeInsightSettings _instance_3 = CodeInsightSettings.getInstance();
-    if (_instance_3.AUTOINSERT_PAIR_QUOTE) {
-      Iterable<AbstractAutoEditBlock> _quotes_1 = this.blockProvider.getQuotes();
+    if (CodeInsightSettings.getInstance().AUTOINSERT_PAIR_QUOTE) {
       final Function1<AbstractAutoEditBlock, IdeaAutoEditHandler.Result> _function_3 = (AbstractAutoEditBlock it) -> {
         return this.openBlock(it, c, context);
       };
-      Iterable<IdeaAutoEditHandler.Result> _map_3 = IterableExtensions.<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>map(_quotes_1, _function_3);
+      Iterable<IdeaAutoEditHandler.Result> _map_3 = IterableExtensions.<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>map(this.blockProvider.getQuotes(), _function_3);
       for (final IdeaAutoEditHandler.Result result_3 : _map_3) {
         if ((Objects.equal(result_3, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result_3, IdeaAutoEditHandler.Result.STOP))) {
           return result_3;
@@ -232,8 +204,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   }
   
   protected IdeaAutoEditHandler.Result closeBlock(final AbstractAutoEditBlock block, final char c, final AutoEditContext context) {
-    String _closingTerminal = block.getClosingTerminal();
-    boolean _isAtTerminal = this.isAtTerminal(_closingTerminal, c, context);
+    boolean _isAtTerminal = this.isAtTerminal(block.getClosingTerminal(), c, context);
     if (_isAtTerminal) {
       boolean _close = block.close(c, context);
       if (_close) {
@@ -244,8 +215,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   }
   
   protected IdeaAutoEditHandler.Result openBlock(final AbstractAutoEditBlock block, final char c, final AutoEditContext context) {
-    String _openingTerminal = block.getOpeningTerminal();
-    boolean _isAtTerminal = this.isAtTerminal(_openingTerminal, c, context);
+    boolean _isAtTerminal = this.isAtTerminal(block.getOpeningTerminal(), c, context);
     if (_isAtTerminal) {
       block.open(c, context);
       return IdeaAutoEditHandler.Result.STOP;

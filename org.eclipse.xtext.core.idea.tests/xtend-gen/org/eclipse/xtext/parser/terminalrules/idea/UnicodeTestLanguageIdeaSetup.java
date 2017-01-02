@@ -12,8 +12,7 @@ public class UnicodeTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      UnicodeTestLanguageStandaloneSetupIdea _unicodeTestLanguageStandaloneSetupIdea = new UnicodeTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _unicodeTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new UnicodeTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

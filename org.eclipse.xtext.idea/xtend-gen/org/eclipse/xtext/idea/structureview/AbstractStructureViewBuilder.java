@@ -39,8 +39,7 @@ public abstract class AbstractStructureViewBuilder implements XtextFileAwareStru
     final XtextFileTreeModel model = this.createStructureViewModel(editor);
     final IStructureViewTreeElementProvider structureViewTreeElementProvider = this.createStructureViewTreeElementProvider();
     model.setStructureViewTreeElementProvider(structureViewTreeElementProvider);
-    StructureViewFactory _instance = StructureViewFactory.getInstance(project);
-    StructureView view = _instance.createStructureView(fileEditor, model, project, false);
+    StructureView view = StructureViewFactory.getInstance(project).createStructureView(fileEditor, model, project, false);
     this.configureStructureViewTreeElementProvider(structureViewTreeElementProvider, model, view);
     Disposer.register(view, new Disposable() {
       @Override

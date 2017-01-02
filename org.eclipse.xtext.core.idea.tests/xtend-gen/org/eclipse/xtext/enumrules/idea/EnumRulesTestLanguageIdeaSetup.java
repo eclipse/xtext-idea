@@ -12,8 +12,7 @@ public class EnumRulesTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EnumRulesTestLanguageStandaloneSetupIdea _enumRulesTestLanguageStandaloneSetupIdea = new EnumRulesTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _enumRulesTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EnumRulesTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

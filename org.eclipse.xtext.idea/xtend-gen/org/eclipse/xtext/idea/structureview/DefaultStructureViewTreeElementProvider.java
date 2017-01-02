@@ -17,8 +17,6 @@ import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.navigation.ItemPresentation;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -28,7 +26,6 @@ import org.eclipse.xtext.idea.structureview.EStructuralFeatureTreeElement;
 import org.eclipse.xtext.idea.structureview.IStructureViewTreeElementProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileTreeElement;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -56,10 +53,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
   }
   
   protected void _buildChildren(final XtextFileTreeElement it) {
-    BaseXtextFile _element = it.getElement();
-    XtextResource _resource = _element.getResource();
-    EList<EObject> _contents = _resource.getContents();
-    final EObject modelElement = IterableExtensions.<EObject>head(_contents);
+    final EObject modelElement = IterableExtensions.<EObject>head(it.getElement().getResource().getContents());
     boolean _equals = Objects.equal(modelElement, null);
     if (_equals) {
       return;
@@ -87,22 +81,21 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
   }
   
   protected void _buildChildren(final EObjectTreeElement it) {
-    it.addChildren(ListExtensions.<EObject, StructureViewTreeElement>map(it.getObject().eContents(), ((Function1<EObject, StructureViewTreeElement>) (EObject child) -> {
+    final Function1<EObject, StructureViewTreeElement> _function = (EObject child) -> {
       return this.createEObjectTreeElement(child, it.xtextFile);
-    })));
+    };
+    it.addChildren(ListExtensions.<EObject, StructureViewTreeElement>map(it.getObject().eContents(), _function));
   }
   
   protected void _buildChildren(final EStructuralFeatureTreeElement it) {
-    EObject _owner = it.getOwner();
-    EStructuralFeature _feature = it.getFeature();
-    final Object values = _owner.eGet(_feature);
+    final Object values = it.getOwner().eGet(it.getFeature());
     if ((values instanceof List<?>)) {
-      EStructuralFeature _feature_1 = it.getFeature();
-      boolean _isMany = _feature_1.isMany();
+      boolean _isMany = it.getFeature().isMany();
       if (_isMany) {
-        it.addChildren(IterableExtensions.<EObject, StructureViewTreeElement>map(Iterables.<EObject>filter(((Iterable<?>)values), EObject.class), ((Function1<EObject, StructureViewTreeElement>) (EObject value) -> {
+        final Function1<EObject, StructureViewTreeElement> _function = (EObject value) -> {
           return this.createEObjectTreeElement(value, it.xtextFile);
-        })));
+        };
+        it.addChildren(IterableExtensions.<EObject, StructureViewTreeElement>map(Iterables.<EObject>filter(((Iterable<?>)values), EObject.class), _function));
       }
     } else {
       if ((values instanceof EObject)) {
@@ -161,12 +154,10 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
   }
   
   protected boolean isLeaf(final EObject modelElement) {
-    EClass _eClass = modelElement.eClass();
-    EList<EReference> _eAllContainments = _eClass.getEAllContainments();
     final Function1<EReference, Boolean> _function = (EReference containmentRef) -> {
       return Boolean.valueOf(modelElement.eIsSet(containmentRef));
     };
-    boolean _exists = IterableExtensions.<EReference>exists(_eAllContainments, _function);
+    boolean _exists = IterableExtensions.<EReference>exists(modelElement.eClass().getEAllContainments(), _function);
     return (!_exists);
   }
   

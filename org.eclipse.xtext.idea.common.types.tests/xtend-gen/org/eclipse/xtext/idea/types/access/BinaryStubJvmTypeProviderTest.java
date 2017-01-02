@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.types.access;
 
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.testFramework.PsiTestCase;
@@ -37,17 +36,14 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    Module _module = this.getModule();
-    LibraryUtil.addGuavaLibrary(_module);
-    Module _module_1 = this.getModule();
-    LibraryUtil.addLibrary(_module_1, "org.eclipse.xtext.common.types.tests.testData", AbstractMethods.class);
+    LibraryUtil.addGuavaLibrary(this.getModule());
+    LibraryUtil.addLibrary(this.getModule(), "org.eclipse.xtext.common.types.tests.testData", AbstractMethods.class);
     this.delegate.setUp(this.myModule);
   }
   
   @Override
   protected Sdk getTestProjectJdk() {
-    JavaAwareProjectJdkTableImpl _instanceEx = JavaAwareProjectJdkTableImpl.getInstanceEx();
-    return _instanceEx.getInternalJdk();
+    return JavaAwareProjectJdkTableImpl.getInstanceEx().getInternalJdk();
   }
   
   @Override

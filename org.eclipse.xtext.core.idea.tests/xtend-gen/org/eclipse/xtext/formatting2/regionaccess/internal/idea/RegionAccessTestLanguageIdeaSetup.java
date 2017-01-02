@@ -12,8 +12,7 @@ public class RegionAccessTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      RegionAccessTestLanguageStandaloneSetupIdea _regionAccessTestLanguageStandaloneSetupIdea = new RegionAccessTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _regionAccessTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new RegionAccessTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

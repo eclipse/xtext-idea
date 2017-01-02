@@ -16,14 +16,11 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataContextWrapper;
 import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
@@ -82,8 +79,7 @@ public class ConfigurationProducerExtensions {
         _psiElement_1=_location_1.getPsiElement();
       }
       final PsiElement psiElement = _psiElement_1;
-      List<? extends PsiElement> _generatedElements = this.traceProvider.getGeneratedElements(psiElement);
-      PsiElement javaElement = IterableExtensions.head(_generatedElements);
+      PsiElement javaElement = IterableExtensions.head(this.traceProvider.getGeneratedElements(psiElement));
       if ((javaElement == null)) {
         javaElement = IterableExtensions.<PsiFile>head(this.getJavaFiles(psiElement));
       }
@@ -110,10 +106,7 @@ public class ConfigurationProducerExtensions {
         {
           final VirtualFileInProject res = uri.getPlatformResource();
           if ((res != null)) {
-            Project _project = xtextFile.getProject();
-            PsiManager _instance = PsiManager.getInstance(_project);
-            VirtualFile _file = res.getFile();
-            final PsiFile javaPsiFile = _instance.findFile(_file);
+            final PsiFile javaPsiFile = PsiManager.getInstance(xtextFile.getProject()).findFile(res.getFile());
             if ((javaPsiFile != null)) {
               javaFiles.add(javaPsiFile);
             }

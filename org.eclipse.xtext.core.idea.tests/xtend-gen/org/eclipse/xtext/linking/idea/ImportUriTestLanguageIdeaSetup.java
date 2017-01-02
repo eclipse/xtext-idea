@@ -12,8 +12,7 @@ public class ImportUriTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ImportUriTestLanguageStandaloneSetupIdea _importUriTestLanguageStandaloneSetupIdea = new ImportUriTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _importUriTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ImportUriTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

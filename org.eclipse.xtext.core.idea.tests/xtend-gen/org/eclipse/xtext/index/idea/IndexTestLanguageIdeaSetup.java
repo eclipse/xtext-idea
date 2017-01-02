@@ -12,8 +12,7 @@ public class IndexTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      IndexTestLanguageStandaloneSetupIdea _indexTestLanguageStandaloneSetupIdea = new IndexTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _indexTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new IndexTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

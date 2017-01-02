@@ -93,14 +93,12 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFileInProject virtualFile) {
-    VirtualFile _file = virtualFile.getFile();
-    return this.getURIForVirtualFile(_file);
+    return this.getURIForVirtualFile(virtualFile.getFile());
   }
   
   public VirtualFileInProject findVirtualFileInProject(final SourceRelativeURI srcRelativeLocation) {
     final AbsoluteURI absoluteUri = this.resolvePath(srcRelativeLocation);
-    URI _uRI = absoluteUri.getURI();
-    final VirtualFile vFile = VirtualFileURIUtil.getVirtualFile(_uRI);
+    final VirtualFile vFile = VirtualFileURIUtil.getVirtualFile(absoluteUri.getURI());
     if ((vFile == null)) {
       return null;
     }
@@ -111,29 +109,21 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   @Override
   public AbsoluteURI resolvePath(final SourceRelativeURI path) {
     if ((this.jarRoot != null)) {
-      String _string = path.toString();
-      final VirtualFile child = this.jarRoot.findFileByRelativePath(_string);
+      final VirtualFile child = this.jarRoot.findFileByRelativePath(path.toString());
       final URI uri = VirtualFileURIUtil.getURI(child);
       return new AbsoluteURI(uri);
     } else {
       if ((this.isTraceToTarget() && (this.getModule() != null))) {
-        Module _module = this.getModule();
-        final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(_module);
+        final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(this.getModule());
         final Set<? extends IdeaSourceFolder> sourceFolders = this.localProjectConfig.getSourceFolders();
         for (final IdeaSourceFolder sourceFolder : sourceFolders) {
           {
-            VirtualFile _contentRoot = this.localProjectConfig.getContentRoot();
-            OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
-            String _name = sourceFolder.getName();
-            String _outputDirectory = _head.getOutputDirectory(_name);
-            final VirtualFile outputFolder = _contentRoot.findFileByRelativePath(_outputDirectory);
+            final VirtualFile outputFolder = this.localProjectConfig.getContentRoot().findFileByRelativePath(IterableExtensions.<OutputConfiguration>head(outputConfigurations).getOutputDirectory(sourceFolder.getName()));
             if ((outputFolder != null)) {
-              URI _uRI = path.getURI();
-              String _string_1 = _uRI.toString();
-              final VirtualFile file = outputFolder.findFileByRelativePath(_string_1);
+              final VirtualFile file = outputFolder.findFileByRelativePath(path.getURI().toString());
               if ((file != null)) {
-                URI _uRI_1 = VirtualFileURIUtil.getURI(file);
-                return new AbsoluteURI(_uRI_1);
+                URI _uRI = VirtualFileURIUtil.getURI(file);
+                return new AbsoluteURI(_uRI);
               }
             }
           }
@@ -146,8 +136,7 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   @Override
   public InputStream getContents(final SourceRelativeURI uri) throws IOException {
     final VirtualFileInProject file = this.findVirtualFileInProject(uri);
-    VirtualFile _file = file.getFile();
-    byte[] _contentsToByteArray = _file.contentsToByteArray();
+    byte[] _contentsToByteArray = file.getFile().contentsToByteArray();
     return new ByteArrayInputStream(_contentsToByteArray);
   }
   

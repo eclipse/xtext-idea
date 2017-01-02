@@ -52,8 +52,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
   
   @Override
   public String getPresentableText() {
-    BaseXtextFile _element = this.getElement();
-    return _element.getName();
+    return this.getElement().getName();
   }
   
   @Override

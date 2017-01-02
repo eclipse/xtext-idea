@@ -39,8 +39,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class ASTNodeExtension {
   public List<ASTNode> findNodesForFeature(final ASTNode node, final EStructuralFeature structuralFeature) {
-    EClass _eContainingClass = structuralFeature.getEContainingClass();
-    final ASTNode actualNode = this.findActualNodeFor(node, _eContainingClass);
+    final ASTNode actualNode = this.findActualNodeFor(node, structuralFeature.getEContainingClass());
     if ((actualNode instanceof TreeElement)) {
       return this.findNodesForFeature(((TreeElement)actualNode), structuralFeature);
     }
@@ -83,8 +82,7 @@ public class ASTNodeExtension {
           while ((ASTNodeExtension.this.getGrammarElement(firstChild) instanceof Action)) {
             firstChild = firstChild.getFirstChildNode();
           }
-          EObject _grammarElement = ASTNodeExtension.this.getGrammarElement(firstChild);
-          final Assignment assignment = GrammarUtil.containingAssignment(_grammarElement);
+          final Assignment assignment = GrammarUtil.containingAssignment(ASTNodeExtension.this.getGrammarElement(firstChild));
           if (((assignment != null) && Objects.equal(featureName, assignment.getFeature()))) {
             result.add(element);
           }
@@ -130,8 +128,7 @@ public class ASTNodeExtension {
       }
     }
     if (!_matched) {
-      AbstractRule _containingRule = GrammarUtil.containingRule(grammarElement);
-      _switchResult = _containingRule.getType();
+      _switchResult = GrammarUtil.containingRule(grammarElement).getType();
     }
     final TypeRef type = _switchResult;
     EClassifier _classifier = null;

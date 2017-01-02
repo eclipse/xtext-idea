@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.trace;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -36,7 +35,6 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
-import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.internal.AbstractTraceForURIProvider;
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
@@ -48,7 +46,6 @@ import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileBasedTrace;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -82,7 +79,6 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     
     @Override
     public InputStream openStream() throws IOException {
-      Application _application = ApplicationManager.getApplication();
       final Computable<InputStream> _function = () -> {
         try {
           byte[] _contentsToByteArray = this.file.contentsToByteArray();
@@ -91,7 +87,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      return _application.<InputStream>runReadAction(_function);
+      return ApplicationManager.getApplication().<InputStream>runReadAction(_function);
     }
     
     @Override
@@ -131,11 +127,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     final Iterable<? extends ILocationInVirtualFile> targetLocations = trace.getAllAssociatedLocations(region);
     final PsiManager mngr = element.getManager();
     final Function1<ILocationInVirtualFile, Boolean> _function = (ILocationInVirtualFile it) -> {
-      ITextRegionWithLineInformation _textRegion = it.getTextRegion();
-      int _length = _textRegion.getLength();
+      int _length = it.getTextRegion().getLength();
       return Boolean.valueOf((_length > 0));
     };
-    Iterable<? extends ILocationInVirtualFile> _filter = IterableExtensions.filter(targetLocations, _function);
     final Function1<ILocationInVirtualFile, PsiElement> _function_1 = (ILocationInVirtualFile it) -> {
       PsiElement _xblockexpression = null;
       {
@@ -148,8 +142,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
         PsiFile _findFile = mngr.findFile(targetFile);
         PsiElement _findElementAt = null;
         if (_findFile!=null) {
-          int _offset = textRegion.getOffset();
-          _findElementAt=_findFile.findElementAt(_offset);
+          _findElementAt=_findFile.findElementAt(textRegion.getOffset());
         }
         PsiElement result = _findElementAt;
         if (((result == null) || (result.getTextLength() == 0))) {
@@ -167,10 +160,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
       }
       return _xblockexpression;
     };
-    Iterable<PsiElement> _map = IterableExtensions.map(_filter, _function_1);
-    Iterable<PsiElement> _filterNull = IterableExtensions.<PsiElement>filterNull(_map);
-    Set<PsiElement> _set = IterableExtensions.<PsiElement>toSet(_filterNull);
-    final List<PsiElement> result = IterableExtensions.<PsiElement>toList(_set);
+    final List<PsiElement> result = IterableExtensions.<PsiElement>toList(IterableExtensions.<PsiElement>toSet(IterableExtensions.<PsiElement>filterNull(IterableExtensions.map(IterableExtensions.filter(targetLocations, _function), _function_1))));
     return result;
   }
   
@@ -186,8 +176,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   protected VirtualFileInProject asFile(final AbsoluteURI absoluteURI, final IProjectConfig project) {
-    URI _uRI = absoluteURI.getURI();
-    final VirtualFile file = VirtualFileURIUtil.getVirtualFile(_uRI);
+    final VirtualFile file = VirtualFileURIUtil.getVirtualFile(absoluteURI.getURI());
     final Module module = ((IdeaProjectConfig) project).getModule();
     final Project ideaProject = module.getProject();
     return new VirtualFileInProject(file, ideaProject);
@@ -200,51 +189,38 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     if ((builder == null)) {
       return CollectionLiterals.<AbstractTraceForURIProvider.PersistedTrace>newArrayList();
     }
-    VirtualFile _file = sourceFile.getFile();
-    URI _uRI = VirtualFileURIUtil.getURI(_file);
-    final Iterable<URI> generatedSources = builder.getGeneratedSources(_uRI);
+    final Iterable<URI> generatedSources = builder.getGeneratedSources(VirtualFileURIUtil.getURI(sourceFile.getFile()));
     final Function1<URI, VirtualFile> _function = (URI it) -> {
       return VirtualFileURIUtil.getVirtualFile(it);
     };
-    Iterable<VirtualFile> _map = IterableExtensions.<URI, VirtualFile>map(generatedSources, _function);
-    Iterable<VirtualFile> _filterNull = IterableExtensions.<VirtualFile>filterNull(_map);
     final Function1<VirtualFile, Boolean> _function_1 = (VirtualFile it) -> {
       return Boolean.valueOf(this.isTraceFile(it));
     };
-    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(_filterNull, _function_1);
+    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(IterableExtensions.<VirtualFile>filterNull(IterableExtensions.<URI, VirtualFile>map(generatedSources, _function)), _function_1);
     final Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace> _function_2 = (VirtualFile it) -> {
       TraceForVirtualFileProvider.VirtualFilePersistedTrace _virtualFilePersistedTrace = new TraceForVirtualFileProvider.VirtualFilePersistedTrace(it, this);
       return ((AbstractTraceForURIProvider.PersistedTrace) _virtualFilePersistedTrace);
     };
-    Iterable<AbstractTraceForURIProvider.PersistedTrace> _map_1 = IterableExtensions.<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>map(generatedTraces, _function_2);
-    final List<AbstractTraceForURIProvider.PersistedTrace> result = IterableExtensions.<AbstractTraceForURIProvider.PersistedTrace>toList(_map_1);
+    final List<AbstractTraceForURIProvider.PersistedTrace> result = IterableExtensions.<AbstractTraceForURIProvider.PersistedTrace>toList(IterableExtensions.<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>map(generatedTraces, _function_2));
     return result;
   }
   
   @Override
   public SourceRelativeURI getGeneratedUriForTrace(final IProjectConfig projectConfig, final AbsoluteURI absoluteSourceResource, final AbsoluteURI generatedFileURI, final ITraceURIConverter traceURIConverter) {
     final Module module = ((IdeaProjectConfig) projectConfig).getModule();
-    IResourceServiceProvider _serviceProvider = this.getServiceProvider(absoluteSourceResource);
-    final IdeaOutputConfigurationProvider outputConfigurationProvider = _serviceProvider.<IdeaOutputConfigurationProvider>get(IdeaOutputConfigurationProvider.class);
+    final IdeaOutputConfigurationProvider outputConfigurationProvider = this.getServiceProvider(absoluteSourceResource).<IdeaOutputConfigurationProvider>get(IdeaOutputConfigurationProvider.class);
     final Set<OutputConfiguration> outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module);
-    URI _uRI = absoluteSourceResource.getURI();
-    final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(_uRI);
+    final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(absoluteSourceResource.getURI());
     if ((sourceFolder == null)) {
       return null;
     }
-    OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
-    String _name = sourceFolder.getName();
-    final String outputFolder = _head.getOutputDirectory(_name);
-    Application _application = ApplicationManager.getApplication();
+    final String outputFolder = IterableExtensions.<OutputConfiguration>head(outputConfigurations).getOutputDirectory(sourceFolder.getName());
     final Computable<VirtualFile> _function = () -> {
       boolean _isAbsolutePath = this.isAbsolutePath(outputFolder);
       if (_isAbsolutePath) {
-        VirtualFileManager _instance = VirtualFileManager.getInstance();
-        String _pathToUrl = VfsUtilCore.pathToUrl(outputFolder);
-        return _instance.findFileByUrl(_pathToUrl);
+        return VirtualFileManager.getInstance().findFileByUrl(VfsUtilCore.pathToUrl(outputFolder));
       } else {
-        ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
-        VirtualFile[] _contentRoots = _instance_1.getContentRoots();
+        VirtualFile[] _contentRoots = ModuleRootManager.getInstance(module).getContentRoots();
         for (final VirtualFile contentRoot : _contentRoots) {
           {
             final VirtualFile result = contentRoot.findFileByRelativePath(outputFolder);
@@ -257,7 +233,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
         return null;
       }
     };
-    final VirtualFile outputSourceFolder = _application.<VirtualFile>runReadAction(_function);
+    final VirtualFile outputSourceFolder = ApplicationManager.getApplication().<VirtualFile>runReadAction(_function);
     if (((outputSourceFolder == null) || (!outputSourceFolder.exists()))) {
       final SourceRelativeURI result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter);
       return result;
@@ -277,9 +253,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   }
   
   private boolean isTraceFile(final VirtualFile file) {
-    TraceFileNameProvider _traceFileNameProvider = this.getTraceFileNameProvider();
-    String _name = file.getName();
-    return _traceFileNameProvider.isTraceFileName(_name);
+    return this.getTraceFileNameProvider().isTraceFileName(file.getName());
   }
   
   @Override
@@ -316,18 +290,15 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   public boolean isGenerated(final VirtualFileInProject file) {
-    AbstractTraceForURIProvider.PersistedTrace _findPersistedTrace = this.findPersistedTrace(file);
-    return _findPersistedTrace.exists();
+    return this.findPersistedTrace(file).exists();
   }
   
   @Override
   public VirtualFileBasedTrace getTraceToTarget(final VirtualFileInProject sourceFile, final AbsoluteURI absoluteSourceResource, final IProjectConfig projectConfig) {
     final VirtualFileBasedTrace result = super.getTraceToTarget(sourceFile, absoluteSourceResource, projectConfig);
     if ((result != null)) {
-      IResourceServiceProvider _serviceProvider = this.getServiceProvider(absoluteSourceResource);
-      final IdeaOutputConfigurationProvider outputConfigurationProvider = _serviceProvider.<IdeaOutputConfigurationProvider>get(IdeaOutputConfigurationProvider.class);
-      IResourceServiceProvider _serviceProvider_1 = this.getServiceProvider(absoluteSourceResource);
-      final IdeaProjectConfigProvider projectConfigProvider = _serviceProvider_1.<IdeaProjectConfigProvider>get(IdeaProjectConfigProvider.class);
+      final IdeaOutputConfigurationProvider outputConfigurationProvider = this.getServiceProvider(absoluteSourceResource).<IdeaOutputConfigurationProvider>get(IdeaOutputConfigurationProvider.class);
+      final IdeaProjectConfigProvider projectConfigProvider = this.getServiceProvider(absoluteSourceResource).<IdeaProjectConfigProvider>get(IdeaProjectConfigProvider.class);
       result.setOutputConfigurationProvider(outputConfigurationProvider);
       result.setProjectConfigProvider(projectConfigProvider);
     }
@@ -338,9 +309,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   protected VirtualFileBasedTrace newAbstractTrace(final VirtualFileInProject file) {
     final VirtualFileBasedTrace result = this.traceProvider.get();
     result.setLocalStorage(file);
-    JarFileSystem _instance = JarFileSystem.getInstance();
-    VirtualFile _file = file.getFile();
-    final VirtualFile jarRoot = _instance.getRootByEntry(_file);
+    final VirtualFile jarRoot = JarFileSystem.getInstance().getRootByEntry(file.getFile());
     if ((jarRoot != null)) {
       result.setJarRoot(jarRoot);
     } else {
@@ -354,10 +323,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     if ((parent == null)) {
       return null;
     }
-    TraceFileNameProvider _traceFileNameProvider = this.getTraceFileNameProvider();
-    String _name = generatedFile.getName();
-    String _traceFromJava = _traceFileNameProvider.getTraceFromJava(_name);
-    final VirtualFile result = parent.findChild(_traceFromJava);
+    final VirtualFile result = parent.findChild(this.getTraceFileNameProvider().getTraceFromJava(generatedFile.getName()));
     return result;
   }
 }

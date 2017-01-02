@@ -12,8 +12,7 @@ public class LocationProviderTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      LocationProviderTestLanguageStandaloneSetupIdea _locationProviderTestLanguageStandaloneSetupIdea = new LocationProviderTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _locationProviderTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new LocationProviderTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -12,8 +12,7 @@ public class TransientValuesTestIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      TransientValuesTestStandaloneSetupIdea _transientValuesTestStandaloneSetupIdea = new TransientValuesTestStandaloneSetupIdea();
-      _xblockexpression = _transientValuesTestStandaloneSetupIdea.createInjector();
+      _xblockexpression = new TransientValuesTestStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -146,8 +146,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     int _xblockexpression = (int) 0;
     {
       final int psiMarker = this.markPsi();
-      int _mark = super.mark();
-      this.psiToOriginalMarkers.put(Integer.valueOf(psiMarker), Integer.valueOf(_mark));
+      this.psiToOriginalMarkers.put(Integer.valueOf(psiMarker), Integer.valueOf(super.mark()));
       _xblockexpression = psiMarker;
     }
     return _xblockexpression;
@@ -171,13 +170,11 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
   
   @Override
   public void release(final int psiMarker) {
-    Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
-    super.release((_get).intValue());
+    super.release((this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker))).intValue());
     final PsiTokenStreamState state = this.states.get(psiMarker);
     this.tokenType = state.getTokenType();
     this.errorMessage = state.getErrorMessage();
-    PsiBuilder.Marker _marker = state.getMarker();
-    _marker.drop();
+    state.getMarker().drop();
   }
   
   @Override
@@ -190,13 +187,11 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
   
   @Override
   public void rewind(final int psiMarker) {
-    Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
-    super.rewind((_get).intValue());
+    super.rewind((this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker))).intValue());
     final PsiTokenStreamState state = this.states.get(psiMarker);
     this.tokenType = state.getTokenType();
     this.errorMessage = state.getErrorMessage();
-    PsiBuilder.Marker _marker = state.getMarker();
-    _marker.rollbackTo();
+    state.getMarker().rollbackTo();
     this.afterSeek = false;
   }
   

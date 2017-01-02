@@ -39,8 +39,7 @@ public class BuildEvent {
     this.type = type;
     this.filesByURI = CollectionLiterals.<URI, VirtualFile>newLinkedHashMap();
     for (final VirtualFile file : files) {
-      URI _uRI = VirtualFileURIUtil.getURI(file);
-      this.filesByURI.put(_uRI, file);
+      this.filesByURI.put(VirtualFileURIUtil.getURI(file), file);
     }
   }
   

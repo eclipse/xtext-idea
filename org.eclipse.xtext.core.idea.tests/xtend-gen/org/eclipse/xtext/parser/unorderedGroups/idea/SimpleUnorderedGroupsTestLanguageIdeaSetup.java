@@ -12,8 +12,7 @@ public class SimpleUnorderedGroupsTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      SimpleUnorderedGroupsTestLanguageStandaloneSetupIdea _simpleUnorderedGroupsTestLanguageStandaloneSetupIdea = new SimpleUnorderedGroupsTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _simpleUnorderedGroupsTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new SimpleUnorderedGroupsTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

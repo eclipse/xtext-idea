@@ -59,13 +59,11 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
     try {
       ASTNode _xblockexpression = null;
       {
-        PsiXtextTokenStream _createTokenStream = this.createTokenStream(builder);
-        AbstractPsiAntlrParser _createParser = this.createParser(builder, _createTokenStream);
+        AbstractPsiAntlrParser _createParser = this.createParser(builder, this.createTokenStream(builder));
         final Procedure1<AbstractPsiAntlrParser> _function = (AbstractPsiAntlrParser it) -> {
           it.setTokenTypeMap(this.tokenDefProvider.getTokenDefMap());
           it.setUnorderedGroupHelper(this.unorderedGroupHelperProvider.get());
-          IUnorderedGroupHelper _unorderedGroupHelper = it.getUnorderedGroupHelper();
-          _unorderedGroupHelper.initializeWith(it);
+          it.getUnorderedGroupHelper().initializeWith(it);
         };
         final AbstractPsiAntlrParser parser = ObjectExtensions.<AbstractPsiAntlrParser>operator_doubleArrow(_createParser, _function);
         PsiBuilder.Marker rootMarker = builder.mark();
@@ -99,8 +97,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       if (!_matched) {
         if (grammarElement instanceof RuleCall) {
           _matched=true;
-          AbstractRule _rule = ((RuleCall)grammarElement).getRule();
-          _switchResult = _rule.getName();
+          _switchResult = ((RuleCall)grammarElement).getRule().getName();
         }
       }
       _xifexpression = _switchResult;
@@ -129,8 +126,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
   }
   
   protected TokenSource createTokenSource(final PsiBuilder builder) {
-    CharSequence _originalText = builder.getOriginalText();
-    return this.tokenSourceProvider.createTokenSource(_originalText);
+    return this.tokenSourceProvider.createTokenSource(builder.getOriginalText());
   }
   
   protected abstract Set<String> getInitialHiddenTokens();

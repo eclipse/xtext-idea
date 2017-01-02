@@ -26,11 +26,10 @@ import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 public class XbaseFacetConfiguration extends AbstractFacetConfiguration {
   @Override
   public FacetEditorTab[] createEditorTabs(final FacetEditorContext editorContext, final FacetValidatorsManager validatorsManager) {
-    Facet _facet = editorContext.getFacet();
-    Module _module = _facet.getModule();
+    Module _module = editorContext.getFacet().getModule();
     final XbaseFacetForm uiForm = new XbaseFacetForm(_module, validatorsManager);
-    Facet _facet_1 = editorContext.getFacet();
-    final GeneratorFacetEditorTab<XbaseFacetConfiguration> facetEditorTab = new GeneratorFacetEditorTab<XbaseFacetConfiguration>(_facet_1, uiForm);
+    Facet _facet = editorContext.getFacet();
+    final GeneratorFacetEditorTab<XbaseFacetConfiguration> facetEditorTab = new GeneratorFacetEditorTab<XbaseFacetConfiguration>(_facet, uiForm);
     return new FacetEditorTab[] { facetEditorTab };
   }
   

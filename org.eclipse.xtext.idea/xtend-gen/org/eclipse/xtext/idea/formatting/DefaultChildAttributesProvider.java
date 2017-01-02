@@ -15,7 +15,6 @@ import com.intellij.formatting.ChildAttributes;
 import com.intellij.formatting.Indent;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ide.editor.bracketmatching.BracePair;
 import org.eclipse.xtext.idea.formatting.BlockExtension;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.formatting.SyntheticXtextBlock;
@@ -54,8 +53,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     int _size = children.size();
     boolean _greaterEqualsThan = (newChildIndex >= _size);
     if (_greaterEqualsThan) {
-      int _size_1 = children.size();
-      return this.getAfterChildIndent(block, _size_1);
+      return this.getAfterChildIndent(block, children.size());
     }
     final Indent indent = this.getBeforeChildIndent(block, newChildIndex);
     boolean _equals = Objects.equal(indent, null);
@@ -98,8 +96,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     if (_isLeaf) {
       return this.getAfterChildIndent(childBefore);
     }
-    List<Block> _subBlocks = childBefore.getSubBlocks();
-    final int size = _subBlocks.size();
+    final int size = childBefore.getSubBlocks().size();
     return this.getChildIndent(childBefore, size);
   }
   
@@ -108,8 +105,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     if (_equals) {
       return null;
     }
-    EObject _grammarElement = this._blockExtension.getGrammarElement(block);
-    final Indent grammarElementIndent = this.getIndentAfter(_grammarElement);
+    final Indent grammarElementIndent = this.getIndentAfter(this._blockExtension.getGrammarElement(block));
     boolean _notEquals = (!Objects.equal(grammarElementIndent, null));
     if (_notEquals) {
       return grammarElementIndent;
@@ -119,8 +115,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     }
     boolean _isOpening = this._blockExtension.isOpening(block);
     if (_isOpening) {
-      BracePair _bracePairForOpeningBrace = this._blockExtension.getBracePairForOpeningBrace(block);
-      return this._blockExtension.getIndent(_bracePairForOpeningBrace, false);
+      return this._blockExtension.getIndent(this._blockExtension.getBracePairForOpeningBrace(block), false);
     }
     return null;
   }
@@ -134,8 +129,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     if (_equals) {
       return null;
     }
-    EObject _grammarElement = this._blockExtension.getGrammarElement(block);
-    final Indent grammarElementIndent = this.getIndentBefore(_grammarElement);
+    final Indent grammarElementIndent = this.getIndentBefore(this._blockExtension.getGrammarElement(block));
     boolean _notEquals = (!Objects.equal(grammarElementIndent, null));
     if (_notEquals) {
       return grammarElementIndent;
@@ -145,8 +139,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     }
     boolean _isClosing = this._blockExtension.isClosing(block);
     if (_isClosing) {
-      BracePair _bracePairForClosingBrace = this._blockExtension.getBracePairForClosingBrace(block);
-      return this._blockExtension.getIndent(_bracePairForClosingBrace, false);
+      return this._blockExtension.getIndent(this._blockExtension.getBracePairForClosingBrace(block), false);
     }
     return null;
   }

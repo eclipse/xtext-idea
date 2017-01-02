@@ -30,8 +30,7 @@ public class GrammarAwarePsiErrorElement extends PsiErrorElementImpl implements 
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
-    Class<? extends GrammarAwarePsiErrorElement> _class = this.getClass();
-    String _simpleName = _class.getSimpleName();
+    String _simpleName = this.getClass().getSimpleName();
     _builder.append(_simpleName);
     _builder.append(":");
     String _errorDescription = this.getErrorDescription();

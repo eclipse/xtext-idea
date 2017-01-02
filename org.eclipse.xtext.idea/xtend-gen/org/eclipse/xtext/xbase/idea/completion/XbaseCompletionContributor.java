@@ -19,22 +19,18 @@ import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.completion.JavaClassNameCompletionContributor;
 import com.intellij.codeInsight.completion.JavaCompletionSorting;
 import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement;
-import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.openapi.editor.Document;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -43,7 +39,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -67,28 +62,17 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
       final PsiFile file = context.getFile();
       if ((file instanceof BaseXtextFile)) {
         final XtextResource resource = ((BaseXtextFile)file).getResource();
-        IResourceServiceProvider _resourceServiceProvider = resource.getResourceServiceProvider();
-        IJvmTypeProvider.Factory _get = _resourceServiceProvider.<IJvmTypeProvider.Factory>get(IJvmTypeProvider.Factory.class);
-        ResourceSet _resourceSet = resource.getResourceSet();
-        final IJvmTypeProvider typeProvider = _get.findTypeProvider(_resourceSet);
-        String _qualifiedName = item.getQualifiedName();
-        final JvmType jvmType = typeProvider.findTypeByName(_qualifiedName);
+        final IJvmTypeProvider typeProvider = resource.getResourceServiceProvider().<IJvmTypeProvider.Factory>get(IJvmTypeProvider.Factory.class).findTypeProvider(resource.getResourceSet());
+        final JvmType jvmType = typeProvider.findTypeByName(item.getQualifiedName());
         if ((jvmType instanceof JvmDeclaredType)) {
           final String simpleName = ((JvmDeclaredType)jvmType).getSimpleName();
-          Document _document = context.getDocument();
-          int _startOffset = context.getStartOffset();
-          int _tailOffset = context.getTailOffset();
-          _document.replaceString(_startOffset, _tailOffset, simpleName);
+          context.getDocument().replaceString(context.getStartOffset(), context.getTailOffset(), simpleName);
           final RewritableImportSection importSection = this.factory.parse(resource);
           boolean _addImport = importSection.addImport(((JvmDeclaredType)jvmType));
           if (_addImport) {
             final List<ReplaceRegion> regions = importSection.rewrite();
             for (final ReplaceRegion reg : regions) {
-              Document _document_1 = context.getDocument();
-              int _offset = reg.getOffset();
-              int _endOffset = reg.getEndOffset();
-              String _text = reg.getText();
-              _document_1.replaceString(_offset, _endOffset, _text);
+              context.getDocument().replaceString(reg.getOffset(), reg.getEndOffset(), reg.getText());
             }
           }
         } else {
@@ -118,8 +102,7 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   
   @Override
   protected CompletionSorter getCompletionSorter(final CompletionParameters parameters, final CompletionResultSet result) {
-    PrefixMatcher _prefixMatcher = result.getPrefixMatcher();
-    CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, _prefixMatcher);
+    CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, result.getPrefixMatcher());
     XbaseLookupElementWeigher _xbaseLookupElementWeigher = new XbaseLookupElementWeigher();
     return _defaultSorter.weighBefore("liftShorter", _xbaseLookupElementWeigher);
   }
@@ -141,14 +124,12 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   }
   
   protected Set<RuleCall> getExpressionContextFollowElements() {
-    XbaseGrammarAccess.XPrimaryExpressionElements _xPrimaryExpressionAccess = this.grammarAccess.getXPrimaryExpressionAccess();
-    RuleCall _xFeatureCallParserRuleCall_4 = _xPrimaryExpressionAccess.getXFeatureCallParserRuleCall_4();
+    RuleCall _xFeatureCallParserRuleCall_4 = this.grammarAccess.getXPrimaryExpressionAccess().getXFeatureCallParserRuleCall_4();
     return Collections.<RuleCall>unmodifiableSet(CollectionLiterals.<RuleCall>newHashSet(_xFeatureCallParserRuleCall_4));
   }
   
   protected void completeJavaTypeWithinMultiLineComment() {
-    TokenSet _multiLineCommentTokens = this._tokenSetProvider.getMultiLineCommentTokens();
-    IElementType[] _types = _multiLineCommentTokens.getTypes();
+    IElementType[] _types = this._tokenSetProvider.getMultiLineCommentTokens().getTypes();
     for (final IElementType mlCommentTokenType : _types) {
       final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
         @Override
@@ -214,8 +195,6 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   protected void completeJavaTypes(final CompletionParameters completionParameters, final CompletionResultSet completionResultSet, final boolean addImport, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
     int _invocationCount = completionParameters.getInvocationCount();
     boolean _lessEqualsThan = (_invocationCount <= 2);
-    CompletionResultSet _addJavaSorting = JavaCompletionSorting.addJavaSorting(completionParameters, completionResultSet);
-    PrefixMatcher _prefixMatcher = _addJavaSorting.getPrefixMatcher();
     final Consumer<LookupElement> _function = (LookupElement it) -> {
       if ((it instanceof JavaPsiClassReferenceElement)) {
         Boolean _apply = filter.apply(((JavaPsiClassReferenceElement)it));
@@ -227,7 +206,8 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
         }
       }
     };
-    JavaClassNameCompletionContributor.addAllClasses(completionParameters, _lessEqualsThan, _prefixMatcher, _function);
+    JavaClassNameCompletionContributor.addAllClasses(completionParameters, _lessEqualsThan, 
+      JavaCompletionSorting.addJavaSorting(completionParameters, completionResultSet).getPrefixMatcher(), _function);
   }
   
   @Override

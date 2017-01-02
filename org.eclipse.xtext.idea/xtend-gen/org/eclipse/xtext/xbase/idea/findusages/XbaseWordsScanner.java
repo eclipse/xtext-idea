@@ -16,7 +16,6 @@ import com.intellij.lang.cacheBuilder.WordOccurrence;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lexer.Lexer;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.Processor;
 import org.eclipse.xtext.idea.findusages.WordsScannerProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
@@ -82,9 +81,7 @@ public class XbaseWordsScanner implements WordsScanner {
   }
   
   protected boolean isOperator() {
-    TokenSet _operatorTokens = this.operatorTokenTypeProvider.getOperatorTokens();
-    IElementType _tokenType = this.lexer.getTokenType();
-    return _operatorTokens.contains(_tokenType);
+    return this.operatorTokenTypeProvider.getOperatorTokens().contains(this.lexer.getTokenType());
   }
   
   protected void scanWords(final Processor<WordOccurrence> processor) {
@@ -95,7 +92,6 @@ public class XbaseWordsScanner implements WordsScanner {
     }
     final WordOccurrence.Kind kind = this.getOccurrenceKind();
     final int tokenStart = this.lexer.getTokenStart();
-    CharSequence _tokenSequence = this.lexer.getTokenSequence();
     final Processor<WordOccurrence> _function = (WordOccurrence occurrence) -> {
       boolean _xblockexpression = false;
       {
@@ -109,7 +105,7 @@ public class XbaseWordsScanner implements WordsScanner {
       }
       return _xblockexpression;
     };
-    this.simpleWordsScanner.processWords(_tokenSequence, _function);
+    this.simpleWordsScanner.processWords(this.lexer.getTokenSequence(), _function);
   }
   
   protected WordOccurrence.Kind getOccurrenceKind() {
@@ -125,14 +121,10 @@ public class XbaseWordsScanner implements WordsScanner {
   }
   
   protected boolean isComments() {
-    TokenSet _commentTokens = this.tokenTypeProvider.getCommentTokens();
-    IElementType _tokenType = this.lexer.getTokenType();
-    return _commentTokens.contains(_tokenType);
+    return this.tokenTypeProvider.getCommentTokens().contains(this.lexer.getTokenType());
   }
   
   protected boolean isLiterals() {
-    TokenSet _stringLiteralTokens = this.tokenTypeProvider.getStringLiteralTokens();
-    IElementType _tokenType = this.lexer.getTokenType();
-    return _stringLiteralTokens.contains(_tokenType);
+    return this.tokenTypeProvider.getStringLiteralTokens().contains(this.lexer.getTokenType());
   }
 }

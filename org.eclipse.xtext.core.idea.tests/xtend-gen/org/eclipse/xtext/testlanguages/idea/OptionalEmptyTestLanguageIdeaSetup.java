@@ -12,8 +12,7 @@ public class OptionalEmptyTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      OptionalEmptyTestLanguageStandaloneSetupIdea _optionalEmptyTestLanguageStandaloneSetupIdea = new OptionalEmptyTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _optionalEmptyTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new OptionalEmptyTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

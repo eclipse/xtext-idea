@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.completion;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -25,24 +24,19 @@ import com.intellij.codeInsight.completion.CompletionSorter;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.LegacyCompletionContributor;
 import com.intellij.codeInsight.completion.OffsetMap;
-import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementWeigher;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +46,6 @@ import java.util.concurrent.Executors;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
@@ -183,12 +176,10 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     boolean _containsKey = this.myContributors.containsKey(type);
     boolean _not = (!_containsKey);
     if (_not) {
-      ArrayListMultimap<TokenSet, CompletionProvider<CompletionParameters>> _create = ArrayListMultimap.<TokenSet, CompletionProvider<CompletionParameters>>create();
-      this.myContributors.put(type, _create);
+      this.myContributors.put(type, ArrayListMultimap.<TokenSet, CompletionProvider<CompletionParameters>>create());
     }
     for (final TokenSet tokenSet : tokenSets) {
-      Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(type);
-      _get.put(tokenSet, contrib);
+      this.myContributors.get(type).put(tokenSet, contrib);
     }
   }
   
@@ -201,11 +192,10 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     if ((this.followElementComputer == null)) {
       throw new IllegalStateException("followElementComputer is not injected, probably IDE project is missing");
     }
-    Grammar _grammar = this.grammarAccess.getGrammar();
     final IFollowElementAcceptor _function = (AbstractElement it) -> {
       this.extend(type, tokenSets, it, contrib);
     };
-    this.followElementComputer.collectAbstractElements(_grammar, feature, _function);
+    this.followElementComputer.collectAbstractElements(this.grammarAccess.getGrammar(), feature, _function);
   }
   
   protected void extend(final CompletionType type, final AbstractElement followElement, final CompletionProvider<CompletionParameters> contrib) {
@@ -217,8 +207,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     boolean _containsKey = this.myFollowElementBasedContributors.containsKey(type);
     boolean _not = (!_containsKey);
     if (_not) {
-      HashMap<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _newHashMap = CollectionLiterals.<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>newHashMap();
-      this.myFollowElementBasedContributors.put(type, _newHashMap);
+      this.myFollowElementBasedContributors.put(type, CollectionLiterals.<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>newHashMap());
     }
     final Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> map = this.myFollowElementBasedContributors.get(type);
     for (final TokenSet tokenSet : tokenSets) {
@@ -226,8 +215,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         boolean _containsKey_1 = map.containsKey(tokenSet);
         boolean _not_1 = (!_containsKey_1);
         if (_not_1) {
-          ArrayListMultimap<AbstractElement, CompletionProvider<CompletionParameters>> _create = ArrayListMultimap.<AbstractElement, CompletionProvider<CompletionParameters>>create();
-          map.put(tokenSet, _create);
+          map.put(tokenSet, ArrayListMultimap.<AbstractElement, CompletionProvider<CompletionParameters>>create());
         }
         final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> providers = map.get(tokenSet);
         providers.put(followElement, contrib);
@@ -237,18 +225,15 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   @Override
   public void fillCompletionVariants(final CompletionParameters parameters, final CompletionResultSet result) {
-    CompletionSorter _completionSorter = this.getCompletionSorter(parameters, result);
-    final CompletionResultSet sortedResult = result.withRelevanceSorter(_completionSorter);
+    final CompletionResultSet sortedResult = result.withRelevanceSorter(this.getCompletionSorter(parameters, result));
     final Procedure1<CompletionResult> _function = (CompletionResult it) -> {
       boolean _isValidProposal = this.isValidProposal(it.getLookupElement(), parameters);
       if (_isValidProposal) {
-        LookupElement _lookupElement = it.getLookupElement();
-        sortedResult.addElement(_lookupElement);
+        sortedResult.addElement(it.getLookupElement());
       }
     };
     final Procedure1<CompletionResult> filteredConsumer = _function;
-    CompletionService _completionService = CompletionService.getCompletionService();
-    final CompletionResultSet filteredResult = _completionService.createResultSet(parameters, new Consumer<CompletionResult>() {
+    final CompletionResultSet filteredResult = CompletionService.getCompletionService().createResultSet(parameters, new Consumer<CompletionResult>() {
         public void consume(CompletionResult t) {
           filteredConsumer.apply(t);
         }
@@ -266,11 +251,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       return;
     }
     Editor _editor = parameters.getEditor();
-    int _offset = parameters.getOffset();
-    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
-    CompletionType _completionType = parameters.getCompletionType();
-    Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(_completionType);
-    final Collection<CompletionProvider<CompletionParameters>> providers = _get.get(tokenSet);
+    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), parameters.getOffset());
+    final Collection<CompletionProvider<CompletionParameters>> providers = this.myContributors.get(parameters.getCompletionType()).get(tokenSet);
     boolean _equals = Objects.equal(providers, null);
     if (_equals) {
       return;
@@ -294,11 +276,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       return;
     }
     Editor _editor = parameters.getEditor();
-    int _offset = parameters.getOffset();
-    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
-    CompletionType _completionType = parameters.getCompletionType();
-    Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _get = this.myFollowElementBasedContributors.get(_completionType);
-    final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = _get.get(tokenSet);
+    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), parameters.getOffset());
+    final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = this.myFollowElementBasedContributors.get(parameters.getCompletionType()).get(tokenSet);
     boolean _equals = Objects.equal(element2provider, null);
     if (_equals) {
       return;
@@ -328,11 +307,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected Set<AbstractElement> computeFollowElements(final CompletionParameters parameters) {
-    Editor _editor = parameters.getEditor();
-    Document _document = _editor.getDocument();
-    PsiElement _position = parameters.getPosition();
-    ASTNode _node = _position.getNode();
-    int _startOffset = _node.getStartOffset();
+    Document _document = parameters.getEditor().getDocument();
+    int _startOffset = parameters.getPosition().getNode().getStartOffset();
     TextRange _textRange = new TextRange(0, _startOffset);
     final String text = _document.getText(_textRange);
     final Collection<FollowElement> followElements = this.contentAssistParser.getFollowElements(text, false);
@@ -342,8 +318,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected CompletionSorter getCompletionSorter(final CompletionParameters parameters, final CompletionResultSet result) {
-    PrefixMatcher _prefixMatcher = result.getPrefixMatcher();
-    CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, _prefixMatcher);
+    CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, result.getPrefixMatcher());
     AbstractCompletionContributor.DispreferKeywordsWeigher _dispreferKeywordsWeigher = new AbstractCompletionContributor.DispreferKeywordsWeigher();
     return _defaultSorter.weighBefore("liftShorter", _dispreferKeywordsWeigher);
   }
@@ -362,8 +337,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected void createParserBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
     Editor _editor = parameters.getEditor();
-    int _offset = parameters.getOffset();
-    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
+    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), parameters.getOffset());
     boolean _supportParserBasedProposals = this.supportParserBasedProposals(tokenSet);
     boolean _not = (!_supportParserBasedProposals);
     if (_not) {
@@ -374,17 +348,12 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     if (_equals) {
       return;
     }
-    String _text = this.getText(parameters);
-    TextRegion _selection = this.getSelection(parameters);
-    int _offset_1 = parameters.getOffset();
-    XtextResource _resource = this.getResource(parameters);
-    final ContentAssistContext[] contexts = delegate.create(_text, _selection, _offset_1, _resource);
+    final ContentAssistContext[] contexts = delegate.create(this.getText(parameters), this.getSelection(parameters), parameters.getOffset(), this.getResource(parameters));
     final java.util.function.Consumer<ContentAssistContext> _function = (ContentAssistContext c) -> {
-      ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
       final java.util.function.Consumer<AbstractElement> _function_1 = (AbstractElement e) -> {
         this.createProposal(e, c, parameters, result);
       };
-      _firstSetGrammarElements.forEach(_function_1);
+      c.getFirstSetGrammarElements().forEach(_function_1);
     };
     ((List<ContentAssistContext>)Conversions.doWrapArray(contexts)).forEach(_function);
   }
@@ -412,8 +381,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected String getText(final CompletionParameters parameters) {
     final Computable<String> _function = () -> {
-      PsiFile _originalFile = parameters.getOriginalFile();
-      return _originalFile.getText();
+      return parameters.getOriginalFile().getText();
     };
     return this.<String>runReadAction(_function);
   }
@@ -431,9 +399,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected OffsetMap getOffsets(final CompletionParameters parameters) {
     final Computable<OffsetMap> _function = () -> {
-      PsiElement _position = parameters.getPosition();
-      CompletionContext _userData = _position.<CompletionContext>getUserData(CompletionContext.COMPLETION_CONTEXT_KEY);
-      return _userData.getOffsetMap();
+      return parameters.getPosition().<CompletionContext>getUserData(CompletionContext.COMPLETION_CONTEXT_KEY).getOffsetMap();
     };
     return this.<OffsetMap>runReadAction(_function);
   }
@@ -447,8 +413,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected <T extends Object> T runReadAction(final Computable<T> computable) {
-    Application _application = ApplicationManager.getApplication();
-    return _application.<T>runReadAction(computable);
+    return ApplicationManager.getApplication().<T>runReadAction(computable);
   }
   
   protected void createProposal(final AbstractElement grammarElement, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {

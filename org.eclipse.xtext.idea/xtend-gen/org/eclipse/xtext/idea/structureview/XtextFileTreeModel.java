@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.structureview.AbstractStructureViewTreeElement;
 import org.eclipse.xtext.idea.structureview.AlphaSorter;
 import org.eclipse.xtext.idea.structureview.DefaultComparator;
@@ -59,8 +58,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
   
   public XtextFileTreeModel(final BaseXtextFile xtextFile, final Editor editor) {
     super(editor, xtextFile);
-    IXtextLanguage _xtextLanguage = xtextFile.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
+    xtextFile.getXtextLanguage().injectMembers(this);
     this.sorters = CollectionLiterals.<Sorter>newArrayList();
     final Comparator<TreeElement> comparator = this.getComparator();
     boolean _notEquals = (!Objects.equal(comparator, null));

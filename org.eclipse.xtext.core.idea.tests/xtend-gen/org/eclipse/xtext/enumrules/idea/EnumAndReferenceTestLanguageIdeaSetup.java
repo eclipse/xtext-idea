@@ -12,8 +12,7 @@ public class EnumAndReferenceTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EnumAndReferenceTestLanguageStandaloneSetupIdea _enumAndReferenceTestLanguageStandaloneSetupIdea = new EnumAndReferenceTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _enumAndReferenceTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EnumAndReferenceTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

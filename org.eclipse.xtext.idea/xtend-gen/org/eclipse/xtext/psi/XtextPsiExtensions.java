@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
@@ -25,14 +24,12 @@ public class XtextPsiExtensions {
   private IPsiModelAssociations associations;
   
   public PsiElement findEObjectAssociatedPsiElement(final PsiElement ctx, final int offset) {
-    PsiFile _containingFile = ctx.getContainingFile();
-    final PsiElement element = _containingFile.findElementAt(offset);
+    final PsiElement element = ctx.getContainingFile().findElementAt(offset);
     return this.findEObjectAssociatedPsiElement(element);
   }
   
   public EObject findEObject(final PsiElement ctx, final int offset) {
-    PsiElement _findEObjectAssociatedPsiElement = this.findEObjectAssociatedPsiElement(ctx, offset);
-    return this.associations.getEObject(_findEObjectAssociatedPsiElement);
+    return this.associations.getEObject(this.findEObjectAssociatedPsiElement(ctx, offset));
   }
   
   public PsiElement findEObjectAssociatedPsiElement(final PsiElement element) {
@@ -44,7 +41,6 @@ public class XtextPsiExtensions {
   }
   
   public EObject findEObject(final PsiElement ctx) {
-    PsiElement _findEObjectAssociatedPsiElement = this.findEObjectAssociatedPsiElement(ctx);
-    return this.associations.getEObject(_findEObjectAssociatedPsiElement);
+    return this.associations.getEObject(this.findEObjectAssociatedPsiElement(ctx));
   }
 }

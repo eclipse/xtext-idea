@@ -9,9 +9,7 @@ package org.eclipse.xtext.idea.structureview;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -52,20 +50,14 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   
   @Override
   protected PsiElement getInternalNavigationElement() {
-    List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(this.owner, this.feature);
     final Function1<INode, Iterable<ILeafNode>> _function = (INode it) -> {
       return it.getLeafNodes();
     };
-    List<Iterable<ILeafNode>> _map = ListExtensions.<INode, Iterable<ILeafNode>>map(_findNodesForFeature, _function);
-    Iterable<ILeafNode> _flatten = Iterables.<ILeafNode>concat(_map);
     final Function1<ILeafNode, Boolean> _function_1 = (ILeafNode it) -> {
       boolean _isHidden = it.isHidden();
       return Boolean.valueOf((!_isHidden));
     };
-    Iterable<ILeafNode> _filter = IterableExtensions.<ILeafNode>filter(_flatten, _function_1);
-    ILeafNode _head = IterableExtensions.<ILeafNode>head(_filter);
-    ASTNode _aSTNode = this.xtextFile.getASTNode(_head);
-    return _aSTNode.getPsi();
+    return this.xtextFile.getASTNode(IterableExtensions.<ILeafNode>head(IterableExtensions.<ILeafNode>filter(Iterables.<ILeafNode>concat(ListExtensions.<INode, Iterable<ILeafNode>>map(NodeModelUtils.findNodesForFeature(this.owner, this.feature), _function)), _function_1))).getPsi();
   }
   
   @Override

@@ -14,7 +14,6 @@ import com.intellij.debugger.SourcePosition;
 import com.intellij.debugger.engine.DebugProcess;
 import com.intellij.debugger.engine.ExtraSteppingFilter;
 import com.intellij.debugger.engine.SuspendContext;
-import com.intellij.debugger.engine.jdi.StackFrameProxy;
 import com.sun.jdi.Location;
 import com.sun.jdi.Method;
 import com.sun.jdi.request.StepRequest;
@@ -54,8 +53,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
       }
       final DebugProcess debugProcess = context.getDebugProcess();
       final PositionManager positionManager = debugProcess.getPositionManager();
-      StackFrameProxy _frameProxy = context.getFrameProxy();
-      final Location location = _frameProxy.location();
+      final Location location = context.getFrameProxy().location();
       boolean _isEmptyAnonymousClassConstructor = this.isEmptyAnonymousClassConstructor(context);
       if (_isEmptyAnonymousClassConstructor) {
         return true;
@@ -73,10 +71,8 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
   
   protected boolean isXtextSourced(final SuspendContext context) {
     try {
-      StackFrameProxy _frameProxy = context.getFrameProxy();
-      final Location location = _frameProxy.location();
-      DebugProcess _debugProcess = context.getDebugProcess();
-      URI _findOriginalDeclaration = this._debugProcessExtensions.findOriginalDeclaration(_debugProcess, location);
+      final Location location = context.getFrameProxy().location();
+      URI _findOriginalDeclaration = this._debugProcessExtensions.findOriginalDeclaration(context.getDebugProcess(), location);
       return (!Objects.equal(_findOriginalDeclaration, null));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -85,8 +81,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
   
   public boolean isEmptyAnonymousClassConstructor(final SuspendContext context) {
     try {
-      StackFrameProxy _frameProxy = context.getFrameProxy();
-      final Location location = _frameProxy.location();
+      final Location location = context.getFrameProxy().location();
       boolean _notEquals = (!Objects.equal(location, null));
       if (_notEquals) {
         final Method method = location.method();

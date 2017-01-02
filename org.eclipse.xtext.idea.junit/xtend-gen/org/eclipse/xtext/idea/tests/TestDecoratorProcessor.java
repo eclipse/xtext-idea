@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.tests;
 
 import com.google.common.base.Objects;
-import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -41,28 +40,20 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     final Type atTest = context.findTypeGlobally(Test.class);
     final Type atIgnore = context.findTypeGlobally(Ignore.class);
     delegate.markAsRead();
-    TypeReference _type = delegate.getType();
-    Iterable<? extends ResolvedMethod> _allResolvedMethods = _type.getAllResolvedMethods();
     final Function1<ResolvedMethod, MethodDeclaration> _function = (ResolvedMethod it) -> {
       return it.getDeclaration();
     };
-    Iterable<MethodDeclaration> _map = IterableExtensions.map(_allResolvedMethods, _function);
     final Function1<MethodDeclaration, Boolean> _function_1 = (MethodDeclaration it) -> {
       return Boolean.valueOf(((it.findAnnotation(atTest) != null) && (it.findAnnotation(atIgnore) == null)));
     };
-    Iterable<MethodDeclaration> _filter = IterableExtensions.<MethodDeclaration>filter(_map, _function_1);
     final Function1<MethodDeclaration, Boolean> _function_2 = (MethodDeclaration it) -> {
-      String _simpleName = it.getSimpleName();
-      MutableMethodDeclaration _findDeclaredMethod = cls.findDeclaredMethod(_simpleName);
+      MutableMethodDeclaration _findDeclaredMethod = cls.findDeclaredMethod(it.getSimpleName());
       return Boolean.valueOf(Objects.equal(_findDeclaredMethod, null));
     };
-    Iterable<MethodDeclaration> _filter_1 = IterableExtensions.<MethodDeclaration>filter(_filter, _function_2);
     final Function1<MethodDeclaration, String> _function_3 = (MethodDeclaration it) -> {
       return it.getSimpleName();
     };
-    List<MethodDeclaration> _sortBy = IterableExtensions.<MethodDeclaration, String>sortBy(_filter_1, _function_3);
     final Consumer<MethodDeclaration> _function_4 = (MethodDeclaration declaredMethod) -> {
-      String _simpleName = declaredMethod.getSimpleName();
       final Procedure1<MutableMethodDeclaration> _function_5 = (MutableMethodDeclaration it) -> {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -76,8 +67,8 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
         it.setBody(_client);
         it.setExceptions(((TypeReference[])Conversions.unwrapArray(declaredMethod.getExceptions(), TypeReference.class)));
       };
-      cls.addMethod(_simpleName, _function_5);
+      cls.addMethod(declaredMethod.getSimpleName(), _function_5);
     };
-    _sortBy.forEach(_function_4);
+    IterableExtensions.<MethodDeclaration, String>sortBy(IterableExtensions.<MethodDeclaration>filter(IterableExtensions.<MethodDeclaration>filter(IterableExtensions.map(delegate.getType().getAllResolvedMethods(), _function), _function_1), _function_2), _function_3).forEach(_function_4);
   }
 }

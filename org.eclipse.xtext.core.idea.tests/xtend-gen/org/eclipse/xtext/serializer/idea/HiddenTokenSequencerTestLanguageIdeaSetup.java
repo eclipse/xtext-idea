@@ -12,8 +12,7 @@ public class HiddenTokenSequencerTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      HiddenTokenSequencerTestLanguageStandaloneSetupIdea _hiddenTokenSequencerTestLanguageStandaloneSetupIdea = new HiddenTokenSequencerTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _hiddenTokenSequencerTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new HiddenTokenSequencerTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

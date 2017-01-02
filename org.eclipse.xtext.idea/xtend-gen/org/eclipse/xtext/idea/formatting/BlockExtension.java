@@ -14,7 +14,6 @@ import com.intellij.formatting.ASTBlock;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.tree.IElementType;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -75,8 +74,7 @@ public class BlockExtension {
   public boolean isOpening(final Block block) {
     boolean _xifexpression = false;
     if ((block instanceof ASTBlock)) {
-      ASTNode _node = ((ASTBlock)block).getNode();
-      _xifexpression = this.isOpening(_node);
+      _xifexpression = this.isOpening(((ASTBlock)block).getNode());
     }
     return _xifexpression;
   }
@@ -84,8 +82,7 @@ public class BlockExtension {
   public boolean isClosing(final Block block) {
     boolean _xifexpression = false;
     if ((block instanceof ASTBlock)) {
-      ASTNode _node = ((ASTBlock)block).getNode();
-      _xifexpression = this.isClosing(_node);
+      _xifexpression = this.isClosing(((ASTBlock)block).getNode());
     }
     return _xifexpression;
   }
@@ -98,12 +95,11 @@ public class BlockExtension {
         return false;
       }
       final String text = node.getText();
-      Set<BracePair> _bracePairs = this.getBracePairs();
       final Function1<BracePair, Boolean> _function = (BracePair it) -> {
         String _leftBrace = it.getLeftBrace();
         return Boolean.valueOf(Objects.equal(text, _leftBrace));
       };
-      _xblockexpression = IterableExtensions.<BracePair>exists(_bracePairs, _function);
+      _xblockexpression = IterableExtensions.<BracePair>exists(this.getBracePairs(), _function);
     }
     return _xblockexpression;
   }
@@ -116,19 +112,17 @@ public class BlockExtension {
         return false;
       }
       final String text = node.getText();
-      Set<BracePair> _bracePairs = this.getBracePairs();
       final Function1<BracePair, Boolean> _function = (BracePair it) -> {
         String _rightBrace = it.getRightBrace();
         return Boolean.valueOf(Objects.equal(text, _rightBrace));
       };
-      _xblockexpression = IterableExtensions.<BracePair>exists(_bracePairs, _function);
+      _xblockexpression = IterableExtensions.<BracePair>exists(this.getBracePairs(), _function);
     }
     return _xblockexpression;
   }
   
   public BracePair getBracePairForOpeningBrace(final Block block) {
-    ASTNode _node = this.getNode(block);
-    return this.getBracePairForOpeningNode(_node);
+    return this.getBracePairForOpeningNode(this.getNode(block));
   }
   
   public BracePair getBracePairForOpeningNode(final ASTNode node) {
@@ -139,19 +133,17 @@ public class BlockExtension {
         return null;
       }
       final String openingBrace = node.getText();
-      Set<BracePair> _bracePairs = this.getBracePairs();
       final Function1<BracePair, Boolean> _function = (BracePair it) -> {
         String _leftBrace = it.getLeftBrace();
         return Boolean.valueOf(Objects.equal(_leftBrace, openingBrace));
       };
-      _xblockexpression = IterableExtensions.<BracePair>findFirst(_bracePairs, _function);
+      _xblockexpression = IterableExtensions.<BracePair>findFirst(this.getBracePairs(), _function);
     }
     return _xblockexpression;
   }
   
   public BracePair getBracePairForClosingBrace(final Block block) {
-    ASTNode _node = this.getNode(block);
-    return this.getBracePairForClosingNode(_node);
+    return this.getBracePairForClosingNode(this.getNode(block));
   }
   
   public BracePair getBracePairForClosingNode(final ASTNode node) {
@@ -162,12 +154,11 @@ public class BlockExtension {
         return null;
       }
       final String openingBrace = node.getText();
-      Set<BracePair> _bracePairs = this.getBracePairs();
       final Function1<BracePair, Boolean> _function = (BracePair it) -> {
         String _rightBrace = it.getRightBrace();
         return Boolean.valueOf(Objects.equal(_rightBrace, openingBrace));
       };
-      _xblockexpression = IterableExtensions.<BracePair>findFirst(_bracePairs, _function);
+      _xblockexpression = IterableExtensions.<BracePair>findFirst(this.getBracePairs(), _function);
     }
     return _xblockexpression;
   }
@@ -176,8 +167,7 @@ public class BlockExtension {
     boolean _xblockexpression = false;
     {
       final ASTNode node = this.getNode(block);
-      TextRange _textRange = block.getTextRange();
-      int _startOffset = _textRange.getStartOffset();
+      int _startOffset = block.getTextRange().getStartOffset();
       int _startOffset_1 = node.getStartOffset();
       final int offset = (_startOffset - _startOffset_1);
       final ASTNode leafElement = node.findLeafElementAt(offset);

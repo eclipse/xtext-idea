@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.idea.facet;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.EffectiveLanguageLevelUtil;
 import com.intellij.openapi.module.Module;
@@ -18,8 +17,6 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.pom.java.LanguageLevel;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.FacetProvider;
@@ -50,9 +47,7 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
   
   @Override
   public GeneratorConfig get(final EObject context) {
-    Resource _eResource = context.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    final Module module = ModuleProvider.findModule(_resourceSet);
+    final Module module = ModuleProvider.findModule(context.eResource().getResourceSet());
     if ((module != null)) {
       final Facet<? extends AbstractFacetConfiguration> facet = this.facetProvider.getFacet(module);
       AbstractFacetConfiguration _configuration = null;
@@ -88,17 +83,15 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
             return EffectiveLanguageLevelUtil.getEffectiveLanguageLevel(module);
           };
           final Computable<LanguageLevel> action = _function;
-          Application _application = ApplicationManager.getApplication();
-          _xblockexpression_1 = _application.<LanguageLevel>runReadAction(action);
+          _xblockexpression_1 = ApplicationManager.getApplication().<LanguageLevel>runReadAction(action);
         }
         _xifexpression = _xblockexpression_1;
       } else {
-        LanguageLevel[] _values = LanguageLevel.values();
         final Function1<LanguageLevel, Boolean> _function = (LanguageLevel it) -> {
           String _presentableText = it.getPresentableText();
           return Boolean.valueOf(Objects.equal(_presentableText, version));
         };
-        _xifexpression = IterableExtensions.<LanguageLevel>findFirst(((Iterable<LanguageLevel>)Conversions.doWrapArray(_values)), _function);
+        _xifexpression = IterableExtensions.<LanguageLevel>findFirst(((Iterable<LanguageLevel>)Conversions.doWrapArray(LanguageLevel.values())), _function);
       }
       final LanguageLevel languageLevel = _xifexpression;
       JavaVersion _switchResult = null;

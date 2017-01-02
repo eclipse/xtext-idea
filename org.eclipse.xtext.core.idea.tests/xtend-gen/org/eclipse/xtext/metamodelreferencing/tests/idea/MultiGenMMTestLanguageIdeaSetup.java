@@ -12,8 +12,7 @@ public class MultiGenMMTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      MultiGenMMTestLanguageStandaloneSetupIdea _multiGenMMTestLanguageStandaloneSetupIdea = new MultiGenMMTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _multiGenMMTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new MultiGenMMTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

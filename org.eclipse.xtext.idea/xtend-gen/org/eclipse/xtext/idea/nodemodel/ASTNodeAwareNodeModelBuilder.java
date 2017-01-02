@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
@@ -129,8 +128,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
                 AbstractRule _xblockexpression_3 = null;
                 {
                   final String ruleName = TokenTool.getLexerRuleName(tokenName);
-                  Grammar _grammar = this.grammarAccess.getGrammar();
-                  _xblockexpression_3 = GrammarUtil.findRuleForName(_grammar, ruleName);
+                  _xblockexpression_3 = GrammarUtil.findRuleForName(this.grammarAccess.getGrammar(), ruleName);
                 }
                 _xifexpression_2 = _xblockexpression_3;
               }

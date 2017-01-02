@@ -12,8 +12,7 @@ public class DatatypeRulesTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      DatatypeRulesTestLanguageStandaloneSetupIdea _datatypeRulesTestLanguageStandaloneSetupIdea = new DatatypeRulesTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _datatypeRulesTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new DatatypeRulesTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

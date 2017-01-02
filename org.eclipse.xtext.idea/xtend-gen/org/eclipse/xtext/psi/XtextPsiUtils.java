@@ -9,7 +9,6 @@ package org.eclipse.xtext.psi;
 
 import com.google.common.base.Objects;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.indexing.IndexingDataKeys;
@@ -30,8 +29,7 @@ public class XtextPsiUtils {
       if ((virtualFile != null)) {
         return virtualFile;
       }
-      FileViewProvider _viewProvider = ((PsiFile)element).getViewProvider();
-      return _viewProvider.getVirtualFile();
+      return ((PsiFile)element).getViewProvider().getVirtualFile();
     } else {
       VirtualFile _xifexpression_1 = null;
       boolean _equals = Objects.equal(element, null);

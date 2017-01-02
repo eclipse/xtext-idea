@@ -12,8 +12,7 @@ public class ReferenceGrammarTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ReferenceGrammarTestLanguageStandaloneSetupIdea _referenceGrammarTestLanguageStandaloneSetupIdea = new ReferenceGrammarTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _referenceGrammarTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ReferenceGrammarTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

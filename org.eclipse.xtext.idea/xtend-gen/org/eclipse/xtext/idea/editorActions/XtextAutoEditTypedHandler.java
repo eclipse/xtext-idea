@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.editorActions;
 
 import com.google.common.base.Objects;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
-import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.fileTypes.FileType;
@@ -25,26 +24,22 @@ import org.eclipse.xtext.idea.editorActions.IdeaAutoEditHandlerExtension;
 public class XtextAutoEditTypedHandler extends TypedHandlerDelegate {
   @Override
   public TypedHandlerDelegate.Result beforeCharTyped(final char c, final Project project, final Editor editor, final PsiFile file, final FileType fileType) {
-    Language _language = file.getLanguage();
-    final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(_language);
+    final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
     boolean _equals = Objects.equal(autoEditHandler, null);
     if (_equals) {
       return super.beforeCharTyped(c, project, editor, file, fileType);
     }
-    IdeaAutoEditHandler.Result _beforeCharTyped = autoEditHandler.beforeCharTyped(c, project, ((EditorEx) editor), file, fileType);
-    return this.translateResult(_beforeCharTyped);
+    return this.translateResult(autoEditHandler.beforeCharTyped(c, project, ((EditorEx) editor), file, fileType));
   }
   
   @Override
   public TypedHandlerDelegate.Result charTyped(final char c, final Project project, final Editor editor, final PsiFile file) {
-    Language _language = file.getLanguage();
-    final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(_language);
+    final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
     boolean _equals = Objects.equal(autoEditHandler, null);
     if (_equals) {
       return super.charTyped(c, project, editor, file);
     }
-    IdeaAutoEditHandler.Result _charTyped = autoEditHandler.charTyped(c, project, ((EditorEx) editor), file);
-    return this.translateResult(_charTyped);
+    return this.translateResult(autoEditHandler.charTyped(c, project, ((EditorEx) editor), file));
   }
   
   protected TypedHandlerDelegate.Result translateResult(final IdeaAutoEditHandler.Result result) {

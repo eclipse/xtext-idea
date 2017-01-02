@@ -8,8 +8,6 @@
 package org.eclipse.xtext.idea.editorActions;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.editor.ex.DocumentEx;
-import com.intellij.openapi.editor.ex.EditorEx;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.editorActions.AutoEditContext;
@@ -48,8 +46,7 @@ public abstract class AbstractAutoEditBlock {
     }
     int _length = this.closingTerminal.length();
     final int endOffset = (beginOffset + _length);
-    DocumentEx _document = context.getDocument();
-    int _textLength = _document.getTextLength();
+    int _textLength = context.getDocument().getTextLength();
     boolean _greaterThan = (endOffset > _textLength);
     if (_greaterThan) {
       return false;
@@ -59,9 +56,7 @@ public abstract class AbstractAutoEditBlock {
     if (_notEquals_1) {
       return false;
     }
-    EditorEx _editor = context.getEditor();
-    DocumentEx _document_1 = _editor.getDocument();
-    _document_1.deleteString(beginOffset, endOffset);
+    context.getEditor().getDocument().deleteString(beginOffset, endOffset);
     return true;
   }
   

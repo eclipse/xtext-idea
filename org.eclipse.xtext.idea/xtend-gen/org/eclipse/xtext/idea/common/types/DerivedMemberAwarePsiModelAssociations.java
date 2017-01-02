@@ -34,13 +34,11 @@ public class DerivedMemberAwarePsiModelAssociations extends PsiModelAssociations
       if (_equals) {
         return null;
       }
-      EObject _convertToSource = this.convertToSource(object);
-      final PsiElement psiElement = super.getPsiElement(_convertToSource);
+      final PsiElement psiElement = super.getPsiElement(this.convertToSource(object));
       PsiElement _xifexpression = null;
       boolean _equals_1 = Objects.equal(psiElement, null);
       if (_equals_1) {
-        EObject _eContainer = object.eContainer();
-        _xifexpression = this.getPsiElement(_eContainer);
+        _xifexpression = this.getPsiElement(object.eContainer());
       } else {
         _xifexpression = psiElement;
       }

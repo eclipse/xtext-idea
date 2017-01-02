@@ -101,13 +101,10 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
   
   @Override
   protected List<Block> buildChildren() {
-    ASTNode[] _children = this.myNode.getChildren(null);
     final Function1<ASTNode, Block> _function = (ASTNode it) -> {
       return this._blockFactory.createBlock(it, this);
     };
-    List<Block> _map = ListExtensions.<ASTNode, Block>map(((List<ASTNode>)Conversions.doWrapArray(_children)), _function);
-    Iterable<Block> _filterNull = IterableExtensions.<Block>filterNull(_map);
-    return this.group(_filterNull);
+    return this.group(IterableExtensions.<Block>filterNull(ListExtensions.<ASTNode, Block>map(((List<ASTNode>)Conversions.doWrapArray(this.myNode.getChildren(null))), _function)));
   }
   
   protected List<Block> group(final Iterable<Block> blocks) {
@@ -120,14 +117,12 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
           boolean _isOpening = this._blockExtension.isOpening(block);
           if (_isOpening) {
             final BracePair bracePair = this._blockExtension.getBracePairForOpeningBrace(block);
-            int _size = stack.size();
-            openingBlockIndex.put(bracePair, Integer.valueOf(_size));
+            openingBlockIndex.put(bracePair, Integer.valueOf(stack.size()));
           }
           boolean _isClosing = this._blockExtension.isClosing(block);
           if (_isClosing) {
             final BracePair bracePair_1 = this._blockExtension.getBracePairForClosingBrace(block);
-            List<Integer> _get = openingBlockIndex.get(bracePair_1);
-            final Integer index = IterableExtensions.<Integer>last(_get);
+            final Integer index = IterableExtensions.<Integer>last(openingBlockIndex.get(bracePair_1));
             boolean _notEquals = (!Objects.equal(index, null));
             if (_notEquals) {
               openingBlockIndex.remove(bracePair_1, index);
@@ -137,14 +132,10 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
           stack.addLast(block);
         }
       }
-      List<Map.Entry<BracePair, Integer>> _entries = openingBlockIndex.entries();
       final Comparator<Map.Entry<BracePair, Integer>> _function = (Map.Entry<BracePair, Integer> $0, Map.Entry<BracePair, Integer> $1) -> {
-        Integer _value = $0.getValue();
-        Integer _value_1 = $1.getValue();
-        return _value.compareTo(_value_1);
+        return $0.getValue().compareTo($1.getValue());
       };
-      List<Map.Entry<BracePair, Integer>> _sortWith = IterableExtensions.<Map.Entry<BracePair, Integer>>sortWith(_entries, _function);
-      List<Map.Entry<BracePair, Integer>> _reverse = ListExtensions.<Map.Entry<BracePair, Integer>>reverse(_sortWith);
+      List<Map.Entry<BracePair, Integer>> _reverse = ListExtensions.<Map.Entry<BracePair, Integer>>reverse(IterableExtensions.<Map.Entry<BracePair, Integer>>sortWith(openingBlockIndex.entries(), _function));
       for (final Map.Entry<BracePair, Integer> entry : _reverse) {
         this.group(stack, entry.getValue(), entry.getKey(), null);
       }
@@ -164,11 +155,10 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     final boolean enforceIndentToChildren = this.shouldEnforceIndentToChildren(children);
     groupBlock.setIndent(this._blockExtension.getIndent(bracePair, enforceIndentToChildren));
     groupBlock.setParentBlock(IterableExtensions.<ModifiableBlock>head(Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class)).getParentBlock());
-    Iterable<ModifiableBlock> _filter = Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class);
     final Consumer<ModifiableBlock> _function = (ModifiableBlock child) -> {
       child.setParentBlock(groupBlock);
     };
-    _filter.forEach(_function);
+    Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class).forEach(_function);
     stack.addLast(groupBlock);
   }
   
@@ -193,13 +183,11 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     if (_greaterThan) {
       return true;
     }
-    Block _head = IterableExtensions.<Block>head(children);
-    final BracePair bracePair = this._blockExtension.getBracePairForOpeningBrace(_head);
+    final BracePair bracePair = this._blockExtension.getBracePairForOpeningBrace(IterableExtensions.<Block>head(children));
     if ((Objects.equal(bracePair, null) || (!bracePair.isStructural()))) {
       return true;
     }
-    Block _last = IterableExtensions.<Block>last(children);
-    BracePair _bracePairForClosingBrace = this._blockExtension.getBracePairForClosingBrace(_last);
+    BracePair _bracePairForClosingBrace = this._blockExtension.getBracePairForClosingBrace(IterableExtensions.<Block>last(children));
     return (!Objects.equal(_bracePairForClosingBrace, bracePair));
   }
   

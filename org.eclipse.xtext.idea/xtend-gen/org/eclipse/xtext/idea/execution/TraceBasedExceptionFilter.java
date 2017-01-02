@@ -14,7 +14,6 @@ import com.intellij.execution.filters.FileHyperlinkInfo;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.HyperlinkInfo;
 import com.intellij.execution.filters.OpenFileHyperlinkInfo;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.RangeMarker;
@@ -26,13 +25,11 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.DocumentUtil;
-import java.util.List;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -54,12 +51,11 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
     if (_equals) {
       return null;
     }
-    List<Filter.ResultItem> _resultItems = result.getResultItems();
     final Function1<Filter.ResultItem, Boolean> _function = (Filter.ResultItem it) -> {
       HyperlinkInfo _hyperlinkInfo = it.getHyperlinkInfo();
       return Boolean.valueOf((!Objects.equal(_hyperlinkInfo, null)));
     };
-    final Filter.ResultItem resultItem = IterableExtensions.<Filter.ResultItem>findFirst(_resultItems, _function);
+    final Filter.ResultItem resultItem = IterableExtensions.<Filter.ResultItem>findFirst(result.getResultItems(), _function);
     final HyperlinkInfo hyperlinkInfo = resultItem.getHyperlinkInfo();
     if ((hyperlinkInfo instanceof FileHyperlinkInfo)) {
       final OpenFileDescriptor descriptor = ((FileHyperlinkInfo)hyperlinkInfo).getDescriptor();
@@ -73,30 +69,23 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
           final IIdeaTrace trace = this.traceProvider.getTraceToSource(fileInProject);
           final RangeMarker rangeMarker = descriptor.getRangeMarker();
           if (((!Objects.equal(trace, null)) && (!Objects.equal(rangeMarker, null)))) {
-            Application _application = ApplicationManager.getApplication();
             final Computable<Integer> _function_1 = () -> {
               int _xblockexpression = (int) 0;
               {
-                FileDocumentManager _instance = FileDocumentManager.getInstance();
-                VirtualFile _file_1 = descriptor.getFile();
-                final Document document = _instance.getDocument(_file_1);
-                int _startOffset = rangeMarker.getStartOffset();
-                final int lineNumber = document.getLineNumber(_startOffset);
+                final Document document = FileDocumentManager.getInstance().getDocument(descriptor.getFile());
+                final int lineNumber = document.getLineNumber(rangeMarker.getStartOffset());
                 _xblockexpression = DocumentUtil.getFirstNonSpaceCharOffset(document, lineNumber);
               }
               return Integer.valueOf(_xblockexpression);
             };
-            final Integer nonSpaceCharOffset = _application.<Integer>runReadAction(_function_1);
+            final Integer nonSpaceCharOffset = ApplicationManager.getApplication().<Integer>runReadAction(_function_1);
             TextRegion _textRegion = new TextRegion((nonSpaceCharOffset).intValue(), 0);
             final ILocationInVirtualFile location = trace.getBestAssociatedLocation(_textRegion);
             boolean _notEquals_1 = (!Objects.equal(location, null));
             if (_notEquals_1) {
-              VirtualFileInProject _platformResource = location.getPlatformResource();
-              Project _project_1 = _platformResource.getProject();
-              VirtualFileInProject _platformResource_1 = location.getPlatformResource();
-              VirtualFile _file_1 = _platformResource_1.getFile();
-              ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
-              int _lineNumber = _textRegion_1.getLineNumber();
+              Project _project_1 = location.getPlatformResource().getProject();
+              VirtualFile _file_1 = location.getPlatformResource().getFile();
+              int _lineNumber = location.getTextRegion().getLineNumber();
               final OpenFileDescriptor sourceFileDescriptor = new OpenFileDescriptor(_project_1, _file_1, _lineNumber, 
                 0);
               final OpenFileHyperlinkInfo linkInfo = new OpenFileHyperlinkInfo(sourceFileDescriptor);

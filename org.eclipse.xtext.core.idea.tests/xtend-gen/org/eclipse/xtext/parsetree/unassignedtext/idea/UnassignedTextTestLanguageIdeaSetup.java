@@ -12,8 +12,7 @@ public class UnassignedTextTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      UnassignedTextTestLanguageStandaloneSetupIdea _unassignedTextTestLanguageStandaloneSetupIdea = new UnassignedTextTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _unassignedTextTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new UnassignedTextTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

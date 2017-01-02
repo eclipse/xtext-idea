@@ -49,9 +49,10 @@ public class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
     boolean _isEmpty = IterableExtensions.isEmpty(secondaryHandlers);
     boolean _not = (!_isEmpty);
     GeneratedSourceAwareFindUsagesHandler.LOG.assertTrue(_not);
-    this.secondaryHandlers = IterableExtensions.<PsiElement, FindUsagesHandler>toMap(secondaryHandlers, ((Function1<FindUsagesHandler, PsiElement>) (FindUsagesHandler it) -> {
+    final Function1<FindUsagesHandler, PsiElement> _function = (FindUsagesHandler it) -> {
       return it.getPsiElement();
-    }));
+    };
+    this.secondaryHandlers = IterableExtensions.<PsiElement, FindUsagesHandler>toMap(secondaryHandlers, _function);
   }
   
   @Override

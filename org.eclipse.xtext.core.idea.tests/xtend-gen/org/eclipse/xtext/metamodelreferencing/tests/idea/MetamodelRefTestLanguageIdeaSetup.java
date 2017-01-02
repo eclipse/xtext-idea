@@ -12,8 +12,7 @@ public class MetamodelRefTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      MetamodelRefTestLanguageStandaloneSetupIdea _metamodelRefTestLanguageStandaloneSetupIdea = new MetamodelRefTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _metamodelRefTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new MetamodelRefTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

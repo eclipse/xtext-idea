@@ -13,7 +13,6 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import org.eclipse.xtext.idea.findusages.IReferenceSearcher;
-import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.psi.XtextPsiElement;
 
 /**
@@ -29,8 +28,7 @@ public class XtextPsiElementReferenceSearcher extends QueryExecutorBase<PsiRefer
   public void processQuery(final ReferencesSearch.SearchParameters queryParameters, final Processor<PsiReference> consumer) {
     final PsiElement element = queryParameters.getElementToSearch();
     if ((element instanceof XtextPsiElement)) {
-      IXtextLanguage _xtextLanguage = ((XtextPsiElement)element).getXtextLanguage();
-      final IReferenceSearcher referenceSearcher = _xtextLanguage.<IReferenceSearcher>getInstance(IReferenceSearcher.class);
+      final IReferenceSearcher referenceSearcher = ((XtextPsiElement)element).getXtextLanguage().<IReferenceSearcher>getInstance(IReferenceSearcher.class);
       referenceSearcher.processQuery(queryParameters, consumer);
     }
   }

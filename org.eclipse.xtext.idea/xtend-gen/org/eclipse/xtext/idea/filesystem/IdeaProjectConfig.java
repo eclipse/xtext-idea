@@ -12,7 +12,6 @@ import com.intellij.ide.projectView.impl.ProjectRootsUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -47,17 +46,12 @@ public class IdeaProjectConfig implements IProjectConfig {
   
   @Override
   public IdeaSourceFolder findSourceFolderContaining(final URI member) {
-    VirtualFileManager _instance = VirtualFileManager.getInstance();
-    String _string = member.toString();
-    final VirtualFile file = _instance.findFileByUrl(_string);
+    final VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(member.toString());
     boolean _equals = Objects.equal(file, null);
     if (_equals) {
       return null;
     }
-    Project _project = this.module.getProject();
-    ProjectRootManager _instance_1 = ProjectRootManager.getInstance(_project);
-    ProjectFileIndex _fileIndex = _instance_1.getFileIndex();
-    final VirtualFile sourceRoot = _fileIndex.getSourceRootForFile(file);
+    final VirtualFile sourceRoot = ProjectRootManager.getInstance(this.module.getProject()).getFileIndex().getSourceRootForFile(file);
     boolean _equals_1 = Objects.equal(sourceRoot, null);
     if (_equals_1) {
       return null;
@@ -76,23 +70,18 @@ public class IdeaProjectConfig implements IProjectConfig {
   
   @Override
   public URI getPath() {
-    String _url = this.contentRoot.getUrl();
-    URI _createURI = URI.createURI(_url);
-    return UriUtil.toFolderURI(_createURI);
+    return UriUtil.toFolderURI(URI.createURI(this.contentRoot.getUrl()));
   }
   
   @Override
   public Set<? extends IdeaSourceFolder> getSourceFolders() {
-    Iterable<SourceFolder> _existingSourceFolders = RootModelExtensions.getExistingSourceFolders(this.module);
     final Function1<SourceFolder, Boolean> _function = (SourceFolder it) -> {
       return Boolean.valueOf((Objects.equal(it.getFile(), this.contentRoot) || VfsUtil.isAncestor(this.contentRoot, it.getFile(), false)));
     };
-    Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(_existingSourceFolders, _function);
     final Function1<SourceFolder, IdeaSourceFolder> _function_1 = (SourceFolder sourceFolder) -> {
       return new IdeaSourceFolder(sourceFolder);
     };
-    Iterable<IdeaSourceFolder> _map = IterableExtensions.<SourceFolder, IdeaSourceFolder>map(_filter, _function_1);
-    return IterableExtensions.<IdeaSourceFolder>toSet(_map);
+    return IterableExtensions.<IdeaSourceFolder>toSet(IterableExtensions.<SourceFolder, IdeaSourceFolder>map(IterableExtensions.<SourceFolder>filter(RootModelExtensions.getExistingSourceFolders(this.module), _function), _function_1));
   }
   
   @Override

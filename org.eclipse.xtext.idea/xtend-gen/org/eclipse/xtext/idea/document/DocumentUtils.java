@@ -41,13 +41,11 @@ public class DocumentUtils {
     public ISourceAppender append(final JvmType object) {
       if ((object instanceof JvmGenericType)) {
         if (((this.importSection.addImport(((JvmDeclaredType)object)) || this.importSection.hasImportedType(((JvmDeclaredType)object))) || (!this.importSection.needsImport(((JvmDeclaredType)object))))) {
-          String _simpleName = ((JvmGenericType)object).getSimpleName();
-          this.result.append(_simpleName);
+          this.result.append(((JvmGenericType)object).getSimpleName());
           return this;
         }
       }
-      String _qualifiedName = object.getQualifiedName();
-      this.result.append(_qualifiedName);
+      this.result.append(object.getQualifiedName());
       return this;
     }
     
@@ -56,8 +54,7 @@ public class DocumentUtils {
       final DocumentUtils.ImportingSourceAppender nested = new DocumentUtils.ImportingSourceAppender(this.importSection);
       final LightweightTypeReferenceSerializer serializer = new LightweightTypeReferenceSerializer(nested);
       typeRef.accept(serializer);
-      String _string = nested.toString();
-      this.result.append(_string);
+      this.result.append(nested.toString());
       return this;
     }
     
@@ -95,10 +92,7 @@ public class DocumentUtils {
   public void updateImportSection(final Document document, final RewritableImportSection importSection) {
     List<ReplaceRegion> _rewrite = importSection.rewrite();
     for (final ReplaceRegion reg : _rewrite) {
-      int _offset = reg.getOffset();
-      int _endOffset = reg.getEndOffset();
-      String _text = reg.getText();
-      document.replaceString(_offset, _endOffset, _text);
+      document.replaceString(reg.getOffset(), reg.getEndOffset(), reg.getText());
     }
   }
   
@@ -110,8 +104,7 @@ public class DocumentUtils {
   
   public String toImportableString(final JvmTypeReference ref, final RewritableImportSection importSection) {
     final DocumentUtils.ImportingSourceAppender appender = new DocumentUtils.ImportingSourceAppender(importSection);
-    JvmType _type = ref.getType();
-    appender.append(_type);
+    appender.append(ref.getType());
     return appender.toString();
   }
 }

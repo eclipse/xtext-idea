@@ -7,11 +7,9 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.ex.DocumentEx;
 import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.tree.IElementType;
@@ -33,8 +31,7 @@ public class AutoEditContext {
   private final TokenSetProvider tokenSetProivder;
   
   public int getCaretOffset() {
-    CaretModel _caretModel = this.editor.getCaretModel();
-    return _caretModel.getOffset();
+    return this.editor.getCaretModel().getOffset();
   }
   
   public DocumentEx getDocument() {
@@ -46,8 +43,7 @@ public class AutoEditContext {
   }
   
   public TokenSet getTokenSet(final HighlighterIterator iterator) {
-    IElementType _tokenType = iterator.getTokenType();
-    return this.getTokenSet(_tokenType);
+    return this.getTokenSet(iterator.getTokenType());
   }
   
   public TokenSet getTokenSet(final IElementType tokenType) {
@@ -55,8 +51,7 @@ public class AutoEditContext {
   }
   
   public HighlighterIterator createTokenIterator(final int offset) {
-    EditorHighlighter _highlighter = this.editor.getHighlighter();
-    return _highlighter.createIterator(offset);
+    return this.editor.getHighlighter().createIterator(offset);
   }
   
   public boolean isSameLine(final int offset, final int offset2) {
@@ -66,8 +61,7 @@ public class AutoEditContext {
   }
   
   public int getLineNumber(final int offset) {
-    DocumentEx _document = this.getDocument();
-    return _document.getLineNumber(offset);
+    return this.getDocument().getLineNumber(offset);
   }
   
   public String getText(final int startOffset, final int endOffset) {
@@ -85,8 +79,7 @@ public class AutoEditContext {
   }
   
   public int type(final char c) {
-    String _valueOf = String.valueOf(c);
-    return EditorModificationUtil.insertStringAtCaret(this.editor, _valueOf, true, true);
+    return EditorModificationUtil.insertStringAtCaret(this.editor, String.valueOf(c), true, true);
   }
   
   public int count(final String searchMe, final String toFind) {
@@ -104,14 +97,10 @@ public class AutoEditContext {
   
   public boolean isIdentifierPart(final int offset) {
     boolean _xifexpression = false;
-    DocumentEx _document = this.getDocument();
-    int _textLength = _document.getTextLength();
+    int _textLength = this.getDocument().getTextLength();
     boolean _greaterThan = (_textLength > offset);
     if (_greaterThan) {
-      DocumentEx _document_1 = this.getDocument();
-      CharSequence _charsSequence = _document_1.getCharsSequence();
-      char _charAt = _charsSequence.charAt(offset);
-      _xifexpression = Character.isJavaIdentifierPart(_charAt);
+      _xifexpression = Character.isJavaIdentifierPart(this.getDocument().getCharsSequence().charAt(offset));
     }
     return _xifexpression;
   }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.FileASTNode;
 import com.intellij.psi.tree.IElementType;
 import java.util.Collections;
 import java.util.List;
@@ -92,8 +91,7 @@ public class PsiToEcoreAdapter {
     }
     final List<ASTNode> astNodes = this.reverseNodesMapping.get(originalNode);
     if (((astNodes == null) && (node.getRootNode() == node))) {
-      FileASTNode _node = this.xtextFile.getNode();
-      return _node.getFirstChildNode();
+      return this.xtextFile.getNode().getFirstChildNode();
     }
     return astNodes.get(index);
   }

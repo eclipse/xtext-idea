@@ -12,8 +12,7 @@ public class SDomainIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      SDomainStandaloneSetupIdea _sDomainStandaloneSetupIdea = new SDomainStandaloneSetupIdea();
-      _xblockexpression = _sDomainStandaloneSetupIdea.createInjector();
+      _xblockexpression = new SDomainStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

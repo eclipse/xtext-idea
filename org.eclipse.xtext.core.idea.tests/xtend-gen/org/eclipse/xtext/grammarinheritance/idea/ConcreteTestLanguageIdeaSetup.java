@@ -12,8 +12,7 @@ public class ConcreteTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ConcreteTestLanguageStandaloneSetupIdea _concreteTestLanguageStandaloneSetupIdea = new ConcreteTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _concreteTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new ConcreteTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

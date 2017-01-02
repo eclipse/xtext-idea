@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.filesystem;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
@@ -43,27 +42,22 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
   
   @Override
   public Set<? extends IProjectConfig> getProjects() {
-    Application _application = ApplicationManager.getApplication();
     final Computable<Module[]> _function = () -> {
-      ModuleManager _instance = ModuleManager.getInstance(this.project);
-      return _instance.getModules();
+      return ModuleManager.getInstance(this.project).getModules();
     };
-    final Module[] modules = _application.<Module[]>runReadAction(_function);
+    final Module[] modules = ApplicationManager.getApplication().<Module[]>runReadAction(_function);
     final Function1<Module, IdeaProjectConfig> _function_1 = (Module it) -> {
       return this.toIdeaProjectConfig(it);
     };
-    List<IdeaProjectConfig> _map = ListExtensions.<Module, IdeaProjectConfig>map(((List<Module>)Conversions.doWrapArray(modules)), _function_1);
-    return IterableExtensions.<IdeaProjectConfig>toSet(_map);
+    return IterableExtensions.<IdeaProjectConfig>toSet(ListExtensions.<Module, IdeaProjectConfig>map(((List<Module>)Conversions.doWrapArray(modules)), _function_1));
   }
   
   @Override
   public IdeaProjectConfig findProjectByName(final String name) {
-    Application _application = ApplicationManager.getApplication();
     final Computable<Module> _function = () -> {
-      ModuleManager _instance = ModuleManager.getInstance(this.project);
-      return _instance.findModuleByName(name);
+      return ModuleManager.getInstance(this.project).findModuleByName(name);
     };
-    final Module module = _application.<Module>runReadAction(_function);
+    final Module module = ApplicationManager.getApplication().<Module>runReadAction(_function);
     if ((module != null)) {
       return this.toIdeaProjectConfig(module);
     } else {
@@ -81,8 +75,7 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
     if ((file == null)) {
       return null;
     }
-    ProjectRootManager _instance = ProjectRootManager.getInstance(this.project);
-    final ProjectFileIndex fileIndex = _instance.getFileIndex();
+    final ProjectFileIndex fileIndex = ProjectRootManager.getInstance(this.project).getFileIndex();
     final Module module = fileIndex.getModuleForFile(file, true);
     if ((module == null)) {
       return null;

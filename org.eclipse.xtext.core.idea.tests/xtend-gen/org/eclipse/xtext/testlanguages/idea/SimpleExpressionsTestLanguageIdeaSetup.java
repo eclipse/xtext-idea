@@ -12,8 +12,7 @@ public class SimpleExpressionsTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      SimpleExpressionsTestLanguageStandaloneSetupIdea _simpleExpressionsTestLanguageStandaloneSetupIdea = new SimpleExpressionsTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _simpleExpressionsTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new SimpleExpressionsTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

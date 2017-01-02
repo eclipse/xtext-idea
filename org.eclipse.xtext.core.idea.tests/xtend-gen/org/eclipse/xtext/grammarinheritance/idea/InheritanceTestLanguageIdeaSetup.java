@@ -12,8 +12,7 @@ public class InheritanceTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      InheritanceTestLanguageStandaloneSetupIdea _inheritanceTestLanguageStandaloneSetupIdea = new InheritanceTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _inheritanceTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new InheritanceTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

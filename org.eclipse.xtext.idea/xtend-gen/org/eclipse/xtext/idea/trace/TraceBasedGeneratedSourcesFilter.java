@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.trace;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.ide.projectView.impl.ProjectViewPane;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.GeneratedSourcesFilter;
@@ -44,12 +43,9 @@ public class TraceBasedGeneratedSourcesFilter extends GeneratedSourcesFilter {
   
   @Override
   public List<? extends PsiElement> getOriginalElements(final PsiElement element) {
-    Application _application = ApplicationManager.getApplication();
-    boolean _isDispatchThread = _application.isDispatchThread();
+    boolean _isDispatchThread = ApplicationManager.getApplication().isDispatchThread();
     if (_isDispatchThread) {
-      Project _project = element.getProject();
-      IdeFocusManager _instance = IdeFocusManager.getInstance(_project);
-      final Component focusOwner = _instance.getFocusOwner();
+      final Component focusOwner = IdeFocusManager.getInstance(element.getProject()).getFocusOwner();
       if (((!Objects.equal(focusOwner, null)) && focusOwner.getClass().getName().startsWith(ProjectViewPane.class.getName()))) {
         return CollectionLiterals.<PsiElement>emptyList();
       }

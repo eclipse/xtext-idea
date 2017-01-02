@@ -170,28 +170,23 @@ public class XbaseFacetForm extends GeneratorFacetForm {
   public void setData(final GeneratorConfigurationState data) {
     super.setData(data);
     if ((data instanceof XbaseGeneratorConfigurationState)) {
-      LanguageLevel[] _values = LanguageLevel.values();
       final Function1<LanguageLevel, Boolean> _function = (LanguageLevel it) -> {
         String _name = it.name();
         String _targetJavaVersion = ((XbaseGeneratorConfigurationState)data).getTargetJavaVersion();
         return Boolean.valueOf((_name == _targetJavaVersion));
       };
-      LanguageLevel _findFirst = IterableExtensions.<LanguageLevel>findFirst(((Iterable<LanguageLevel>)Conversions.doWrapArray(_values)), _function);
+      LanguageLevel _findFirst = IterableExtensions.<LanguageLevel>findFirst(((Iterable<LanguageLevel>)Conversions.doWrapArray(LanguageLevel.values())), _function);
       boolean _notEquals = (!Objects.equal(_findFirst, null));
       if (_notEquals) {
         this.targetJavaVersion.setSelectedItem(LanguageLevel.valueOf(((XbaseGeneratorConfigurationState)data).getTargetJavaVersion()));
       } else {
         this.targetJavaVersion.setSelectedItem(null);
       }
-      boolean _isGenerateSuppressWarnings = ((XbaseGeneratorConfigurationState)data).isGenerateSuppressWarnings();
-      this.generateSuppressWarnings.setSelected(_isGenerateSuppressWarnings);
-      boolean _isGenerateGeneratedAnnotation = ((XbaseGeneratorConfigurationState)data).isGenerateGeneratedAnnotation();
-      this.generateGeneratedAnnotation.setSelected(_isGenerateGeneratedAnnotation);
-      boolean _isIncludeDateInGenerated = ((XbaseGeneratorConfigurationState)data).isIncludeDateInGenerated();
-      this.includeDateInGenerated.setSelected(_isIncludeDateInGenerated);
+      this.generateSuppressWarnings.setSelected(((XbaseGeneratorConfigurationState)data).isGenerateSuppressWarnings());
+      this.generateGeneratedAnnotation.setSelected(((XbaseGeneratorConfigurationState)data).isGenerateGeneratedAnnotation());
+      this.includeDateInGenerated.setSelected(((XbaseGeneratorConfigurationState)data).isIncludeDateInGenerated());
       this.generatedAnnotationComment.setText(((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment());
-      boolean _isInstallDslAsPrimarySource = ((XbaseGeneratorConfigurationState)data).isInstallDslAsPrimarySource();
-      this.installDslAsPrimarySource.setSelected(_isInstallDslAsPrimarySource);
+      this.installDslAsPrimarySource.setSelected(((XbaseGeneratorConfigurationState)data).isInstallDslAsPrimarySource());
       this.hideLocalSyntheticVariables.setSelected(((XbaseGeneratorConfigurationState)data).isHideLocalSyntheticVariables());
     }
   }
@@ -225,14 +220,11 @@ public class XbaseFacetForm extends GeneratorFacetForm {
         Object _selectedItem = this.targetJavaVersion.getSelectedItem();
         boolean _tripleNotEquals = (_selectedItem != null);
         if (_tripleNotEquals) {
-          Object _selectedItem_1 = this.targetJavaVersion.getSelectedItem();
-          String _string = _selectedItem_1.toString();
-          String _targetJavaVersion = ((XbaseGeneratorConfigurationState)data).getTargetJavaVersion();
-          boolean _equals = _string.equals(_targetJavaVersion);
+          boolean _equals = this.targetJavaVersion.getSelectedItem().toString().equals(((XbaseGeneratorConfigurationState)data).getTargetJavaVersion());
           _xifexpression = (!_equals);
         } else {
-          String _targetJavaVersion_1 = ((XbaseGeneratorConfigurationState)data).getTargetJavaVersion();
-          _xifexpression = (_targetJavaVersion_1 != null);
+          String _targetJavaVersion = ((XbaseGeneratorConfigurationState)data).getTargetJavaVersion();
+          _xifexpression = (_targetJavaVersion != null);
         }
         if (_xifexpression) {
           return true;
@@ -259,13 +251,11 @@ public class XbaseFacetForm extends GeneratorFacetForm {
         String _text = this.generatedAnnotationComment.getText();
         boolean _tripleNotEquals_4 = (_text != null);
         if (_tripleNotEquals_4) {
-          String _text_1 = this.generatedAnnotationComment.getText();
-          String _generatedAnnotationComment = ((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment();
-          boolean _equals_1 = _text_1.equals(_generatedAnnotationComment);
+          boolean _equals_1 = this.generatedAnnotationComment.getText().equals(((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment());
           _xifexpression_1 = (!_equals_1);
         } else {
-          String _generatedAnnotationComment_1 = ((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment();
-          _xifexpression_1 = (_generatedAnnotationComment_1 != null);
+          String _generatedAnnotationComment = ((XbaseGeneratorConfigurationState)data).getGeneratedAnnotationComment();
+          _xifexpression_1 = (_generatedAnnotationComment != null);
         }
         if (_xifexpression_1) {
           return true;

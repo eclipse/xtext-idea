@@ -46,8 +46,7 @@ public class IdeaWidgetFactory {
       gbc.fill = GridBagConstraints.HORIZONTAL;
       gbc.gridwidth = 2;
       gbc.ipady = 4;
-      JComponent _apply = col.apply(gbc);
-      host.add(_apply, gbc);
+      host.add(col.apply(gbc), gbc);
       this.rowsAdded++;
       return host;
     }
@@ -58,16 +57,14 @@ public class IdeaWidgetFactory {
       gbc.gridy = this.rowsAdded;
       gbc.ipady = 4;
       gbc.anchor = GridBagConstraints.EAST;
-      JComponent _apply = col1.apply(gbc);
-      host.add(_apply, gbc);
+      host.add(col1.apply(gbc), gbc);
       GridBagConstraints _gridBagConstraints = new GridBagConstraints();
       gbc = _gridBagConstraints;
       gbc.gridx = 1;
       gbc.gridy = this.rowsAdded;
       gbc.anchor = GridBagConstraints.WEST;
       gbc.fill = GridBagConstraints.HORIZONTAL;
-      JComponent _apply_1 = col2.apply(gbc);
-      host.add(_apply_1, gbc);
+      host.add(col2.apply(gbc), gbc);
       this.rowsAdded++;
       return host;
     }
@@ -89,8 +86,7 @@ public class IdeaWidgetFactory {
     for (final Function1<? super GridBagConstraints, ? extends JComponent> childAddition : children) {
       {
         final GridBagConstraints ld = new GridBagConstraints();
-        JComponent _apply = childAddition.apply(ld);
-        flowPanel.add(_apply, ld);
+        flowPanel.add(childAddition.apply(ld), ld);
       }
     }
     return flowPanel;

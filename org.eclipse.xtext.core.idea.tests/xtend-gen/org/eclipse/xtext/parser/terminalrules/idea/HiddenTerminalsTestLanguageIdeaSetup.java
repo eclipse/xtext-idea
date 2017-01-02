@@ -12,8 +12,7 @@ public class HiddenTerminalsTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      HiddenTerminalsTestLanguageStandaloneSetupIdea _hiddenTerminalsTestLanguageStandaloneSetupIdea = new HiddenTerminalsTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _hiddenTerminalsTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new HiddenTerminalsTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

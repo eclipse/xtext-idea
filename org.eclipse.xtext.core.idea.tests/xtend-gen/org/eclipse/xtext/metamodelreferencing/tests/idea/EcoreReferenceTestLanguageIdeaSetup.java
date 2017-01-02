@@ -12,8 +12,7 @@ public class EcoreReferenceTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EcoreReferenceTestLanguageStandaloneSetupIdea _ecoreReferenceTestLanguageStandaloneSetupIdea = new EcoreReferenceTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _ecoreReferenceTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EcoreReferenceTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

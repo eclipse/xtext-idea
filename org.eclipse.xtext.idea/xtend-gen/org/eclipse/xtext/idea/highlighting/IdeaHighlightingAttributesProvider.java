@@ -58,8 +58,7 @@ public class IdeaHighlightingAttributesProvider {
       this.highlightingConfiguration.configure(new IHighlightingConfiguration.IHighlightingStyleAcceptor() {
         @Override
         public TextAttributesKey addStyle(final String xtextStyleId, final String displayName, final TextAttributesKey fallbackKey) {
-          HighlightInfoType _addHighlightingConfiguration = IdeaHighlightingAttributesProvider.this.addHighlightingConfiguration(xtextStyleId, displayName, fallbackKey);
-          return _addHighlightingConfiguration.getAttributesKey();
+          return IdeaHighlightingAttributesProvider.this.addHighlightingConfiguration(xtextStyleId, displayName, fallbackKey).getAttributesKey();
         }
         
         @Override
@@ -122,12 +121,12 @@ public class IdeaHighlightingAttributesProvider {
   }
   
   public Map<String, TextAttributesKey> getXtextStyle2TextAttributes() {
-    return CollectionLiterals.<String, TextAttributesKey>newHashMap(((Pair<? extends String, ? extends TextAttributesKey>[])Conversions.unwrapArray(IterableExtensions.<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>>map(this.name2highlightInfoType.entrySet(), ((Function1<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>>) (Map.Entry<String, HighlightInfoType> it) -> {
+    final Function1<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>> _function = (Map.Entry<String, HighlightInfoType> it) -> {
       String _key = it.getKey();
-      HighlightInfoType _value = it.getValue();
-      TextAttributesKey _attributesKey = _value.getAttributesKey();
+      TextAttributesKey _attributesKey = it.getValue().getAttributesKey();
       return Pair.<String, TextAttributesKey>of(_key, _attributesKey);
-    })), Pair.class)));
+    };
+    return CollectionLiterals.<String, TextAttributesKey>newHashMap(((Pair<? extends String, ? extends TextAttributesKey>[])Conversions.unwrapArray(IterableExtensions.<Map.Entry<String, HighlightInfoType>, Pair<String, TextAttributesKey>>map(this.name2highlightInfoType.entrySet(), _function), Pair.class)));
   }
   
   public Iterable<AttributesDescriptor> getAttributesDescriptors() {

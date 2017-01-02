@@ -42,8 +42,7 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
       final URI resourceURI = ((BaseXtextFile)containingFile).getURI();
       final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
       if ((resourceServiceProvider instanceof IResourceIdeaServiceProvider)) {
-        IPsiModelAssociations _psiModelAssociations = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations();
-        return _psiModelAssociations.getEObject(element);
+        return ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations().getEObject(element);
       }
     }
     return null;
@@ -57,13 +56,11 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
       if (_equals) {
         return null;
       }
-      URI _uRI = EcoreUtil.getURI(object);
-      final URI resourceURI = _uRI.trimFragment();
+      final URI resourceURI = EcoreUtil.getURI(object).trimFragment();
       final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
       PsiElement _xifexpression = null;
       if ((resourceServiceProvider instanceof IResourceIdeaServiceProvider)) {
-        IPsiModelAssociations _psiModelAssociations = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations();
-        _xifexpression = _psiModelAssociations.getPsiElement(object);
+        _xifexpression = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations().getPsiElement(object);
       }
       _xblockexpression = _xifexpression;
     }
@@ -81,8 +78,7 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
       final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
       PsiElement _xifexpression = null;
       if ((resourceServiceProvider instanceof IResourceIdeaServiceProvider)) {
-        IPsiModelAssociations _psiModelAssociations = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations();
-        _xifexpression = _psiModelAssociations.getPsiElement(objectDescription, context);
+        _xifexpression = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations().getPsiElement(objectDescription, context);
       }
       _xblockexpression = _xifexpression;
     }

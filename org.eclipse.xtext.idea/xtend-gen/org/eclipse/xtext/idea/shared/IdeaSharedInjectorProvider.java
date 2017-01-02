@@ -23,13 +23,13 @@ public class IdeaSharedInjectorProvider {
     if (IdeaSharedInjectorProvider.injector != null) {
       _elvis = IdeaSharedInjectorProvider.injector;
     } else {
-      _elvis = (IdeaSharedInjectorProvider.injector = Guice.createInjector(new IdeaSharedModule()));
+      IdeaSharedModule _ideaSharedModule = new IdeaSharedModule();
+      _elvis = (IdeaSharedInjectorProvider.injector = Guice.createInjector(_ideaSharedModule));
     }
     return _elvis;
   }
   
   public static void injectMembers(final Object o) {
-    Injector _injector = IdeaSharedInjectorProvider.getInjector();
-    _injector.injectMembers(o);
+    IdeaSharedInjectorProvider.getInjector().injectMembers(o);
   }
 }

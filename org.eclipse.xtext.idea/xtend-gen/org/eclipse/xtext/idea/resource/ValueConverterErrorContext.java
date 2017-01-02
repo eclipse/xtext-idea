@@ -45,11 +45,9 @@ public class ValueConverterErrorContext extends ErrorContext implements ISyntaxE
         String _xifexpression_1 = null;
         boolean _notEquals_1 = (!Objects.equal(cause, null));
         if (_notEquals_1) {
-          Class<? extends Exception> _class = cause.getClass();
-          _xifexpression_1 = _class.getSimpleName();
+          _xifexpression_1 = cause.getClass().getSimpleName();
         } else {
-          Class<? extends ValueConverterException> _class_1 = this.valueConverterException.getClass();
-          _xifexpression_1 = _class_1.getSimpleName();
+          _xifexpression_1 = this.valueConverterException.getClass().getSimpleName();
         }
         /* Objects.equal(result, _xifexpression_1); */
       }

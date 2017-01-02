@@ -12,8 +12,7 @@ public class TerminalRulesTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      TerminalRulesTestLanguageStandaloneSetupIdea _terminalRulesTestLanguageStandaloneSetupIdea = new TerminalRulesTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _terminalRulesTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new TerminalRulesTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

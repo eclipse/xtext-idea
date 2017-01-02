@@ -28,35 +28,25 @@ import org.eclipse.xtext.idea.common.types.UnresolvedPsiClassType;
 @SuppressWarnings("all")
 public class StubURIHelper implements URIHelperConstants {
   public URI getFullURI(final String name) {
-    StringBuilder _createURIBuilder = this.createURIBuilder();
-    StringBuilder _appendClassResourceURI = this.appendClassResourceURI(_createURIBuilder, name);
-    StringBuilder _append = _appendClassResourceURI.append("#");
-    StringBuilder _appendTypeFragment = this.appendTypeFragment(_append, name);
-    return this.createURI(_appendTypeFragment);
+    return this.createURI(this.appendTypeFragment(this.appendClassResourceURI(this.createURIBuilder(), name).append("#"), name));
   }
   
   public URI createResourceURI(final String name) {
-    StringBuilder _createURIBuilder = this.createURIBuilder();
-    StringBuilder _appendClassResourceURI = this.appendClassResourceURI(_createURIBuilder, name);
-    return this.createURI(_appendClassResourceURI);
+    return this.createURI(this.appendClassResourceURI(this.createURIBuilder(), name));
   }
   
   public String getFragment(final String name) {
-    StringBuilder _createFragmentBuilder = this.createFragmentBuilder();
-    StringBuilder _appendTypeFragment = this.appendTypeFragment(_createFragmentBuilder, name);
-    return _appendTypeFragment.toString();
+    return this.appendTypeFragment(this.createFragmentBuilder(), name).toString();
   }
   
   protected StringBuilder appendClassResourceURI(final StringBuilder builder, final String name) {
-    String _trimInnerType = this.trimInnerType(name);
-    final String topLevelTypeName = this.trimBrackets(_trimInnerType);
+    final String topLevelTypeName = this.trimBrackets(this.trimInnerType(name));
     Class<?> _forName = Primitives.forName(topLevelTypeName);
     boolean _tripleNotEquals = (_forName != null);
     if (_tripleNotEquals) {
       builder.append(URIHelperConstants.PRIMITIVES);
     } else {
-      StringBuilder _append = builder.append(URIHelperConstants.OBJECTS);
-      _append.append(topLevelTypeName);
+      builder.append(URIHelperConstants.OBJECTS).append(topLevelTypeName);
     }
     return builder;
   }
@@ -88,59 +78,37 @@ public class StubURIHelper implements URIHelperConstants {
   }
   
   public URI getFullURI(final PsiClass psiClass) {
-    StringBuilder _createURIBuilder = this.createURIBuilder();
-    StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, psiClass);
-    return this.createURI(_appendFullURI);
+    return this.createURI(this.appendFullURI(this.createURIBuilder(), psiClass));
   }
   
   public URI getFullURI(final PsiMethod method) {
     URI _xblockexpression = null;
     {
-      PsiParameterList _parameterList = method.getParameterList();
-      int _parametersCount = _parameterList.getParametersCount();
+      int _parametersCount = method.getParameterList().getParametersCount();
       boolean _notEquals = (_parametersCount != 0);
       if (_notEquals) {
         String _string = method.toString();
         throw new IllegalArgumentException(_string);
       }
-      StringBuilder _createURIBuilder = this.createURIBuilder();
-      PsiClass _containingClass = method.getContainingClass();
-      StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, _containingClass);
-      StringBuilder _append = _appendFullURI.append(".");
-      String _name = method.getName();
-      StringBuilder _append_1 = _append.append(_name);
-      StringBuilder _append_2 = _append_1.append("()");
-      _xblockexpression = this.createURI(_append_2);
+      _xblockexpression = this.createURI(this.appendFullURI(this.createURIBuilder(), method.getContainingClass()).append(".").append(method.getName()).append("()"));
     }
     return _xblockexpression;
   }
   
   public URI getFullURI(final PsiField field) {
-    StringBuilder _createURIBuilder = this.createURIBuilder();
-    PsiClass _containingClass = field.getContainingClass();
-    StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, _containingClass);
-    StringBuilder _append = _appendFullURI.append(".");
-    String _name = field.getName();
-    StringBuilder _append_1 = _append.append(_name);
-    return this.createURI(_append_1);
+    return this.createURI(this.appendFullURI(this.createURIBuilder(), field.getContainingClass()).append(".").append(field.getName()));
   }
   
   public URI getFullURI(final PsiType type) throws UnresolvedPsiClassType {
-    StringBuilder _createURIBuilder = this.createURIBuilder();
-    StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, type);
-    return this.createURI(_appendFullURI);
+    return this.createURI(this.appendFullURI(this.createURIBuilder(), type));
   }
   
   protected StringBuilder appendFullURI(final StringBuilder it, final PsiType type) throws UnresolvedPsiClassType {
-    StringBuilder _appendTypeResourceURI = this.appendTypeResourceURI(it, type);
-    StringBuilder _append = _appendTypeResourceURI.append("#");
-    return this.appendTypeFragment(_append, type);
+    return this.appendTypeFragment(this.appendTypeResourceURI(it, type).append("#"), type);
   }
   
   protected StringBuilder appendFullURI(final StringBuilder it, final PsiClass psiClass) {
-    StringBuilder _appendClassResourceURI = this.appendClassResourceURI(it, psiClass);
-    StringBuilder _append = _appendClassResourceURI.append("#");
-    return this.appendClassFragment(_append, psiClass);
+    return this.appendClassFragment(this.appendClassResourceURI(it, psiClass).append("#"), psiClass);
   }
   
   protected StringBuilder appendTypeResourceURI(final StringBuilder builder, final PsiType type) throws UnresolvedPsiClassType {
@@ -148,8 +116,7 @@ public class StubURIHelper implements URIHelperConstants {
     boolean _matched = false;
     if (type instanceof PsiArrayType) {
       _matched=true;
-      PsiType _componentType = ((PsiArrayType)type).getComponentType();
-      _switchResult = this.appendTypeResourceURI(builder, _componentType);
+      _switchResult = this.appendTypeResourceURI(builder, ((PsiArrayType)type).getComponentType());
     }
     if (!_matched) {
       if (type instanceof PsiPrimitiveType) {
@@ -168,8 +135,7 @@ public class StubURIHelper implements URIHelperConstants {
           if (_not) {
             throw new UnresolvedPsiClassType(((PsiClassType)type), resolveResult);
           }
-          PsiClass _element = resolveResult.getElement();
-          _xblockexpression = this.appendClassResourceURI(builder, _element);
+          _xblockexpression = this.appendClassResourceURI(builder, resolveResult.getElement());
         }
         _switchResult = _xblockexpression;
       }
@@ -192,9 +158,7 @@ public class StubURIHelper implements URIHelperConstants {
       if (_notEquals) {
         _xifexpression = this.appendClassResourceURI(builder, containingClass);
       } else {
-        StringBuilder _append = builder.append(URIHelperConstants.OBJECTS);
-        String _qualifiedName = psiClass.getQualifiedName();
-        _xifexpression = _append.append(_qualifiedName);
+        _xifexpression = builder.append(URIHelperConstants.OBJECTS).append(psiClass.getQualifiedName());
       }
       _xblockexpression = _xifexpression;
     }
@@ -213,8 +177,7 @@ public class StubURIHelper implements URIHelperConstants {
     if (!_matched) {
       if (owner instanceof PsiMethod) {
         _matched=true;
-        PsiClass _containingClass = ((PsiMethod)owner).getContainingClass();
-        _switchResult = this.appendClassResourceURI(builder, _containingClass);
+        _switchResult = this.appendClassResourceURI(builder, ((PsiMethod)owner).getContainingClass());
       }
     }
     return _switchResult;
@@ -225,8 +188,7 @@ public class StubURIHelper implements URIHelperConstants {
     boolean _matched = false;
     if (type instanceof PsiPrimitiveType) {
       _matched=true;
-      String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText(false);
-      _switchResult = builder.append(_canonicalText);
+      _switchResult = builder.append(((PsiPrimitiveType)type).getCanonicalText(false));
     }
     if (!_matched) {
       if (type instanceof PsiClassType) {
@@ -239,8 +201,7 @@ public class StubURIHelper implements URIHelperConstants {
           if (_not) {
             throw new UnresolvedPsiClassType(((PsiClassType)type), resolveResult);
           }
-          PsiClass _element = resolveResult.getElement();
-          _xblockexpression = this.appendClassFragment(builder, _element);
+          _xblockexpression = this.appendClassFragment(builder, resolveResult.getElement());
         }
         _switchResult = _xblockexpression;
       }
@@ -248,9 +209,7 @@ public class StubURIHelper implements URIHelperConstants {
     if (!_matched) {
       if (type instanceof PsiArrayType) {
         _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        StringBuilder _appendTypeFragment = this.appendTypeFragment(builder, _componentType);
-        _switchResult = _appendTypeFragment.append("[]");
+        _switchResult = this.appendTypeFragment(builder, ((PsiArrayType)type).getComponentType()).append("[]");
       }
     }
     if (!_matched) {
@@ -266,13 +225,9 @@ public class StubURIHelper implements URIHelperConstants {
     final PsiClass containingClass = psiClass.getContainingClass();
     boolean _equals = Objects.equal(containingClass, null);
     if (_equals) {
-      String _qualifiedName = psiClass.getQualifiedName();
-      return builder.append(_qualifiedName);
+      return builder.append(psiClass.getQualifiedName());
     } else {
-      StringBuilder _appendClassFragment = this.appendClassFragment(builder, containingClass);
-      StringBuilder _append = _appendClassFragment.append("$");
-      String _name = psiClass.getName();
-      return _append.append(_name);
+      return this.appendClassFragment(builder, containingClass).append("$").append(psiClass.getName());
     }
   }
   
@@ -290,18 +245,12 @@ public class StubURIHelper implements URIHelperConstants {
         this.appendMethodFragment(builder, ((PsiMethod)owner));
       }
     }
-    StringBuilder _append = builder.append("/");
-    String _name = typeParameter.getName();
-    return _append.append(_name);
+    return builder.append("/").append(typeParameter.getName());
   }
   
   protected StringBuilder appendMethodFragment(final StringBuilder builder, final PsiMethod method) {
-    PsiClass _containingClass = method.getContainingClass();
-    this.appendClassFragment(builder, _containingClass);
-    StringBuilder _append = builder.append(".");
-    String _name = method.getName();
-    StringBuilder _append_1 = _append.append(_name);
-    _append_1.append("(");
+    this.appendClassFragment(builder, method.getContainingClass());
+    builder.append(".").append(method.getName()).append("(");
     final PsiParameterList parameterList = method.getParameterList();
     final int parameterCount = parameterList.getParametersCount();
     if ((parameterCount > 0)) {
@@ -311,9 +260,7 @@ public class StubURIHelper implements URIHelperConstants {
           if ((i != 0)) {
             builder.append(",");
           }
-          PsiParameter _get = parameters[i];
-          PsiType _type = _get.getType();
-          this.appendTypeName(builder, _type);
+          this.appendTypeName(builder, parameters[i].getType());
         }
       }
     }
@@ -325,8 +272,7 @@ public class StubURIHelper implements URIHelperConstants {
     boolean _matched = false;
     if (type instanceof PsiPrimitiveType) {
       _matched=true;
-      String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText();
-      _switchResult = builder.append(_canonicalText);
+      _switchResult = builder.append(((PsiPrimitiveType)type).getCanonicalText());
     }
     if (!_matched) {
       if (type instanceof PsiClassType) {
@@ -338,8 +284,7 @@ public class StubURIHelper implements URIHelperConstants {
           boolean _matched_1 = false;
           if (resolved instanceof PsiTypeParameter) {
             _matched_1=true;
-            String _name = ((PsiTypeParameter)resolved).getName();
-            _switchResult_1 = builder.append(_name);
+            _switchResult_1 = builder.append(((PsiTypeParameter)resolved).getName());
           }
           if (!_matched_1) {
             boolean _notEquals = (!Objects.equal(resolved, null));
@@ -349,9 +294,7 @@ public class StubURIHelper implements URIHelperConstants {
             }
           }
           if (!_matched_1) {
-            String _canonicalText = ((PsiClassType)type).getCanonicalText();
-            String _qualifiedClassName = PsiNameHelper.getQualifiedClassName(_canonicalText, false);
-            _switchResult_1 = builder.append(_qualifiedClassName);
+            _switchResult_1 = builder.append(PsiNameHelper.getQualifiedClassName(((PsiClassType)type).getCanonicalText(), false));
           }
           _xblockexpression = _switchResult_1;
         }
@@ -361,9 +304,7 @@ public class StubURIHelper implements URIHelperConstants {
     if (!_matched) {
       if (type instanceof PsiArrayType) {
         _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        StringBuilder _appendTypeName = this.appendTypeName(builder, _componentType);
-        _switchResult = _appendTypeName.append("[]");
+        _switchResult = this.appendTypeName(builder, ((PsiArrayType)type).getComponentType()).append("[]");
       }
     }
     if (!_matched) {
@@ -383,13 +324,9 @@ public class StubURIHelper implements URIHelperConstants {
       final PsiClass container = clazz.getContainingClass();
       StringBuilder _xifexpression = null;
       if ((container != null)) {
-        StringBuilder _appendTypeName = this.appendTypeName(builder, container);
-        StringBuilder _append = _appendTypeName.append("$");
-        String _name = clazz.getName();
-        _xifexpression = _append.append(_name);
+        _xifexpression = this.appendTypeName(builder, container).append("$").append(clazz.getName());
       } else {
-        String _qualifiedName = clazz.getQualifiedName();
-        _xifexpression = builder.append(_qualifiedName);
+        _xifexpression = builder.append(clazz.getQualifiedName());
       }
       _xblockexpression = _xifexpression;
     }
@@ -397,9 +334,7 @@ public class StubURIHelper implements URIHelperConstants {
   }
   
   protected StringBuilder createURIBuilder() {
-    StringBuilder _stringBuilder = new StringBuilder(48);
-    StringBuilder _append = _stringBuilder.append(URIHelperConstants.PROTOCOL);
-    return _append.append(":");
+    return new StringBuilder(48).append(URIHelperConstants.PROTOCOL).append(":");
   }
   
   protected StringBuilder createFragmentBuilder() {
@@ -407,7 +342,6 @@ public class StubURIHelper implements URIHelperConstants {
   }
   
   protected URI createURI(final StringBuilder uriBuilder) {
-    String _string = uriBuilder.toString();
-    return URI.createURI(_string);
+    return URI.createURI(uriBuilder.toString());
   }
 }

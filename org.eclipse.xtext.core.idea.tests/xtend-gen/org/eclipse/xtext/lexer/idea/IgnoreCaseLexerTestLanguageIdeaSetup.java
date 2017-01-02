@@ -12,8 +12,7 @@ public class IgnoreCaseLexerTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      IgnoreCaseLexerTestLanguageStandaloneSetupIdea _ignoreCaseLexerTestLanguageStandaloneSetupIdea = new IgnoreCaseLexerTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _ignoreCaseLexerTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new IgnoreCaseLexerTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

@@ -12,8 +12,7 @@ public class EntitiesIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EntitiesStandaloneSetupIdea _entitiesStandaloneSetupIdea = new EntitiesStandaloneSetupIdea();
-      _xblockexpression = _entitiesStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EntitiesStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

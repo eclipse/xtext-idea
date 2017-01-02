@@ -12,8 +12,7 @@ public class EncodingTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EncodingTestLanguageStandaloneSetupIdea _encodingTestLanguageStandaloneSetupIdea = new EncodingTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _encodingTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EncodingTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

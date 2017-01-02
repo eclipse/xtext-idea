@@ -15,14 +15,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.impl.source.DummyHolder;
 import com.intellij.psi.impl.source.DummyHolderFactory;
 import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.FileElement;
@@ -32,14 +26,11 @@ import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.regex.Pattern;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
@@ -74,8 +65,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
     {
       IElementType _elementType = context.getElementType();
       this.assertToken(name, ((IGrammarAwareElementType) _elementType));
-      IElementType _elementType_1 = context.getElementType();
-      LeafElement _leaf = ASTFactory.leaf(_elementType_1, name);
+      LeafElement _leaf = ASTFactory.leaf(context.getElementType(), name);
       final Procedure1<LeafElement> _function = (LeafElement it) -> {
         CodeEditUtil.setNodeGenerated(it, true);
       };
@@ -89,22 +79,13 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
     FileElement _xblockexpression = null;
     {
       final PsiBuilder builder = this.createNameBuilder(name, currentName, context);
-      PsiElement _psi = context.getPsi();
-      Project _project = _psi.getProject();
-      PsiParser _createParser = this.parserDefinition.createParser(_project);
-      IElementType _elementType = context.getElementType();
-      ASTNode _parse = _createParser.parse(_elementType, builder);
+      ASTNode _parse = this.parserDefinition.createParser(context.getPsi().getProject()).parse(context.getElementType(), builder);
       final Procedure1<TreeElement> _function = (TreeElement it) -> {
         this.assertNode(it);
         CodeEditUtil.setNodeGeneratedRecursively(it, true);
       };
       final TreeElement contentElement = ObjectExtensions.<TreeElement>operator_doubleArrow(((TreeElement) _parse), _function);
-      PsiElement _psi_1 = context.getPsi();
-      PsiManager _manager = _psi_1.getManager();
-      PsiElement _psi_2 = context.getPsi();
-      PsiElement _context = _psi_2.getContext();
-      DummyHolder _createHolder = DummyHolderFactory.createHolder(_manager, contentElement, _context);
-      _xblockexpression = _createHolder.getTreeElement();
+      _xblockexpression = DummyHolderFactory.createHolder(context.getPsi().getManager(), contentElement, context.getPsi().getContext()).getTreeElement();
     }
     return _xblockexpression;
   }
@@ -112,14 +93,8 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
   protected PsiBuilder createNameBuilder(final String name, final String currentName, final ASTNode context) {
     PsiBuilder _xblockexpression = null;
     {
-      String _text = context.getText();
-      String _quote = Pattern.quote(currentName);
-      final String text = _text.replaceFirst(_quote, name);
-      PsiBuilderFactory _instance = PsiBuilderFactory.getInstance();
-      PsiElement _psi = context.getPsi();
-      Project _project = _psi.getProject();
-      Lexer _createLexer = this.parserDefinition.createLexer(_project);
-      PsiBuilder _createBuilder = _instance.createBuilder(this.parserDefinition, _createLexer, text);
+      final String text = context.getText().replaceFirst(Pattern.quote(currentName), name);
+      PsiBuilder _createBuilder = PsiBuilderFactory.getInstance().createBuilder(this.parserDefinition, this.parserDefinition.createLexer(context.getPsi().getProject()), text);
       final Procedure1<PsiBuilder> _function = (PsiBuilder it) -> {
         it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, context.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY));
       };
@@ -151,8 +126,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
   }
   
   protected void assertToken(final String name, final IGrammarAwareElementType elementType) {
-    EObject _grammarElement = elementType.getGrammarElement();
-    final String ruleName = this.getRuleName(_grammarElement);
+    final String ruleName = this.getRuleName(elementType.getGrammarElement());
     final TokenSource tokenSource = this.tokenSourceProvider.createTokenSource(name);
     Token token = tokenSource.nextToken();
     String _text = token.getText();
@@ -165,10 +139,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       _builder.append(ruleName);
       throw new IncorrectOperationException(_builder.toString());
     }
-    Map<Integer, String> _tokenDefMap = this.tokenDefProvider.getTokenDefMap();
-    int _type = token.getType();
-    String _get = _tokenDefMap.get(Integer.valueOf(_type));
-    final String lexerRuleName = TokenTool.getLexerRuleName(_get);
+    final String lexerRuleName = TokenTool.getLexerRuleName(this.tokenDefProvider.getTokenDefMap().get(Integer.valueOf(token.getType())));
     boolean _notEquals_1 = (!Objects.equal(ruleName, lexerRuleName));
     if (_notEquals_1) {
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -189,13 +160,11 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
   }
   
   protected String _getRuleName(final RuleCall it) {
-    AbstractRule _rule = it.getRule();
-    return _rule.getName();
+    return it.getRule().getName();
   }
   
   protected String _getRuleName(final CrossReference it) {
-    AbstractElement _terminal = it.getTerminal();
-    return this.getRuleName(_terminal);
+    return this.getRuleName(it.getTerminal());
   }
   
   protected String getRuleName(final EObject it) {

@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.editorActions;
 
 import com.google.common.base.Objects;
 import com.intellij.codeInsight.editorActions.BackspaceHandlerDelegate;
-import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.psi.PsiFile;
@@ -23,8 +22,7 @@ import org.eclipse.xtext.idea.editorActions.IdeaAutoEditHandlerExtension;
 public class XtextAutoEditBackspaceHandler extends BackspaceHandlerDelegate {
   @Override
   public void beforeCharDeleted(final char c, final PsiFile file, final Editor editor) {
-    Language _language = file.getLanguage();
-    final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(_language);
+    final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
     boolean _notEquals = (!Objects.equal(autoEditHandler, null));
     if (_notEquals) {
       autoEditHandler.beforeCharDeleted(c, file, ((EditorEx) editor));
@@ -35,8 +33,7 @@ public class XtextAutoEditBackspaceHandler extends BackspaceHandlerDelegate {
   public boolean charDeleted(final char c, final PsiFile file, final Editor editor) {
     boolean _xblockexpression = false;
     {
-      Language _language = file.getLanguage();
-      final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(_language);
+      final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
       boolean _xifexpression = false;
       boolean _notEquals = (!Objects.equal(autoEditHandler, null));
       if (_notEquals) {

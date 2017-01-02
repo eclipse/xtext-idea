@@ -11,7 +11,6 @@ import org.eclipse.xtext.parser.terminalrules.DynamicChannelTest;
 import org.eclipse.xtext.parser.terminalrules.idea.XtextTerminalsTestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageFileType;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage;
-import org.eclipse.xtext.resource.XtextResource;
 
 @TestDecorator
 @SuppressWarnings("all")
@@ -28,8 +27,7 @@ public class IdeaDynamicChannelTest extends AbstractLanguageParsingTestCase {
     
     @Override
     protected IParseResult parse(final String model) {
-      XtextResource _checkResource = this.modelChecker.checkResource(model, false);
-      return _checkResource.getParseResult();
+      return this.modelChecker.checkResource(model, false).getParseResult();
     }
     
     public Delegate(final ModelChecker modelChecker) {

@@ -31,8 +31,6 @@ public class LocationInVirtualFile extends LocationInResource implements ILocati
   
   @Override
   public VirtualFileInProject getPlatformResource() {
-    VirtualFileBasedTrace _trace = this.getTrace();
-    SourceRelativeURI _srcRelativeResourceURI = this.getSrcRelativeResourceURI();
-    return _trace.findVirtualFileInProject(_srcRelativeResourceURI);
+    return this.getTrace().findVirtualFileInProject(this.getSrcRelativeResourceURI());
   }
 }

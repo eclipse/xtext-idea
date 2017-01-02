@@ -15,7 +15,6 @@ import org.eclipse.xtext.idea.sdomain.SDomainStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class SDomainStandaloneSetup extends SDomainStandaloneSetupGenerated {
   public static void doSetup() {
-    SDomainStandaloneSetup _sDomainStandaloneSetup = new SDomainStandaloneSetup();
-    _sDomainStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new SDomainStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

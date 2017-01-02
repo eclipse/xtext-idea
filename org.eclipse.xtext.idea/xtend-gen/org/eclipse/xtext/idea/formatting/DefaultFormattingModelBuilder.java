@@ -34,8 +34,7 @@ public class DefaultFormattingModelBuilder implements FormattingModelBuilder {
     FormattingModel _xblockexpression = null;
     {
       final Block block = this._blockFactory.createRootBlock(element, settings);
-      PsiFile _containingFile = element.getContainingFile();
-      _xblockexpression = FormattingModelProvider.createFormattingModelForPsiFile(_containingFile, block, settings);
+      _xblockexpression = FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
     }
     return _xblockexpression;
   }

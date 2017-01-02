@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.extensions;
 import com.intellij.openapi.extensions.AbstractExtensionPointBean;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.util.xmlb.annotations.Attribute;
-import java.lang.reflect.Field;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -45,9 +44,7 @@ public class EPackageEP extends AbstractExtensionPointBean implements EPackage.D
   @Override
   public EPackage getEPackage() {
     try {
-      Class<Object> _findClass = this.<Object>findClass(this.packageClass);
-      Field _field = _findClass.getField("eINSTANCE");
-      Object _get = _field.get(null);
+      Object _get = this.<Object>findClass(this.packageClass).getField("eINSTANCE").get(null);
       return ((EPackage) _get);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

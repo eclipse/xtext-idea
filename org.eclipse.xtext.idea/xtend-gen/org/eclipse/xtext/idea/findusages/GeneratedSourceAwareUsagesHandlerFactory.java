@@ -15,7 +15,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.IndexNotReadyException;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.PsiNamedElement;
@@ -23,7 +22,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.xtext.idea.findusages.GeneratedSourceAwareFindUsagesHandler;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
@@ -50,8 +48,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   
   @Override
   public boolean canFindUsages(final PsiElement element) {
-    Project _project = element.getProject();
-    FindUsagesHandlerFactory[] delegates = Extensions.<FindUsagesHandlerFactory>getExtensions(FindUsagesHandlerFactory.EP_NAME, _project);
+    FindUsagesHandlerFactory[] delegates = Extensions.<FindUsagesHandlerFactory>getExtensions(FindUsagesHandlerFactory.EP_NAME, element.getProject());
     for (final FindUsagesHandlerFactory delegate : delegates) {
       if ((delegate != this)) {
         try {
@@ -97,16 +94,14 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   }
   
   protected Iterable<FindUsagesHandler> getSecondaryHandlers(final PsiElement element) {
-    List<? extends PsiElement> _secondaryElements = this.getSecondaryElements(element);
     final Function1<PsiElement, FindUsagesHandler> _function = (PsiElement it) -> {
       return this.delegateFindUsagesHandler(it);
     };
-    List<FindUsagesHandler> _map = ListExtensions.map(_secondaryElements, _function);
     final Function1<FindUsagesHandler, Boolean> _function_1 = (FindUsagesHandler it) -> {
       boolean _isNullHandler = this.isNullHandler(it);
       return Boolean.valueOf((!_isNullHandler));
     };
-    return IterableExtensions.<FindUsagesHandler>filter(_map, _function_1);
+    return IterableExtensions.<FindUsagesHandler>filter(ListExtensions.map(this.getSecondaryElements(element), _function), _function_1);
   }
   
   protected List<? extends PsiElement> getSecondaryElements(final PsiElement element) {
@@ -123,14 +118,10 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     if ((element instanceof PsiNameIdentifierOwner)) {
       return this.getOriginalElements(((PsiNameIdentifierOwner)element).getNameIdentifier());
     }
-    List<? extends PsiElement> _originalElements = this.traceProvider.getOriginalElements(element);
     final Function1<PsiElement, PsiNamedElement> _function = (PsiElement it) -> {
       return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class, false);
     };
-    List<PsiNamedElement> _map = ListExtensions.map(_originalElements, _function);
-    Iterable<PsiNamedElement> _filterNull = IterableExtensions.<PsiNamedElement>filterNull(_map);
-    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_filterNull);
-    final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(_set);
+    final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(IterableExtensions.<PsiNamedElement>toSet(IterableExtensions.<PsiNamedElement>filterNull(ListExtensions.map(this.traceProvider.getOriginalElements(element), _function))));
     return result;
   }
   
@@ -160,8 +151,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   }
   
   protected FindUsagesHandler delegateFindUsagesHandler(final PsiElement element) {
-    Project _project = element.getProject();
-    FindUsagesHandlerFactory[] delegates = Extensions.<FindUsagesHandlerFactory>getExtensions(FindUsagesHandlerFactory.EP_NAME, _project);
+    FindUsagesHandlerFactory[] delegates = Extensions.<FindUsagesHandlerFactory>getExtensions(FindUsagesHandlerFactory.EP_NAME, element.getProject());
     for (final FindUsagesHandlerFactory delegate : delegates) {
       if ((delegate != this)) {
         try {

@@ -52,23 +52,19 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   }
   
   protected TokenSet createAllowedTypes(final TokenTypeProvider tokenTypeProvider, final IGrammarAccess grammarAccess) {
-    TokenSet _commentTokens = tokenTypeProvider.getCommentTokens();
-    TokenSet _whitespaceTokens = tokenTypeProvider.getWhitespaceTokens();
     final Function1<BracePair, List<IElementType>> _function = (BracePair it) -> {
       IElementType _leftBraceType = it.getLeftBraceType();
       IElementType _rightBraceType = it.getRightBraceType();
       return Collections.<IElementType>unmodifiableList(CollectionLiterals.<IElementType>newArrayList(_leftBraceType, _rightBraceType));
     };
-    List<List<IElementType>> _map = ListExtensions.<BracePair, List<IElementType>>map(((List<BracePair>)Conversions.doWrapArray(this.pairs)), _function);
-    Iterable<IElementType> _flatten = Iterables.<IElementType>concat(_map);
-    TokenSet _create = TokenSet.create(((IElementType[])Conversions.unwrapArray(_flatten, IElementType.class)));
-    List<Keyword> _findKeywords = grammarAccess.findKeywords(";", ",");
     final Function1<Keyword, IElementType> _function_1 = (Keyword it) -> {
       return this.getTokenType(it);
     };
-    List<IElementType> _map_1 = ListExtensions.<Keyword, IElementType>map(_findKeywords, _function_1);
-    TokenSet _create_1 = TokenSet.create(((IElementType[])Conversions.unwrapArray(_map_1, IElementType.class)));
-    return TokenSet.orSet(_commentTokens, _whitespaceTokens, _create, _create_1);
+    return TokenSet.orSet(
+      tokenTypeProvider.getCommentTokens(), 
+      tokenTypeProvider.getWhitespaceTokens(), 
+      TokenSet.create(((IElementType[])Conversions.unwrapArray(Iterables.<IElementType>concat(ListExtensions.<BracePair, List<IElementType>>map(((List<BracePair>)Conversions.doWrapArray(this.pairs)), _function)), IElementType.class))), 
+      TokenSet.create(((IElementType[])Conversions.unwrapArray(ListExtensions.<Keyword, IElementType>map(grammarAccess.findKeywords(";", ","), _function_1), IElementType.class))));
   }
   
   protected HashMap<String, IElementType> createTokenTypes(final ITokenDefProvider tokenDefProvider, final TokenTypeProvider tokenTypeProvider) {
@@ -94,20 +90,17 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   }
   
   protected Iterable<BracePair> createPairs(final IBracePairProvider bracePairProvider, final IGrammarAccess grammarAccess) {
-    Set<org.eclipse.xtext.ide.editor.bracketmatching.BracePair> _pairs = bracePairProvider.getPairs();
     final Function1<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>> _function = (org.eclipse.xtext.ide.editor.bracketmatching.BracePair it) -> {
       return this.findPairs(it.getLeftBrace(), it.getRightBrace(), it.isStructural(), grammarAccess);
     };
-    Iterable<List<BracePair>> _map = IterableExtensions.<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>>map(_pairs, _function);
-    return Iterables.<BracePair>concat(_map);
+    return Iterables.<BracePair>concat(IterableExtensions.<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>>map(bracePairProvider.getPairs(), _function));
   }
   
   protected List<BracePair> findPairs(final String leftBraceKeyword, final String rightBraceKeyword, final boolean structural, final IGrammarAccess grammarAccess) {
-    List<Pair<Keyword, Keyword>> _findKeywordPairs = grammarAccess.findKeywordPairs(leftBraceKeyword, rightBraceKeyword);
     final Function1<Pair<Keyword, Keyword>, BracePair> _function = (Pair<Keyword, Keyword> it) -> {
       return this.createPair(it.getFirst(), it.getSecond(), structural);
     };
-    return ListExtensions.<Pair<Keyword, Keyword>, BracePair>map(_findKeywordPairs, _function);
+    return ListExtensions.<Pair<Keyword, Keyword>, BracePair>map(grammarAccess.findKeywordPairs(leftBraceKeyword, rightBraceKeyword), _function);
   }
   
   protected BracePair createPair(final Keyword leftBraceKeyword, final Keyword rightBraceKeyword, final boolean structural) {

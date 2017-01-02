@@ -12,8 +12,7 @@ public class TreeTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      TreeTestLanguageStandaloneSetupIdea _treeTestLanguageStandaloneSetupIdea = new TreeTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _treeTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new TreeTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

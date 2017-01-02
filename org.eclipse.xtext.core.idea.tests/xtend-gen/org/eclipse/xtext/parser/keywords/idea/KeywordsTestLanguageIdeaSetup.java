@@ -12,8 +12,7 @@ public class KeywordsTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      KeywordsTestLanguageStandaloneSetupIdea _keywordsTestLanguageStandaloneSetupIdea = new KeywordsTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _keywordsTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new KeywordsTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

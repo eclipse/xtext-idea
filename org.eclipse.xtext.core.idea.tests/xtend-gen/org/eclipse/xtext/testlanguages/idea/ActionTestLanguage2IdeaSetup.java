@@ -12,8 +12,7 @@ public class ActionTestLanguage2IdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      ActionTestLanguage2StandaloneSetupIdea _actionTestLanguage2StandaloneSetupIdea = new ActionTestLanguage2StandaloneSetupIdea();
-      _xblockexpression = _actionTestLanguage2StandaloneSetupIdea.createInjector();
+      _xblockexpression = new ActionTestLanguage2StandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

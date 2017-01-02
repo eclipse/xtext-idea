@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.sdomain.idea.tests.psi;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import junit.framework.TestCase;
@@ -57,15 +56,10 @@ public class XtextPsiReferenceTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void testReference(@Extension final XtextPsiReferenceTestContext context) {
-    String _text = context.getText();
-    this.myFixture.configureByText("aaa.sdomain", _text);
-    PsiFile _file = this.myFixture.getFile();
-    int _caretOffset = context.getCaretOffset();
-    final PsiElement elementAtCaret = _file.findElementAt(_caretOffset);
+    this.myFixture.configureByText("aaa.sdomain", context.getText());
+    final PsiElement elementAtCaret = this.myFixture.getFile().findElementAt(context.getCaretOffset());
     TestCase.assertNotNull(elementAtCaret);
-    PsiFile _file_1 = this.myFixture.getFile();
-    int _caretOffset_1 = context.getCaretOffset();
-    PsiReference _findReferenceAt = _file_1.findReferenceAt(_caretOffset_1);
+    PsiReference _findReferenceAt = this.myFixture.getFile().findReferenceAt(context.getCaretOffset());
     final XtextPsiReference reference = ((XtextPsiReference) _findReferenceAt);
     TestCase.assertNotNull(reference);
     int _startReferenceOffset = context.getStartReferenceOffset();

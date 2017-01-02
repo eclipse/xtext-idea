@@ -15,7 +15,6 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement;
 import com.intellij.openapi.util.Condition;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
@@ -49,8 +48,7 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
   
   protected void completeXAnnotation_AnnotationType() {
     final Function1<JavaPsiClassReferenceElement, Boolean> _function = (JavaPsiClassReferenceElement it) -> {
-      PsiClass _object = it.getObject();
-      return Boolean.valueOf(_object.isAnnotationType());
+      return Boolean.valueOf(it.getObject().isAnnotationType());
     };
     this.completeJavaTypes(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, true, _function);
   }
@@ -59,14 +57,12 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
-        PsiElement _position = $0.getPosition();
         final Condition<PsiElement> _function = (PsiElement it) -> {
           EObject _eObject = XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(it);
           return (!Objects.equal(_eObject, null));
         };
-        final PsiElement psiElement = PsiTreeUtil.findFirstParent(_position, false, _function);
-        EObject _eObject = XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(psiElement);
-        final XAnnotation annotation = EcoreUtil2.<XAnnotation>getContainerOfType(_eObject, XAnnotation.class);
+        final PsiElement psiElement = PsiTreeUtil.findFirstParent($0.getPosition(), false, _function);
+        final XAnnotation annotation = EcoreUtil2.<XAnnotation>getContainerOfType(XbaseWithAnnotationsCompletionContributor.this._iPsiModelAssociations.getEObject(psiElement), XAnnotation.class);
         JvmType _annotationType = null;
         if (annotation!=null) {
           _annotationType=annotation.getAnnotationType();
@@ -78,10 +74,8 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
           boolean _not = (!_eIsProxy);
           if (_not) {
             _matched=true;
-            Iterable<JvmOperation> _declaredOperations = ((JvmAnnotationType)annotationType).getDeclaredOperations();
-            final List<JvmOperation> operations = IterableExtensions.<JvmOperation>toList(_declaredOperations);
-            Iterable<JvmOperation> _tail = IterableExtensions.<JvmOperation>tail(operations);
-            boolean _isEmpty = IterableExtensions.isEmpty(_tail);
+            final List<JvmOperation> operations = IterableExtensions.<JvmOperation>toList(((JvmAnnotationType)annotationType).getDeclaredOperations());
+            boolean _isEmpty = IterableExtensions.isEmpty(IterableExtensions.<JvmOperation>tail(operations));
             if (_isEmpty) {
               final JvmOperation singleOperation = IterableExtensions.<JvmOperation>head(operations);
               String _simpleName = singleOperation.getSimpleName();

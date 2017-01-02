@@ -15,7 +15,6 @@ import org.eclipse.xtext.idea.common.types.RefactoringTestLanguageStandaloneSetu
 @SuppressWarnings("all")
 public class RefactoringTestLanguageStandaloneSetup extends RefactoringTestLanguageStandaloneSetupGenerated {
   public static void doSetup() {
-    RefactoringTestLanguageStandaloneSetup _refactoringTestLanguageStandaloneSetup = new RefactoringTestLanguageStandaloneSetup();
-    _refactoringTestLanguageStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new RefactoringTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

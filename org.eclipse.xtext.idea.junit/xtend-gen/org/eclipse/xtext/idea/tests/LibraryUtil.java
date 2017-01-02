@@ -14,7 +14,6 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
@@ -70,14 +69,14 @@ public class LibraryUtil {
   
   public static void removeLibFromIgnoredFilesList() {
     final FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-    String _ignoredFilesList = fileTypeManager.getIgnoredFilesList();
-    final String[] ignoredFilesList = _ignoredFilesList.split("\\*\\.lib;");
+    final String[] ignoredFilesList = fileTypeManager.getIgnoredFilesList().split("\\*\\.lib;");
     int _length = ignoredFilesList.length;
     boolean _greaterThan = (_length > 1);
     if (_greaterThan) {
-      fileTypeManager.setIgnoredFilesList(IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(ignoredFilesList)), ((Function2<String, String, String>) (String p1, String p2) -> {
+      final Function2<String, String, String> _function = (String p1, String p2) -> {
         return (p1 + p2);
-      })));
+      };
+      fileTypeManager.setIgnoredFilesList(IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(ignoredFilesList)), _function));
     }
   }
   
@@ -89,11 +88,8 @@ public class LibraryUtil {
   }
   
   public static void addLibrary(final ModifiableRootModel it, final String libName, final Class<?> clazz) {
-    LibraryTable _moduleLibraryTable = it.getModuleLibraryTable();
-    Library _createLibrary = _moduleLibraryTable.createLibrary(libName);
-    final Library.ModifiableModel libraryModel = _createLibrary.getModifiableModel();
-    String _urlForLibraryRoot = LibraryUtil.getUrlForLibraryRoot(clazz);
-    libraryModel.addRoot(_urlForLibraryRoot, OrderRootType.CLASSES);
+    final Library.ModifiableModel libraryModel = it.getModuleLibraryTable().createLibrary(libName).getModifiableModel();
+    libraryModel.addRoot(LibraryUtil.getUrlForLibraryRoot(clazz), OrderRootType.CLASSES);
     libraryModel.commit();
   }
   
@@ -103,8 +99,7 @@ public class LibraryUtil {
       final String path = PathUtil.getJarPathForClass(clazz);
       VfsRootAccess.allowRootAccess(path);
       final File libraryRoot = new File(path);
-      LocalFileSystem _instance = LocalFileSystem.getInstance();
-      _instance.refreshAndFindFileByIoFile(libraryRoot);
+      LocalFileSystem.getInstance().refreshAndFindFileByIoFile(libraryRoot);
       _xblockexpression = VfsUtil.getUrlForLibraryRoot(libraryRoot);
     }
     return _xblockexpression;

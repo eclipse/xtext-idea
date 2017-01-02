@@ -12,8 +12,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      AbstractIgnoreCaseLinkingTestLanguageStandaloneSetupIdea _abstractIgnoreCaseLinkingTestLanguageStandaloneSetupIdea = new AbstractIgnoreCaseLinkingTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _abstractIgnoreCaseLinkingTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new AbstractIgnoreCaseLinkingTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

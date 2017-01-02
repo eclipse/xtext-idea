@@ -10,10 +10,8 @@ import com.intellij.debugger.engine.DebugProcessImpl;
 import com.intellij.debugger.engine.JavaDebugProcess;
 import com.intellij.debugger.engine.SuspendContextImpl;
 import com.intellij.debugger.engine.SuspendManager;
-import com.intellij.debugger.impl.DebuggerContextImpl;
 import com.intellij.debugger.impl.DebuggerManagerImpl;
 import com.intellij.debugger.impl.DebuggerSession;
-import com.intellij.debugger.impl.DebuggerStateManager;
 import com.intellij.debugger.impl.GenericDebuggerRunnerSettings;
 import com.intellij.debugger.impl.OutputChecker;
 import com.intellij.debugger.settings.DebuggerSettings;
@@ -36,15 +34,12 @@ import com.intellij.execution.runners.ExecutionEnvironmentBuilder;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.ArrayUtil;
-import com.intellij.util.PathsList;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
@@ -94,20 +89,12 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   }
   
   protected void assertCurrentLine(final VirtualFile file, final String fragment) {
-    DebuggerStateManager _contextManager = this.myDebuggerSession.getContextManager();
-    DebuggerContextImpl _context = _contextManager.getContext();
-    final SourcePosition sp = _context.getSourcePosition();
+    final SourcePosition sp = this.myDebuggerSession.getContextManager().getContext().getSourcePosition();
     TestCase.assertEquals(file, sp.getFile().getVirtualFile());
-    Project _project = this.getProject();
-    PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
-    PsiFile _file = sp.getFile();
-    final Document doc = _instance.getDocument(_file);
-    String _text = doc.getText();
-    final int index = _text.indexOf(fragment);
+    final Document doc = PsiDocumentManager.getInstance(this.getProject()).getDocument(sp.getFile());
+    final int index = doc.getText().indexOf(fragment);
     if ((index == (-1))) {
-      PsiFile _file_1 = sp.getFile();
-      VirtualFile _virtualFile = _file_1.getVirtualFile();
-      String _name = _virtualFile.getName();
+      String _name = sp.getFile().getVirtualFile().getName();
       String _plus = ((("couldn\'t find \'" + fragment) + "\' in file ") + _name);
       TestCase.fail(_plus);
     }
@@ -115,9 +102,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   }
   
   protected void assertCurrentLine(final VirtualFile file, final int line) {
-    DebuggerStateManager _contextManager = this.myDebuggerSession.getContextManager();
-    DebuggerContextImpl _context = _contextManager.getContext();
-    final SourcePosition sp = _context.getSourcePosition();
+    final SourcePosition sp = this.myDebuggerSession.getContextManager().getContext().getSourcePosition();
     TestCase.assertEquals(file, sp.getFile().getVirtualFile());
     TestCase.assertEquals(line, sp.getLine());
   }
@@ -127,12 +112,9 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   }
   
   protected LineBreakpoint<?> addLineBreakpoint(final VirtualFile file, final int line) {
-    DebuggerManagerEx _instanceEx = DebuggerManagerImpl.getInstanceEx(this.myProject);
-    final BreakpointManager breakpointManager = _instanceEx.getBreakpointManager();
-    PsiManager _instance = PsiManager.getInstance(this.myProject);
-    final PsiFile psiFile = _instance.findFile(file);
-    PsiDocumentManager _instance_1 = PsiDocumentManager.getInstance(this.myProject);
-    final Document document = _instance_1.getDocument(psiFile);
+    final BreakpointManager breakpointManager = DebuggerManagerImpl.getInstanceEx(this.myProject).getBreakpointManager();
+    final PsiFile psiFile = PsiManager.getInstance(this.myProject).findFile(file);
+    final Document document = PsiDocumentManager.getInstance(this.myProject).getDocument(psiFile);
     return breakpointManager.addLineBreakpoint(document, line);
   }
   
@@ -187,10 +169,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       TestCase.assertFalse(this.myDebugProcess.getProcessHandler().isProcessTerminated());
       int i = 0;
       final SuspendManager suspendManager = this.myDebugProcess.getSuspendManager();
-      DebuggerSession _session = this.myDebugProcess.getSession();
-      DebuggerStateManager _contextManager = _session.getContextManager();
-      DebuggerContextImpl _context = _contextManager.getContext();
-      final SourcePosition oldSourcePosition = _context.getSourcePosition();
+      final SourcePosition oldSourcePosition = this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition();
       command.run();
       while (((i++ < (AbstractDebuggerTestCase.timeout / 10)) && (Objects.equal(oldSourcePosition, this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition()) || 
         Objects.equal(this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition(), null)))) {
@@ -199,16 +178,12 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
           UIUtil.dispatchAllInvocationEvents();
         }
       }
-      DebuggerSession _session_1 = this.myDebugProcess.getSession();
-      DebuggerStateManager _contextManager_1 = _session_1.getContextManager();
-      DebuggerContextImpl _context_1 = _contextManager_1.getContext();
-      SourcePosition _sourcePosition = _context_1.getSourcePosition();
+      SourcePosition _sourcePosition = this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition();
       boolean _equals = Objects.equal(oldSourcePosition, _sourcePosition);
       if (_equals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("too long process, terminated=");
-        ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
-        boolean _isProcessTerminated = _processHandler.isProcessTerminated();
+        boolean _isProcessTerminated = this.myDebugProcess.getProcessHandler().isProcessTerminated();
         _builder.append(_isProcessTerminated);
         TestCase.fail(_builder.toString());
       }
@@ -222,23 +197,14 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final List<String> args = new ArrayList<String>();
     args.add("-g");
     args.add("-d");
-    Module _module = this.getModule();
-    VirtualFile _moduleFile = _module.getModuleFile();
-    VirtualFile _parent = _moduleFile.getParent();
-    final String modulePath = _parent.getPath();
+    final String modulePath = this.getModule().getModuleFile().getParent().getPath();
     final File classesDir = new File(modulePath, "classes");
     classesDir.mkdir();
-    String _path = classesDir.getPath();
-    args.add(_path);
+    args.add(classesDir.getPath());
     final Class<TestCase> testCaseClass = TestCase.class;
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/");
-    String _name = testCaseClass.getName();
-    Character _valueOf = Character.valueOf('.');
-    char _charValue = _valueOf.charValue();
-    Character _valueOf_1 = Character.valueOf('/');
-    char _charValue_1 = _valueOf_1.charValue();
-    String _replace = _name.replace(_charValue, _charValue_1);
+    String _replace = testCaseClass.getName().replace(Character.valueOf('.').charValue(), Character.valueOf('/').charValue());
     _builder.append(_replace);
     _builder.append(".class");
     final String junitLibRoot = PathManager.getResourceRoot(testCaseClass, _builder.toString());
@@ -248,66 +214,54 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       String _jarPathForClass_1 = PathManager.getJarPathForClass(IterableExtensions.class);
       String _jarPathForClass_2 = PathManager.getJarPathForClass(Accessors.class);
       String _jarPathForClass_3 = PathManager.getJarPathForClass(Active.class);
-      String _join = IterableExtensions.join(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(junitLibRoot, _jarPathForClass, _jarPathForClass_1, _jarPathForClass_2, _jarPathForClass_3)), File.pathSeparator);
-      args.add(_join);
+      args.add(
+        IterableExtensions.join(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(junitLibRoot, _jarPathForClass, _jarPathForClass_1, _jarPathForClass_2, _jarPathForClass_3)), File.pathSeparator));
     }
     final int before = args.size();
-    File _file = new File(modulePath, "src");
-    File[] _listFiles = _file.listFiles();
     final Function1<File, Boolean> _function = (File it) -> {
-      String _name_1 = it.getName();
-      return Boolean.valueOf(_name_1.endsWith(".java"));
+      return Boolean.valueOf(it.getName().endsWith(".java"));
     };
-    Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function);
+    Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(new File(modulePath, "src").listFiles())), _function);
     for (final File file : _filter) {
-      String _path_1 = file.getPath();
-      args.add(_path_1);
+      args.add(file.getPath());
     }
-    File _file_1 = new File(modulePath, "xtend-gen");
-    File[] _listFiles_1 = _file_1.listFiles();
     final Function1<File, Boolean> _function_1 = (File it) -> {
-      String _name_1 = it.getName();
-      return Boolean.valueOf(_name_1.endsWith(".java"));
+      return Boolean.valueOf(it.getName().endsWith(".java"));
     };
-    Iterable<File> _filter_1 = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles_1)), _function_1);
+    Iterable<File> _filter_1 = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(new File(modulePath, "xtend-gen").listFiles())), _function_1);
     for (final File file_1 : _filter_1) {
-      String _path_2 = file_1.getPath();
-      args.add(_path_2);
+      args.add(file_1.getPath());
     }
     int _size = args.size();
     boolean _lessThan = (before < _size);
     TestCase.assertTrue("No Java files!", _lessThan);
-    String[] _stringArray = ArrayUtil.toStringArray(args);
-    Main.compile(_stringArray);
+    Main.compile(ArrayUtil.toStringArray(args));
   }
   
   protected void startDebugProcess(final String className) throws ExecutionException, InterruptedException, InvocationTargetException {
     TestCase.assertTrue((this.myDebugProcess == null));
-    this.myDebuggerSession = this.createLocalProcess(DebuggerSettings.SOCKET_TRANSPORT, ObjectExtensions.<JavaParameters>operator_doubleArrow(new JavaParameters(), ((Procedure1<JavaParameters>) (JavaParameters it) -> {
+    JavaParameters _javaParameters = new JavaParameters();
+    final Procedure1<JavaParameters> _function = (JavaParameters it) -> {
       try {
         it.setMainClass(className);
         it.configureByModule(this.getModule(), JavaParameters.JDK_AND_CLASSES, this.getTestProjectJdk());
-        Module _module = this.getModule();
-        VirtualFile _moduleFile = _module.getModuleFile();
-        VirtualFile _parent = _moduleFile.getParent();
-        final String modulePath = _parent.getPath();
+        final String modulePath = this.getModule().getModuleFile().getParent().getPath();
         final File classesDir = new File(modulePath, "classes");
-        PathsList _classPath = it.getClassPath();
-        _classPath.add(classesDir);
+        it.getClassPath().add(classesDir);
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
-    })));
+    };
+    JavaParameters _doubleArrow = ObjectExtensions.<JavaParameters>operator_doubleArrow(_javaParameters, _function);
+    this.myDebuggerSession = this.createLocalProcess(DebuggerSettings.SOCKET_TRANSPORT, _doubleArrow);
     this.myDebugProcess = this.myDebuggerSession.getProcess();
-    final Disposable _function = () -> {
+    final Disposable _function_1 = () -> {
       this.myDebugProcess.dispose();
     };
-    this.<Disposable>disposeOnTearDown(_function);
-    final Runnable _function_1 = () -> {
+    this.<Disposable>disposeOnTearDown(_function_1);
+    final Runnable _function_2 = () -> {
       try {
-        DebugProcessImpl _process = this.myDebuggerSession.getProcess();
-        ProcessHandler _processHandler = _process.getProcessHandler();
-        _processHandler.startNotify();
+        this.myDebuggerSession.getProcess().getProcessHandler().startNotify();
         while ((!this.myDebuggerSession.isAttached())) {
           {
             UIUtil.dispatchAllInvocationEvents();
@@ -318,7 +272,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    this.waitForContextChange(_function_1);
+    this.waitForContextChange(_function_2);
   }
   
   private DebuggerSession createLocalProcess(final int transport, final JavaParameters myJavaParameters) throws ExecutionException, InterruptedException, InvocationTargetException {
@@ -332,7 +286,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     GenericDebuggerRunnerSettings debuggerRunnerSettings = new GenericDebuggerRunnerSettings();
     debuggerRunnerSettings.LOCAL = true;
     debuggerRunnerSettings.setDebugPort("3456");
-    __AbstractDebuggerTestCase_1 ___AbstractDebuggerTestCase_1 = new __AbstractDebuggerTestCase_1() {
+    final DebuggerTestCase.MockConfiguration profile = new __AbstractDebuggerTestCase_1() {
       @Override
       protected String getTestAppPath() {
         return null;
@@ -346,13 +300,9 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       public DebuggerTestCase.MockConfiguration createMockConf() {
         return new DebuggerTestCase.MockConfiguration();
       }
-    };
-    final DebuggerTestCase.MockConfiguration profile = ___AbstractDebuggerTestCase_1.createMockConf();
+    }.createMockConf();
     Executor _debugExecutorInstance = DefaultDebugExecutor.getDebugExecutorInstance();
-    ExecutionEnvironmentBuilder _executionEnvironmentBuilder = new ExecutionEnvironmentBuilder(this.myProject, _debugExecutorInstance);
-    ExecutionEnvironmentBuilder _runnerSettings = _executionEnvironmentBuilder.runnerSettings(debuggerRunnerSettings);
-    ExecutionEnvironmentBuilder _runProfile = _runnerSettings.runProfile(profile);
-    ExecutionEnvironment environment = _runProfile.build();
+    ExecutionEnvironment environment = new ExecutionEnvironmentBuilder(this.myProject, _debugExecutorInstance).runnerSettings(debuggerRunnerSettings).runProfile(profile).build();
     final JavaCommandLineState javaCommandLineState = new JavaCommandLineState(environment) {
       @Override
       protected JavaParameters createJavaParameters() {
@@ -361,17 +311,16 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       
       @Override
       protected GeneralCommandLine createCommandLine() throws ExecutionException {
-        JavaParameters _javaParameters = this.getJavaParameters();
-        return CommandLineBuilder.createFromJavaParameters(_javaParameters);
+        return CommandLineBuilder.createFromJavaParameters(this.getJavaParameters());
       }
     };
-    JavaParameters _javaParameters = javaCommandLineState.getJavaParameters();
-    final RemoteConnection debugParameters = DebuggerManagerImpl.createDebugParameters(_javaParameters, debuggerRunnerSettings, true);
+    final RemoteConnection debugParameters = DebuggerManagerImpl.createDebugParameters(
+      javaCommandLineState.getJavaParameters(), debuggerRunnerSettings, true);
     final Runnable _function = () -> {
       try {
-        DebuggerSession _attachVirtualMachine = this.attachVirtualMachine(javaCommandLineState, javaCommandLineState.getEnvironment(), debugParameters, 
-          false);
-        debuggerSession[0] = _attachVirtualMachine;
+        debuggerSession[0] = 
+          this.attachVirtualMachine(javaCommandLineState, javaCommandLineState.getEnvironment(), debugParameters, 
+            false);
       } catch (final Throwable _t) {
         if (_t instanceof ExecutionException) {
           final ExecutionException e = (ExecutionException)_t;
@@ -382,12 +331,9 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       }
     };
     this.invokeAndWaitIfNeeded(_function);
-    DebuggerSession _get = debuggerSession[0];
-    DebugProcessImpl _process = _get.getProcess();
-    final ProcessHandler processHandler = _process.getProcessHandler();
-    DebuggerSession _get_1 = debuggerSession[0];
-    DebugProcessImpl _process_1 = _get_1.getProcess();
-    _process_1.addProcessListener(new ProcessAdapter() {
+    final ProcessHandler processHandler = debuggerSession[0].getProcess().getProcessHandler();
+    DebugProcessImpl _process = debuggerSession[0].getProcess();
+    _process.addProcessListener(new ProcessAdapter() {
       @Override
       public void onTextAvailable(final ProcessEvent event, final Key outputType) {
         String _text = event.getText();
@@ -396,8 +342,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         InputOutput.<String>println(_plus_1);
       }
     });
-    DebuggerManagerEx _instanceEx = DebuggerManagerEx.getInstanceEx(this.myProject);
-    DebugProcess _debugProcess = _instanceEx.getDebugProcess(processHandler);
+    DebugProcess _debugProcess = DebuggerManagerEx.getInstanceEx(this.myProject).getDebugProcess(processHandler);
     DebugProcessImpl process = ((DebugProcessImpl) _debugProcess);
     TestCase.assertNotNull(process);
     return debuggerSession[0];

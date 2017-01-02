@@ -22,10 +22,8 @@ public class DataContextExtensions {
   public static DataContext getDataContext() {
     DataContext _xblockexpression = null;
     {
-      WindowManagerEx _instanceEx = WindowManagerEx.getInstanceEx();
-      final Window window = _instanceEx.getMostRecentFocusedWindow();
-      DataManager _instance = DataManager.getInstance();
-      _xblockexpression = _instance.getDataContext(window);
+      final Window window = WindowManagerEx.getInstanceEx().getMostRecentFocusedWindow();
+      _xblockexpression = DataManager.getInstance().getDataContext(window);
     }
     return _xblockexpression;
   }

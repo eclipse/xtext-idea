@@ -12,8 +12,7 @@ public class Bug305397IdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      Bug305397StandaloneSetupIdea _bug305397StandaloneSetupIdea = new Bug305397StandaloneSetupIdea();
-      _xblockexpression = _bug305397StandaloneSetupIdea.createInjector();
+      _xblockexpression = new Bug305397StandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

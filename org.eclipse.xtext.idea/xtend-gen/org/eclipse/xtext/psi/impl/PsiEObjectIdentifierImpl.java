@@ -62,21 +62,15 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
   
   @Override
   public int getStartOffsetInParent() {
-    TextRange _textRange = this.getTextRange();
-    int _startOffset = _textRange.getStartOffset();
-    PsiElement _parent = this.getParent();
-    TextRange _textRange_1 = _parent.getTextRange();
-    int _startOffset_1 = _textRange_1.getStartOffset();
+    int _startOffset = this.getTextRange().getStartOffset();
+    int _startOffset_1 = this.getParent().getTextRange().getStartOffset();
     return (_startOffset - _startOffset_1);
   }
   
   @Override
   public TextRange getTextRange() {
-    PsiElement _parent = this.getParent();
-    int _textOffset = _parent.getTextOffset();
-    ASTNode _node = this.getNode();
-    TextRange _textRange = _node.getTextRange();
-    int _endOffset = _textRange.getEndOffset();
+    int _textOffset = this.getParent().getTextOffset();
+    int _endOffset = this.getNode().getTextRange().getEndOffset();
     return new TextRange(_textOffset, _endOffset);
   }
   
@@ -90,19 +84,14 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
     String _xblockexpression = null;
     {
       final TextRange textRange = this.getTextRange();
-      PsiFile _containingFile = this.getContainingFile();
-      String _text = _containingFile.getText();
-      int _startOffset = textRange.getStartOffset();
-      int _endOffset = textRange.getEndOffset();
-      _xblockexpression = _text.substring(_startOffset, _endOffset);
+      _xblockexpression = this.getContainingFile().getText().substring(textRange.getStartOffset(), textRange.getEndOffset());
     }
     return _xblockexpression;
   }
   
   @Override
   public int getTextOffset() {
-    TextRange _textRange = this.getTextRange();
-    return _textRange.getStartOffset();
+    return this.getTextRange().getStartOffset();
   }
   
   @Override
@@ -113,8 +102,7 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
-    Class<? extends PsiEObjectIdentifierImpl> _class = this.getClass();
-    String _simpleName = _class.getSimpleName();
+    String _simpleName = this.getClass().getSimpleName();
     _builder.append(_simpleName);
     _builder.append(": ");
     String _text = this.getText();

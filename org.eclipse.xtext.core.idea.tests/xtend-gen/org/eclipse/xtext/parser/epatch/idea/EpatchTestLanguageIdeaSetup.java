@@ -12,8 +12,7 @@ public class EpatchTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      EpatchTestLanguageStandaloneSetupIdea _epatchTestLanguageStandaloneSetupIdea = new EpatchTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _epatchTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new EpatchTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

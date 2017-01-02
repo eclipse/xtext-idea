@@ -12,8 +12,7 @@ public class FormatterTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      FormatterTestLanguageStandaloneSetupIdea _formatterTestLanguageStandaloneSetupIdea = new FormatterTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _formatterTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new FormatterTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

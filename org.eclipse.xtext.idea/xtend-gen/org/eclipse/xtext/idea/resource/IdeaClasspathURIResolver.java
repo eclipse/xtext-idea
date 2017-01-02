@@ -8,10 +8,8 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
@@ -41,19 +39,14 @@ public class IdeaClasspathURIResolver implements IClasspathUriResolver {
     }
     final Module module = ((Module) context);
     final GlobalSearchScope scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module);
-    Application _application = ApplicationManager.getApplication();
     final Function1<Object, URI> _function = (Object it) -> {
-      Project _project = module.getProject();
-      String _lastSegment = classpathUri.lastSegment();
-      final PsiFile[] files = FilenameIndex.getFilesByName(_project, _lastSegment, scope);
+      final PsiFile[] files = FilenameIndex.getFilesByName(module.getProject(), classpathUri.lastSegment(), scope);
       for (final PsiFile file : files) {
         {
           final VirtualFile vf = XtextPsiUtils.findVirtualFile(file);
           if (((!Objects.equal(vf, null)) && vf.exists())) {
             final URI uri = VirtualFileURIUtil.getURI(vf);
-            String _string = uri.toString();
-            String _path = classpathUri.path();
-            boolean _endsWith = _string.endsWith(_path);
+            boolean _endsWith = uri.toString().endsWith(classpathUri.path());
             if (_endsWith) {
               return uri;
             }
@@ -62,7 +55,7 @@ public class IdeaClasspathURIResolver implements IClasspathUriResolver {
       }
       return null;
     };
-    final URI uri = _application.<URI>runReadAction(
+    final URI uri = ApplicationManager.getApplication().<URI>runReadAction(
       ((Computable<URI>) new Computable<URI>() {
           public URI compute() {
             return _function.apply(null);

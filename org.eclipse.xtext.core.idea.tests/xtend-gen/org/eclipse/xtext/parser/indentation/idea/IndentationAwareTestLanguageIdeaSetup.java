@@ -12,8 +12,7 @@ public class IndentationAwareTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      IndentationAwareTestLanguageStandaloneSetupIdea _indentationAwareTestLanguageStandaloneSetupIdea = new IndentationAwareTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _indentationAwareTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new IndentationAwareTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

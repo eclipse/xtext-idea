@@ -24,7 +24,6 @@ public class PlatformUtil {
   }
   
   public boolean isPluginInstalled(final String pluginId) {
-    PluginId _id = PluginId.getId(pluginId);
-    return PluginManager.isPluginInstalled(_id);
+    return PluginManager.isPluginInstalled(PluginId.getId(pluginId));
   }
 }

@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -32,13 +31,11 @@ public class PsiLogicalContainerProvider implements IPsiLogicalContainerProvider
   
   @Override
   public PsiElement getNearestLogicalContainer(final PsiElement expr) {
-    EObject _eObject = this._iPsiModelAssociations.getEObject(expr);
-    return this.getNearestLogicalContainer(_eObject);
+    return this.getNearestLogicalContainer(this._iPsiModelAssociations.getEObject(expr));
   }
   
   @Override
   public PsiElement getNearestLogicalContainer(final EObject expr) {
-    JvmIdentifiableElement _nearestLogicalContainer = this.logicalContainerProvider.getNearestLogicalContainer(expr);
-    return this._iPsiModelAssociations.getPsiElement(_nearestLogicalContainer);
+    return this._iPsiModelAssociations.getPsiElement(this.logicalContainerProvider.getNearestLogicalContainer(expr));
   }
 }

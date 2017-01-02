@@ -12,8 +12,7 @@ public class IgnoreCaseNamespacesTestLanguageIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      IgnoreCaseNamespacesTestLanguageStandaloneSetupIdea _ignoreCaseNamespacesTestLanguageStandaloneSetupIdea = new IgnoreCaseNamespacesTestLanguageStandaloneSetupIdea();
-      _xblockexpression = _ignoreCaseNamespacesTestLanguageStandaloneSetupIdea.createInjector();
+      _xblockexpression = new IgnoreCaseNamespacesTestLanguageStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

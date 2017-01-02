@@ -21,7 +21,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.problems.WolfTheProblemSolver;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -61,42 +60,35 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     ProblemsView _problemsView = this.getProblemsView();
     boolean _tripleNotEquals = (_problemsView != null);
     if (_tripleNotEquals) {
-      ProblemsView _problemsView_1 = this.getProblemsView();
-      _problemsView_1.clearProgress();
-      ProblemsView _problemsView_2 = this.getProblemsView();
-      _problemsView_2.clearOldMessages(this.affectedScope, this.sessionId);
+      this.getProblemsView().clearProgress();
+      this.getProblemsView().clearOldMessages(this.affectedScope, this.sessionId);
     }
   }
   
   public void rehighlight() {
-    HashSet<URI> _affectedFiles = this.affectedScope.getAffectedFiles();
     final Function1<URI, Boolean> _function = (URI it) -> {
       return Boolean.valueOf(this.shouldRehighlight(it));
     };
-    final Iterable<URI> filesToRehighlight = IterableExtensions.<URI>filter(_affectedFiles, _function);
+    final Iterable<URI> filesToRehighlight = IterableExtensions.<URI>filter(this.affectedScope.getAffectedFiles(), _function);
     boolean _isEmpty = IterableExtensions.isEmpty(filesToRehighlight);
     if (_isEmpty) {
       return;
     }
     final WolfTheProblemSolver wolfTheProblemSolver = WolfTheProblemSolver.getInstance(this.project);
     for (final URI fileToRehighlight : filesToRehighlight) {
-      VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(fileToRehighlight);
-      wolfTheProblemSolver.queue(_virtualFile);
+      wolfTheProblemSolver.queue(VirtualFileURIUtil.getVirtualFile(fileToRehighlight));
     }
-    DaemonCodeAnalyzer _instance = DaemonCodeAnalyzer.getInstance(this.project);
-    _instance.restart();
+    DaemonCodeAnalyzer.getInstance(this.project).restart();
   }
   
   protected boolean shouldRehighlight(final URI fileURI) {
     final Function1<BuildEvent, Boolean> _function = (BuildEvent it) -> {
       return Boolean.valueOf((Objects.equal(it.getType(), BuildEvent.Type.MODIFIED) || Objects.equal(it.getType(), BuildEvent.Type.DELETED)));
     };
-    Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(this.events, _function);
     final Function1<BuildEvent, Boolean> _function_1 = (BuildEvent it) -> {
-      Set<URI> _uRIs = it.getURIs();
-      return Boolean.valueOf(_uRIs.contains(fileURI));
+      return Boolean.valueOf(it.getURIs().contains(fileURI));
     };
-    boolean _exists = IterableExtensions.<BuildEvent>exists(_filter, _function_1);
+    boolean _exists = IterableExtensions.<BuildEvent>exists(IterableExtensions.<BuildEvent>filter(this.events, _function), _function_1);
     return (_exists == false);
   }
   
@@ -123,8 +115,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     ProblemsView _problemsView = this.getProblemsView();
     boolean _tripleNotEquals = (_problemsView != null);
     if (_tripleNotEquals) {
-      ProblemsView _problemsView_1 = this.getProblemsView();
-      _problemsView_1.addMessage(compilerMessage, this.sessionId);
+      this.getProblemsView().addMessage(compilerMessage, this.sessionId);
     }
   }
   

@@ -4,14 +4,10 @@ import com.google.inject.Inject;
 import com.intellij.codeInsight.TestFrameworks;
 import com.intellij.execution.JavaExecutionUtil;
 import com.intellij.execution.Location;
-import com.intellij.execution.RunManager;
-import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.application.ApplicationConfiguration;
 import com.intellij.execution.application.ApplicationConfigurationType;
-import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationUtil;
-import com.intellij.execution.configurations.JavaRunConfigurationModule;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.junit.JavaRunConfigurationProducerBase;
 import com.intellij.openapi.module.Module;
@@ -124,20 +120,15 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
       if (((method != null) && TestFrameworks.getInstance().isTestMethod(method))) {
         return false;
       }
-      JavaRunConfigurationModule _configurationModule = appConfiguration.getConfigurationModule();
-      final Module configurationModule = _configurationModule.getModule();
-      Module _module = context.getModule();
-      boolean _equal = Comparing.<Module>equal(_module, configurationModule);
+      final Module configurationModule = appConfiguration.getConfigurationModule().getModule();
+      boolean _equal = Comparing.<Module>equal(context.getModule(), configurationModule);
       if (_equal) {
         return true;
       }
-      RunManager _runManager = context.getRunManager();
-      ConfigurationFactory _configurationFactory = this.getConfigurationFactory();
-      RunnerAndConfigurationSettings _configurationTemplate = _runManager.getConfigurationTemplate(_configurationFactory);
-      RunConfiguration _configuration = _configurationTemplate.getConfiguration();
+      RunConfiguration _configuration = context.getRunManager().getConfigurationTemplate(
+        this.getConfigurationFactory()).getConfiguration();
       ApplicationConfiguration template = ((ApplicationConfiguration) _configuration);
-      JavaRunConfigurationModule _configurationModule_1 = template.getConfigurationModule();
-      final Module predefinedModule = _configurationModule_1.getModule();
+      final Module predefinedModule = template.getConfigurationModule().getModule();
       boolean _equal_1 = Comparing.<Module>equal(predefinedModule, configurationModule);
       if (_equal_1) {
         return true;

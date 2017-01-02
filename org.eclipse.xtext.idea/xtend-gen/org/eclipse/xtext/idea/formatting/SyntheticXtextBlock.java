@@ -90,12 +90,8 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   public TextRange getTextRange() {
     TextRange _xblockexpression = null;
     {
-      Block _head = IterableExtensions.<Block>head(this.children);
-      TextRange _textRange = _head.getTextRange();
-      final int startOffset = _textRange.getStartOffset();
-      Block _last = IterableExtensions.<Block>last(this.children);
-      TextRange _textRange_1 = _last.getTextRange();
-      final int endOffset = _textRange_1.getEndOffset();
+      final int startOffset = IterableExtensions.<Block>head(this.children).getTextRange().getStartOffset();
+      final int endOffset = IterableExtensions.<Block>last(this.children).getTextRange().getEndOffset();
       _xblockexpression = new TextRange(startOffset, endOffset);
     }
     return _xblockexpression;
@@ -105,8 +101,7 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   public String toString() {
     String _string = this.children.toString();
     String _plus = (_string + " ");
-    TextRange _textRange = this.getTextRange();
-    String _string_1 = _textRange.toString();
+    String _string_1 = this.getTextRange().toString();
     return (_plus + _string_1);
   }
   
