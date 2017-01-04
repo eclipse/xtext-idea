@@ -46,13 +46,12 @@ public class AutoEditString extends AbstractAutoEditBlock {
   @Override
   public boolean close(final char c, @Extension final AutoEditContext context) {
     final AutoEditStringRegion stringRegion = this.findRegion(context.getCaretOffset(), context);
-    boolean _equals = Objects.equal(stringRegion, null);
-    if (_equals) {
+    if ((stringRegion == null)) {
       return false;
     }
     TextRegion _closingTerminal = stringRegion.getClosingTerminal();
-    boolean _equals_1 = Objects.equal(_closingTerminal, null);
-    if (_equals_1) {
+    boolean _tripleEquals = (_closingTerminal == null);
+    if (_tripleEquals) {
       context.type(c);
     } else {
       boolean _contains = stringRegion.getClosingTerminal().contains(context.getCaretOffset());
@@ -67,13 +66,11 @@ public class AutoEditString extends AbstractAutoEditBlock {
   
   protected AutoEditStringRegion findRegion(final int offset, @Extension final AutoEditContext context) {
     final TextRegion openingTerminal = this.findOpeningTerminal(offset, context);
-    boolean _equals = Objects.equal(openingTerminal, null);
-    if (_equals) {
+    if ((openingTerminal == null)) {
       return null;
     }
     final TextRegion closingTerminal = this.findClosingTerminal(offset, openingTerminal.getOffset(), context);
-    boolean _notEquals = (!Objects.equal(closingTerminal, null));
-    if (_notEquals) {
+    if ((closingTerminal != null)) {
       int _offset = openingTerminal.getOffset();
       boolean _greaterEqualsThan = (_offset >= offset);
       if (_greaterEqualsThan) {
@@ -102,8 +99,7 @@ public class AutoEditString extends AbstractAutoEditBlock {
       while ((!iterator.atEnd())) {
         {
           final TextRegion openingTerminal = this.getOpeningTerminal(iterator, context);
-          boolean _notEquals = (!Objects.equal(openingTerminal, null));
-          if (_notEquals) {
+          if ((openingTerminal != null)) {
             return openingTerminal;
           }
           iterator.retreat();
@@ -126,8 +122,7 @@ public class AutoEditString extends AbstractAutoEditBlock {
       while ((!iterator.atEnd())) {
         {
           final TextRegion closingTerminal = this.getClosingTerminal(iterator, openingTokenOffset, context);
-          boolean _notEquals = (!Objects.equal(closingTerminal, null));
-          if (_notEquals) {
+          if ((closingTerminal != null)) {
             return closingTerminal;
           }
           iterator.advance();
@@ -139,8 +134,7 @@ public class AutoEditString extends AbstractAutoEditBlock {
   }
   
   protected TextRegion getOpeningTerminal(final HighlighterIterator iterator, @Extension final AutoEditContext context) {
-    boolean _equals = Objects.equal(iterator, null);
-    if (_equals) {
+    if ((iterator == null)) {
       return null;
     }
     int _end = iterator.getEnd();
@@ -167,8 +161,7 @@ public class AutoEditString extends AbstractAutoEditBlock {
   }
   
   protected TextRegion getClosingTerminal(final HighlighterIterator iterator, final int openingTokenOffset, @Extension final AutoEditContext context) {
-    boolean _equals = Objects.equal(iterator, null);
-    if (_equals) {
+    if ((iterator == null)) {
       return null;
     }
     int _end = iterator.getEnd();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
@@ -33,7 +32,7 @@ public class RootModelExtensions {
   public static Iterable<SourceFolder> getExistingSourceFolders(final Module module) {
     final Function1<SourceFolder, Boolean> _function = (SourceFolder it) -> {
       VirtualFile _file = it.getFile();
-      return Boolean.valueOf((!Objects.equal(_file, null)));
+      return Boolean.valueOf((_file != null));
     };
     return IterableExtensions.<SourceFolder>filter(RootModelExtensions.getSourceFolders(module), _function);
   }

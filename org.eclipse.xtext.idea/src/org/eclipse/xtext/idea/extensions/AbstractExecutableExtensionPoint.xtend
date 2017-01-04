@@ -27,9 +27,9 @@ abstract class AbstractExecutableExtensionPoint extends AbstractExtensionPointBe
 	}
 
 	def createInstance() {
-		if (implementationClass == null)
+		if (implementationClass === null)
 			throw 'Class is not specified'.asRuntimeException
-		if (factoryClass == null)
+		if (factoryClass === null)
 			implementationClass.findClass.newInstance
 		else
 			factoryClass.<ExtensionFactory>findClass.newInstance.createInstance(null, implementationClass)

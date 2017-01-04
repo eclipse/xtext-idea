@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.google.common.base.Objects;
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegateAdapter;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -27,8 +26,7 @@ public class XtextAutoEditEnterHandler extends EnterHandlerDelegateAdapter {
   @Override
   public EnterHandlerDelegate.Result preprocessEnter(final PsiFile file, final Editor editor, final Ref<Integer> caretOffset, final Ref<Integer> caretAdvance, final DataContext dataContext, final EditorActionHandler originalHandler) {
     final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
-    boolean _equals = Objects.equal(autoEditHandler, null);
-    if (_equals) {
+    if ((autoEditHandler == null)) {
       return super.preprocessEnter(file, editor, caretOffset, caretAdvance, dataContext, originalHandler);
     }
     return this.translateResult(autoEditHandler.beforeEnterTyped(file, 
@@ -38,8 +36,7 @@ public class XtextAutoEditEnterHandler extends EnterHandlerDelegateAdapter {
   @Override
   public EnterHandlerDelegate.Result postProcessEnter(final PsiFile file, final Editor editor, final DataContext dataContext) {
     final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
-    boolean _equals = Objects.equal(autoEditHandler, null);
-    if (_equals) {
+    if ((autoEditHandler == null)) {
       return super.postProcessEnter(file, editor, dataContext);
     }
     return this.translateResult(autoEditHandler.enterTyped(file, ((EditorEx) editor), dataContext));

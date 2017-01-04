@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.Extensions;
 import java.util.List;
@@ -40,18 +39,18 @@ public class EcoreGlobalRegistries {
     final IResourceServiceProvider.Registry registry = IResourceServiceProvider.Registry.INSTANCE;
     final Consumer<ResourceServiceProviderEP> _function_2 = (ResourceServiceProviderEP it) -> {
       String _uriExtension = it.getUriExtension();
-      boolean _notEquals = (!Objects.equal(_uriExtension, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_uriExtension != null);
+      if (_tripleNotEquals) {
         registry.getExtensionToFactoryMap().put(it.getUriExtension(), it.createDescriptor());
       }
       String _protocolName = it.getProtocolName();
-      boolean _notEquals_1 = (!Objects.equal(_protocolName, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_protocolName != null);
+      if (_tripleNotEquals_1) {
         registry.getProtocolToFactoryMap().put(it.getProtocolName(), it.createDescriptor());
       }
       String _contentTypeIdentifier = it.getContentTypeIdentifier();
-      boolean _notEquals_2 = (!Objects.equal(_contentTypeIdentifier, null));
-      if (_notEquals_2) {
+      boolean _tripleNotEquals_2 = (_contentTypeIdentifier != null);
+      if (_tripleNotEquals_2) {
         registry.getContentTypeToFactoryMap().put(it.getContentTypeIdentifier(), it.createDescriptor());
       }
     };

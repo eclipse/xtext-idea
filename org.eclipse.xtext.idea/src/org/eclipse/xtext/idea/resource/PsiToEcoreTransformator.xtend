@@ -317,7 +317,7 @@ class PsiToEcoreTransformator implements IParser {
 				transformChildren(childTransformationContext).sync
 				if (ruleCall.ensureModelElementCreated) {
 					val child = if (rule instanceof ParserRule) childTransformationContext.current else childTransformationContext.enumerator 
-					if (child != null) {
+					if (child !== null) {
 						assign(child, ruleCall, rule.qualifiedName)
 					}
 				}

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
@@ -27,7 +26,7 @@ public class AlphaSorter implements Sorter {
   
   @Override
   public boolean isVisible() {
-    return (!Objects.equal(this.comparator, null));
+    return (this.comparator != null);
   }
   
   @Override

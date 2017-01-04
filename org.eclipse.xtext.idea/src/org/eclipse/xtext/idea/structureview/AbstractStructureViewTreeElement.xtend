@@ -38,19 +38,19 @@ abstract class AbstractStructureViewTreeElement implements ModifiableStructureVi
 		if (leaf) {
 			return emptyList
 		}
-		if (children == null) {
+		if (children === null) {
 			children = newArrayList
 			structureViewTreeElementProvider.buildChildren(this)
 		}
-		if (children == null) {
+		if (children === null) {
 			return emptyList
 		} 
 		children
 	}
 	
 	override addChild(StructureViewTreeElement child) {
-		if (child != null) {
-			if (children == null) {
+		if (child !== null) {
+			if (children === null) {
 				children = newArrayList
 			}
 			leaf = false
@@ -63,7 +63,7 @@ abstract class AbstractStructureViewTreeElement implements ModifiableStructureVi
 	override addChildren(Iterable<StructureViewTreeElement> children) {
 		val notNullChildren = children.filterNull
 		if (!notNullChildren.empty) {
-			if (this.children == null) {
+			if (this.children === null) {
 				this.children = newArrayList
 			}
 			leaf = false
@@ -102,7 +102,7 @@ abstract class AbstractStructureViewTreeElement implements ModifiableStructureVi
 	protected def getNavigationElement() {
 		try {
 			val element = internalNavigationElement
-			if (element != null && element.valid) {
+			if (element !== null && element.valid) {
 				element
 			}
 		} catch (Exception e) {

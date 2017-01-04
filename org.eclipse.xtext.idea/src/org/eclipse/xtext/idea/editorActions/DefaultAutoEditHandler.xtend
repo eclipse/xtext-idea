@@ -47,7 +47,7 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 	) {
 		val context = new AutoEditContext(editor, tokenSetProvider)
 		val region = findBlockRegion(context)
-		if (region == null)
+		if (region === null)
 			return Result.CONTINUE
 
 		return handleIndentation(region, context)

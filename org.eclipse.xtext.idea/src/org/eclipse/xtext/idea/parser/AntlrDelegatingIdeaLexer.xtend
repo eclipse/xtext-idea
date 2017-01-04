@@ -46,7 +46,7 @@ class AntlrDelegatingIdeaLexer extends LexerBase {
 
 	override IElementType getTokenType() {
 		locateToken
-		if (token == null) {
+		if (token === null) {
 			return null
 		}
 		val int type = token.getType();
@@ -82,7 +82,7 @@ class AntlrDelegatingIdeaLexer extends LexerBase {
 	}
 
 	def void locateToken() {
-		if (token == null) {
+		if (token === null) {
 			try {
 				token = tokenSource.nextToken as CommonToken
 			} catch (Exception e) {

@@ -53,7 +53,7 @@ class BlockExtension {
 	}
 
 	def isOpening(ASTNode node) {
-		if (node == null)
+		if (node === null)
 			return false
 
 		val text = node.text
@@ -61,7 +61,7 @@ class BlockExtension {
 	}
 
 	def isClosing(ASTNode node) {
-		if (node == null)
+		if (node === null)
 			return false
 
 		val text = node.text
@@ -73,7 +73,7 @@ class BlockExtension {
 	}
 
 	def getBracePairForOpeningNode(ASTNode node) {
-		if (node == null)
+		if (node === null)
 			return null
 
 		val openingBrace = node.text
@@ -85,7 +85,7 @@ class BlockExtension {
 	}
 
 	def getBracePairForClosingNode(ASTNode node) {
-		if (node == null)
+		if (node === null)
 			return null
 
 		val openingBrace = node.text
@@ -97,7 +97,7 @@ class BlockExtension {
 		val offset = block.textRange.startOffset - node.startOffset
 		val leafElement = node.findLeafElementAt(offset)
 		val bracePair = leafElement.bracePairForOpeningNode
-		bracePair != null && bracePair.structural
+		bracePair !== null && bracePair.structural
 	}
 
 	def getBracePairs() {
@@ -107,7 +107,7 @@ class BlockExtension {
 	public static val STRUCTURAL_INDENT = Indent.getIndent(Indent.Type.NORMAL, false, true)
 
 	def getIndent(BracePair bracePair, boolean enforceIndentToChildren) {
-		if (bracePair == null)
+		if (bracePair === null)
 			return Indent.noneIndent
 
 		if (bracePair.structural)

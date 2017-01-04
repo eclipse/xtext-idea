@@ -94,8 +94,7 @@ public class XbaseBlockFactory extends DefaultBlockFactory {
   protected boolean isContinuation(final EObject grammarElement) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(grammarElement, null);
-      if (_equals) {
+      if ((grammarElement == null)) {
         return false;
       }
       boolean _switchResult = false;
@@ -203,8 +202,7 @@ public class XbaseBlockFactory extends DefaultBlockFactory {
   protected boolean isStructural(final EObject grammarElement) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(grammarElement, null);
-      if (_equals) {
+      if ((grammarElement == null)) {
         return false;
       }
       boolean _switchResult = false;

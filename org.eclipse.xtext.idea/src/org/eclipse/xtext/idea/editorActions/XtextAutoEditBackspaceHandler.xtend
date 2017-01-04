@@ -19,13 +19,13 @@ class XtextAutoEditBackspaceHandler extends BackspaceHandlerDelegate {
 
 	override beforeCharDeleted(char c, PsiFile file, Editor editor) {
 		val autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.language)
-		if (autoEditHandler != null)
+		if (autoEditHandler !== null)
 			autoEditHandler.beforeCharDeleted(c, file, editor as EditorEx)
 	}
 
 	override charDeleted(char c, PsiFile file, Editor editor) {
 		val autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.language)
-		if (autoEditHandler != null)
+		if (autoEditHandler !== null)
 			autoEditHandler.charDeleted(c, file, editor as EditorEx)
 		else
 			false

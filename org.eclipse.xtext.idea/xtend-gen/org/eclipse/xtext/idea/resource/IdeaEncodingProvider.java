@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -22,8 +21,7 @@ public class IdeaEncodingProvider implements IEncodingProvider {
   @Override
   public String getEncoding(final URI uri) {
     final VirtualFileManager fileManager = ApplicationManager.getApplication().<VirtualFileManager>getComponent(VirtualFileManager.class);
-    boolean _equals = Objects.equal(fileManager, null);
-    if (_equals) {
+    if ((fileManager == null)) {
       return new IEncodingProvider.Runtime().getEncoding(uri);
     }
     String _elvis = null;

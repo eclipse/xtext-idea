@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.google.common.base.Objects;
 import com.intellij.codeInsight.editorActions.BackspaceHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
@@ -23,8 +22,7 @@ public class XtextAutoEditBackspaceHandler extends BackspaceHandlerDelegate {
   @Override
   public void beforeCharDeleted(final char c, final PsiFile file, final Editor editor) {
     final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
-    boolean _notEquals = (!Objects.equal(autoEditHandler, null));
-    if (_notEquals) {
+    if ((autoEditHandler != null)) {
       autoEditHandler.beforeCharDeleted(c, file, ((EditorEx) editor));
     }
   }
@@ -35,8 +33,7 @@ public class XtextAutoEditBackspaceHandler extends BackspaceHandlerDelegate {
     {
       final IdeaAutoEditHandler autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.getLanguage());
       boolean _xifexpression = false;
-      boolean _notEquals = (!Objects.equal(autoEditHandler, null));
-      if (_notEquals) {
+      if ((autoEditHandler != null)) {
         _xifexpression = autoEditHandler.charDeleted(c, file, ((EditorEx) editor));
       } else {
         _xifexpression = false;

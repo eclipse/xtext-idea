@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -54,8 +53,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
   
   protected void _buildChildren(final XtextFileTreeElement it) {
     final EObject modelElement = IterableExtensions.<EObject>head(it.getElement().getResource().getContents());
-    boolean _equals = Objects.equal(modelElement, null);
-    if (_equals) {
+    if ((modelElement == null)) {
       return;
     }
     ItemPresentation _elvis = null;
@@ -69,8 +67,8 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
     final ItemPresentation itemPresentation = _elvis;
     if ((itemPresentation instanceof PresentationData)) {
       String _presentableText = ((PresentationData)itemPresentation).getPresentableText();
-      boolean _equals_1 = Objects.equal(_presentableText, null);
-      if (_equals_1) {
+      boolean _tripleEquals = (_presentableText == null);
+      if (_tripleEquals) {
         ((PresentationData)itemPresentation).setPresentableText(modelElement.eResource().getURI().trimFileExtension().lastSegment());
       }
     }
@@ -118,8 +116,8 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
       if (itemPresentation!=null) {
         _presentableText=itemPresentation.getPresentableText();
       }
-      boolean _equals = Objects.equal(_presentableText, null);
-      if (!_equals) {
+      boolean _tripleEquals = (_presentableText == null);
+      if (!_tripleEquals) {
         _and = false;
       } else {
         _and = leaf;

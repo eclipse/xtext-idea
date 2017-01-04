@@ -47,17 +47,15 @@ public class IdeaProjectConfig implements IProjectConfig {
   @Override
   public IdeaSourceFolder findSourceFolderContaining(final URI member) {
     final VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(member.toString());
-    boolean _equals = Objects.equal(file, null);
-    if (_equals) {
+    if ((file == null)) {
       return null;
     }
     final VirtualFile sourceRoot = ProjectRootManager.getInstance(this.module.getProject()).getFileIndex().getSourceRootForFile(file);
-    boolean _equals_1 = Objects.equal(sourceRoot, null);
-    if (_equals_1) {
+    if ((sourceRoot == null)) {
       return null;
     }
     final SourceFolder sourceFolder = ProjectRootsUtil.findSourceFolder(this.module, sourceRoot);
-    if ((Objects.equal(sourceFolder, null) || (!Objects.equal(sourceFolder.getContentEntry().getFile(), this.contentRoot)))) {
+    if (((sourceFolder == null) || (!Objects.equal(sourceFolder.getContentEntry().getFile(), this.contentRoot)))) {
       return null;
     }
     return new IdeaSourceFolder(sourceFolder);

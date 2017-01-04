@@ -33,7 +33,7 @@ class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
 	}
 	
 	override isApplicable(SuspendContext context) {
-		if (context == null || !isXtextSourced(context)) {
+		if (context === null || !isXtextSourced(context)) {
             return false;
         }
         val debugProcess = context.getDebugProcess()
@@ -41,7 +41,7 @@ class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
         val location = context.getFrameProxy().location()
         if (isEmptyAnonymousClassConstructor(context))
         	return true;
-        val result = positionManager.getSourcePosition(location) == null
+        val result = positionManager.getSourcePosition(location) === null
         if (result) {
         	return true
         }
@@ -50,14 +50,14 @@ class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
 	
 	protected def boolean isXtextSourced(SuspendContext context) {
 		val location = context.frameProxy.location
-		return context.debugProcess.findOriginalDeclaration(location) != null
+		return context.debugProcess.findOriginalDeclaration(location) !== null
 	}
 		
 	def isEmptyAnonymousClassConstructor(SuspendContext context) {
 		val Location location = context.frameProxy.location
-        if (location != null) {
+        if (location !== null) {
           val Method method = location.method();
-          if (method != null && method.isConstructor() && method.argumentTypes.isEmpty && method.declaringType.name.indexOf('$') > 0) {
+          if (method !== null && method.isConstructor() && method.argumentTypes.isEmpty && method.declaringType.name.indexOf('$') > 0) {
             return true
           }
         }

@@ -13,7 +13,7 @@ import com.intellij.openapi.project.Project
 class NullNamesValidator implements NamesValidator {
 	
 	override isIdentifier(String name, Project project) {
-		name != null
+		name !== null
 	}
 	
 	override isKeyword(String name, Project project) {

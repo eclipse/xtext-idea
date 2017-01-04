@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.idea.findusages;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -51,7 +50,7 @@ public class XbaseWordsScanner implements WordsScanner {
   @Override
   public void processWords(final CharSequence fileText, final Processor<WordOccurrence> processor) {
     this.lexer.start(fileText);
-    while ((!Objects.equal(this.lexer.getTokenType(), null))) {
+    while ((this.lexer.getTokenType() != null)) {
       {
         this.scanOperator(processor);
         this.scanWords(processor);
@@ -86,8 +85,8 @@ public class XbaseWordsScanner implements WordsScanner {
   
   protected void scanWords(final Processor<WordOccurrence> processor) {
     IElementType _tokenType = this.lexer.getTokenType();
-    boolean _equals = Objects.equal(_tokenType, null);
-    if (_equals) {
+    boolean _tripleEquals = (_tokenType == null);
+    if (_tripleEquals) {
       return;
     }
     final WordOccurrence.Kind kind = this.getOccurrenceKind();

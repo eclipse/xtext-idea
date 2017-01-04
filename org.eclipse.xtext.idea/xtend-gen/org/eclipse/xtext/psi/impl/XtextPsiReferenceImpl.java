@@ -198,8 +198,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     {
       ProgressIndicatorProvider.checkCanceled();
       ICrossReferenceDescription crossReferenceDescription = this.getCrossReferenceDescription();
-      boolean _equals = Objects.equal(crossReferenceDescription, null);
-      if (_equals) {
+      if ((crossReferenceDescription == null)) {
         return ((Object[])Conversions.unwrapArray(CollectionLiterals.<Object>emptyList(), Object.class));
       }
       ArrayList<LookupElementBuilder> variants = CollectionLiterals.<LookupElementBuilder>newArrayList();
@@ -210,8 +209,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
           String name = this.qualifiedNameConverter.toString(objectDescription.getName());
           if ((objectDescription.getEObjectOrProxy().eIsProxy() || (objectDescription.getEObjectOrProxy().eResource() != null))) {
             PsiElement element = this.psiModelAssociations.getPsiElement(objectDescription, this.myElement.getXtextFile().getResource());
-            boolean _notEquals = (!Objects.equal(element, null));
-            if (_notEquals) {
+            if ((element != null)) {
               LookupElementBuilder _withTypeText = LookupElementBuilder.create(name).withTypeText(element.getNavigationElement().getContainingFile().getName());
               variants.add(_withTypeText);
             }
@@ -229,8 +227,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     {
       ProgressIndicatorProvider.checkCanceled();
       ICrossReferenceDescription crossReferenceDescription = this.getCrossReferenceDescription();
-      boolean _equals = Objects.equal(crossReferenceDescription, null);
-      if (_equals) {
+      if ((crossReferenceDescription == null)) {
         return null;
       }
       EObject object = crossReferenceDescription.resolve();

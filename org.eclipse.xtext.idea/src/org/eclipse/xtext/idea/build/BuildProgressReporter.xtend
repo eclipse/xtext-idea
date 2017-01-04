@@ -97,7 +97,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 
 	protected def isUnitTestMode() {
 		val application = ApplicationManager.application
-		application == null || application.unitTestMode
+		application === null || application.unitTestMode
 	}
 
 	protected def CompilerMessage getCompilerMessage(URI validated, Issue issue) {

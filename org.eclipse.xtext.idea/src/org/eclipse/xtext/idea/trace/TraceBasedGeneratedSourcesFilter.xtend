@@ -38,7 +38,7 @@ class TraceBasedGeneratedSourcesFilter extends GeneratedSourcesFilter {
 		// don't navigate to the original element on double click in project explorer
 		if (ApplicationManager.application.isDispatchThread) {
 			val focusOwner = IdeFocusManager.getInstance(element.project).focusOwner
-			if (focusOwner != null && focusOwner.class.name.startsWith(ProjectViewPane.name)) {
+			if (focusOwner !== null && focusOwner.class.name.startsWith(ProjectViewPane.name)) {
 				return emptyList
 			}
 		}

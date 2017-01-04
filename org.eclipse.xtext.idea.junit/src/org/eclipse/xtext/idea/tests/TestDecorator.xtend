@@ -22,7 +22,7 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
 		val delegate = cls.findDeclaredField('delegate')
-		if (delegate == null) {
+		if (delegate === null) {
 			cls.addWarning("Delegate is not declared")
 			return
 		}
@@ -32,7 +32,7 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 		delegate.type.allResolvedMethods
 			.map[declaration]
 			.filter [findAnnotation(atTest) !== null && findAnnotation(atIgnore) === null]
-			.filter[cls.findDeclaredMethod(simpleName) == null]
+			.filter[cls.findDeclaredMethod(simpleName) === null]
 			.sortBy[simpleName]
 			.forEach[declaredMethod|
 				cls.addMethod(declaredMethod.simpleName) [

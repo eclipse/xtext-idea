@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.tests.parsing;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -98,7 +97,7 @@ public class NodeModelPrinter {
     }
     _builder.newLineIfNotEmpty();
     {
-      if (((!this.ignoreSyntaxErrors) && (!Objects.equal(it.getSyntaxErrorMessage(), null)))) {
+      if (((!this.ignoreSyntaxErrors) && (it.getSyntaxErrorMessage() != null))) {
         _builder.append("syntaxErrorMessage: ");
         SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
         _builder.append(_syntaxErrorMessage);
@@ -163,8 +162,8 @@ public class NodeModelPrinter {
     _builder.append(_name);
     {
       AbstractElement _terminal = crossReference.getTerminal();
-      boolean _notEquals = (!Objects.equal(_terminal, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_terminal != null);
+      if (_tripleNotEquals) {
         _builder.append(" | ");
         String _printGrammarElement = this.printGrammarElement(crossReference.getTerminal());
         _builder.append(_printGrammarElement);
@@ -183,8 +182,8 @@ public class NodeModelPrinter {
     _builder.append(_literal);
     {
       Keyword _literal_1 = it.getLiteral();
-      boolean _notEquals = (!Objects.equal(_literal_1, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_literal_1 != null);
+      if (_tripleNotEquals) {
         _builder.append(" = ");
         String _value = it.getLiteral().getValue();
         _builder.append(_value);

@@ -48,7 +48,7 @@ class DebugProcessExtensions {
 		val uri = javaSource.file.virtualFile.getURI
 		val lastSegmentOfTrace = traceFileNameProvider.getTraceFromJava(uri.lastSegment)
 		val virtualFile = uri.trimSegments(1).appendSegment(lastSegmentOfTrace).virtualFile
-		if (virtualFile == null || !virtualFile.exists) {
+		if (virtualFile === null || !virtualFile.exists) {
 			return null
 		}
 		val trace = traceRegionSerializer.readTraceRegionFrom(virtualFile.inputStream)
@@ -68,7 +68,7 @@ class DebugProcessExtensions {
 		for (uri : generated.filter[fileExtension=='java']) {
 			val lastSegmentOfTrace = traceFileNameProvider.getTraceFromJava(uri.lastSegment)
 			val virtualFile = uri.trimSegments(1).appendSegment(lastSegmentOfTrace).virtualFile
-			if (virtualFile != null && virtualFile.exists) {
+			if (virtualFile !== null && virtualFile.exists) {
 				val trace = traceRegionSerializer.readTraceRegionFrom(virtualFile.inputStream)
 				result.put(uri,trace)
 			}
@@ -82,7 +82,7 @@ class DebugProcessExtensions {
 		
 	def URI findOriginalDeclaration(DebugProcess process, Location location) {
 		val psiFile = process.getPsiFile(location)
-		if (psiFile == null)
+		if (psiFile === null)
 			return null
 		else 
 			return process.project.getComponent(XtextAutoBuilderComponent).getSource4GeneratedSource(psiFile.virtualFile.getURI).head

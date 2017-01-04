@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.psi;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiElement;
@@ -35,7 +34,7 @@ public class XtextPsiExtensions {
   public PsiElement findEObjectAssociatedPsiElement(final PsiElement element) {
     final Condition<PsiElement> _function = (PsiElement it) -> {
       EObject _eObject = this.associations.getEObject(it);
-      return (!Objects.equal(_eObject, null));
+      return (_eObject != null);
     };
     return PsiTreeUtil.findFirstParent(element, false, _function);
   }

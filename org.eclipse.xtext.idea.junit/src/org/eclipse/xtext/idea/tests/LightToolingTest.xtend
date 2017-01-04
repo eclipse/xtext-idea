@@ -84,7 +84,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		new LightProjectDescriptor() {
 			override configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 				val languageLevelModuleExtension = model.getModuleExtension(LanguageLevelModuleExtension)
-				if (languageLevelModuleExtension != null) {
+				if (languageLevelModuleExtension !== null) {
 					languageLevelModuleExtension.languageLevel = LightToolingTest.this.languageLevel
 				}
 				addFacetToModule(module, fileType.language.ID)

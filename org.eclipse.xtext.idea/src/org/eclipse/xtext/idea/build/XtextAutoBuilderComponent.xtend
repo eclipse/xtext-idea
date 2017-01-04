@@ -155,7 +155,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		EditorFactory.getInstance().getEventMulticaster().addDocumentListener(new DocumentAdapter() {
 			override void documentChanged(DocumentEvent event) {
 				var file = FileDocumentManager.getInstance().getFile(event.getDocument())
-				if (file != null) {
+				if (file !== null) {
 					fileModified(file)
 				} else {
 					LOG.info("No virtual file for document. Contents was "+event.document)
@@ -358,7 +358,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		alarm.cancelAllRequests
 		chunkedResourceDescriptions.removeContainer(module.name)
 		val before = moduleName2GeneratedMapping.remove(module.name)
-		if (before != null) {
+		if (before !== null) {
 			safeDeleteUris(before.allGenerated)
 		}
 		queueAllResources(module)
@@ -430,7 +430,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				LOG.debug("Ignoring transitive file change "+file.path)
 			return true;
 		}
-		return file == null 
+		return file === null 
 			|| file.isDirectory 
 	}
 	
@@ -604,11 +604,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	def getServiceProviderProvider(Module module) {
 		return [
 			val serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(it)
-			if (serviceProvider != null) {
+			if (serviceProvider !== null) {
 				val facetProvider = serviceProvider.get(FacetProvider)
-				if (facetProvider != null) {
+				if (facetProvider !== null) {
 					val facet = facetProvider.getFacet(module)
-					if (facet != null) {
+					if (facet !== null) {
 						return serviceProvider
 					}
 				}
@@ -637,7 +637,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				case ADDED: {
 					for (uri : event.URIs) {
 						val sourceUris = fileMappings?.getSource(uri)
-						if (sourceUris != null && !sourceUris.isEmpty) {
+						if (sourceUris !== null && !sourceUris.isEmpty) {
 							for (sourceUri : sourceUris) {
 								consistentAdd(sourceUri, changedUris, deletedUris)
 							}									
@@ -653,7 +653,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				case DELETED : {
 					for (uri : event.URIs) {
 						val sourceUris = fileMappings?.getSource(uri)
-						if (sourceUris != null && !sourceUris.isEmpty) {
+						if (sourceUris !== null && !sourceUris.isEmpty) {
 							for (sourceUri : sourceUris) {
 								if (!deletedUris.contains(sourceUri)) {
 									changedUris += sourceUri
@@ -708,11 +708,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def Module findModule(VirtualFile file, ProjectFileIndex fileIndex) {
-		if (file == null) {
+		if (file === null) {
 			return null
 		}
 		val module = fileIndex.getModuleForFile(file, true)
-		if (module != null)
+		if (module !== null)
 			return module
 		return file.parent.findModule(fileIndex)
 	}

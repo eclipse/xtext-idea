@@ -21,14 +21,14 @@ class XtextAutoEditTypedHandler extends TypedHandlerDelegate {
 
 	override beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
 		val autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.language)
-		if (autoEditHandler == null)
+		if (autoEditHandler === null)
 			return super.beforeCharTyped(c, project, editor, file, fileType)
 		return autoEditHandler.beforeCharTyped(c, project, editor as EditorEx, file, fileType).translateResult
 	}
 
 	override charTyped(char c, Project project, Editor editor, PsiFile file) {
 		val autoEditHandler = IdeaAutoEditHandlerExtension.INSTANCE.forLanguage(file.language)
-		if (autoEditHandler == null)
+		if (autoEditHandler === null)
 			return super.charTyped(c, project, editor, file)
 		return autoEditHandler.charTyped(c, project, editor as EditorEx, file).translateResult
 	}

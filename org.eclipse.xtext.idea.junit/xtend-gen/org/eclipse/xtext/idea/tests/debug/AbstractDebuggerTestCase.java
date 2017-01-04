@@ -172,7 +172,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       final SourcePosition oldSourcePosition = this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition();
       command.run();
       while (((i++ < (AbstractDebuggerTestCase.timeout / 10)) && (Objects.equal(oldSourcePosition, this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition()) || 
-        Objects.equal(this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition(), null)))) {
+        (this.myDebugProcess.getSession().getContextManager().getContext().getSourcePosition() == null)))) {
         {
           Thread.sleep(10);
           UIUtil.dispatchAllInvocationEvents();

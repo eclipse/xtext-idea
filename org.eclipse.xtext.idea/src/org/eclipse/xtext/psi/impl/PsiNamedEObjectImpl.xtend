@@ -37,7 +37,7 @@ class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjec
 
 	override getNameIdentifier() {
 		val nameNode = findNameNode
-		if (nameNode == null) {
+		if (nameNode === null) {
 			return null
 		}
 		new PsiEObjectIdentifierImpl(nameNode.psi)
@@ -45,7 +45,7 @@ class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjec
 
 	override getName() {
 		val stub = stub
-		if (stub != null) {
+		if (stub !== null) {
 			return stub.name
 		}
 		

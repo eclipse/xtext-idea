@@ -23,7 +23,7 @@ class VirtualFileInProject {
 	
 	def static VirtualFileInProject forPsiElement(PsiElement element) {
 		val virtualFile = XtextPsiUtils.findVirtualFile(element)
-		if (virtualFile == null)
+		if (virtualFile === null)
 			return null
 
 		return new VirtualFileInProject(virtualFile, element.project)

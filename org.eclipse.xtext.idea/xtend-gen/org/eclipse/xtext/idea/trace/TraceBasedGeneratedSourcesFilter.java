@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.trace;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.ide.projectView.impl.ProjectViewPane;
 import com.intellij.openapi.application.ApplicationManager;
@@ -46,7 +45,7 @@ public class TraceBasedGeneratedSourcesFilter extends GeneratedSourcesFilter {
     boolean _isDispatchThread = ApplicationManager.getApplication().isDispatchThread();
     if (_isDispatchThread) {
       final Component focusOwner = IdeFocusManager.getInstance(element.getProject()).getFocusOwner();
-      if (((!Objects.equal(focusOwner, null)) && focusOwner.getClass().getName().startsWith(ProjectViewPane.class.getName()))) {
+      if (((focusOwner != null) && focusOwner.getClass().getName().startsWith(ProjectViewPane.class.getName()))) {
         return CollectionLiterals.<PsiElement>emptyList();
       }
     }

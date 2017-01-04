@@ -93,7 +93,7 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 			val line = source.line
 			for (uri2trace : traces.entrySet) {
 				val region = uri2trace.value.treeIterator.findFirst[associatedLocations.head?.lineNumber == line]
-				if (region != null) {
+				if (region !== null) {
 					val psiFile = process.getPsiFile(uri2trace.key)
 					val classes = process.javaPositionManger.getAllClasses(SourcePosition.createFromLine(psiFile, region.myLineNumber+1))
 					allClasses.addAll(classes)
@@ -105,11 +105,11 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 		override getSourcePosition(Location location) throws NoDataException {
 			val line = location.lineNumber -1
 			val psiFile = process.getPsiFile(location)
-			if (psiFile == null) {
+			if (psiFile === null) {
 				throw NoDataException.INSTANCE
 			}
 			val trace = SourcePosition.createFromLine(psiFile, line).traceForJava
-			if (trace == null) {
+			if (trace === null) {
 				throw NoDataException.INSTANCE
 			}
 			val sourceURI = process.findOriginalDeclaration(location)

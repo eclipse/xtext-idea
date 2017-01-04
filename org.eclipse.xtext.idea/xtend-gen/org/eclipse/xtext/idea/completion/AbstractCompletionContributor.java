@@ -253,8 +253,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     Editor _editor = parameters.getEditor();
     final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), parameters.getOffset());
     final Collection<CompletionProvider<CompletionParameters>> providers = this.myContributors.get(parameters.getCompletionType()).get(tokenSet);
-    boolean _equals = Objects.equal(providers, null);
-    if (_equals) {
+    if ((providers == null)) {
       return;
     }
     final HashSet<CompletionProvider<CompletionParameters>> calledProviders = CollectionLiterals.<CompletionProvider<CompletionParameters>>newHashSet();
@@ -278,8 +277,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     Editor _editor = parameters.getEditor();
     final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), parameters.getOffset());
     final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = this.myFollowElementBasedContributors.get(parameters.getCompletionType()).get(tokenSet);
-    boolean _equals = Objects.equal(element2provider, null);
-    if (_equals) {
+    if ((element2provider == null)) {
       return;
     }
     final Set<AbstractElement> followElements = this.computeFollowElements(parameters);
@@ -344,8 +342,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       return;
     }
     final ContentAssistContextFactory delegate = this.getParserBasedDelegate();
-    boolean _equals = Objects.equal(delegate, null);
-    if (_equals) {
+    if ((delegate == null)) {
       return;
     }
     final ContentAssistContext[] contexts = delegate.create(this.getText(parameters), this.getSelection(parameters), parameters.getOffset(), this.getResource(parameters));
@@ -366,8 +363,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   protected ContentAssistContextFactory getParserBasedDelegate() {
     ContentAssistContextFactory _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this.delegates, null);
-      if (_equals) {
+      if ((this.delegates == null)) {
         return null;
       }
       ContentAssistContextFactory _get = this.delegates.get();

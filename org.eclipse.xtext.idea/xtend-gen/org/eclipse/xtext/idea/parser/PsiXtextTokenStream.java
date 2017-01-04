@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.parser;
 
-import com.google.common.base.Objects;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
@@ -49,8 +48,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
   
   @Override
   public void reportError(final Function0<? extends String> reporter) {
-    boolean _equals = Objects.equal(this.errorMessage, null);
-    if (_equals) {
+    if ((this.errorMessage == null)) {
       this.errorMessage = reporter.apply();
     }
   }
@@ -71,8 +69,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     while ((!this.builder.eof())) {
       this.consume();
     }
-    boolean _notEquals = (!Objects.equal(this.errorMessage, null));
-    if (_notEquals) {
+    if ((this.errorMessage != null)) {
       this.builder.error(this.errorMessage);
       this.errorMessage = null;
     }
@@ -104,8 +101,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     int _channel = token.getChannel();
     final boolean hidden = (_channel == BaseRecognizer.HIDDEN);
     IElementType _xifexpression = null;
-    boolean _equals = Objects.equal(tokenType, null);
-    if (_equals) {
+    if ((tokenType == null)) {
       _xifexpression = this.builder.getTokenType();
     } else {
       _xifexpression = tokenType;
@@ -117,8 +113,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
     CreateElementType _createElementType = new CreateElementType(currentTokenType, _function);
     this.builder.remapCurrentToken(_createElementType);
     final String errorMessage = this.getErrorMessage(token);
-    boolean _notEquals = (!Objects.equal(errorMessage, null));
-    if (_notEquals) {
+    if ((errorMessage != null)) {
       final PsiBuilder.Marker errorMarker = this.builder.mark();
       this.builder.advanceLexer();
       errorMarker.error(errorMessage);
@@ -128,7 +123,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
   }
   
   protected String getErrorMessage(final Token token) {
-    if (((token.getChannel() != BaseRecognizer.HIDDEN) && (!Objects.equal(this.errorMessage, null)))) {
+    if (((token.getChannel() != BaseRecognizer.HIDDEN) && (this.errorMessage != null))) {
       final String result = this.errorMessage;
       this.errorMessage = null;
       return result;

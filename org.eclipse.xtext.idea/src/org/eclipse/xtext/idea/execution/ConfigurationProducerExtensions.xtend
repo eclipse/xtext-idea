@@ -67,7 +67,7 @@ class ConfigurationProducerExtensions {
 			return emptySet
 		}
 		val fileInProject = VirtualFileInProject.forPsiElement(xtextFile)
-		if (fileInProject == null) {
+		if (fileInProject === null) {
 			return emptySet
 		}
 		val IIdeaTrace trace = traceProvider.getTraceToTarget(fileInProject)

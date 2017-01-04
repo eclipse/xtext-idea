@@ -28,7 +28,7 @@ class XtextPsiUtils {
 				return virtualFile 
 			}
 			return element.getViewProvider().getVirtualFile() 
-		} else if (element == null) {
+		} else if (element === null) {
 			return null
 		} else {
 			findVirtualFile(element.containingFile)

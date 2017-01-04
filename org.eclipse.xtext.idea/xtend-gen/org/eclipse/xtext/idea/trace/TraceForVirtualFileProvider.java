@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.trace;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.openapi.application.ApplicationManager;
@@ -224,8 +223,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
         for (final VirtualFile contentRoot : _contentRoots) {
           {
             final VirtualFile result = contentRoot.findFileByRelativePath(outputFolder);
-            boolean _notEquals = (!Objects.equal(result, null));
-            if (_notEquals) {
+            if ((result != null)) {
               return result;
             }
           }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.idea.findusages;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
@@ -79,8 +78,7 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
   }
   
   protected void accept(final Set<String> words, final String word) {
-    boolean _notEquals = (!Objects.equal(word, null));
-    if (_notEquals) {
+    if ((word != null)) {
       words.add(word);
     }
   }
@@ -98,12 +96,10 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
   protected void _collectWords(final JvmFeature jvmElement, final Procedure1<? super String> acceptor) {
     acceptor.apply(jvmElement.getSimpleName());
     final QualifiedName simpleOperator = this._operatorMapping.getOperator(QualifiedName.create(jvmElement.getSimpleName()));
-    boolean _notEquals = (!Objects.equal(simpleOperator, null));
-    if (_notEquals) {
+    if ((simpleOperator != null)) {
       acceptor.apply(simpleOperator.toString());
       final QualifiedName compoundOperator = this._operatorMapping.getCompoundOperator(simpleOperator);
-      boolean _notEquals_1 = (!Objects.equal(compoundOperator, null));
-      if (_notEquals_1) {
+      if ((compoundOperator != null)) {
         acceptor.apply(compoundOperator.toString());
       }
     } else {

@@ -40,10 +40,10 @@ class AutoEditString extends AbstractAutoEditBlock {
 
 	override close(char c, extension AutoEditContext context) {
 		val stringRegion = caretOffset.findRegion(context)
-		if (stringRegion == null)
+		if (stringRegion === null)
 			return false
 
-		if (stringRegion.closingTerminal == null)
+		if (stringRegion.closingTerminal === null)
 			type(c)
 		else if (stringRegion.closingTerminal.contains(caretOffset))
 			editor.moveCaretRelatively(1)
@@ -55,11 +55,11 @@ class AutoEditString extends AbstractAutoEditBlock {
 
 	protected def AutoEditStringRegion findRegion(int offset, extension AutoEditContext context) {
 		val openingTerminal = offset.findOpeningTerminal(context)
-		if (openingTerminal == null)
+		if (openingTerminal === null)
 			return null
 
 		val closingTerminal = offset.findClosingTerminal(openingTerminal.offset, context)
-		if (closingTerminal != null) {
+		if (closingTerminal !== null) {
 			if (openingTerminal.offset >= offset)
 				return null
 			if (closingTerminal.offset + closingTerminal.length <= offset)
@@ -79,7 +79,7 @@ class AutoEditString extends AbstractAutoEditBlock {
 
 		while (!iterator.atEnd) {
 			val openingTerminal = iterator.getOpeningTerminal(context)
-			if (openingTerminal != null)
+			if (openingTerminal !== null)
 				return openingTerminal
 
 			iterator.retreat
@@ -98,7 +98,7 @@ class AutoEditString extends AbstractAutoEditBlock {
 
 		while (!iterator.atEnd) {
 			val closingTerminal = iterator.getClosingTerminal(openingTokenOffset, context)
-			if (closingTerminal != null)
+			if (closingTerminal !== null)
 				return closingTerminal
 
 			iterator.advance
@@ -110,7 +110,7 @@ class AutoEditString extends AbstractAutoEditBlock {
 		HighlighterIterator iterator,
 		extension AutoEditContext context
 	) {
-		if (iterator == null)
+		if (iterator === null)
 			return null
 
 		if (iterator.end - iterator.start < openingTerminal.length)
@@ -127,7 +127,7 @@ class AutoEditString extends AbstractAutoEditBlock {
 		int openingTokenOffset,
 		extension AutoEditContext context
 	) {
-		if (iterator == null)
+		if (iterator === null)
 			return null
 
 		if (iterator.end - openingTokenOffset < openingTerminal.length + closingTerminal.length)

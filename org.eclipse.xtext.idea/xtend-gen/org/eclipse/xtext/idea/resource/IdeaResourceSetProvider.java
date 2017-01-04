@@ -139,7 +139,7 @@ public class IdeaResourceSetProvider {
           for (final URI uri_1 : localDeleted) {
             {
               final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri_1);
-              if (((!Objects.equal(file, null)) && file.exists())) {
+              if (((file != null) && file.exists())) {
                 file.delete(this.getRequestor());
               }
             }
@@ -167,13 +167,11 @@ public class IdeaResourceSetProvider {
         return new ByteArrayInputStream(this.writtenContents.get(uri).content);
       }
       final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
-      boolean _equals = Objects.equal(virtualFile, null);
-      if (_equals) {
+      if ((virtualFile == null)) {
         throw new FileNotFoundException(("Couldn\'t find virtual file for " + uri));
       }
       final Document cachedDocument = FileDocumentManager.getInstance().getCachedDocument(virtualFile);
-      boolean _notEquals = (!Objects.equal(cachedDocument, null));
-      if (_notEquals) {
+      if ((cachedDocument != null)) {
         String _text = cachedDocument.getText();
         Charset _charset = virtualFile.getCharset();
         return new LazyStringInputStream(_text, _charset);
@@ -226,8 +224,8 @@ public class IdeaResourceSetProvider {
         return true;
       }
       IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor _folderDescriptor = this.getFolderDescriptor(uri);
-      boolean _notEquals = (!Objects.equal(_folderDescriptor, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_folderDescriptor != null);
+      if (_tripleNotEquals) {
         return true;
       }
       VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
@@ -246,12 +244,11 @@ public class IdeaResourceSetProvider {
       }
       Object _get = options.get(URIConverter.OPTION_REQUESTED_ATTRIBUTES);
       final Set<String> requestedAttributes = ((Set<String>) _get);
-      if ((Objects.equal(requestedAttributes, null) || requestedAttributes.isEmpty())) {
+      if (((requestedAttributes == null) || requestedAttributes.isEmpty())) {
         return CollectionLiterals.<String, Object>emptyMap();
       }
       final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor fileDescriptor = this.writtenContents.get(uri);
-      boolean _notEquals = (!Objects.equal(fileDescriptor, null));
-      if (_notEquals) {
+      if ((fileDescriptor != null)) {
         final HashMap<String, Object> attributes = CollectionLiterals.<String, Object>newHashMap();
         boolean _contains_1 = requestedAttributes.contains(URIConverter.ATTRIBUTE_DIRECTORY);
         if (_contains_1) {
@@ -264,8 +261,7 @@ public class IdeaResourceSetProvider {
         return attributes;
       }
       final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor folderDescriptor = this.getFolderDescriptor(uri);
-      boolean _notEquals_1 = (!Objects.equal(folderDescriptor, null));
-      if (_notEquals_1) {
+      if ((folderDescriptor != null)) {
         final HashMap<String, Object> attributes_1 = CollectionLiterals.<String, Object>newHashMap();
         boolean _contains_3 = requestedAttributes.contains(URIConverter.ATTRIBUTE_DIRECTORY);
         if (_contains_3) {
@@ -278,8 +274,7 @@ public class IdeaResourceSetProvider {
         return attributes_1;
       }
       final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
-      boolean _notEquals_2 = (!Objects.equal(file, null));
-      if (_notEquals_2) {
+      if ((file != null)) {
         final HashMap<String, Object> attributes_2 = CollectionLiterals.<String, Object>newHashMap();
         boolean _contains_5 = requestedAttributes.contains(URIConverter.ATTRIBUTE_DIRECTORY);
         if (_contains_5) {
@@ -321,8 +316,7 @@ public class IdeaResourceSetProvider {
       {
         final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
         Set<URI> _xifexpression = null;
-        boolean _notEquals = (!Objects.equal(file, null));
-        if (_notEquals) {
+        if ((file != null)) {
           final Function1<VirtualFile, URI> _function = (VirtualFile it) -> {
             return VirtualFileURIUtil.getURI(it);
           };

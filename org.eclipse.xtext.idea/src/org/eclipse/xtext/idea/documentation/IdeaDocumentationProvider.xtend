@@ -30,15 +30,15 @@ class IdeaDocumentationProvider extends AbstractDocumentationProvider {
 
 	override getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
 		val gen = findDocumentationInGeneratedCode(element, originalElement)
-		if (gen != null) {
+		if (gen !== null) {
 			val result = gen.delegate.getQuickNavigateInfo(gen.generatedElement, gen.generatedOriginalElement)
-			if (result != null)
+			if (result !== null)
 				return result
 		}
 		if (element instanceof PsiEObject) {
 			val eobj = element.EObject
 			val result = eobj.calleeDocumentationProvider?.getQuickNavigateInfo(element)
-			if (result != null)
+			if (result !== null)
 				return result
 			return EcoreUtil.getURI(eobj).toString
 		}
@@ -47,15 +47,15 @@ class IdeaDocumentationProvider extends AbstractDocumentationProvider {
 
 	override generateDoc(PsiElement element, PsiElement originalElement) {
 		val gen = findDocumentationInGeneratedCode(element, originalElement)
-		if (gen != null) {
+		if (gen !== null) {
 			val result = gen.delegate.generateDoc(gen.generatedElement, gen.generatedOriginalElement)
-			if (result != null)
+			if (result !== null)
 				return result
 		}
 		if (element instanceof PsiEObject) {
 			val eobj = element.EObject
 			val result = eobj.calleeDocumentationProvider?.generateDoc(element)
-			if (result != null)
+			if (result !== null)
 				return result
 			return EcoreUtil.getURI(eobj).toString
 		}
@@ -63,11 +63,11 @@ class IdeaDocumentationProvider extends AbstractDocumentationProvider {
 	}
 
 	def protected IdeaDeclarationDocumentationProvider getCalleeDocumentationProvider(EObject object) {
-		if (object == null || object.eIsProxy)
+		if (object === null || object.eIsProxy)
 			return null
 		val uri = object.eResource.URI
 		val resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri)
-		if (resourceServiceProvider == null)
+		if (resourceServiceProvider === null)
 			return null
 		return resourceServiceProvider?.get(IdeaDeclarationDocumentationProvider)
 	}
@@ -75,11 +75,11 @@ class IdeaDocumentationProvider extends AbstractDocumentationProvider {
 	def protected GeneratedCodeDelegate findDocumentationInGeneratedCode(PsiElement element,
 		PsiElement originalElement) {
 		val generatedElement = element.generatedElement
-		if (generatedElement == null)
+		if (generatedElement === null)
 			return null
 		val generatedOriginalElement = originalElement.generatedElement ?: originalElement
 		val delegate = DocumentationManager.getProviderFromElement(generatedElement, generatedOriginalElement)
-		if (delegate == null)
+		if (delegate === null)
 			return null
 		return new GeneratedCodeDelegate(generatedElement, generatedOriginalElement, delegate)
 	}
