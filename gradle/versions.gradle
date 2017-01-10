@@ -6,7 +6,8 @@ version = '2.11.0-SNAPSHOT'
 
 ext.versions = [
 	'xtext': version,
-	'ideaVersion' : project.hasProperty('ideaEAP') ? 'LATEST-EAP-SNAPSHOT' : '145.972.3',
-	'ideaGradlePlugin' : '1.0.15',
-	'emfMwe2': '2.9.0.201605261059'
+	'xtext_gradle_plugin': '1.0.15',
+	'idea' : project.hasProperty('ideaEAP') ? 'LATEST-EAP-SNAPSHOT' : '145.972.3',
+	'emfMwe2': '2.9.0.201605261059',
+	'guice': '3.0'
 ]
