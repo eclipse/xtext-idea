@@ -55,7 +55,7 @@ public class KeywordsTestLanguageElementTypeProvider implements IElementTypeProv
 			return new IGrammarAwareElementType("Model_ForthAssignment_3_ELEMENT_TYPE", KeywordsTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getForthAssignment_3());
 		}
 		public static IGrammarAwareElementType createModel_ForthReverseSolidusKeyword_3_0ElementType() {
-			return new IGrammarAwareElementType("Model_ForthReverseSolidusKeyword_3_0_ELEMENT_TYPE", KeywordsTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getForthReverseSolidusKeyword_3_0());
+			return new IGrammarAwareElementType("Model_ForthReverseSolidusKeyword_3_0_ELEMENT_TYPE", KeywordsTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getForthBackslashKeyword_3_0());
 		}
 		public static IGrammarAwareElementType createModel_FifthAssignment_4ElementType() {
 			return new IGrammarAwareElementType("Model_FifthAssignment_4_ELEMENT_TYPE", KeywordsTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getFifthAssignment_4());
