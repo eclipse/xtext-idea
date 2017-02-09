@@ -3,6 +3,7 @@ apply from: "${rootDir}/gradle/idea-development.gradle"
 
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.purexbase:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.purexbase.ide:$versions.xtext"
 }
 
 ideaDevelopment {
