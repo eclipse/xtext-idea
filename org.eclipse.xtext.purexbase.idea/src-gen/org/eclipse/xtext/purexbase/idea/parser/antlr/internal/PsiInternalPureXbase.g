@@ -37,7 +37,7 @@ import com.intellij.lang.PsiBuilder;
 	public PsiInternalPureXbaseParser(PsiBuilder builder, TokenStream input, PureXbaseElementTypeProvider elementTypeProvider, PureXbaseGrammarAccess grammarAccess) {
 		this(input);
 		setPsiBuilder(builder);
-    	this.grammarAccess = grammarAccess;
+		this.grammarAccess = grammarAccess;
 		this.elementTypeProvider = elementTypeProvider;
 	}
 

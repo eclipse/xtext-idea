@@ -24,7 +24,7 @@ repositories {
 	jcenter()
 	// We have dependencies to test projects from xtext-extras, so Jenkins snapshots are the default
 	if (!hasProperty('useJenkinsSnapshots') || findProperty('useJenkinsSnapshots') == 'true') {
-		maven { url jenkinsPipelineRepo('lsp4j') }
+		maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/" }
 		maven { url jenkinsPipelineRepo('xtext-lib') }
 		maven { url jenkinsPipelineRepo('xtext-core') }
 		maven { url jenkinsPipelineRepo('xtext-extras') }
