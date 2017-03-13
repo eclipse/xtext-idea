@@ -4,6 +4,7 @@ import com.google.common.io.CharStreams
 import com.google.inject.Injector
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
@@ -47,7 +48,11 @@ class IdeaUnicodeTest extends AbstractLanguageParsingTestCase {
 		}
 		
 		override protected doGetResource(InputStream in, URI uri) throws Exception {
-			modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
+			modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in, charsetForTest)), false)
+		}
+		
+		override protected getCharsetForTest() {
+			StandardCharsets.UTF_8
 		}
 		
 	}

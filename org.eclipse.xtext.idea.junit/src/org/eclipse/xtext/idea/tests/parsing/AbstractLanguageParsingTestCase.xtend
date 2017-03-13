@@ -39,6 +39,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import java.nio.charset.StandardCharsets
 
 abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
 
@@ -196,7 +197,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 		var resourceSet = createFreshResourceSet
 		val uri = URI.createURI(myFile.virtualFile.url)
 		resourceSet.createResource(uri) as XtextResource => [
-			load(new ByteArrayInputStream(myFile.text.bytes), null)
+			load(new ByteArrayInputStream(myFile.text.getBytes(StandardCharsets.UTF_8)), null)
 		]
 	}
 
