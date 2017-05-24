@@ -26,7 +26,6 @@ class TraceBasedJUnitMethodConfigurationProducer extends TestMethodConfiguration
 		xtextLanguage.injectMembers(this)
 	}
 
-	@Override
 	override boolean setupConfigurationFromContext(JUnitConfiguration configuration, ConfigurationContext context,
 		Ref<PsiElement> sourceElement) {
 		val javaElement = context.tracedJavaElement

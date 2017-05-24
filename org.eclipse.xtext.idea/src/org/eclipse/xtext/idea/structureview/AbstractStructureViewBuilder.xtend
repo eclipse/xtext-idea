@@ -34,7 +34,7 @@ abstract class AbstractStructureViewBuilder implements XtextFileAwareStructureVi
 		structureViewTreeElementProvider.configureStructureViewTreeElementProvider(model, view)
 
 		Disposer.register(view, new Disposable() {
-			@Override override void dispose() {
+			override void dispose() {
 				model.dispose()
 			}
 		})
