@@ -1,5 +1,7 @@
 # IntelliJ IDEA Support For The Xtext Framework
 
+**NOTE: This project is currently not maintained. If you are interested in supporting it, please [get in contact with us on Gitter](http://gitter.im/eclipse/xtext).**
+
 This repository contains all IntelliJ IDEA related code for Xtext, including
  - the general IDEA support for Xtext languages,
  - the Xtext SDK for IDEA itself.
