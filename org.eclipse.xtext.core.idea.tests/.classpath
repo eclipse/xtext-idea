@@ -6,7 +6,7 @@
 			<attribute name="ignore_optional_problems" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="xtend-gen">
+	<classpathentry including="**/*.java|**/*.xtend" kind="src" path="xtend-gen">
 		<attributes>
 			<attribute name="ignore_optional_problems" value="true"/>
 		</attributes>
