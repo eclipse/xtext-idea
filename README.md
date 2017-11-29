@@ -1,4 +1,4 @@
-# IntelliJ IDEA Support For The Xtext Framework
+# IntelliJ IDEA Support For The Xtext Framework and the Xtend Programming Language
 
 **NOTE: This project is currently not maintained. If you are interested in supporting it, please [get in contact with us on Gitter](http://gitter.im/eclipse/xtext).**
 
