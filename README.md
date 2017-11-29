@@ -5,6 +5,7 @@
 This repository contains all IntelliJ IDEA related code for Xtext, including
  - the general IDEA support for Xtext languages,
  - the Xtext SDK for IDEA itself.
+ - the Xtend Programming Language
 
 ## How To Build
 
