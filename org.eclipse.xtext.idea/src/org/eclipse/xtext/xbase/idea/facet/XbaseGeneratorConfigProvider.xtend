@@ -70,6 +70,8 @@ import static extension com.intellij.openapi.module.EffectiveLanguageLevelUtil.*
 			case JDK_1_5: JavaVersion.JAVA5
 			case JDK_1_6: JavaVersion.JAVA6
 			case JDK_1_7: JavaVersion.JAVA7
+			case JDK_1_8: JavaVersion.JAVA8
+			case JDK_1_9: JavaVersion.JAVA9
 			default: JavaVersion.JAVA8
 		}
 	}
