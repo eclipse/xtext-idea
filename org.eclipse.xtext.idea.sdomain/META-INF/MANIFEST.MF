@@ -25,3 +25,4 @@ Export-Package: org.eclipse.xtext.idea.sdomain,
  org.eclipse.xtext.idea.sdomain.serializer,
  org.eclipse.xtext.idea.sdomain.services,
  org.eclipse.xtext.idea.sdomain.validation
+Automatic-Module-Name: org.eclipse.xtext.idea.sdomain
