@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -254,7 +254,6 @@ public class JavaIoFileSystemTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -268,7 +267,6 @@ public class JavaIoFileSystemTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -282,7 +280,6 @@ public class JavaIoFileSystemTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -298,7 +295,6 @@ public class JavaIoFileSystemTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
