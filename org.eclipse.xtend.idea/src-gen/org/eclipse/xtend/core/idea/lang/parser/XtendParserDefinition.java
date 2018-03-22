@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -474,7 +474,19 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getFullJvmFormalParameterElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMultiCatchTypeElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXStringLiteralElementType()) {
@@ -508,6 +520,21 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getXCasePartElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getXCasePart_XCasePartAction_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXExpressionOrSimpleConstructorCallElementType()) {
@@ -1060,21 +1087,6 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getXCasePartElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getXCasePart_XCasePartAction_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXForLoopExpressionElementType()) {
