@@ -686,9 +686,11 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 		'''
 			var a = 1
 			a = 3
+			println(a)
 		'''.assertAdjustLineIndent('''
 			var a = 1
 			a = 3
+			println(a)
 		''')
 	}
 
@@ -698,11 +700,13 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			a
 			=
 			3
+			println(a)
 		'''.assertAdjustLineIndent('''
 			var a = 1
 			a
 					=
 					3
+			println(a)
 		''')
 	}
 	
@@ -1946,13 +1950,13 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			try return 1
 			catch (java.lang.IllegalStateException e) return 2
 			catch (java.lang.Exception e) return 3
-			finally b = true
+			finally println(b = true)
 		'''.assertAdjustLineIndent('''
 			var b = false
 			try return 1
 			catch (java.lang.IllegalStateException e) return 2
 			catch (java.lang.Exception e) return 3
-			finally b = true
+			finally println(b = true)
 		''')
 	}
 	
@@ -1966,7 +1970,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			catch (java.lang.Exception e)
 			return 3
 			finally
-			b = true
+			println(b = true)
 		'''.assertAdjustLineIndent('''
 			var b = false
 			try
@@ -1976,7 +1980,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			catch (java.lang.Exception e)
 				return 3
 			finally
-				b = true
+				println(b = true)
 		''')
 	}
 	
@@ -1990,7 +1994,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			} catch (java.lang.Exception e) {
 			return 3
 			} finally {
-			b = true
+			println(b = true)
 			}
 		'''.assertAdjustLineIndent('''
 			var b = false
@@ -2001,7 +2005,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			} catch (java.lang.Exception e) {
 				return 3
 			} finally {
-				b = true
+				println(b = true)
 			}
 		''')
 	}
@@ -2023,7 +2027,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			}
 			finally
 			{
-			b = true
+			println(b = true)
 			}
 		'''.assertAdjustLineIndent('''
 			var b = false
@@ -2041,7 +2045,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			}
 			finally
 			{
-				b = true
+				println(b = true)
 			}
 		''')
 	}
