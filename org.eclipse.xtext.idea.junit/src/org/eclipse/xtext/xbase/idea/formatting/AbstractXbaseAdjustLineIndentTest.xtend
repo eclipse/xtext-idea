@@ -1947,22 +1947,25 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 	def void testXTryCatchFinallyExpression_01() {
 		'''
 			var b = false
+			println(b)
 			try return 1
 			catch (java.lang.IllegalStateException e) return 2
 			catch (java.lang.Exception e) return 3
-			finally println(b = true)
+			finally b = true
 		'''.assertAdjustLineIndent('''
 			var b = false
+			println(b)
 			try return 1
 			catch (java.lang.IllegalStateException e) return 2
 			catch (java.lang.Exception e) return 3
-			finally println(b = true)
+			finally b = true
 		''')
 	}
 	
 	def void testXTryCatchFinallyExpression_02() {
 		'''
 			var b = false
+			println(b)
 			try 
 			return 1
 			catch (java.lang.IllegalStateException e)
@@ -1970,9 +1973,10 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			catch (java.lang.Exception e)
 			return 3
 			finally
-			println(b = true)
+			b = true
 		'''.assertAdjustLineIndent('''
 			var b = false
+			println(b)
 			try
 				return 1
 			catch (java.lang.IllegalStateException e)
@@ -1980,13 +1984,14 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			catch (java.lang.Exception e)
 				return 3
 			finally
-				println(b = true)
+				b = true
 		''')
 	}
 	
 	def void testXTryCatchFinallyExpression_03() {
 		'''
 			var b = false
+			println(b)
 			try {
 			return 1
 			} catch (java.lang.IllegalStateException e) {
@@ -1994,10 +1999,11 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			} catch (java.lang.Exception e) {
 			return 3
 			} finally {
-			println(b = true)
+			b = true
 			}
 		'''.assertAdjustLineIndent('''
 			var b = false
+			println(b)
 			try {
 				return 1
 			} catch (java.lang.IllegalStateException e) {
@@ -2005,7 +2011,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			} catch (java.lang.Exception e) {
 				return 3
 			} finally {
-				println(b = true)
+				b = true
 			}
 		''')
 	}
@@ -2013,6 +2019,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 	def void testXTryCatchFinallyExpression_04() {
 		'''
 			var b = false
+			println(b)
 			try
 			{
 			return 1
@@ -2027,10 +2034,11 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			}
 			finally
 			{
-			println(b = true)
+			b = true
 			}
 		'''.assertAdjustLineIndent('''
 			var b = false
+			println(b)
 			try
 			{
 				return 1
@@ -2045,7 +2053,7 @@ abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest {
 			}
 			finally
 			{
-				println(b = true)
+				b = true
 			}
 		''')
 	}
