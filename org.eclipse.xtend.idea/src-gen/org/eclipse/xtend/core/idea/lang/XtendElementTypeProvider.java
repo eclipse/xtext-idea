@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -3834,8 +3834,8 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 		public static IGrammarAwareElementType createFullJvmFormalParameter_ParameterTypeAssignment_1ElementType() {
 			return new IGrammarAwareElementType("FullJvmFormalParameter_ParameterTypeAssignment_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getFullJvmFormalParameterAccess().getParameterTypeAssignment_1());
 		}
-		public static IGrammarAwareElementType createFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0ElementType() {
-			return new IGrammarAwareElementType("FullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getFullJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_1_0());
+		public static IGrammarAwareElementType createFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("FullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0());
 		}
 		public static IGrammarAwareElementType createFullJvmFormalParameter_NameAssignment_2ElementType() {
 			return new IGrammarAwareElementType("FullJvmFormalParameter_NameAssignment_2_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getFullJvmFormalParameterAccess().getNameAssignment_2());
@@ -3855,11 +3855,59 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType FullJvmFormalParameter_ParameterTypeAssignment_1_ELEMENT_TYPE = associate(FullJvmFormalParameterFactory.createFullJvmFormalParameter_ParameterTypeAssignment_1ElementType());
 
-	public static final IGrammarAwareElementType FullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0_ELEMENT_TYPE = associate(FullJvmFormalParameterFactory.createFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0ElementType());
+	public static final IGrammarAwareElementType FullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0_ELEMENT_TYPE = associate(FullJvmFormalParameterFactory.createFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType());
 
 	public static final IGrammarAwareElementType FullJvmFormalParameter_NameAssignment_2_ELEMENT_TYPE = associate(FullJvmFormalParameterFactory.createFullJvmFormalParameter_NameAssignment_2ElementType());
 
 	public static final IGrammarAwareElementType FullJvmFormalParameter_NameInnerVarIDParserRuleCall_2_0_ELEMENT_TYPE = associate(FullJvmFormalParameterFactory.createFullJvmFormalParameter_NameInnerVarIDParserRuleCall_2_0ElementType());
+
+	private static class MultiCatchTypeFactory {
+		public static IGrammarAwareElementType createMultiCatchTypeElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeRule());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_GroupElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_Group_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_JvmTypeReferenceParserRuleCall_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_Group_1ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_Group_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getGroup_1());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_Group_1_1ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_Group_1_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getGroup_1_1());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_VerticalLineKeyword_1_1_0ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_VerticalLineKeyword_1_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_ReferencesAssignment_1_1_1ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_ReferencesAssignment_1_1_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1());
+		}
+		public static IGrammarAwareElementType createMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType() {
+			return new IGrammarAwareElementType("MultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType MultiCatchType_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchTypeElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_Group_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_GroupElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_JvmTypeReferenceParserRuleCall_0_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_Group_1_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_Group_1ElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_Group_1_1_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_Group_1_1ElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_VerticalLineKeyword_1_1_0_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_VerticalLineKeyword_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_ReferencesAssignment_1_1_1_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_ReferencesAssignment_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType MultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0_ELEMENT_TYPE = associate(MultiCatchTypeFactory.createMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType());
 
 	private static class XStringLiteralFactory {
 		public static IGrammarAwareElementType createXStringLiteralElementType() {
@@ -4046,6 +4094,89 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 	public static final IGrammarAwareElementType XSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0_ELEMENT_TYPE = associate(XSwitchExpressionFactory.createXSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0ElementType());
 
 	public static final IGrammarAwareElementType XSwitchExpression_RightCurlyBracketKeyword_6_ELEMENT_TYPE = associate(XSwitchExpressionFactory.createXSwitchExpression_RightCurlyBracketKeyword_6ElementType());
+
+	private static class XCasePartFactory {
+		public static IGrammarAwareElementType createXCasePartElementType() {
+			return new IGrammarAwareElementType("XCasePart_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartRule());
+		}
+		public static IGrammarAwareElementType createXCasePart_GroupElementType() {
+			return new IGrammarAwareElementType("XCasePart_Group_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createXCasePart_XCasePartAction_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_XCasePartAction_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getXCasePartAction_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_TypeGuardAssignment_1ElementType() {
+			return new IGrammarAwareElementType("XCasePart_TypeGuardAssignment_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getTypeGuardAssignment_1());
+		}
+		public static IGrammarAwareElementType createXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_Group_2ElementType() {
+			return new IGrammarAwareElementType("XCasePart_Group_2_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getGroup_2());
+		}
+		public static IGrammarAwareElementType createXCasePart_CaseKeyword_2_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_CaseKeyword_2_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getCaseKeyword_2_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_CaseAssignment_2_1ElementType() {
+			return new IGrammarAwareElementType("XCasePart_CaseAssignment_2_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getCaseAssignment_2_1());
+		}
+		public static IGrammarAwareElementType createXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_CaseXExpressionParserRuleCall_2_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getCaseXExpressionParserRuleCall_2_1_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_Alternatives_3ElementType() {
+			return new IGrammarAwareElementType("XCasePart_Alternatives_3_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getAlternatives_3());
+		}
+		public static IGrammarAwareElementType createXCasePart_Group_3_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_Group_3_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getGroup_3_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_ColonKeyword_3_0_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_ColonKeyword_3_0_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getColonKeyword_3_0_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_ThenAssignment_3_0_1ElementType() {
+			return new IGrammarAwareElementType("XCasePart_ThenAssignment_3_0_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getThenAssignment_3_0_1());
+		}
+		public static IGrammarAwareElementType createXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_ThenXExpressionParserRuleCall_3_0_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_1_0());
+		}
+		public static IGrammarAwareElementType createXCasePart_FallThroughAssignment_3_1ElementType() {
+			return new IGrammarAwareElementType("XCasePart_FallThroughAssignment_3_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getFallThroughAssignment_3_1());
+		}
+		public static IGrammarAwareElementType createXCasePart_FallThroughCommaKeyword_3_1_0ElementType() {
+			return new IGrammarAwareElementType("XCasePart_FallThroughCommaKeyword_3_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType XCasePart_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePartElementType());
+
+	public static final IGrammarAwareElementType XCasePart_Group_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_GroupElementType());
+
+	public static final IGrammarAwareElementType XCasePart_XCasePartAction_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_XCasePartAction_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_TypeGuardAssignment_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_TypeGuardAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_Group_2_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_Group_2ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_CaseKeyword_2_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_CaseKeyword_2_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_CaseAssignment_2_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_CaseAssignment_2_1ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_CaseXExpressionParserRuleCall_2_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_Alternatives_3_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_Alternatives_3ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_Group_3_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_Group_3_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_ColonKeyword_3_0_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_ColonKeyword_3_0_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_ThenAssignment_3_0_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_ThenAssignment_3_0_1ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_ThenXExpressionParserRuleCall_3_0_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_FallThroughAssignment_3_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_FallThroughAssignment_3_1ElementType());
+
+	public static final IGrammarAwareElementType XCasePart_FallThroughCommaKeyword_3_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_FallThroughCommaKeyword_3_1_0ElementType());
 
 	private static class XExpressionOrSimpleConstructorCallFactory {
 		public static IGrammarAwareElementType createXExpressionOrSimpleConstructorCallElementType() {
@@ -7149,89 +7280,6 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 	public static final IGrammarAwareElementType XIfExpression_ElseAssignment_6_1_ELEMENT_TYPE = associate(XIfExpressionFactory.createXIfExpression_ElseAssignment_6_1ElementType());
 
 	public static final IGrammarAwareElementType XIfExpression_ElseXExpressionParserRuleCall_6_1_0_ELEMENT_TYPE = associate(XIfExpressionFactory.createXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType());
-
-	private static class XCasePartFactory {
-		public static IGrammarAwareElementType createXCasePartElementType() {
-			return new IGrammarAwareElementType("XCasePart_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartRule());
-		}
-		public static IGrammarAwareElementType createXCasePart_GroupElementType() {
-			return new IGrammarAwareElementType("XCasePart_Group_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getGroup());
-		}
-		public static IGrammarAwareElementType createXCasePart_XCasePartAction_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_XCasePartAction_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getXCasePartAction_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_TypeGuardAssignment_1ElementType() {
-			return new IGrammarAwareElementType("XCasePart_TypeGuardAssignment_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getTypeGuardAssignment_1());
-		}
-		public static IGrammarAwareElementType createXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_1_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_Group_2ElementType() {
-			return new IGrammarAwareElementType("XCasePart_Group_2_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getGroup_2());
-		}
-		public static IGrammarAwareElementType createXCasePart_CaseKeyword_2_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_CaseKeyword_2_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getCaseKeyword_2_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_CaseAssignment_2_1ElementType() {
-			return new IGrammarAwareElementType("XCasePart_CaseAssignment_2_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getCaseAssignment_2_1());
-		}
-		public static IGrammarAwareElementType createXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_CaseXExpressionParserRuleCall_2_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getCaseXExpressionParserRuleCall_2_1_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_Alternatives_3ElementType() {
-			return new IGrammarAwareElementType("XCasePart_Alternatives_3_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getAlternatives_3());
-		}
-		public static IGrammarAwareElementType createXCasePart_Group_3_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_Group_3_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getGroup_3_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_ColonKeyword_3_0_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_ColonKeyword_3_0_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getColonKeyword_3_0_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_ThenAssignment_3_0_1ElementType() {
-			return new IGrammarAwareElementType("XCasePart_ThenAssignment_3_0_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getThenAssignment_3_0_1());
-		}
-		public static IGrammarAwareElementType createXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_ThenXExpressionParserRuleCall_3_0_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_1_0());
-		}
-		public static IGrammarAwareElementType createXCasePart_FallThroughAssignment_3_1ElementType() {
-			return new IGrammarAwareElementType("XCasePart_FallThroughAssignment_3_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getFallThroughAssignment_3_1());
-		}
-		public static IGrammarAwareElementType createXCasePart_FallThroughCommaKeyword_3_1_0ElementType() {
-			return new IGrammarAwareElementType("XCasePart_FallThroughCommaKeyword_3_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0());
-		}
-	}
-
-	public static final IGrammarAwareElementType XCasePart_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePartElementType());
-
-	public static final IGrammarAwareElementType XCasePart_Group_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_GroupElementType());
-
-	public static final IGrammarAwareElementType XCasePart_XCasePartAction_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_XCasePartAction_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_TypeGuardAssignment_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_TypeGuardAssignment_1ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_Group_2_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_Group_2ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_CaseKeyword_2_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_CaseKeyword_2_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_CaseAssignment_2_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_CaseAssignment_2_1ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_CaseXExpressionParserRuleCall_2_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_Alternatives_3_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_Alternatives_3ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_Group_3_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_Group_3_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_ColonKeyword_3_0_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_ColonKeyword_3_0_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_ThenAssignment_3_0_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_ThenAssignment_3_0_1ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_ThenXExpressionParserRuleCall_3_0_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_FallThroughAssignment_3_1_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_FallThroughAssignment_3_1ElementType());
-
-	public static final IGrammarAwareElementType XCasePart_FallThroughCommaKeyword_3_1_0_ELEMENT_TYPE = associate(XCasePartFactory.createXCasePart_FallThroughCommaKeyword_3_1_0ElementType());
 
 	private static class XForLoopExpressionFactory {
 		public static IGrammarAwareElementType createXForLoopExpressionElementType() {
@@ -12100,8 +12148,8 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 		return FullJvmFormalParameter_ParameterTypeAssignment_1_ELEMENT_TYPE;
 	}
 	
-	public IGrammarAwareElementType getFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0ElementType() {
-		return FullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_1_0_ELEMENT_TYPE;
+	public IGrammarAwareElementType getFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType() {
+		return FullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getFullJvmFormalParameter_NameAssignment_2ElementType() {
@@ -12110,6 +12158,42 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 	
 	public IGrammarAwareElementType getFullJvmFormalParameter_NameInnerVarIDParserRuleCall_2_0ElementType() {
 		return FullJvmFormalParameter_NameInnerVarIDParserRuleCall_2_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchTypeElementType() {
+		return MultiCatchType_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_GroupElementType() {
+		return MultiCatchType_Group_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType() {
+		return MultiCatchType_JvmTypeReferenceParserRuleCall_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_Group_1ElementType() {
+		return MultiCatchType_Group_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType() {
+		return MultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_Group_1_1ElementType() {
+		return MultiCatchType_Group_1_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_VerticalLineKeyword_1_1_0ElementType() {
+		return MultiCatchType_VerticalLineKeyword_1_1_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_ReferencesAssignment_1_1_1ElementType() {
+		return MultiCatchType_ReferencesAssignment_1_1_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType() {
+		return MultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getXStringLiteralElementType() {
@@ -12254,6 +12338,70 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 	
 	public IGrammarAwareElementType getXSwitchExpression_RightCurlyBracketKeyword_6ElementType() {
 		return XSwitchExpression_RightCurlyBracketKeyword_6_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePartElementType() {
+		return XCasePart_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_GroupElementType() {
+		return XCasePart_Group_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_XCasePartAction_0ElementType() {
+		return XCasePart_XCasePartAction_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_TypeGuardAssignment_1ElementType() {
+		return XCasePart_TypeGuardAssignment_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType() {
+		return XCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_Group_2ElementType() {
+		return XCasePart_Group_2_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_CaseKeyword_2_0ElementType() {
+		return XCasePart_CaseKeyword_2_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_CaseAssignment_2_1ElementType() {
+		return XCasePart_CaseAssignment_2_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType() {
+		return XCasePart_CaseXExpressionParserRuleCall_2_1_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_Alternatives_3ElementType() {
+		return XCasePart_Alternatives_3_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_Group_3_0ElementType() {
+		return XCasePart_Group_3_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_ColonKeyword_3_0_0ElementType() {
+		return XCasePart_ColonKeyword_3_0_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_ThenAssignment_3_0_1ElementType() {
+		return XCasePart_ThenAssignment_3_0_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType() {
+		return XCasePart_ThenXExpressionParserRuleCall_3_0_1_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_FallThroughAssignment_3_1ElementType() {
+		return XCasePart_FallThroughAssignment_3_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXCasePart_FallThroughCommaKeyword_3_1_0ElementType() {
+		return XCasePart_FallThroughCommaKeyword_3_1_0_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getXExpressionOrSimpleConstructorCallElementType() {
@@ -14614,70 +14762,6 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 	
 	public IGrammarAwareElementType getXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType() {
 		return XIfExpression_ElseXExpressionParserRuleCall_6_1_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePartElementType() {
-		return XCasePart_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_GroupElementType() {
-		return XCasePart_Group_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_XCasePartAction_0ElementType() {
-		return XCasePart_XCasePartAction_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_TypeGuardAssignment_1ElementType() {
-		return XCasePart_TypeGuardAssignment_1_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType() {
-		return XCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_Group_2ElementType() {
-		return XCasePart_Group_2_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_CaseKeyword_2_0ElementType() {
-		return XCasePart_CaseKeyword_2_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_CaseAssignment_2_1ElementType() {
-		return XCasePart_CaseAssignment_2_1_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType() {
-		return XCasePart_CaseXExpressionParserRuleCall_2_1_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_Alternatives_3ElementType() {
-		return XCasePart_Alternatives_3_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_Group_3_0ElementType() {
-		return XCasePart_Group_3_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_ColonKeyword_3_0_0ElementType() {
-		return XCasePart_ColonKeyword_3_0_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_ThenAssignment_3_0_1ElementType() {
-		return XCasePart_ThenAssignment_3_0_1_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType() {
-		return XCasePart_ThenXExpressionParserRuleCall_3_0_1_0_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_FallThroughAssignment_3_1ElementType() {
-		return XCasePart_FallThroughAssignment_3_1_ELEMENT_TYPE;
-	}
-	
-	public IGrammarAwareElementType getXCasePart_FallThroughCommaKeyword_3_1_0ElementType() {
-		return XCasePart_FallThroughCommaKeyword_3_1_0_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getXForLoopExpressionElementType() {
