@@ -554,7 +554,7 @@ ruleParserRule returns [Boolean current=false]
 					}
 				}
 			)
-		)?
+		)*
 		(
 			(
 				(
@@ -2758,7 +2758,7 @@ ruleTerminalRule returns [Boolean current=false]
 					}
 				}
 			)
-		)?
+		)*
 		{
 			markLeaf(elementTypeProvider.getTerminalRule_TerminalKeyword_1ElementType());
 		}
