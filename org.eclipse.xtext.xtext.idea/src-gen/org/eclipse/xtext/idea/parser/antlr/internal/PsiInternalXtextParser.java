@@ -9435,7 +9435,7 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleEnumRule"
-    // PsiInternalXtext.g:3372:1: ruleEnumRule returns [Boolean current=false] : ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' ) ;
+    // PsiInternalXtext.g:3372:1: ruleEnumRule returns [Boolean current=false] : ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' ) ;
     public final Boolean ruleEnumRule() throws RecognitionException {
         Boolean current = false;
 
@@ -9453,49 +9453,56 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
 
         try {
-            // PsiInternalXtext.g:3373:1: ( ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' ) )
-            // PsiInternalXtext.g:3374:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' )
+            // PsiInternalXtext.g:3373:1: ( ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' ) )
+            // PsiInternalXtext.g:3374:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' )
             {
-            // PsiInternalXtext.g:3374:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' )
-            // PsiInternalXtext.g:3375:3: ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';'
+            // PsiInternalXtext.g:3374:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';' )
+            // PsiInternalXtext.g:3375:3: ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'enum' ( (lv_name_2_0= ruleValidID ) ) (otherlv_3= 'returns' ( (lv_type_4_0= ruleTypeRef ) ) )? otherlv_5= ':' ( (lv_alternatives_6_0= ruleEnumLiterals ) ) otherlv_7= ';'
             {
-            // PsiInternalXtext.g:3375:3: ( (lv_annotations_0_0= ruleAnnotation ) )?
-            int alt74=2;
-            int LA74_0 = input.LA(1);
+            // PsiInternalXtext.g:3375:3: ( (lv_annotations_0_0= ruleAnnotation ) )*
+            loop74:
+            do {
+                int alt74=2;
+                int LA74_0 = input.LA(1);
 
-            if ( (LA74_0==21) ) {
-                alt74=1;
-            }
-            switch (alt74) {
-                case 1 :
-                    // PsiInternalXtext.g:3376:4: (lv_annotations_0_0= ruleAnnotation )
-                    {
-                    // PsiInternalXtext.g:3376:4: (lv_annotations_0_0= ruleAnnotation )
-                    // PsiInternalXtext.g:3377:5: lv_annotations_0_0= ruleAnnotation
-                    {
-
-                    					markComposite(elementTypeProvider.getEnumRule_AnnotationsAnnotationParserRuleCall_0_0ElementType());
-                    				
-                    pushFollow(FollowSets000.FOLLOW_50);
-                    lv_annotations_0_0=ruleAnnotation();
-
-                    state._fsp--;
+                if ( (LA74_0==21) ) {
+                    alt74=1;
+                }
 
 
-                    					doneComposite();
-                    					if(!current) {
-                    						associateWithSemanticElement();
-                    						current = true;
-                    					}
-                    				
+                switch (alt74) {
+            	case 1 :
+            	    // PsiInternalXtext.g:3376:4: (lv_annotations_0_0= ruleAnnotation )
+            	    {
+            	    // PsiInternalXtext.g:3376:4: (lv_annotations_0_0= ruleAnnotation )
+            	    // PsiInternalXtext.g:3377:5: lv_annotations_0_0= ruleAnnotation
+            	    {
 
-                    }
+            	    					markComposite(elementTypeProvider.getEnumRule_AnnotationsAnnotationParserRuleCall_0_0ElementType());
+            	    				
+            	    pushFollow(FollowSets000.FOLLOW_50);
+            	    lv_annotations_0_0=ruleAnnotation();
+
+            	    state._fsp--;
 
 
-                    }
-                    break;
+            	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
+            	    				
 
-            }
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop74;
+                }
+            } while (true);
 
 
             			markLeaf(elementTypeProvider.getEnumRule_EnumKeyword_1ElementType());
@@ -9965,20 +9972,18 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
     protected DFA9 dfa9 = new DFA9(this);
     protected DFA34 dfa34 = new DFA34(this);
-    static final String dfa_1s = "\10\uffff";
-    static final String dfa_2s = "\2\5\3\uffff\3\5";
-    static final String dfa_3s = "\1\62\1\5\3\uffff\1\62\1\5\1\57";
-    static final String dfa_4s = "\2\uffff\1\1\1\2\1\3\3\uffff";
-    static final String dfa_5s = "\10\uffff}>";
+    static final String dfa_1s = "\6\uffff";
+    static final String dfa_2s = "\2\5\3\uffff\1\5";
+    static final String dfa_3s = "\1\62\1\5\3\uffff\1\62";
+    static final String dfa_4s = "\2\uffff\1\1\1\2\1\3\1\uffff";
+    static final String dfa_5s = "\6\uffff}>";
     static final String[] dfa_6s = {
             "\1\2\17\uffff\1\1\1\2\20\uffff\2\2\6\uffff\1\3\2\uffff\1\4",
             "\1\5",
             "",
             "",
             "",
-            "\1\2\17\uffff\1\6\1\2\20\uffff\2\2\6\uffff\1\3\2\uffff\1\4",
-            "\1\7",
-            "\1\2\17\uffff\1\6\1\2\20\uffff\2\2\6\uffff\1\3"
+            "\1\2\17\uffff\1\1\1\2\20\uffff\2\2\6\uffff\1\3\2\uffff\1\4"
     };
 
     static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
@@ -10103,7 +10108,7 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
         public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x00010B8000028030L});
         public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x00010B8000028032L});
         public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0002000000000002L});
-        public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0004000000000000L});
+        public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0004000000200000L});
         public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000800000002L});
     }
 

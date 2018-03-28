@@ -3386,7 +3386,7 @@ ruleEnumRule returns [Boolean current=false]
 					}
 				}
 			)
-		)?
+		)*
 		{
 			markLeaf(elementTypeProvider.getEnumRule_EnumKeyword_1ElementType());
 		}
