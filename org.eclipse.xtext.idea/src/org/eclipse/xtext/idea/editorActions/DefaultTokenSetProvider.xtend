@@ -60,11 +60,11 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 		iterator.tokenType
 	}
 
-	override def getCommentTokens() {
+	override getCommentTokens() {
 		tokenTypeProvider.commentTokens
 	}
 
-	override def getSingleLineCommentTokens() {
+	override getSingleLineCommentTokens() {
 		slCommentTokens
 	}
 	
@@ -72,7 +72,7 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 		mlCommentTokens
 	}
 
-	override def getStringLiteralTokens() {
+	override getStringLiteralTokens() {
 		tokenTypeProvider.stringLiteralTokens
 	}
 

@@ -22,7 +22,7 @@ interface IReferenceSearcher {
 	def void processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer)
 
 	@Singleton
-	public static class NullReferenceSearcher implements IReferenceSearcher {
+	static class NullReferenceSearcher implements IReferenceSearcher {
 
 		override processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer) {
 		}

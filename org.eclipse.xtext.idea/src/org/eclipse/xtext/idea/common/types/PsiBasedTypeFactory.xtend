@@ -88,7 +88,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 	static val FLOAT_NEGATIVE_INF = "-1.0f / 0.0"
 	static val FLOAT_NAN = "0.0f / 0.0"
 
-	val final createTypeTask = Stopwatches.forTask("PsiClassFactory.createType")
+	val createTypeTask = Stopwatches.forTask("PsiClassFactory.createType")
 
 	val extension TypesFactory = TypesFactory.eINSTANCE
 

@@ -29,17 +29,17 @@ import org.jetbrains.annotations.NotNull
 abstract class AbstractXtextParserDefinition implements ParserDefinition {
 	
 	@Inject
-	private Provider<Lexer> lexerProvider; 
+	Provider<Lexer> lexerProvider; 
 	
 	@Inject
-	private TokenTypeProvider tokenTypeProvider;
+	TokenTypeProvider tokenTypeProvider;
 	
 	@Inject
-	private Provider<PsiParser> psiParserProvider;
+	Provider<PsiParser> psiParserProvider;
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
-	private IElementTypeProvider elementTypeProvider;
+	IElementTypeProvider elementTypeProvider;
 	
 	@NotNull
 	override Lexer createLexer(Project project) {

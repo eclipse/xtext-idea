@@ -29,7 +29,7 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
  */
 class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory {
 	
-	private static final Logger LOG = Logger.getInstance("#com.intellij.find.findParameterUsages.FindUsagesManager");
+	static final Logger LOG = Logger.getInstance("#com.intellij.find.findParameterUsages.FindUsagesManager");
 	
 	@Inject ITraceForVirtualFileProvider traceProvider
 	

@@ -66,15 +66,15 @@ class IdeaResourceSetProvider {
 		return resourceSet
 	}
 
-	public static class VirtualFileBasedUriHandler implements URIHandler {
+	static class VirtualFileBasedUriHandler implements URIHandler {
 
 		@Accessors
-		public static class ContentDescriptor {
+		static class ContentDescriptor {
 			byte[] content
 			long timeStamp
 		}
 
-		public static def VirtualFileBasedUriHandler find(Notifier notifier) {
+		static def VirtualFileBasedUriHandler find(Notifier notifier) {
 			EcoreUtil2.getResourceSet(notifier).URIConverter.URIHandlers.filter(VirtualFileBasedUriHandler).head
 		}
 

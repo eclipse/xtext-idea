@@ -467,7 +467,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	volatile boolean ignoreIncomingEvents = false
 	
-	private static val BUILD_MONITOR = new Object()
+	static val BUILD_MONITOR = new Object()
 	
 	protected def void build() {
 		if (disposed) {
@@ -497,7 +497,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return TEST_MODE || (project.isInitialized && !DumbService.getInstance(project).isDumb)
 	}
 	
-	private List<BuildEvent> unProcessedEvents = newArrayList
+	List<BuildEvent> unProcessedEvents = newArrayList
 	
 	protected def void internalBuild(ProgressIndicator indicator) {
 		queue.drainTo(unProcessedEvents)
@@ -695,7 +695,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return result
 	}
 	
-	public def ChunkedResourceDescriptions installCopyOfResourceDescriptions(ResourceSet resourceSet) {
+	def ChunkedResourceDescriptions installCopyOfResourceDescriptions(ResourceSet resourceSet) {
 		return chunkedResourceDescriptions.createShallowCopyWith(resourceSet)
 	}
 
