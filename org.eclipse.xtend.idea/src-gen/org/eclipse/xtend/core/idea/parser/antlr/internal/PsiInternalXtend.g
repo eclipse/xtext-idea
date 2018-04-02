@@ -56,6 +56,9 @@ tokens {
 	KW_SEPARATOR = 'SEPARATOR' ;
 	KW_Import = 'import' ;
 	KW_FullStopFullStopFullStop = '...' ;
+	KW_QuestionMark = '?' ;
+	KW_Try = 'try' ;
+	KW_Finally = 'finally' ;
 	KW_VerticalLine = '|' ;
 	KW_Switch = 'switch' ;
 	KW_Default = 'default' ;
@@ -112,10 +115,7 @@ tokens {
 	KW_Typeof = 'typeof' ;
 	KW_Throw = 'throw' ;
 	KW_Return = 'return' ;
-	KW_Try = 'try' ;
-	KW_Finally = 'finally' ;
 	KW_Catch = 'catch' ;
-	KW_QuestionMark = '?' ;
 	KW_Ampersand = '&' ;
 }
 
@@ -4577,6 +4577,503 @@ ruleParameter returns [Boolean current=false]
 	)
 ;
 
+//Entry rule entryRuleXAssignment
+entryRuleXAssignment returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getXAssignmentElementType()); }
+	iv_ruleXAssignment=ruleXAssignment
+	{ $current=$iv_ruleXAssignment.current; }
+	EOF;
+
+// Rule XAssignment
+ruleXAssignment returns [Boolean current=false]
+:
+	(
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			(
+				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
+						markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
+					}
+					ruleFeatureCallID
+					{
+						doneComposite();
+					}
+				)
+			)
+			{
+				markComposite(elementTypeProvider.getXAssignment_OpSingleAssignParserRuleCall_0_2ElementType());
+			}
+			ruleOpSingleAssign
+			{
+				doneComposite();
+			}
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getXAssignment_ValueXAssignmentParserRuleCall_0_3_0ElementType());
+					}
+					lv_value_3_0=ruleXAssignment
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)
+		    |
+		(
+			{
+				markComposite(elementTypeProvider.getXAssignment_XConditionalExpressionParserRuleCall_1_0ElementType());
+			}
+			this_XConditionalExpression_4=ruleXConditionalExpression
+			{
+				$current = $this_XConditionalExpression_4.current;
+				doneComposite();
+			}
+			(
+				(
+					((
+						(
+						)
+						(
+							(
+								ruleOpMultiAssign
+							)
+						)
+					)
+					)=>
+					(
+						(
+							{
+								precedeComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+								doneComposite();
+								associateWithSemanticElement();
+							}
+						)
+						(
+							(
+								{
+									if (!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
+								}
+								{
+									markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
+								}
+								ruleOpMultiAssign
+								{
+									doneComposite();
+								}
+							)
+						)
+					)
+				)
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getXAssignment_RightOperandXAssignmentParserRuleCall_1_1_1_0ElementType());
+						}
+						lv_rightOperand_7_0=ruleXAssignment
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)?
+		)
+	)
+;
+
+//Entry rule entryRuleXConditionalExpression
+entryRuleXConditionalExpression returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getXConditionalExpressionElementType()); }
+	iv_ruleXConditionalExpression=ruleXConditionalExpression
+	{ $current=$iv_ruleXConditionalExpression.current; }
+	EOF;
+
+// Rule XConditionalExpression
+ruleXConditionalExpression returns [Boolean current=false]
+:
+	(
+		{
+			markComposite(elementTypeProvider.getXConditionalExpression_XOrExpressionParserRuleCall_0ElementType());
+		}
+		this_XOrExpression_0=ruleXOrExpression
+		{
+			$current = $this_XOrExpression_0.current;
+			doneComposite();
+		}
+		(
+			(
+				('?')=>
+				(
+					(
+						{
+							precedeComposite(elementTypeProvider.getXConditionalExpression_XIfExpressionIfAction_1_0_0_0ElementType());
+							doneComposite();
+							associateWithSemanticElement();
+						}
+					)
+					(
+						(
+							{
+								markLeaf(elementTypeProvider.getXConditionalExpression_ConditionalExpressionQuestionMarkKeyword_1_0_0_1_0ElementType());
+							}
+							lv_conditionalExpression_2_0='?'
+							{
+								doneLeaf(lv_conditionalExpression_2_0);
+							}
+							{
+								if (!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+						)
+					)
+				)
+			)
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getXConditionalExpression_ThenXExpressionParserRuleCall_1_1_0ElementType());
+					}
+					lv_then_3_0=ruleXExpression
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+			(
+				(
+					(':')=>
+					{
+						markLeaf(elementTypeProvider.getXConditionalExpression_ColonKeyword_1_2_0ElementType());
+					}
+					otherlv_4=':'
+					{
+						doneLeaf(otherlv_4);
+					}
+				)
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getXConditionalExpression_ElseXExpressionParserRuleCall_1_2_1_0ElementType());
+						}
+						lv_else_5_0=ruleXExpression
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)?
+		)?
+	)
+;
+
+//Entry rule entryRuleXTryCatchFinallyExpression
+entryRuleXTryCatchFinallyExpression returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); }
+	iv_ruleXTryCatchFinallyExpression=ruleXTryCatchFinallyExpression
+	{ $current=$iv_ruleXTryCatchFinallyExpression.current; }
+	EOF;
+
+// Rule XTryCatchFinallyExpression
+ruleXTryCatchFinallyExpression returns [Boolean current=false]
+:
+	(
+		(
+			{
+				precedeComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
+				doneComposite();
+				associateWithSemanticElement();
+			}
+		)
+		{
+			markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_TryKeyword_1ElementType());
+		}
+		otherlv_1='try'
+		{
+			doneLeaf(otherlv_1);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_LeftParenthesisKeyword_2_0_0ElementType());
+				}
+				otherlv_2='('
+				{
+					doneLeaf(otherlv_2);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ResourcesInitializedVariableDeclarationParserRuleCall_2_0_1_0ElementType());
+						}
+						lv_resources_3_0=ruleInitializedVariableDeclaration
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+				(
+					{
+						markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_SemicolonKeyword_2_0_2_0ElementType());
+					}
+					otherlv_4=';'
+					{
+						doneLeaf(otherlv_4);
+					}
+					(
+						(
+							{
+								markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ResourcesInitializedVariableDeclarationParserRuleCall_2_0_2_1_0ElementType());
+							}
+							lv_resources_5_0=ruleInitializedVariableDeclaration
+							{
+								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+						)
+					)
+				)*
+				(
+					{
+						markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_SemicolonKeyword_2_0_3ElementType());
+					}
+					otherlv_6=';'
+					{
+						doneLeaf(otherlv_6);
+					}
+				)?
+				{
+					markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_RightParenthesisKeyword_2_0_4ElementType());
+				}
+				otherlv_7=')'
+				{
+					doneLeaf(otherlv_7);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_0_5_0ElementType());
+						}
+						lv_expression_8_0=ruleXExpression
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+				(
+					('catch' | 'finally')=>
+					(
+						(
+							(
+								('catch')=>
+								(
+									{
+										markComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_2_0_6_0_0_0_0ElementType());
+									}
+									lv_catchClauses_9_0=ruleXCatchClause
+									{
+										doneComposite();
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
+								)
+							)+
+							(
+								(
+									('finally')=>
+									{
+										markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_2_0_6_0_0_1_0ElementType());
+									}
+									otherlv_10='finally'
+									{
+										doneLeaf(otherlv_10);
+									}
+								)
+								(
+									(
+										{
+											markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_2_0_6_0_0_1_1_0ElementType());
+										}
+										lv_finallyExpression_11_0=ruleXExpression
+										{
+											doneComposite();
+											if(!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
+										}
+									)
+								)
+							)?
+						)
+						    |
+						(
+							{
+								markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_2_0_6_0_1_0ElementType());
+							}
+							otherlv_12='finally'
+							{
+								doneLeaf(otherlv_12);
+							}
+							(
+								(
+									{
+										markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_2_0_6_0_1_1_0ElementType());
+									}
+									lv_finallyExpression_13_0=ruleXExpression
+									{
+										doneComposite();
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
+								)
+							)
+						)
+					)
+				)?
+			)
+			    |
+			(
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_1_0_0ElementType());
+						}
+						lv_expression_14_0=ruleXExpression
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+				(
+					(
+						(
+							('catch')=>
+							(
+								{
+									markComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_2_1_1_0_0_0ElementType());
+								}
+								lv_catchClauses_15_0=ruleXCatchClause
+								{
+									doneComposite();
+									if(!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
+								}
+							)
+						)+
+						(
+							(
+								('finally')=>
+								{
+									markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_2_1_1_0_1_0ElementType());
+								}
+								otherlv_16='finally'
+								{
+									doneLeaf(otherlv_16);
+								}
+							)
+							(
+								(
+									{
+										markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_2_1_1_0_1_1_0ElementType());
+									}
+									lv_finallyExpression_17_0=ruleXExpression
+									{
+										doneComposite();
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
+								)
+							)
+						)?
+					)
+					    |
+					(
+						{
+							markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_2_1_1_1_0ElementType());
+						}
+						otherlv_18='finally'
+						{
+							doneLeaf(otherlv_18);
+						}
+						(
+							(
+								{
+									markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_2_1_1_1_1_0ElementType());
+								}
+								lv_finallyExpression_19_0=ruleXExpression
+								{
+									doneComposite();
+									if(!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
+								}
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+;
+
 //Entry rule entryRuleXVariableDeclaration
 entryRuleXVariableDeclaration returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getXVariableDeclarationElementType()); }
@@ -4592,41 +5089,7 @@ ruleXVariableDeclaration returns [Boolean current=false]
 			((
 				(
 				)
-				(
-					(
-						(
-							(
-								(
-									'var'
-								)
-							)
-							    |
-							'val'
-						)
-						(
-							(
-								'extension'
-							)
-						)?
-					)
-					    |
-					(
-						(
-							(
-								'extension'
-							)
-						)
-						(
-							(
-								(
-									'var'
-								)
-							)
-							    |
-							'val'
-						)
-					)
-				)
+				ruleVariableModifier[null]
 			)
 			)=>
 			(
@@ -4637,101 +5100,18 @@ ruleXVariableDeclaration returns [Boolean current=false]
 						associateWithSemanticElement();
 					}
 				)
-				(
-					(
-						(
-							(
-								(
-									{
-										markLeaf(elementTypeProvider.getXVariableDeclaration_WriteableVarKeyword_0_0_1_0_0_0_0ElementType());
-									}
-									lv_writeable_1_0='var'
-									{
-										doneLeaf(lv_writeable_1_0);
-									}
-									{
-										if (!$current) {
-											associateWithSemanticElement();
-											$current = true;
-										}
-									}
-								)
-							)
-							    |
-							{
-								markLeaf(elementTypeProvider.getXVariableDeclaration_ValKeyword_0_0_1_0_0_1ElementType());
-							}
-							otherlv_2='val'
-							{
-								doneLeaf(otherlv_2);
-							}
-						)
-						(
-							(
-								{
-									markLeaf(elementTypeProvider.getXVariableDeclaration_ExtensionExtensionKeyword_0_0_1_0_1_0ElementType());
-								}
-								lv_extension_3_0='extension'
-								{
-									doneLeaf(lv_extension_3_0);
-								}
-								{
-									if (!$current) {
-										associateWithSemanticElement();
-										$current = true;
-									}
-								}
-							)
-						)?
-					)
-					    |
-					(
-						(
-							(
-								{
-									markLeaf(elementTypeProvider.getXVariableDeclaration_ExtensionExtensionKeyword_0_0_1_1_0_0ElementType());
-								}
-								lv_extension_4_0='extension'
-								{
-									doneLeaf(lv_extension_4_0);
-								}
-								{
-									if (!$current) {
-										associateWithSemanticElement();
-										$current = true;
-									}
-								}
-							)
-						)
-						(
-							(
-								(
-									{
-										markLeaf(elementTypeProvider.getXVariableDeclaration_WriteableVarKeyword_0_0_1_1_1_0_0ElementType());
-									}
-									lv_writeable_5_0='var'
-									{
-										doneLeaf(lv_writeable_5_0);
-									}
-									{
-										if (!$current) {
-											associateWithSemanticElement();
-											$current = true;
-										}
-									}
-								)
-							)
-							    |
-							{
-								markLeaf(elementTypeProvider.getXVariableDeclaration_ValKeyword_0_0_1_1_1_1ElementType());
-							}
-							otherlv_6='val'
-							{
-								doneLeaf(otherlv_6);
-							}
-						)
-					)
-				)
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+					markComposite(elementTypeProvider.getXVariableDeclaration_VariableModifierParserRuleCall_0_0_1ElementType());
+				}
+				this_VariableModifier_1=ruleVariableModifier[$current]
+				{
+					$current = $this_VariableModifier_1.current;
+					doneComposite();
+				}
 			)
 		)
 		(
@@ -4755,7 +5135,7 @@ ruleXVariableDeclaration returns [Boolean current=false]
 							{
 								markComposite(elementTypeProvider.getXVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_1_0_0_0_0ElementType());
 							}
-							lv_type_7_0=ruleJvmTypeReference
+							lv_type_2_0=ruleJvmTypeReference
 							{
 								doneComposite();
 								if(!$current) {
@@ -4770,7 +5150,7 @@ ruleXVariableDeclaration returns [Boolean current=false]
 							{
 								markComposite(elementTypeProvider.getXVariableDeclaration_NameInnerVarIDParserRuleCall_1_0_0_1_0ElementType());
 							}
-							lv_name_8_0=ruleInnerVarID
+							lv_name_3_0=ruleInnerVarID
 							{
 								doneComposite();
 								if(!$current) {
@@ -4788,7 +5168,7 @@ ruleXVariableDeclaration returns [Boolean current=false]
 					{
 						markComposite(elementTypeProvider.getXVariableDeclaration_NameInnerVarIDParserRuleCall_1_1_0ElementType());
 					}
-					lv_name_9_0=ruleInnerVarID
+					lv_name_4_0=ruleInnerVarID
 					{
 						doneComposite();
 						if(!$current) {
@@ -4803,16 +5183,16 @@ ruleXVariableDeclaration returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getXVariableDeclaration_EqualsSignKeyword_2_0ElementType());
 			}
-			otherlv_10='='
+			otherlv_5='='
 			{
-				doneLeaf(otherlv_10);
+				doneLeaf(otherlv_5);
 			}
 			(
 				(
 					{
 						markComposite(elementTypeProvider.getXVariableDeclaration_RightXExpressionParserRuleCall_2_1_0ElementType());
 					}
-					lv_right_11_0=ruleXExpression
+					lv_right_6_0=ruleXExpression
 					{
 						doneComposite();
 						if(!$current) {
@@ -4823,6 +5203,227 @@ ruleXVariableDeclaration returns [Boolean current=false]
 				)
 			)
 		)?
+	)
+;
+
+//Entry rule entryRuleInitializedVariableDeclaration
+entryRuleInitializedVariableDeclaration returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getInitializedVariableDeclarationElementType()); }
+	iv_ruleInitializedVariableDeclaration=ruleInitializedVariableDeclaration
+	{ $current=$iv_ruleInitializedVariableDeclaration.current; }
+	EOF;
+
+// Rule InitializedVariableDeclaration
+ruleInitializedVariableDeclaration returns [Boolean current=false]
+:
+	(
+		(
+			{
+				precedeComposite(elementTypeProvider.getInitializedVariableDeclaration_XtendVariableDeclarationAction_0ElementType());
+				doneComposite();
+				associateWithSemanticElement();
+			}
+		)
+		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
+			markComposite(elementTypeProvider.getInitializedVariableDeclaration_VariableModifierParserRuleCall_1ElementType());
+		}
+		this_VariableModifier_1=ruleVariableModifier[$current]
+		{
+			$current = $this_VariableModifier_1.current;
+			doneComposite();
+		}
+		(
+			(
+				((
+					(
+						(
+							ruleJvmTypeReference
+						)
+					)
+					(
+						(
+							ruleInnerVarID
+						)
+					)
+				)
+				)=>
+				(
+					(
+						(
+							{
+								markComposite(elementTypeProvider.getInitializedVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_2_0_0_0_0ElementType());
+							}
+							lv_type_2_0=ruleJvmTypeReference
+							{
+								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+						)
+					)
+					(
+						(
+							{
+								markComposite(elementTypeProvider.getInitializedVariableDeclaration_NameInnerVarIDParserRuleCall_2_0_0_1_0ElementType());
+							}
+							lv_name_3_0=ruleInnerVarID
+							{
+								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+						)
+					)
+				)
+			)
+			    |
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getInitializedVariableDeclaration_NameInnerVarIDParserRuleCall_2_1_0ElementType());
+					}
+					lv_name_4_0=ruleInnerVarID
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)
+		{
+			markLeaf(elementTypeProvider.getInitializedVariableDeclaration_EqualsSignKeyword_3ElementType());
+		}
+		otherlv_5='='
+		{
+			doneLeaf(otherlv_5);
+		}
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getInitializedVariableDeclaration_RightXExpressionParserRuleCall_4_0ElementType());
+				}
+				lv_right_6_0=ruleXExpression
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)
+	)
+;
+
+
+// Rule VariableModifier
+ruleVariableModifier[Boolean in_current]  returns [Boolean current=in_current]
+:
+	(
+		(
+			(
+				(
+					(
+						{
+							markLeaf(elementTypeProvider.getVariableModifier_WriteableVarKeyword_0_0_0_0ElementType());
+						}
+						lv_writeable_0_0='var'
+						{
+							doneLeaf(lv_writeable_0_0);
+						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+				    |
+				{
+					markLeaf(elementTypeProvider.getVariableModifier_ValKeyword_0_0_1ElementType());
+				}
+				otherlv_1='val'
+				{
+					doneLeaf(otherlv_1);
+				}
+			)
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getVariableModifier_ExtensionExtensionKeyword_0_1_0ElementType());
+					}
+					lv_extension_2_0='extension'
+					{
+						doneLeaf(lv_extension_2_0);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)?
+		)
+		    |
+		(
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getVariableModifier_ExtensionExtensionKeyword_1_0_0ElementType());
+					}
+					lv_extension_3_0='extension'
+					{
+						doneLeaf(lv_extension_3_0);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+			(
+				(
+					(
+						{
+							markLeaf(elementTypeProvider.getVariableModifier_WriteableVarKeyword_1_1_0_0ElementType());
+						}
+						lv_writeable_4_0='var'
+						{
+							doneLeaf(lv_writeable_4_0);
+						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+				    |
+				{
+					markLeaf(elementTypeProvider.getVariableModifier_ValKeyword_1_1_1ElementType());
+				}
+				otherlv_5='val'
+				{
+					doneLeaf(otherlv_5);
+				}
+			)
+		)
 	)
 ;
 
@@ -6963,134 +7564,6 @@ ruleXExpression returns [Boolean current=false]
 		$current = $this_XAssignment_0.current;
 		doneComposite();
 	}
-;
-
-//Entry rule entryRuleXAssignment
-entryRuleXAssignment returns [Boolean current=false]:
-	{ markComposite(elementTypeProvider.getXAssignmentElementType()); }
-	iv_ruleXAssignment=ruleXAssignment
-	{ $current=$iv_ruleXAssignment.current; }
-	EOF;
-
-// Rule XAssignment
-ruleXAssignment returns [Boolean current=false]
-:
-	(
-		(
-			(
-				{
-					precedeComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
-					doneComposite();
-					associateWithSemanticElement();
-				}
-			)
-			(
-				(
-					{
-						if (!$current) {
-							associateWithSemanticElement();
-							$current = true;
-						}
-					}
-					{
-						markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
-					}
-					ruleFeatureCallID
-					{
-						doneComposite();
-					}
-				)
-			)
-			{
-				markComposite(elementTypeProvider.getXAssignment_OpSingleAssignParserRuleCall_0_2ElementType());
-			}
-			ruleOpSingleAssign
-			{
-				doneComposite();
-			}
-			(
-				(
-					{
-						markComposite(elementTypeProvider.getXAssignment_ValueXAssignmentParserRuleCall_0_3_0ElementType());
-					}
-					lv_value_3_0=ruleXAssignment
-					{
-						doneComposite();
-						if(!$current) {
-							associateWithSemanticElement();
-							$current = true;
-						}
-					}
-				)
-			)
-		)
-		    |
-		(
-			{
-				markComposite(elementTypeProvider.getXAssignment_XOrExpressionParserRuleCall_1_0ElementType());
-			}
-			this_XOrExpression_4=ruleXOrExpression
-			{
-				$current = $this_XOrExpression_4.current;
-				doneComposite();
-			}
-			(
-				(
-					((
-						(
-						)
-						(
-							(
-								ruleOpMultiAssign
-							)
-						)
-					)
-					)=>
-					(
-						(
-							{
-								precedeComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
-								doneComposite();
-								associateWithSemanticElement();
-							}
-						)
-						(
-							(
-								{
-									if (!$current) {
-										associateWithSemanticElement();
-										$current = true;
-									}
-								}
-								{
-									markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
-								}
-								ruleOpMultiAssign
-								{
-									doneComposite();
-								}
-							)
-						)
-					)
-				)
-				(
-					(
-						{
-							markComposite(elementTypeProvider.getXAssignment_RightOperandXAssignmentParserRuleCall_1_1_1_0ElementType());
-						}
-						lv_rightOperand_7_0=ruleXAssignment
-						{
-							doneComposite();
-							if(!$current) {
-								associateWithSemanticElement();
-								$current = true;
-							}
-						}
-					)
-				)
-			)?
-		)
-	)
 ;
 
 //Entry rule entryRuleOpSingleAssign
@@ -10252,41 +10725,7 @@ ruleXExpressionOrVarDeclaration returns [Boolean current=false]
 			((
 				(
 				)
-				(
-					(
-						(
-							(
-								(
-									'var'
-								)
-							)
-							    |
-							'val'
-						)
-						(
-							(
-								'extension'
-							)
-						)?
-					)
-					    |
-					(
-						(
-							(
-								'extension'
-							)
-						)
-						(
-							(
-								(
-									'var'
-								)
-							)
-							    |
-							'val'
-						)
-					)
-				)
+				ruleVariableModifier[null]
 			)
 			)=>
 			{
@@ -10837,121 +11276,6 @@ ruleXReturnExpression returns [Boolean current=false]
 				}
 			)
 		)?
-	)
-;
-
-//Entry rule entryRuleXTryCatchFinallyExpression
-entryRuleXTryCatchFinallyExpression returns [Boolean current=false]:
-	{ markComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); }
-	iv_ruleXTryCatchFinallyExpression=ruleXTryCatchFinallyExpression
-	{ $current=$iv_ruleXTryCatchFinallyExpression.current; }
-	EOF;
-
-// Rule XTryCatchFinallyExpression
-ruleXTryCatchFinallyExpression returns [Boolean current=false]
-:
-	(
-		(
-			{
-				precedeComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
-				doneComposite();
-				associateWithSemanticElement();
-			}
-		)
-		{
-			markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_TryKeyword_1ElementType());
-		}
-		otherlv_1='try'
-		{
-			doneLeaf(otherlv_1);
-		}
-		(
-			(
-				{
-					markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
-				}
-				lv_expression_2_0=ruleXExpression
-				{
-					doneComposite();
-					if(!$current) {
-						associateWithSemanticElement();
-						$current = true;
-					}
-				}
-			)
-		)
-		(
-			(
-				(
-					('catch')=>
-					(
-						{
-							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_3_0_0_0ElementType());
-						}
-						lv_catchClauses_3_0=ruleXCatchClause
-						{
-							doneComposite();
-							if(!$current) {
-								associateWithSemanticElement();
-								$current = true;
-							}
-						}
-					)
-				)+
-				(
-					(
-						('finally')=>
-						{
-							markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_3_0_1_0ElementType());
-						}
-						otherlv_4='finally'
-						{
-							doneLeaf(otherlv_4);
-						}
-					)
-					(
-						(
-							{
-								markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_0_1_1_0ElementType());
-							}
-							lv_finallyExpression_5_0=ruleXExpression
-							{
-								doneComposite();
-								if(!$current) {
-									associateWithSemanticElement();
-									$current = true;
-								}
-							}
-						)
-					)
-				)?
-			)
-			    |
-			(
-				{
-					markLeaf(elementTypeProvider.getXTryCatchFinallyExpression_FinallyKeyword_3_1_0ElementType());
-				}
-				otherlv_6='finally'
-				{
-					doneLeaf(otherlv_6);
-				}
-				(
-					(
-						{
-							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_1_1_0ElementType());
-						}
-						lv_finallyExpression_7_0=ruleXExpression
-						{
-							doneComposite();
-							if(!$current) {
-								associateWithSemanticElement();
-								$current = true;
-							}
-						}
-					)
-				)
-			)
-		)
 	)
 ;
 

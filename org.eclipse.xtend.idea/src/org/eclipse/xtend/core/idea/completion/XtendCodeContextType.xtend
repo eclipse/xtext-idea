@@ -118,7 +118,7 @@ abstract class XtendCodeContextType extends TemplateContextType {
 		new() {
 			super("xtend.statement", "Statement", Generic)
 			tokenSets += tokenSetProvider.defaultTokens
-			followElements += grammarAccess.XVariableDeclarationAccess.valKeyword_0_0_1_0_0_1
+			followElements += grammarAccess.variableModifierAccess.valKeyword_0_0_1
 		}
 
 	}
