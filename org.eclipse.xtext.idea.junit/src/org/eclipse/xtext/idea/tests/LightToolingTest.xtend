@@ -102,7 +102,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		}
 	}
 
-	public static def void addFacetToModule(Module module, String languageId) {
+	static def void addFacetToModule(Module module, String languageId) {
 		val mnr = FacetManager.getInstance(module)
 		val facetType = FacetTypeRegistry.getInstance().facetTypes.findFirst [ FacetType it |
 			it.stringId == languageId

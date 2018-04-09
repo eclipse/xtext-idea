@@ -116,9 +116,9 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 		]
 	}
 
-	private final static String START_SELECTION_MARKER = "<START_SELECTION>"
-	private final static String END_SELECTION_MARKER = "<END_SELECTION>"
-	private final static String SELECTION_MARKER = "<CURSOR>"
+	final static String START_SELECTION_MARKER = "<START_SELECTION>"
+	final static String END_SELECTION_MARKER = "<END_SELECTION>"
+	final static String SELECTION_MARKER = "<CURSOR>"
 	
 	protected def void insertAndAdjust(InsertionContext context, String toInsert) {
 		val startIndex = toInsert.indexOf(START_SELECTION_MARKER)
