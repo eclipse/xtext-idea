@@ -29,7 +29,6 @@ class XtextWizardStep extends ModuleWizardStep {
 	JTextField nameField
 	JTextField extensionField
 
-	JCheckBox idea
 	// JCheckBox eclipse
 	JCheckBox web
 	JCheckBox test
@@ -47,7 +46,6 @@ class XtextWizardStep extends ModuleWizardStep {
 		try {
 			if (mainPanel === null) {
 				mainPanel = createMainPanel()
-				idea.selected = true
 			}
 			return mainPanel
 		} catch (Exception exception) {
@@ -65,7 +63,6 @@ class XtextWizardStep extends ModuleWizardStep {
 			row [label(" ")]
 
 			row [separator("Facets")]
-			row [idea = checkBox("Intellij Idea Plugin")]
 			// row [eclipse = checkBox("Eclipse Plugin")]
 			row [web = checkBox("Web Integration")]
 			row [test = checkBox("Testing Support")]
@@ -90,8 +87,7 @@ class XtextWizardStep extends ModuleWizardStep {
 		config.language.fileExtensions = FileExtensions.fromString(extensionField.text)
 
 		config.runtimeProject.enabled = true
-		config.ideProject.enabled = idea.selected || web.selected
-		config.intellijProject.enabled = idea.selected
+		config.ideProject.enabled = web.selected
 		// config.uiProject.enabled = eclipse.selected
 		config.webProject.enabled = web.selected
 		config.enabledProjects.filter(TestedProjectDescriptor).forEach[testProject.enabled = test.selected]
