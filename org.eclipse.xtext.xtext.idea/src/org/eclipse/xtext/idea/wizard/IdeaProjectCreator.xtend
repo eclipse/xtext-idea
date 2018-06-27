@@ -76,7 +76,7 @@ class IdeaProjectCreator implements ProjectsCreator {
 			project.sourceFolder(it)
 		]
 		project.sourceFolders.forEach [
-			val VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it)
+			val VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it.path)
 			var rootType = JavaSourceRootType.SOURCE
 			// val testFolders = Outlet.testOutlets.map [
 			// project.sourceFolder(it)
@@ -85,7 +85,7 @@ class IdeaProjectCreator implements ProjectsCreator {
 			// if (testFolders.contains(it))
 			// rootType = JavaSourceRootType.TEST_SOURCE
 			// }
-			val isGen = genFolders.contains(it)
+			val isGen = genFolders.contains(it.path)
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", isGen)
 			contentEntry.addSourceFolder(sourceRoot, rootType, properties)
 		]
