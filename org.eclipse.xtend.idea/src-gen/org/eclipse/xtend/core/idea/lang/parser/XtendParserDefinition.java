@@ -474,19 +474,19 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getFullJvmFormalParameterElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiTypeReferenceParserRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMultiCatchTypeElementType()) {
+			if (elementType == elementTypeProvider.getMultiTypeReferenceElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType()) {
+			if (elementType == elementTypeProvider.getMultiTypeReference_JvmTypeReferenceParserRuleCall_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getMultiTypeReference_JvmSynonymTypeReferenceReferencesAction_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getMultiTypeReference_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXStringLiteralElementType()) {
@@ -528,7 +528,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getXCasePart_XCasePartAction_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getXCasePart_TypeGuardMultiTypeReferenceParserRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType()) {

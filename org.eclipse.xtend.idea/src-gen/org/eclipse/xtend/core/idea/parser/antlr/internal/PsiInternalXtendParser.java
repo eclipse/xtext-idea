@@ -12527,11 +12527,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType());
+              					markComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiTypeReferenceParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_60);
-            lv_parameterType_1_0=ruleMultiCatchType();
+            lv_parameterType_1_0=ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return current;
@@ -12591,24 +12591,24 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return current;
     }
-    public final Boolean entryRuleMultiCatchType() throws RecognitionException {
+    public final Boolean entryRuleMultiTypeReference() throws RecognitionException {
         Boolean current = false;
 
-        Boolean iv_ruleMultiCatchType = null;
+        Boolean iv_ruleMultiTypeReference = null;
 
 
         try {
             {
             if ( state.backtracking==0 ) {
-               markComposite(elementTypeProvider.getMultiCatchTypeElementType()); 
+               markComposite(elementTypeProvider.getMultiTypeReferenceElementType()); 
             }
             pushFollow(FOLLOW_1);
-            iv_ruleMultiCatchType=ruleMultiCatchType();
+            iv_ruleMultiTypeReference=ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleMultiCatchType; 
+               current =iv_ruleMultiTypeReference; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -12623,7 +12623,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return current;
     }
-    public final Boolean ruleMultiCatchType() throws RecognitionException {
+    public final Boolean ruleMultiTypeReference() throws RecognitionException {
         Boolean current = false;
 
         Token otherlv_2=null;
@@ -12637,7 +12637,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite(elementTypeProvider.getMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType());
+              			markComposite(elementTypeProvider.getMultiTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_67);
@@ -12663,7 +12663,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					precedeComposite(elementTypeProvider.getMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType());
+                      					precedeComposite(elementTypeProvider.getMultiTypeReference_JvmSynonymTypeReferenceReferencesAction_1_0ElementType());
                       					doneComposite();
                       					associateWithSemanticElement();
                       				
@@ -12686,7 +12686,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      					markLeaf(elementTypeProvider.getMultiCatchType_VerticalLineKeyword_1_1_0ElementType());
+                    	      					markLeaf(elementTypeProvider.getMultiTypeReference_VerticalLineKeyword_1_1_0ElementType());
                     	      				
                     	    }
                     	    otherlv_2=(Token)match(input,KW_VerticalLine,FOLLOW_29); if (state.failed) return current;
@@ -12699,7 +12699,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite(elementTypeProvider.getMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType());
+                    	      							markComposite(elementTypeProvider.getMultiTypeReference_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_67);
@@ -13367,11 +13367,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite(elementTypeProvider.getXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType());
+                      					markComposite(elementTypeProvider.getXCasePart_TypeGuardMultiTypeReferenceParserRuleCall_1_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_70);
-                    lv_typeGuard_1_0=ruleMultiCatchType();
+                    lv_typeGuard_1_0=ruleMultiTypeReference();
 
                     state._fsp--;
                     if (state.failed) return current;

@@ -5226,9 +5226,9 @@ ruleFullJvmFormalParameter returns [Boolean current=false]
 		(
 			(
 				{
-					markComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiCatchTypeParserRuleCall_1_0ElementType());
+					markComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeMultiTypeReferenceParserRuleCall_1_0ElementType());
 				}
-				lv_parameterType_1_0=ruleMultiCatchType
+				lv_parameterType_1_0=ruleMultiTypeReference
 				{
 					doneComposite();
 					if(!$current) {
@@ -5256,19 +5256,19 @@ ruleFullJvmFormalParameter returns [Boolean current=false]
 	)
 ;
 
-//Entry rule entryRuleMultiCatchType
-entryRuleMultiCatchType returns [Boolean current=false]:
-	{ markComposite(elementTypeProvider.getMultiCatchTypeElementType()); }
-	iv_ruleMultiCatchType=ruleMultiCatchType
-	{ $current=$iv_ruleMultiCatchType.current; }
+//Entry rule entryRuleMultiTypeReference
+entryRuleMultiTypeReference returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getMultiTypeReferenceElementType()); }
+	iv_ruleMultiTypeReference=ruleMultiTypeReference
+	{ $current=$iv_ruleMultiTypeReference.current; }
 	EOF;
 
-// Rule MultiCatchType
-ruleMultiCatchType returns [Boolean current=false]
+// Rule MultiTypeReference
+ruleMultiTypeReference returns [Boolean current=false]
 :
 	(
 		{
-			markComposite(elementTypeProvider.getMultiCatchType_JvmTypeReferenceParserRuleCall_0ElementType());
+			markComposite(elementTypeProvider.getMultiTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
 		}
 		this_JvmTypeReference_0=ruleJvmTypeReference
 		{
@@ -5278,14 +5278,14 @@ ruleMultiCatchType returns [Boolean current=false]
 		(
 			(
 				{
-					precedeComposite(elementTypeProvider.getMultiCatchType_JvmSynonymTypeReferenceReferencesAction_1_0ElementType());
+					precedeComposite(elementTypeProvider.getMultiTypeReference_JvmSynonymTypeReferenceReferencesAction_1_0ElementType());
 					doneComposite();
 					associateWithSemanticElement();
 				}
 			)
 			(
 				{
-					markLeaf(elementTypeProvider.getMultiCatchType_VerticalLineKeyword_1_1_0ElementType());
+					markLeaf(elementTypeProvider.getMultiTypeReference_VerticalLineKeyword_1_1_0ElementType());
 				}
 				otherlv_2='|'
 				{
@@ -5294,7 +5294,7 @@ ruleMultiCatchType returns [Boolean current=false]
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getMultiCatchType_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType());
+							markComposite(elementTypeProvider.getMultiTypeReference_ReferencesJvmTypeReferenceParserRuleCall_1_1_1_0ElementType());
 						}
 						lv_references_3_0=ruleJvmTypeReference
 						{
@@ -5573,9 +5573,9 @@ ruleXCasePart returns [Boolean current=false]
 		(
 			(
 				{
-					markComposite(elementTypeProvider.getXCasePart_TypeGuardMultiCatchTypeParserRuleCall_1_0ElementType());
+					markComposite(elementTypeProvider.getXCasePart_TypeGuardMultiTypeReferenceParserRuleCall_1_0ElementType());
 				}
-				lv_typeGuard_1_0=ruleMultiCatchType
+				lv_typeGuard_1_0=ruleMultiTypeReference
 				{
 					doneComposite();
 					if(!$current) {
