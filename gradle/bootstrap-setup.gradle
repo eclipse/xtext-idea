@@ -15,7 +15,7 @@ repositories {
 }
 
 // The Xtend compiler version to use
-def bootstrapXtendVersion = '2.14.0'
+def bootstrapXtendVersion = '2.15.0'
 
 configurations {
 	xtendCompiler {
@@ -26,8 +26,6 @@ configurations {
 					useVersion(bootstrapXtendVersion)
 				if (requested.group == 'com.google.inject' && requested.name == 'guice')
 					useVersion(versions.guice)
-				if (requested.group == 'org.eclipse.jdt' && requested.name == 'org.eclipse.jdt.core')
-					useVersion(versions.jdtCore)
 			}
 		}
 		exclude group: 'asm'
