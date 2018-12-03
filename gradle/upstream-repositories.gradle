@@ -30,7 +30,7 @@ repositories {
     maven { url jenkinsPipelineRepo('xtext-lib','autodetect') }
     maven { url jenkinsPipelineRepo('xtext-core','autodetect') }
     maven { url jenkinsPipelineRepo('xtext-extras','autodetect') }
-    maven { url jenkinsPipelineRepo('xtext-xtend','autodetect') }
+    maven { url "$JENKINS_URL/job/xtext-xtend/job/release_2.16.0/lastSuccessfulBuild/artifact/build/maven-repository/" }
   } else {
     mavenLocal()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
