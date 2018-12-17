@@ -1,11 +1,10 @@
 package org.eclipse.xtext.serializer.idea.lang.psi.impl;
 
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageFileType;
 import org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageLanguage;
-
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
 
 public final class AssignmentFinderTestLanguageFileImpl extends BaseXtextFile {
 

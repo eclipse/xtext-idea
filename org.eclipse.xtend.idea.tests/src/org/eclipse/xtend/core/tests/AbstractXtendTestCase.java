@@ -7,29 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
-import static com.google.common.collect.Lists.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.xtend.XtendAnnotationType;
-import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendConstructor;
-import org.eclipse.xtend.core.xtend.XtendEnum;
-import org.eclipse.xtend.core.xtend.XtendField;
-import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendInterface;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtend.core.tests.util.TemporaryFolder;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtend.core.xtend.*;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
@@ -38,11 +29,12 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * Abstract base for Xtend tests.

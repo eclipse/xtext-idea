@@ -16,9 +16,7 @@ import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState
 
 @State(name = "org.eclipse.xtext.idea.example.entities.EntitiesGenerator", storages = #[
-		@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-		@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-				+ "/EntitiesGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)])
+		@Storage("EntitiesGeneratorConfig.xml")])
  class EntitiesFacetConfiguration extends XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>{
 
 }

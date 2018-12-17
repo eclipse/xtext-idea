@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.unassignedtext.idea;
 
-import org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageLanguage;
 
 public class UnassignedTextTestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr.idea;
 
-import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationBug269362TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationBug269362TestLanguageLanguage;
 
 public class SerializationBug269362TestLanguageExtensionFactory implements ExtensionFactory {
 

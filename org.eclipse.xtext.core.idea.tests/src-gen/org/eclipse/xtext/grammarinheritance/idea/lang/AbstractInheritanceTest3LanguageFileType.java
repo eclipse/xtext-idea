@@ -1,12 +1,11 @@
 package org.eclipse.xtext.grammarinheritance.idea.lang;
 
-import javax.swing.Icon;
-
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.eclipse.xtext.idea.Icons;
 import org.jetbrains.annotations.NonNls;
 
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.*;
 
 public class AbstractInheritanceTest3LanguageFileType extends LanguageFileType {
 

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr.idea.highlighting;
 
-import org.eclipse.xtext.parsetree.reconstr.idea.lang.ComplexReconstrTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parsetree.reconstr.idea.lang.ComplexReconstrTestLanguageLanguage;
 
 
 public class ComplexReconstrTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

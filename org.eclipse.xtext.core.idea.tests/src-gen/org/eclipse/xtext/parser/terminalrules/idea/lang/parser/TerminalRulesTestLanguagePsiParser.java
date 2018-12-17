@@ -1,18 +1,17 @@
 package org.eclipse.xtext.parser.terminalrules.idea.lang.parser;
 
-import static java.util.Collections.emptySet;
-
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.TerminalRulesTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.PsiInternalTerminalRulesTestLanguageParser;
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Set;
+
+import static java.util.Collections.emptySet;
 
 public class TerminalRulesTestLanguagePsiParser extends AbstractXtextPsiParser {
 

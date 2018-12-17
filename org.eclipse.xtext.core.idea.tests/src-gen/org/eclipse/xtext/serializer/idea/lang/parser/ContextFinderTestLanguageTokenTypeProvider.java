@@ -1,14 +1,13 @@
 package org.eclipse.xtext.serializer.idea.lang.parser;
 
-import static org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalContextFinderTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageLanguage;
 import org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalContextFinderTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalContextFinderTestLanguageParser.*;
 
 @Singleton public class ContextFinderTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

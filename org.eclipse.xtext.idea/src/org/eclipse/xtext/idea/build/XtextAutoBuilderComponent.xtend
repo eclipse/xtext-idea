@@ -94,15 +94,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 @State(
 	name='XtextAutoBuilderState', 
 	storages = #[
-		@Storage(
-			id="other", 
-			file = StoragePathMacros.WORKSPACE_FILE
-		),
-		@Storage(
-			id = "dir", 
-			file = StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml", 
-			scheme = StorageScheme.DIRECTORY_BASED
-		)])
+		@Storage(StoragePathMacros.WORKSPACE_FILE),
+		@Storage("xtextAutoBuilderState.xml")])
 @Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
 	
 	volatile boolean disposed

@@ -1,14 +1,13 @@
 package org.eclipse.xtext.validation.idea.lang.parser;
 
-import static org.eclipse.xtext.validation.idea.parser.antlr.internal.PsiInternalConcreteSyntaxValidationTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.validation.idea.lang.ConcreteSyntaxValidationTestLanguageLanguage;
 import org.eclipse.xtext.validation.idea.parser.antlr.internal.PsiInternalConcreteSyntaxValidationTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.validation.idea.parser.antlr.internal.PsiInternalConcreteSyntaxValidationTestLanguageParser.*;
 
 @Singleton public class ConcreteSyntaxValidationTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

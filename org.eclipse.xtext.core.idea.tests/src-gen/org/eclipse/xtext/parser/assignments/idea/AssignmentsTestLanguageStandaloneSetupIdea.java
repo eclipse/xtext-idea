@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.assignments.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parser.assignments.AssignmentsTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.assignments.AssignmentsTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class AssignmentsTestLanguageStandaloneSetupIdea extends AssignmentsTestLanguageStandaloneSetupGenerated {
 

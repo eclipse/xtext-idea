@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.bug419429.idea;
 
-import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429Language;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429Language;
 
 public class Bug419429ExtensionFactory implements ExtensionFactory {
 

@@ -1,17 +1,16 @@
 package org.eclipse.xtext.parser.terminalrules.idea.lang.parser;
 
-import org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug297105TestLanguageFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug297105TestLanguageElementTypeProvider;
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug297105TestLanguageElementTypeProvider;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug297105TestLanguageFileImpl;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 
 public class Bug297105TestLanguageParserDefinition extends AbstractXtextParserDefinition {
 

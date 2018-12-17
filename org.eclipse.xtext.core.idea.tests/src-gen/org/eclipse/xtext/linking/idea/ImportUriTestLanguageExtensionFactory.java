@@ -1,8 +1,7 @@
 package org.eclipse.xtext.linking.idea;
 
-import org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageLanguage;
 
 public class ImportUriTestLanguageExtensionFactory implements ExtensionFactory {
 

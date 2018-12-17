@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.unassignedtext.idea.highlighting;
 
-import org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageLanguage;
 
 
 public class UnassignedTextTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

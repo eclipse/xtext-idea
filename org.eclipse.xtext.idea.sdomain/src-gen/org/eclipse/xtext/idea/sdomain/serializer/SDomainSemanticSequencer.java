@@ -8,24 +8,19 @@
 package org.eclipse.xtext.idea.sdomain.serializer;
 
 import com.google.inject.Inject;
-import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.idea.sdomain.sDomain.Datatype;
-import org.eclipse.xtext.idea.sdomain.sDomain.Entity;
-import org.eclipse.xtext.idea.sdomain.sDomain.File;
-import org.eclipse.xtext.idea.sdomain.sDomain.Import;
-import org.eclipse.xtext.idea.sdomain.sDomain.Namespace;
-import org.eclipse.xtext.idea.sdomain.sDomain.Property;
-import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
+import org.eclipse.xtext.idea.sdomain.sDomain.*;
 import org.eclipse.xtext.idea.sdomain.services.SDomainGrammarAccess;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+
+import java.util.Set;
 
 @SuppressWarnings("all")
 public class SDomainSemanticSequencer extends AbstractDelegatingSemanticSequencer {

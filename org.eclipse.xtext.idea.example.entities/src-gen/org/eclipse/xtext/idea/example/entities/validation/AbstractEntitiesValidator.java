@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.example.entities.validation;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xbase.validation.XbaseValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractEntitiesValidator extends XbaseValidator {
 	

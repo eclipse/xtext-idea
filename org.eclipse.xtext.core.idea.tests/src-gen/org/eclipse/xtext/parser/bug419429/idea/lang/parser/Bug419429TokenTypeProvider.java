@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parser.bug419429.idea.lang.parser;
 
-import static org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal.PsiInternalBug419429Parser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429Language;
 import org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal.PsiInternalBug419429Parser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal.PsiInternalBug419429Parser.*;
 
 @Singleton public class Bug419429TokenTypeProvider implements TokenTypeProvider {
 

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.formatter.idea;
 
-import org.eclipse.xtext.parsetree.formatter.idea.lang.FormatterTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.formatter.idea.lang.FormatterTestLanguageLanguage;
 
 public class FormatterTestLanguageExtensionFactory implements ExtensionFactory {
 

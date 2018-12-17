@@ -1,8 +1,7 @@
 package org.eclipse.xtext.linking.idea;
 
-import org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageLanguage;
 
 public class IgnoreCaseImportsTestLanguageExtensionFactory implements ExtensionFactory {
 

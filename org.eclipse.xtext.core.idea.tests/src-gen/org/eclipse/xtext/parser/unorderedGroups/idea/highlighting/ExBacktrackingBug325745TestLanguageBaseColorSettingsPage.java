@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.unorderedGroups.idea.highlighting;
 
-import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExBacktrackingBug325745TestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExBacktrackingBug325745TestLanguageLanguage;
 
 
 public class ExBacktrackingBug325745TestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

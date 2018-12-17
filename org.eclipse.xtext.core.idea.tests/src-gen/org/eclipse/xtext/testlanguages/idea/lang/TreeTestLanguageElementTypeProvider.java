@@ -1,17 +1,16 @@
 package org.eclipse.xtext.testlanguages.idea.lang;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.TreeTestLanguageFileImpl;
-import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.TreeTestLanguageFileImpl;
+import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
-import com.intellij.psi.tree.IFileElementType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TreeTestLanguageElementTypeProvider implements IElementTypeProvider {
 

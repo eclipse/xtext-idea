@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.impl.idea;
 
-import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageLanguage;
 
 public class CommentAssociationTestLanguageExtensionFactory implements ExtensionFactory {
 

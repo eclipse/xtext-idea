@@ -1,17 +1,16 @@
 package org.eclipse.xtext.parsetree.reconstr.idea.lang.parser;
 
-import org.eclipse.xtext.parsetree.reconstr.idea.lang.psi.impl.SerializationBug269362TestLanguageFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationBug269362TestLanguageElementTypeProvider;
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationBug269362TestLanguageElementTypeProvider;
+import org.eclipse.xtext.parsetree.reconstr.idea.lang.psi.impl.SerializationBug269362TestLanguageFileImpl;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 
 public class SerializationBug269362TestLanguageParserDefinition extends AbstractXtextParserDefinition {
 

@@ -7,10 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.JavaIOFileSystemSupport;
 import org.eclipse.xtend.core.tests.util.TemporaryFolder;
@@ -31,6 +27,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URI;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

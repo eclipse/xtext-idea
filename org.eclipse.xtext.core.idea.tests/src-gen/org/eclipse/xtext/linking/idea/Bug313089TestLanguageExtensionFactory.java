@@ -1,8 +1,7 @@
 package org.eclipse.xtext.linking.idea;
 
-import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageLanguage;
 
 public class Bug313089TestLanguageExtensionFactory implements ExtensionFactory {
 

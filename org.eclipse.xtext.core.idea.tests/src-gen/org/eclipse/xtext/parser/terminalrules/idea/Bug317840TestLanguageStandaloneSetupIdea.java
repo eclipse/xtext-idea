@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.terminalrules.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class Bug317840TestLanguageStandaloneSetupIdea extends Bug317840TestLanguageStandaloneSetupGenerated {
 

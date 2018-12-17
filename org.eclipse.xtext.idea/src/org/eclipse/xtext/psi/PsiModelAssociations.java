@@ -7,6 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi;
 
+import com.google.inject.Singleton;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.impl.source.tree.CompositeElement;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -17,15 +25,6 @@ import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.service.OperationCanceledError;
-
-import com.google.inject.Singleton;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.source.tree.CompositeElement;
 
 @Singleton
 public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAssociator {

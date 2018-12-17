@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.antlr.idea;
 
-import org.eclipse.xtext.parser.antlr.idea.lang.Bug443221TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.antlr.idea.lang.Bug443221TestLanguageLanguage;
 
 public class Bug443221TestLanguageExtensionFactory implements ExtensionFactory {
 

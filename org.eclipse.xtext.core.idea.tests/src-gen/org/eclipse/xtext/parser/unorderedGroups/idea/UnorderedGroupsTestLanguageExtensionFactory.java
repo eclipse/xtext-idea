@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.unorderedGroups.idea;
 
-import org.eclipse.xtext.parser.unorderedGroups.idea.lang.UnorderedGroupsTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.unorderedGroups.idea.lang.UnorderedGroupsTestLanguageLanguage;
 
 public class UnorderedGroupsTestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.keywords.idea;
 
-import org.eclipse.xtext.parser.keywords.idea.lang.KeywordsTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.keywords.idea.lang.KeywordsTestLanguageLanguage;
 
 public class KeywordsTestLanguageExtensionFactory implements ExtensionFactory {
 

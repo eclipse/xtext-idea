@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.formatter.idea.highlighting;
 
-import org.eclipse.xtext.parsetree.formatter.idea.lang.FormatterTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parsetree.formatter.idea.lang.FormatterTestLanguageLanguage;
 
 
 public class FormatterTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

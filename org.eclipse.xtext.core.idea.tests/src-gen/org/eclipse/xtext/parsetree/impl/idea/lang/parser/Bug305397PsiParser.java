@@ -1,18 +1,17 @@
 package org.eclipse.xtext.parsetree.impl.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397ElementTypeProvider;
 import org.eclipse.xtext.parsetree.impl.idea.parser.antlr.internal.PsiInternalBug305397Parser;
 import org.eclipse.xtext.parsetree.impl.services.Bug305397GrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Bug305397PsiParser extends AbstractXtextPsiParser {
 

@@ -5,15 +5,16 @@ package org.eclipse.xtext.purexbase.idea.lang.parser;
 
 import com.google.inject.Inject;
 import com.intellij.lang.PsiBuilder;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.purexbase.idea.lang.PureXbaseElementTypeProvider;
 import org.eclipse.xtext.purexbase.idea.parser.antlr.internal.PsiInternalPureXbaseParser;
 import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PureXbasePsiParser extends AbstractXtextPsiParser {
 

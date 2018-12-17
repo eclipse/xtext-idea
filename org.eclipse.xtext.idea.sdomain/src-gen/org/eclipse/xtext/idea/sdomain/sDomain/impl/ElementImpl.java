@@ -10,9 +10,7 @@
 package org.eclipse.xtext.idea.sdomain.sDomain.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.xtext.idea.sdomain.sDomain.Element;
 import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
 

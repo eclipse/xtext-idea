@@ -1,18 +1,17 @@
 package org.eclipse.xtext.parser.bug419429.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429ElementTypeProvider;
 import org.eclipse.xtext.parser.bug419429.idea.parser.antlr.internal.PsiInternalBug419429Parser;
 import org.eclipse.xtext.parser.bug419429.services.Bug419429GrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Bug419429PsiParser extends AbstractXtextPsiParser {
 

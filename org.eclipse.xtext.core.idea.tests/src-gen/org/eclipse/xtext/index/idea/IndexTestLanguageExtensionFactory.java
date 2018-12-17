@@ -1,8 +1,7 @@
 package org.eclipse.xtext.index.idea;
 
-import org.eclipse.xtext.index.idea.lang.IndexTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.index.idea.lang.IndexTestLanguageLanguage;
 
 public class IndexTestLanguageExtensionFactory implements ExtensionFactory {
 

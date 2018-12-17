@@ -1,7 +1,7 @@
 package org.eclipse.xtext.serializer.idea.highlighting;
 
-import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageLanguage;
 
 
 public class ContextFinderTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

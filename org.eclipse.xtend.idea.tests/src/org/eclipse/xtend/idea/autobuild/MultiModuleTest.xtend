@@ -140,7 +140,7 @@ class MultiModuleTest extends PsiTestCase {
 			val moduleManager = ModuleManager.getInstance(project)
 			val modifiableModuleModel = moduleManager.getModifiableModel()
 			val otherModules = #[]
-			ModuleDeleteProvider.removeModule(moduleA, modifiableModel, otherModules, modifiableModuleModel)
+			ModuleDeleteProvider.removeModule(moduleA, otherModules, modifiableModuleModel)
 			ModifiableModelCommitter.multiCommit(otherModules, modifiableModuleModel)
 			return
 		]

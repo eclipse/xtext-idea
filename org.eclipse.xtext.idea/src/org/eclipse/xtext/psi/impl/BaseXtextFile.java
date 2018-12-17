@@ -7,29 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi.impl;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
-import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
-import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
-import org.eclipse.xtext.idea.util.CancelProgressIndicator;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.psi.PsiEObject;
-import org.eclipse.xtext.psi.XtextPsiUtils;
-import org.eclipse.xtext.psi.stubs.XtextFileStub;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
-import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.OperationCanceledError;
-import org.jetbrains.annotations.NotNull;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -50,6 +27,28 @@ import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.util.indexing.IndexingDataKeys;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
+import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
+import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
+import org.eclipse.xtext.idea.util.CancelProgressIndicator;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.psi.PsiEObject;
+import org.eclipse.xtext.psi.XtextPsiUtils;
+import org.eclipse.xtext.psi.stubs.XtextFileStub;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public abstract class BaseXtextFile extends PsiFileBase {
 	

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.encoding.idea;
 
-import org.eclipse.xtext.parser.encoding.idea.lang.EncodingTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.encoding.idea.lang.EncodingTestLanguageLanguage;
 
 public class EncodingTestLanguageExtensionFactory implements ExtensionFactory {
 

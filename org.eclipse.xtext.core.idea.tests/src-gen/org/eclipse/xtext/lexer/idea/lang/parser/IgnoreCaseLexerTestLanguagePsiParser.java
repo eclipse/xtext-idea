@@ -1,18 +1,17 @@
 package org.eclipse.xtext.lexer.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.lexer.idea.parser.antlr.internal.PsiInternalIgnoreCaseLexerTestLanguageParser;
 import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class IgnoreCaseLexerTestLanguagePsiParser extends AbstractXtextPsiParser {
 

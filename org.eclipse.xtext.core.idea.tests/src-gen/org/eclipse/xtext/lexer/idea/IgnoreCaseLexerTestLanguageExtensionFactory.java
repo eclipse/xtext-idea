@@ -1,8 +1,7 @@
 package org.eclipse.xtext.lexer.idea;
 
-import org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageLanguage;
 
 public class IgnoreCaseLexerTestLanguageExtensionFactory implements ExtensionFactory {
 

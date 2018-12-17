@@ -10,7 +10,6 @@
 package org.eclipse.xtext.idea.example.entities.domainmodel;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**

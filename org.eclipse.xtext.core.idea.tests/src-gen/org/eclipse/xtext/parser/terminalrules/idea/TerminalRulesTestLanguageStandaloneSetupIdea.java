@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.terminalrules.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class TerminalRulesTestLanguageStandaloneSetupIdea extends TerminalRulesTestLanguageStandaloneSetupGenerated {
 

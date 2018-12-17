@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.impl.idea.highlighting;
 
-import org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397Language;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397Language;
 
 
 public class Bug305397BaseColorSettingsPage extends AbstractColorSettingsPage {

@@ -1,10 +1,9 @@
 package org.eclipse.xtext.generator.grammarAccess.idea.highlighting;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.generator.grammarAccess.idea.lang.GrammarAccessTestLanguageLanguage;
+import org.jetbrains.annotations.NotNull;
 
 public class GrammarAccessTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	

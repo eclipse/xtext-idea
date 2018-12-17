@@ -1,14 +1,13 @@
 package org.eclipse.xtext.generator.grammarAccess.idea.lang.parser;
 
-import static org.eclipse.xtext.generator.grammarAccess.idea.parser.antlr.internal.PsiInternalGrammarAccessTestLanguageParser.*;
-
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.generator.grammarAccess.idea.lang.GrammarAccessTestLanguageLanguage;
-import org.eclipse.xtext.generator.grammarAccess.idea.parser.antlr.internal.PsiInternalGrammarAccessTestLanguageParser;
-
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.eclipse.xtext.generator.grammarAccess.idea.lang.GrammarAccessTestLanguageLanguage;
+import org.eclipse.xtext.generator.grammarAccess.idea.parser.antlr.internal.PsiInternalGrammarAccessTestLanguageParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+
+import static org.eclipse.xtext.generator.grammarAccess.idea.parser.antlr.internal.PsiInternalGrammarAccessTestLanguageParser.*;
 
 @Singleton public class GrammarAccessTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

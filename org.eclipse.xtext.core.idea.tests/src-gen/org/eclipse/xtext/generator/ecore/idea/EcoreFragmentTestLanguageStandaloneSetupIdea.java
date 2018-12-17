@@ -1,11 +1,10 @@
 package org.eclipse.xtext.generator.ecore.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class EcoreFragmentTestLanguageStandaloneSetupIdea extends EcoreFragmentTestLanguageStandaloneSetupGenerated {
 

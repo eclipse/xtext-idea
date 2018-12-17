@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parser.indentation.idea.lang.parser;
 
-import static org.eclipse.xtext.parser.indentation.idea.parser.antlr.internal.PsiInternalIndentationAwareTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageLanguage;
 import org.eclipse.xtext.parser.indentation.idea.parser.antlr.internal.PsiInternalIndentationAwareTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parser.indentation.idea.parser.antlr.internal.PsiInternalIndentationAwareTestLanguageParser.*;
 
 @Singleton public class IndentationAwareTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

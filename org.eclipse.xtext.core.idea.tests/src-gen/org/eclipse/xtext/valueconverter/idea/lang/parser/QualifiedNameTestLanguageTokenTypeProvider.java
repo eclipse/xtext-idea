@@ -1,14 +1,13 @@
 package org.eclipse.xtext.valueconverter.idea.lang.parser;
 
-import static org.eclipse.xtext.valueconverter.idea.parser.antlr.internal.PsiInternalQualifiedNameTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageLanguage;
 import org.eclipse.xtext.valueconverter.idea.parser.antlr.internal.PsiInternalQualifiedNameTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.valueconverter.idea.parser.antlr.internal.PsiInternalQualifiedNameTestLanguageParser.*;
 
 @Singleton public class QualifiedNameTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

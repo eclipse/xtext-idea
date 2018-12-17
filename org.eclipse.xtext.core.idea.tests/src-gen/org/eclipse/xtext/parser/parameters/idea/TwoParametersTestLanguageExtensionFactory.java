@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.parameters.idea;
 
-import org.eclipse.xtext.parser.parameters.idea.lang.TwoParametersTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.parameters.idea.lang.TwoParametersTestLanguageLanguage;
 
 public class TwoParametersTestLanguageExtensionFactory implements ExtensionFactory {
 

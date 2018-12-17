@@ -1,8 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea;
 
-import org.eclipse.xtext.testlanguages.idea.lang.LookaheadTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.testlanguages.idea.lang.LookaheadTestLanguageLanguage;
 
 public class LookaheadTestLanguageExtensionFactory implements ExtensionFactory {
 

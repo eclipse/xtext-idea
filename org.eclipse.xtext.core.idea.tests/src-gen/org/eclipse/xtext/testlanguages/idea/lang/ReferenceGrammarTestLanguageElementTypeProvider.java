@@ -1,17 +1,16 @@
 package org.eclipse.xtext.testlanguages.idea.lang;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.ReferenceGrammarTestLanguageFileImpl;
-import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.ReferenceGrammarTestLanguageFileImpl;
+import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
-import com.intellij.psi.tree.IFileElementType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReferenceGrammarTestLanguageElementTypeProvider implements IElementTypeProvider {
 
@@ -305,8 +304,8 @@ public class ReferenceGrammarTestLanguageElementTypeProvider implements IElement
 		public static IGrammarAwareElementType createFarbe_WertGELBKeyword_0_2ElementType() {
 			return new IGrammarAwareElementType("Farbe_WertGELBKeyword_0_2_ELEMENT_TYPE", ReferenceGrammarTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFarbeAccess().getWertGELBKeyword_0_2());
 		}
-		public static IGrammarAwareElementType createFarbe_WertGRÜNKeyword_0_3ElementType() {
-			return new IGrammarAwareElementType("Farbe_WertGRÜNKeyword_0_3_ELEMENT_TYPE", ReferenceGrammarTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFarbeAccess().getWertGRÜNKeyword_0_3());
+		public static IGrammarAwareElementType createFarbe_WertGRÃœNKeyword_0_3ElementType() {
+			return new IGrammarAwareElementType("Farbe_WertGRï¿½NKeyword_0_3_ELEMENT_TYPE", ReferenceGrammarTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFarbeAccess().getWertGRÃœNKeyword_0_3());
 		}
 	}
 
@@ -322,7 +321,7 @@ public class ReferenceGrammarTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType Farbe_WertGELBKeyword_0_2_ELEMENT_TYPE = associate(FarbeFactory.createFarbe_WertGELBKeyword_0_2ElementType());
 
-	public static final IGrammarAwareElementType Farbe_WertGRÜNKeyword_0_3_ELEMENT_TYPE = associate(FarbeFactory.createFarbe_WertGRÜNKeyword_0_3ElementType());
+	public static final IGrammarAwareElementType Farbe_WertGRÃœNKeyword_0_3_ELEMENT_TYPE = associate(FarbeFactory.createFarbe_WertGRÃœNKeyword_0_3ElementType());
 
 	private static class FamilieFactory {
 		public static IGrammarAwareElementType createFamilieElementType() {
@@ -677,8 +676,8 @@ public class ReferenceGrammarTestLanguageElementTypeProvider implements IElement
 		return Farbe_WertGELBKeyword_0_2_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getFarbe_WertGRÜNKeyword_0_3ElementType() {
-		return Farbe_WertGRÜNKeyword_0_3_ELEMENT_TYPE;
+	public IGrammarAwareElementType getFarbe_WertGRÃœNKeyword_0_3ElementType() {
+		return Farbe_WertGRÃœNKeyword_0_3_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getFamilieElementType() {

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal.idea;
 
-import org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageLanguage;
 
 public class RegionAccessTestLanguageExtensionFactory implements ExtensionFactory {
 

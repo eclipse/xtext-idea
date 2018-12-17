@@ -1,11 +1,10 @@
 package org.eclipse.xtext.resource.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.resource.Bug385636StandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.resource.Bug385636StandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class Bug385636StandaloneSetupIdea extends Bug385636StandaloneSetupGenerated {
 

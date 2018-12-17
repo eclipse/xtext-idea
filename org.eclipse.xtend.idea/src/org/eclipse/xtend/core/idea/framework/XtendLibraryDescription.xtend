@@ -78,7 +78,7 @@ class XtendLibraryDescription extends CustomLibraryDescription {
 	}
 
 	protected static def getProviders() {
-		ContainerUtil.findAll(LibraryPresentationProvider.EP_NAME.extensions, XtendLibraryPresentationProvider)
+		ContainerUtil.findAll(LibraryPresentationProvider.EP_NAME.getExtensions, XtendLibraryPresentationProvider)
 	}
 
 }

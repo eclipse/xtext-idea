@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.terminalrules.idea;
 
-import org.eclipse.xtext.parser.terminalrules.idea.lang.EcoreTerminalsTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.EcoreTerminalsTestLanguageLanguage;
 
 public class EcoreTerminalsTestLanguageExtensionFactory implements ExtensionFactory {
 

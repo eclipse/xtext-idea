@@ -1,8 +1,7 @@
 package org.eclipse.xtext.generator.ecore.idea;
 
-import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageLanguage;
 
 public class EcoreFragmentTestLanguageExtensionFactory implements ExtensionFactory {
 

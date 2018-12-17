@@ -1,21 +1,12 @@
 package org.eclipse.xtext.purexbase.idea.parser.antlr.internal;
 
+import com.intellij.lang.PsiBuilder;
+import org.antlr.runtime.*;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
-import org.eclipse.xtext.purexbase.idea.lang.PureXbaseElementTypeProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.purexbase.idea.lang.PureXbaseElementTypeProvider;
 import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess;
-
-import com.intellij.lang.PsiBuilder;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 @SuppressWarnings("all")
 public class PsiInternalPureXbaseParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {

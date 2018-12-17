@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.facet;
 
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IOutputConfigurationProvider;
-import org.eclipse.xtext.generator.OutputConfiguration;
-import org.jdom.Element;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -21,6 +16,10 @@ import com.intellij.facet.ui.FacetEditorTab;
 import com.intellij.facet.ui.FacetValidatorsManager;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
+import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.jdom.Element;
 
 /**
  * @author dhuebner - Initial contribution and API

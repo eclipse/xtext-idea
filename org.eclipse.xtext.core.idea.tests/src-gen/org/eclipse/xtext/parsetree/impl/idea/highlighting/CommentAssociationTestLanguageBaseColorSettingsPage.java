@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.impl.idea.highlighting;
 
-import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageLanguage;
 
 
 public class CommentAssociationTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

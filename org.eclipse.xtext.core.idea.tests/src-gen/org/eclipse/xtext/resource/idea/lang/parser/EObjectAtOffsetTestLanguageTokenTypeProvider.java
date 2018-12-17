@@ -1,14 +1,13 @@
 package org.eclipse.xtext.resource.idea.lang.parser;
 
-import static org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalEObjectAtOffsetTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageLanguage;
 import org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalEObjectAtOffsetTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalEObjectAtOffsetTestLanguageParser.*;
 
 @Singleton public class EObjectAtOffsetTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

@@ -1,11 +1,10 @@
 package org.eclipse.xtext.serializer.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.serializer.SequencerTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.serializer.SequencerTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class SequencerTestLanguageStandaloneSetupIdea extends SequencerTestLanguageStandaloneSetupGenerated {
 

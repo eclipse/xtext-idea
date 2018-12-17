@@ -1,18 +1,17 @@
 package org.eclipse.xtext.index.idea.lang.parser;
 
-import org.eclipse.xtext.index.idea.lang.psi.impl.IndexTestLanguageFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.index.idea.lang.IndexTestLanguageElementTypeProvider;
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
-
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.index.idea.lang.IndexTestLanguageElementTypeProvider;
+import org.eclipse.xtext.index.idea.lang.psi.impl.IndexTestLanguageFileImpl;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 public class IndexTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 

@@ -35,7 +35,7 @@ class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
 
 	@Inject extension IJvmModelAssociations
 
-	override processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer) {
+	override processQuery(SearchParameters queryParameters, Processor<? super PsiReference> consumer) {
 		val element = queryParameters.elementToSearch
 		val words = element.collectWords
 		if (words.empty)

@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parser.terminalrules.idea.lang.parser;
 
-import static org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.PsiInternalBug292245TestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug292245TestLanguageLanguage;
 import org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.PsiInternalBug292245TestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.PsiInternalBug292245TestLanguageParser.RULE_WS;
 
 @Singleton public class Bug292245TestLanguageTokenTypeProvider implements TokenTypeProvider {
 

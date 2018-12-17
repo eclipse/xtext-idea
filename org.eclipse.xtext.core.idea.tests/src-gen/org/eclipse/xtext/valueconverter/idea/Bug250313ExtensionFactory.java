@@ -1,8 +1,7 @@
 package org.eclipse.xtext.valueconverter.idea;
 
-import org.eclipse.xtext.valueconverter.idea.lang.Bug250313Language;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.valueconverter.idea.lang.Bug250313Language;
 
 public class Bug250313ExtensionFactory implements ExtensionFactory {
 

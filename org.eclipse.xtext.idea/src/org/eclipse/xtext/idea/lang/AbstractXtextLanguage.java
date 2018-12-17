@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.lang;
 
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.util.Strings;
-
 import com.google.inject.Injector;
 import com.intellij.lang.Language;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.util.Strings;
 
 public abstract class AbstractXtextLanguage extends Language implements IXtextLanguage {
 

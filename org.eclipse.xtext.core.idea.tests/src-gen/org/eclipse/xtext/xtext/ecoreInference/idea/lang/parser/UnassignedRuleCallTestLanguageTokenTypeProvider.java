@@ -1,14 +1,13 @@
 package org.eclipse.xtext.xtext.ecoreInference.idea.lang.parser;
 
-import static org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal.PsiInternalUnassignedRuleCallTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageLanguage;
 import org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal.PsiInternalUnassignedRuleCallTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal.PsiInternalUnassignedRuleCallTestLanguageParser.*;
 
 @Singleton public class UnassignedRuleCallTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

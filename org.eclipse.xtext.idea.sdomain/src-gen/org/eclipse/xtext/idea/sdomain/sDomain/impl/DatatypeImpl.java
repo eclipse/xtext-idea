@@ -10,7 +10,6 @@
 package org.eclipse.xtext.idea.sdomain.sDomain.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.xtext.idea.sdomain.sDomain.Datatype;
 import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
 

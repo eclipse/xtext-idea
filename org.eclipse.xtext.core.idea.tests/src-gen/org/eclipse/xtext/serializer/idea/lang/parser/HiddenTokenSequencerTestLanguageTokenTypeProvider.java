@@ -1,14 +1,13 @@
 package org.eclipse.xtext.serializer.idea.lang.parser;
 
-import static org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalHiddenTokenSequencerTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageLanguage;
 import org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalHiddenTokenSequencerTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalHiddenTokenSequencerTestLanguageParser.*;
 
 @Singleton public class HiddenTokenSequencerTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

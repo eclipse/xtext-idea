@@ -1,11 +1,7 @@
 package org.eclipse.xtend.core.idea.parser.antlr.internal;
-import org.eclipse.xtext.parser.antlr.Lexer;
-
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
+import org.eclipse.xtext.parser.antlr.Lexer;
 
 @SuppressWarnings("all")
 public class PsiInternalXtendLexer extends Lexer {

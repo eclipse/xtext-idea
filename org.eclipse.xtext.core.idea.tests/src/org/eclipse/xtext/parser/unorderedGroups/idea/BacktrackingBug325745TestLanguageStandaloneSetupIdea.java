@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.unorderedGroups.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class BacktrackingBug325745TestLanguageStandaloneSetupIdea extends BacktrackingBug325745TestLanguageStandaloneSetupGenerated {
 

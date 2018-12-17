@@ -1,17 +1,16 @@
 package org.eclipse.xtext.valueconverter.idea.lang;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.valueconverter.idea.lang.psi.impl.Bug250313FileImpl;
-import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.valueconverter.idea.lang.psi.impl.Bug250313FileImpl;
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
-import com.intellij.psi.tree.IFileElementType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Bug250313ElementTypeProvider implements IElementTypeProvider {
 

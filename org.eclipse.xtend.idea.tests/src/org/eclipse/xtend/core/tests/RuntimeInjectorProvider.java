@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
+import com.google.inject.Injector;
 import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
-
-import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.validation;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractSDomainValidator extends AbstractDeclarativeValidator {
 	

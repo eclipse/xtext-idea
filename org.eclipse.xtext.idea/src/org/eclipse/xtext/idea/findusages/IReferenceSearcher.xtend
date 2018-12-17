@@ -19,12 +19,12 @@ import com.intellij.util.Processor
 @ImplementedBy(NullReferenceSearcher)
 interface IReferenceSearcher {
 
-	def void processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer)
+	def void processQuery(SearchParameters queryParameters, Processor<? super PsiReference> consumer)
 
 	@Singleton
 	static class NullReferenceSearcher implements IReferenceSearcher {
 
-		override processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer) {
+		override processQuery(SearchParameters queryParameters, Processor<? super PsiReference> consumer) {
 		}
 
 	}

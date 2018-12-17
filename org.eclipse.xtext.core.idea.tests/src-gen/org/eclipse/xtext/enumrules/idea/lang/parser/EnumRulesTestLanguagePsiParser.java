@@ -1,18 +1,17 @@
 package org.eclipse.xtext.enumrules.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
-import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageElementTypeProvider;
 import org.eclipse.xtext.enumrules.idea.parser.antlr.internal.PsiInternalEnumRulesTestLanguageParser;
 import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess;
+import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EnumRulesTestLanguagePsiParser extends AbstractXtextPsiParser {
 

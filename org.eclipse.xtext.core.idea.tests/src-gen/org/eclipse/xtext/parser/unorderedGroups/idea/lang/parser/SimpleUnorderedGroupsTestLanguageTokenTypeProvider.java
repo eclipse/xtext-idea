@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parser.unorderedGroups.idea.lang.parser;
 
-import static org.eclipse.xtext.parser.unorderedGroups.idea.parser.antlr.internal.PsiInternalSimpleUnorderedGroupsTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageLanguage;
 import org.eclipse.xtext.parser.unorderedGroups.idea.parser.antlr.internal.PsiInternalSimpleUnorderedGroupsTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parser.unorderedGroups.idea.parser.antlr.internal.PsiInternalSimpleUnorderedGroupsTestLanguageParser.*;
 
 @Singleton public class SimpleUnorderedGroupsTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

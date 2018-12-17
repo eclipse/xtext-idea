@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-
+import com.google.common.io.CharStreams;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
@@ -31,10 +31,9 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
-import com.google.common.io.CharStreams;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

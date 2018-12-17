@@ -1,7 +1,7 @@
 package org.eclipse.xtext.testlanguages.indent.idea.highlighting;
 
-import org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageLanguage;
 
 
 public class IndentationAwareTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

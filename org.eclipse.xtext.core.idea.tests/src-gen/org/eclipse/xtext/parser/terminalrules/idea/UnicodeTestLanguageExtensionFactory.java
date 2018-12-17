@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.terminalrules.idea;
 
-import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageLanguage;
 
 public class UnicodeTestLanguageExtensionFactory implements ExtensionFactory {
 

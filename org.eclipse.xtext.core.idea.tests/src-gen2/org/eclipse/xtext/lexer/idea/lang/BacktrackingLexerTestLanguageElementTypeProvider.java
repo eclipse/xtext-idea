@@ -4,8 +4,6 @@
 package org.eclipse.xtext.lexer.idea.lang;
 
 import com.intellij.psi.tree.IFileElementType;
-import java.util.HashMap;
-import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.lexer.idea.lang.psi.impl.BacktrackingLexerTestLanguageFileImpl;
@@ -13,6 +11,9 @@ import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAcce
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BacktrackingLexerTestLanguageElementTypeProvider implements IElementTypeProvider {
 

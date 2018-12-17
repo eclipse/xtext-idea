@@ -1,18 +1,17 @@
 package org.eclipse.xtext.formatting2.internal.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
-import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageElementTypeProvider;
 import org.eclipse.xtext.formatting2.internal.idea.parser.antlr.internal.PsiInternalFormatterTestLanguageParser;
 import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGrammarAccess;
+import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FormatterTestLanguagePsiParser extends AbstractXtextPsiParser {
 

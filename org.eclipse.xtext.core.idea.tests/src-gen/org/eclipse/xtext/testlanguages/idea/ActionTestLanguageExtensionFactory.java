@@ -1,8 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea;
 
-import org.eclipse.xtext.testlanguages.idea.lang.ActionTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.testlanguages.idea.lang.ActionTestLanguageLanguage;
 
 public class ActionTestLanguageExtensionFactory implements ExtensionFactory {
 

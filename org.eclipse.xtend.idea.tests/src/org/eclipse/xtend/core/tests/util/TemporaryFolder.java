@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.util;
 
+import com.google.common.io.Files;
+import com.google.inject.Singleton;
+import org.junit.rules.ExternalResource;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-
-import org.junit.rules.ExternalResource;
-
-import com.google.common.io.Files;
-import com.google.inject.Singleton;
 
 /**
  * Basically copied from {@link org.junit.rules.TemporaryFolder}

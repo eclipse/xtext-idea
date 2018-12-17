@@ -1,17 +1,16 @@
 package org.eclipse.xtext.formatting2.internal.idea.lang.parser;
 
-import org.eclipse.xtext.formatting2.internal.idea.lang.psi.impl.FormatterTestLanguageFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageElementTypeProvider;
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageElementTypeProvider;
+import org.eclipse.xtext.formatting2.internal.idea.lang.psi.impl.FormatterTestLanguageFileImpl;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 
 public class FormatterTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 

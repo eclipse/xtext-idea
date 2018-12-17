@@ -1,7 +1,7 @@
 package org.eclipse.xtext.resource.idea.highlighting;
 
-import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageLanguage;
 
 
 public class EObjectAtOffsetTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

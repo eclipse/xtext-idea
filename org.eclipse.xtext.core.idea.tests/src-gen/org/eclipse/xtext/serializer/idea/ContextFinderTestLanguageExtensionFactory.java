@@ -1,8 +1,7 @@
 package org.eclipse.xtext.serializer.idea;
 
-import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageLanguage;
 
 public class ContextFinderTestLanguageExtensionFactory implements ExtensionFactory {
 

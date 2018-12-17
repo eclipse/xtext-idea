@@ -47,7 +47,7 @@ class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, PsiEObje
 	override createStub(PsiEObject psi, StubElement parentStub) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
-	
+
 	override deserialize(StubInputStream dataStream, StubElement parentStub) throws IOException {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}

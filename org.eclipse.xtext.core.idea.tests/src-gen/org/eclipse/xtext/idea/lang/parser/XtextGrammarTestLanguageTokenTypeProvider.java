@@ -1,14 +1,13 @@
 package org.eclipse.xtext.idea.lang.parser;
 
-import static org.eclipse.xtext.idea.parser.antlr.internal.PsiInternalXtextGrammarTestLanguageParser.*;
-
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageLanguage;
-import org.eclipse.xtext.idea.parser.antlr.internal.PsiInternalXtextGrammarTestLanguageParser;
-
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageLanguage;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.idea.parser.antlr.internal.PsiInternalXtextGrammarTestLanguageParser;
+
+import static org.eclipse.xtext.idea.parser.antlr.internal.PsiInternalXtextGrammarTestLanguageParser.*;
 
 @Singleton public class XtextGrammarTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

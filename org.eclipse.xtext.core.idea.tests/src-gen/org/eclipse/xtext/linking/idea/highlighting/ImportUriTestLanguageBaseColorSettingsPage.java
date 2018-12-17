@@ -1,7 +1,7 @@
 package org.eclipse.xtext.linking.idea.highlighting;
 
-import org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageLanguage;
 
 
 public class ImportUriTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.framework;
 
-import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
-import org.eclipse.xtend.core.idea.facet.XtendFacetType;
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
-
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetType;
@@ -32,6 +27,10 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.util.indexing.FileContent;
+import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
+import org.eclipse.xtend.core.idea.facet.XtendFacetType;
+import org.eclipse.xtend.core.idea.lang.XtendFileType;
+import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 
 /**
  * @author dhuebner - Initial contribution and API

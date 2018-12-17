@@ -1,54 +1,23 @@
 package org.eclipse.xtend.core.tests.parsing;
 
-import java.util.List;
-import java.util.Set;
-
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.RichString;
-import org.eclipse.xtend.core.xtend.RichStringElseIf;
-import org.eclipse.xtend.core.xtend.RichStringForLoop;
-import org.eclipse.xtend.core.xtend.RichStringIf;
-import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendConstructor;
-import org.eclipse.xtend.core.xtend.XtendField;
-import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendFormalParameter;
-import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtend.core.xtend.*;
+import org.eclipse.xtext.common.types.*;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XBinaryOperation;
-import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XBooleanLiteral;
-import org.eclipse.xtext.xbase.XCatchClause;
-import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XForLoopExpression;
-import org.eclipse.xtext.xbase.XStringLiteral;
-import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.*;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.junit.Test;
 
-import com.google.common.collect.Sets;
-import com.google.inject.Inject;
+import java.util.List;
+import java.util.Set;
 
 public class ParserTest extends AbstractXtendTestCase {
 	
@@ -428,7 +397,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichString_01() throws Exception {
-		XtendFunction function = function("def foo() ''' foo «'holla'» bar '''");
+		XtendFunction function = function("def foo() ''' foo ï¿½'holla'ï¿½ bar '''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral); 
 		assertTrue(richString.getExpressions().get(1) instanceof XStringLiteral); 
@@ -441,7 +410,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringIF_00() throws Exception {
-		XtendFunction function = function("def foo() ''' foo «IF true» wurst «ELSEIF null==3» brot «ELSE» machine «ENDIF» bar '''");
+		XtendFunction function = function("def foo() ''' foo ï¿½IF trueï¿½ wurst ï¿½ELSEIF null==3ï¿½ brot ï¿½ELSEï¿½ machine ï¿½ENDIFï¿½ bar '''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		
@@ -460,7 +429,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringIF_01() throws Exception {
-		XtendFunction function = function("def foo() ''' foo «IF true» wurst «IF false» brot «ELSE» machine «ENDIF» bar «ENDIF»'''");
+		XtendFunction function = function("def foo() ''' foo ï¿½IF trueï¿½ wurst ï¿½IF falseï¿½ brot ï¿½ELSEï¿½ machine ï¿½ENDIFï¿½ bar ï¿½ENDIFï¿½'''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		
@@ -479,7 +448,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringFOR_01() throws Exception {
-		XtendFunction function = function("def withForLoop() '''«FOR i: 1..10»«i»«ENDFOR»'''");
+		XtendFunction function = function("def withForLoop() '''ï¿½FOR i: 1..10ï¿½ï¿½iï¿½ï¿½ENDFORï¿½'''");
 		final RichString richString = (RichString) function.getExpression();
 		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(1);
 		assertTrue(rsFor.getForExpression() instanceof XBinaryOperation);
@@ -493,7 +462,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringFOR_02() throws Exception {
-		XtendFunction function = function("def withForLoop() '''«FOR i: 1..10 BEFORE 'a' SEPARATOR '\t' AFTER i»«ENDFOR»'''");
+		XtendFunction function = function("def withForLoop() '''ï¿½FOR i: 1..10 BEFORE 'a' SEPARATOR '\t' AFTER iï¿½ï¿½ENDFORï¿½'''");
 		final RichString richString = (RichString) function.getExpression();
 		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(1);
 		assertTrue(rsFor.getForExpression() instanceof XBinaryOperation);
@@ -505,7 +474,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringFOR_03() throws Exception {
-		XtendFunction function = function("def withForLoop(String it) '''«it»«val it = 1..10»«FOR i: it SEPARATOR it»«ENDFOR»'''");
+		XtendFunction function = function("def withForLoop(String it) '''ï¿½itï¿½ï¿½val it = 1..10ï¿½ï¿½FOR i: it SEPARATOR itï¿½ï¿½ENDFORï¿½'''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		assertTrue(richString.getExpressions().get(1) instanceof XFeatureCall);
@@ -525,7 +494,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringWithComment_00() throws Exception {
-		XtendFunction function = function("def foo() '''first««« comment \nsecond'''");
+		XtendFunction function = function("def foo() '''firstï¿½ï¿½ï¿½ comment \nsecond'''");
 		assertTrue(function.getExpression() instanceof RichString);
 		RichString richString = (RichString) function.getExpression();
 		assertEquals(2, richString.getExpressions().size());
@@ -536,7 +505,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringWithComment_01() throws Exception {
-		XtendFunction function = function("def foo() '''first« /* ml comment\n */ «« sl_comment \nsecond'''");
+		XtendFunction function = function("def foo() '''firstï¿½ /* ml comment\n */ ï¿½ï¿½ sl_comment \nsecond'''");
 		assertTrue(function.getExpression() instanceof RichString);
 		RichString richString = (RichString) function.getExpression();
 		assertEquals(2, richString.getExpressions().size());
@@ -547,7 +516,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichStringWithComment_03() throws Exception {
-		XtendFunction function = function("def foo() '''first««« comment \nsecond« /* ml comment */ »third'''");
+		XtendFunction function = function("def foo() '''firstï¿½ï¿½ï¿½ comment \nsecondï¿½ /* ml comment */ ï¿½third'''");
 		assertTrue(function.getExpression() instanceof RichString);
 		RichString richString = (RichString) function.getExpression();
 		assertEquals(3, richString.getExpressions().size());

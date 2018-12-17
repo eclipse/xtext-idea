@@ -10,13 +10,10 @@
 package org.eclipse.xtext.idea.sdomain.sDomain.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.xtext.idea.sdomain.sDomain.Property;
 import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
 import org.eclipse.xtext.idea.sdomain.sDomain.Type;

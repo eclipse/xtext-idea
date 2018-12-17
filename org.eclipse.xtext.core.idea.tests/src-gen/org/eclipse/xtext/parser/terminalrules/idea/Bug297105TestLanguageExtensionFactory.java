@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.terminalrules.idea;
 
-import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug297105TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug297105TestLanguageLanguage;
 
 public class Bug297105TestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -5,9 +5,10 @@ package org.eclipse.xtext.purexbase.idea.lang;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import javax.swing.Icon;
 import org.eclipse.xtext.idea.Icons;
 import org.jetbrains.annotations.NonNls;
+
+import javax.swing.*;
 
 public class AbstractPureXbaseFileType extends LanguageFileType {
 

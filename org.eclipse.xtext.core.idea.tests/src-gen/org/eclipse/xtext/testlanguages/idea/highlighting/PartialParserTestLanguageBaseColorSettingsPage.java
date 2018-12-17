@@ -1,7 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea.highlighting;
 
-import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageLanguage;
 
 
 public class PartialParserTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

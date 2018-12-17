@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.datatyperules.idea.highlighting;
 
-import org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageLanguage;
 
 
 public class DatatypeRulesTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

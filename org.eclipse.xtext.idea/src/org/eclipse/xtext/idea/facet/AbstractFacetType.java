@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.facet;
 
-import javax.swing.Icon;
-
-import org.eclipse.xtext.idea.Icons;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.facet.Facet;
@@ -18,6 +14,9 @@ import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
+import org.eclipse.xtext.idea.Icons;
+
+import javax.swing.*;
 
 /**
  * @author dhuebner - Initial contribution and API

@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parsetree.impl.idea.lang.parser;
 
-import static org.eclipse.xtext.parsetree.impl.idea.parser.antlr.internal.PsiInternalCommentAssociationTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageLanguage;
 import org.eclipse.xtext.parsetree.impl.idea.parser.antlr.internal.PsiInternalCommentAssociationTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parsetree.impl.idea.parser.antlr.internal.PsiInternalCommentAssociationTestLanguageParser.*;
 
 @Singleton public class CommentAssociationTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

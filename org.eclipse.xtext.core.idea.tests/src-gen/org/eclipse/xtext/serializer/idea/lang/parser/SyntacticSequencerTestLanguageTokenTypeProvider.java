@@ -1,14 +1,13 @@
 package org.eclipse.xtext.serializer.idea.lang.parser;
 
-import static org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalSyntacticSequencerTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.serializer.idea.lang.SyntacticSequencerTestLanguageLanguage;
 import org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalSyntacticSequencerTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.serializer.idea.parser.antlr.internal.PsiInternalSyntacticSequencerTestLanguageParser.*;
 
 @Singleton public class SyntacticSequencerTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

@@ -9,15 +9,16 @@ package org.eclipse.xtend.core.idea.lang.parser;
 
 import com.google.inject.Inject;
 import com.intellij.lang.PsiBuilder;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider;
 import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class XtendPsiParser extends AbstractXtextPsiParser {
 

@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parser.fragments.idea.lang.parser;
 
-import static org.eclipse.xtext.parser.fragments.idea.parser.antlr.internal.PsiInternalFragmentTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.fragments.idea.lang.FragmentTestLanguageLanguage;
 import org.eclipse.xtext.parser.fragments.idea.parser.antlr.internal.PsiInternalFragmentTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parser.fragments.idea.parser.antlr.internal.PsiInternalFragmentTestLanguageParser.*;
 
 @Singleton public class FragmentTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.idea;
 
-import org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageLanguage;
 
 public class XtextGrammarTestLanguageExtensionFactory implements ExtensionFactory {
 

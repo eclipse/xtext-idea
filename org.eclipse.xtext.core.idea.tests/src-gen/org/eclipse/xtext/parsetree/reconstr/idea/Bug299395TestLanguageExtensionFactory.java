@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr.idea;
 
-import org.eclipse.xtext.parsetree.reconstr.idea.lang.Bug299395TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.reconstr.idea.lang.Bug299395TestLanguageLanguage;
 
 public class Bug299395TestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -2,13 +2,9 @@ package org.eclipse.xtext.enumrules.idea.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.parser.antlr.Lexer;
-
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
+import org.eclipse.xtext.parser.antlr.Lexer;
 
 @SuppressWarnings("all")
 public class PsiInternalEnumRulesTestLanguageLexer extends Lexer {

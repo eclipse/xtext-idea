@@ -1,10 +1,9 @@
 package org.eclipse.xtext.parser.parameters.idea.highlighting;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.parser.parameters.idea.lang.NoParametersTestLanguageLanguage;
+import org.jetbrains.annotations.NotNull;
 
 public class NoParametersTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	

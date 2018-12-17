@@ -1,10 +1,9 @@
 package org.eclipse.xtext.grammarinheritance.idea.highlighting;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest3LanguageLanguage;
+import org.jetbrains.annotations.NotNull;
 
 public class InheritanceTest3LanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	

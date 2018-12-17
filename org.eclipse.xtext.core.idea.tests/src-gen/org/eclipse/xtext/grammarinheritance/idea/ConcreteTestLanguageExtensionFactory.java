@@ -1,8 +1,7 @@
 package org.eclipse.xtext.grammarinheritance.idea;
 
-import org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageLanguage;
 
 public class ConcreteTestLanguageExtensionFactory implements ExtensionFactory {
 

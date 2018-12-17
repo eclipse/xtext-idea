@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.impl.idea;
 
-import org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397Language;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397Language;
 
 public class Bug305397ExtensionFactory implements ExtensionFactory {
 

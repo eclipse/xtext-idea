@@ -1,17 +1,16 @@
 package org.eclipse.xtext.grammarinheritance.idea.lang;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.grammarinheritance.idea.lang.psi.impl.AbstractTestLanguageFileImpl;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
+import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 
-import com.intellij.psi.tree.IFileElementType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AbstractTestLanguageElementTypeProvider implements IElementTypeProvider {
 

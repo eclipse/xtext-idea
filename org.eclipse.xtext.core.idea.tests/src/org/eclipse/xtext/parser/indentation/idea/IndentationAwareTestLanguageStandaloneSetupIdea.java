@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.indentation.idea;
 
-import org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguageStandaloneSetupGenerated;
-import org.eclipse.xtext.util.Modules2;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class IndentationAwareTestLanguageStandaloneSetupIdea extends IndentationAwareTestLanguageStandaloneSetupGenerated {
 

@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.keywords.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class KeywordsTestLanguageStandaloneSetupIdea extends KeywordsTestLanguageStandaloneSetupGenerated {
 

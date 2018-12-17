@@ -2,7 +2,6 @@ package org.eclipse.xtext.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class XtextGrammarTestLanguageFacetType  extends AbstractFacetType<XtextGrammarTestLanguageFacetConfiguration> {
 

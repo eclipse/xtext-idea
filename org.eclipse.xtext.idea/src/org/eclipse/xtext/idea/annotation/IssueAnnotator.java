@@ -7,8 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.annotation;
 
-import java.util.List;
-
+import com.intellij.lang.Language;
+import com.intellij.lang.annotation.Annotation;
+import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
@@ -21,16 +29,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
-import com.intellij.lang.Language;
-import com.intellij.lang.annotation.Annotation;
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
-import com.intellij.lang.annotation.HighlightSeverity;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.progress.ProgressIndicatorProvider;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
+import java.util.List;
 
 public class IssueAnnotator implements Annotator {
 

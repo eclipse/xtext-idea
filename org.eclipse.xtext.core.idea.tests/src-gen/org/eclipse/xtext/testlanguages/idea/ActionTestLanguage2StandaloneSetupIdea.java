@@ -1,11 +1,10 @@
 package org.eclipse.xtext.testlanguages.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.testlanguages.ActionTestLanguage2StandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.testlanguages.ActionTestLanguage2StandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class ActionTestLanguage2StandaloneSetupIdea extends ActionTestLanguage2StandaloneSetupGenerated {
 

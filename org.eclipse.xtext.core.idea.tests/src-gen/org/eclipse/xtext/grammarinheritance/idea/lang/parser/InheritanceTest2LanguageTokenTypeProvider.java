@@ -1,14 +1,13 @@
 package org.eclipse.xtext.grammarinheritance.idea.lang.parser;
 
-import static org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal.PsiInternalInheritanceTest2LanguageParser.*;
-
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest2LanguageLanguage;
-import org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal.PsiInternalInheritanceTest2LanguageParser;
-
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest2LanguageLanguage;
+import org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal.PsiInternalInheritanceTest2LanguageParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+
+import static org.eclipse.xtext.grammarinheritance.idea.parser.antlr.internal.PsiInternalInheritanceTest2LanguageParser.*;
 
 @Singleton public class InheritanceTest2LanguageTokenTypeProvider implements TokenTypeProvider {
 

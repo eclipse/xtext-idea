@@ -1,14 +1,13 @@
 package org.eclipse.xtext.xtext.ecoreInference.idea.lang.parser;
 
-import static org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal.PsiInternalMultiValueFeatureTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.MultiValueFeatureTestLanguageLanguage;
 import org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal.PsiInternalMultiValueFeatureTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.xtext.ecoreInference.idea.parser.antlr.internal.PsiInternalMultiValueFeatureTestLanguageParser.*;
 
 @Singleton public class MultiValueFeatureTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

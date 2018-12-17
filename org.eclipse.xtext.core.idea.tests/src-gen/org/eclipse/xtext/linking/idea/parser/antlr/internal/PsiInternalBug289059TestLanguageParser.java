@@ -1,19 +1,10 @@
 package org.eclipse.xtext.linking.idea.parser.antlr.internal;
 
+import com.intellij.lang.PsiBuilder;
+import org.antlr.runtime.*;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.linking.idea.lang.Bug289059TestLanguageElementTypeProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess;
-
-import com.intellij.lang.PsiBuilder;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalBug289059TestLanguageParser extends AbstractPsiAntlrParser {

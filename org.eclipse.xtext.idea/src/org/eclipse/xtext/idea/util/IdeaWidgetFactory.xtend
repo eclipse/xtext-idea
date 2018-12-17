@@ -83,7 +83,7 @@ class IdeaWidgetFactory {
 		return jbTextField
 	}
 
-	def ComboBox comboBox(Object... values) {
+	def ComboBox<Object> comboBox(Object... values) {
 		val cb = new ComboBox(values)
 		return cb
 	}

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.antlr.idea.highlighting;
 
-import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageLanguage;
 
 
 public class Bug296889TestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

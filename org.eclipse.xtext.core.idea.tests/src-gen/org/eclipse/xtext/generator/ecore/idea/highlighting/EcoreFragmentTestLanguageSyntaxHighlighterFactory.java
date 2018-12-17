@@ -1,10 +1,9 @@
 package org.eclipse.xtext.generator.ecore.idea.highlighting;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageLanguage;
+import org.jetbrains.annotations.NotNull;
 
 public class EcoreFragmentTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	

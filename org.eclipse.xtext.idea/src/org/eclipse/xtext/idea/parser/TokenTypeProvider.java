@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.parser;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.jetbrains.annotations.NotNull;
 
 public interface TokenTypeProvider {
 

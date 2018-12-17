@@ -1,18 +1,17 @@
 package org.eclipse.xtext.parser.epatch.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.parser.epatch.idea.lang.EpatchTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.epatch.idea.parser.antlr.internal.PsiInternalEpatchTestLanguageParser;
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EpatchTestLanguagePsiParser extends AbstractXtextPsiParser {
 

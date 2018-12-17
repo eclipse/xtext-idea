@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr.idea;
 
-import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationErrorTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationErrorTestLanguageLanguage;
 
 public class SerializationErrorTestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -1,14 +1,13 @@
 package org.eclipse.xtext.resource.idea.lang.parser;
 
-import static org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalLiveContainerTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.resource.idea.lang.LiveContainerTestLanguageLanguage;
 import org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalLiveContainerTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalLiveContainerTestLanguageParser.*;
 
 @Singleton public class LiveContainerTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

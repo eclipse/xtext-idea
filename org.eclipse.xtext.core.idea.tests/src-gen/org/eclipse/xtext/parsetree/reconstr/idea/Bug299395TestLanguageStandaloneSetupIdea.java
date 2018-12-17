@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parsetree.reconstr.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parsetree.reconstr.Bug299395TestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parsetree.reconstr.Bug299395TestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class Bug299395TestLanguageStandaloneSetupIdea extends Bug299395TestLanguageStandaloneSetupGenerated {
 

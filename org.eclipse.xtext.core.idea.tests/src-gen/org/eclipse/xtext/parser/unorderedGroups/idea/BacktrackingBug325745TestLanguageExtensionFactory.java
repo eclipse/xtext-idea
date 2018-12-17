@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.unorderedGroups.idea;
 
-import org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageLanguage;
 
 public class BacktrackingBug325745TestLanguageExtensionFactory implements ExtensionFactory {
 

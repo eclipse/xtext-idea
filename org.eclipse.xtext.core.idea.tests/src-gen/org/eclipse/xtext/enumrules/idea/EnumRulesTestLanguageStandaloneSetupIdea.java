@@ -1,11 +1,10 @@
 package org.eclipse.xtext.enumrules.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class EnumRulesTestLanguageStandaloneSetupIdea extends EnumRulesTestLanguageStandaloneSetupGenerated {
 

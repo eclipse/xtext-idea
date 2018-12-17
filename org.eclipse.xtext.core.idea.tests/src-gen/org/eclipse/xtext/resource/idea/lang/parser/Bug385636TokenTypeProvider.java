@@ -1,14 +1,13 @@
 package org.eclipse.xtext.resource.idea.lang.parser;
 
-import static org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalBug385636Parser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.resource.idea.lang.Bug385636Language;
 import org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalBug385636Parser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.resource.idea.parser.antlr.internal.PsiInternalBug385636Parser.*;
 
 @Singleton public class Bug385636TokenTypeProvider implements TokenTypeProvider {
 

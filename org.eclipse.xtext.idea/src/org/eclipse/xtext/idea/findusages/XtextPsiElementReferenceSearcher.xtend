@@ -23,7 +23,7 @@ class XtextPsiElementReferenceSearcher extends QueryExecutorBase<PsiReference, R
 		super(true)
 	}
 
-	override processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer) {
+	override processQuery(SearchParameters queryParameters, Processor<? super PsiReference> consumer) {
 		val element = queryParameters.elementToSearch
 		if (element instanceof XtextPsiElement) {
 			val referenceSearcher = element.xtextLanguage.getInstance(IReferenceSearcher)

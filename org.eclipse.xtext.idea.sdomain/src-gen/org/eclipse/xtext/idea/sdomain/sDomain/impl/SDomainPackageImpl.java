@@ -13,19 +13,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.idea.sdomain.sDomain.Datatype;
-import org.eclipse.xtext.idea.sdomain.sDomain.Element;
-import org.eclipse.xtext.idea.sdomain.sDomain.Entity;
-import org.eclipse.xtext.idea.sdomain.sDomain.File;
-import org.eclipse.xtext.idea.sdomain.sDomain.Import;
-import org.eclipse.xtext.idea.sdomain.sDomain.Namespace;
-import org.eclipse.xtext.idea.sdomain.sDomain.Property;
-import org.eclipse.xtext.idea.sdomain.sDomain.SDomainFactory;
-import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
-import org.eclipse.xtext.idea.sdomain.sDomain.Type;
+import org.eclipse.xtext.idea.sdomain.sDomain.*;
 
 /**
  * <!-- begin-user-doc -->

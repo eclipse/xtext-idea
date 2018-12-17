@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parsetree.transientvalues.idea;
 
-import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestLanguage;
 
 public class TransientValuesTestExtensionFactory implements ExtensionFactory {
 

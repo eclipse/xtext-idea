@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.common.types;
 import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
-import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule;
@@ -26,13 +25,7 @@ import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ITokenToStringConverter;
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
-import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.parser.antlr.LexerBindings;
-import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.parser.antlr.*;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IgnoreCaseLinking;
@@ -42,6 +35,8 @@ import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+
+import java.util.Properties;
 
 /**
  * Manual modifications go to {@link RefactoringTestLanguageRuntimeModule}.

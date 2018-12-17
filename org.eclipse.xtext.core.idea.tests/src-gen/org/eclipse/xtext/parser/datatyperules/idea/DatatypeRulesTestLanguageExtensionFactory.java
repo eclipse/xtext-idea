@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.datatyperules.idea;
 
-import org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageLanguage;
 
 public class DatatypeRulesTestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -1,18 +1,17 @@
 package org.eclipse.xtext.parser.terminalrules.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug297105TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.terminalrules.idea.parser.antlr.internal.PsiInternalBug297105TestLanguageParser;
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Bug297105TestLanguagePsiParser extends AbstractXtextPsiParser {
 

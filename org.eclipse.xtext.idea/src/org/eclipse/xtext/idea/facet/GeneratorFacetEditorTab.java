@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.facet;
 
-import javax.swing.JComponent;
-
 import com.intellij.facet.Facet;
 import com.intellij.facet.ui.FacetEditorTab;
 import com.intellij.openapi.options.ConfigurationException;
+
+import javax.swing.*;
 
 public class GeneratorFacetEditorTab<C extends AbstractFacetConfiguration> extends FacetEditorTab {
 

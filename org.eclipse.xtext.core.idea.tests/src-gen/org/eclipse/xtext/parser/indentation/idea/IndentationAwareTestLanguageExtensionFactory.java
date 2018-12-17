@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.indentation.idea;
 
-import org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageLanguage;
 
 public class IndentationAwareTestLanguageExtensionFactory implements ExtensionFactory {
 

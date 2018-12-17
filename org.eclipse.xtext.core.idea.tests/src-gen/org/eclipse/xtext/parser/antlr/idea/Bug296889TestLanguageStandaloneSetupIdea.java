@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parser.antlr.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parser.antlr.Bug296889TestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parser.antlr.Bug296889TestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class Bug296889TestLanguageStandaloneSetupIdea extends Bug296889TestLanguageStandaloneSetupGenerated {
 

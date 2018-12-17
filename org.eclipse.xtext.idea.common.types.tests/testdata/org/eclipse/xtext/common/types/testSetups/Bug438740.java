@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.testSetups;
 
+import com.google.common.collect.Multimap;
+
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
-
-import com.google.common.collect.Multimap;
 
 /**
  * See also {@linkplain https://bugs.eclipse.org/bugs/show_bug.cgi?id=438740}

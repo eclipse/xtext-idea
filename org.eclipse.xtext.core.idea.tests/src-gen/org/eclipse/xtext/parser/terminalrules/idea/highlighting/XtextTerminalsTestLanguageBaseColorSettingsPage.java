@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.terminalrules.idea.highlighting;
 
-import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage;
 
 
 public class XtextTerminalsTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

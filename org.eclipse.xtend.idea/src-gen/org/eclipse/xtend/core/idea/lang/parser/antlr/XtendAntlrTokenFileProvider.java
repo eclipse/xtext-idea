@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.lang.parser.antlr;
 
-import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+
+import java.io.InputStream;
 
 public class XtendAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	@Override

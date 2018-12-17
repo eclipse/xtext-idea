@@ -12,9 +12,7 @@ import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState
 
 @State(name = "org.eclipse.xtext.purexbase.PureXbaseGenerator", storages = #[
-		@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-		@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-				+ "/PureXbaseGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)])
+		@Storage("PureXbaseGeneratorConfig.xml")])
  class PureXbaseFacetConfiguration extends XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>{
 
 }

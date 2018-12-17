@@ -1,7 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea.highlighting;
 
-import org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageLanguage;
 
 
 public class FowlerDslTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

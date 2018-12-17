@@ -1,8 +1,8 @@
 package org.eclipse.xtext.parsetree.reconstr.idea.lang.psi;
 
 import com.intellij.psi.util.PsiModificationTracker;
-import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener;
 import org.eclipse.xtext.parsetree.reconstr.idea.lang.Bug302128TestLanguageLanguage;
+import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener;
 
 public class Bug302128TestLanguageCodeBlockModificationListener extends BaseXtextCodeBlockModificationListener {
 

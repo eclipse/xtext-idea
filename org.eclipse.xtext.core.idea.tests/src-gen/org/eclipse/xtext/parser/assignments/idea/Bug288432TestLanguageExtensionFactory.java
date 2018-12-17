@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.assignments.idea;
 
-import org.eclipse.xtext.parser.assignments.idea.lang.Bug288432TestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.assignments.idea.lang.Bug288432TestLanguageLanguage;
 
 public class Bug288432TestLanguageExtensionFactory implements ExtensionFactory {
 

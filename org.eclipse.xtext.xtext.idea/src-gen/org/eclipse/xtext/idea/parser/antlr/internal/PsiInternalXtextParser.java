@@ -1,19 +1,10 @@
 package org.eclipse.xtext.idea.parser.antlr.internal;
 
-import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
-import org.eclipse.xtext.idea.lang.XtextElementTypeProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.services.XtextGrammarAccess;
-
 import com.intellij.lang.PsiBuilder;
-
-
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
+import org.eclipse.xtext.idea.lang.XtextElementTypeProvider;
+import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.services.XtextGrammarAccess;
 
 @SuppressWarnings("all")
 public class PsiInternalXtextParser extends AbstractPsiAntlrParser {

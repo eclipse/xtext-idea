@@ -1,8 +1,7 @@
 package org.eclipse.xtext.linking.lazy.idea;
 
-import org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageLanguage;
 
 public class LazyLinkingTestLanguageExtensionFactory implements ExtensionFactory {
 

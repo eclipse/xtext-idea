@@ -1,14 +1,13 @@
 package org.eclipse.xtext.testlanguages.idea.lang.parser;
 
-import static org.eclipse.xtext.testlanguages.idea.parser.antlr.internal.PsiInternalTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.TestLanguageLanguage;
 import org.eclipse.xtext.testlanguages.idea.parser.antlr.internal.PsiInternalTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.testlanguages.idea.parser.antlr.internal.PsiInternalTestLanguageParser.*;
 
 @Singleton public class TestLanguageTokenTypeProvider implements TokenTypeProvider {
 

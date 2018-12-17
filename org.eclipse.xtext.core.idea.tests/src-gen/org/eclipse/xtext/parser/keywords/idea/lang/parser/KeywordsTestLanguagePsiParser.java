@@ -1,18 +1,17 @@
 package org.eclipse.xtext.parser.keywords.idea.lang.parser;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.inject.Inject;
+import com.intellij.lang.PsiBuilder;
 import org.antlr.runtime.TokenStream;
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.parser.keywords.idea.lang.KeywordsTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.keywords.idea.parser.antlr.internal.PsiInternalKeywordsTestLanguageParser;
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
-import com.google.inject.Inject;
-import com.intellij.lang.PsiBuilder;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class KeywordsTestLanguagePsiParser extends AbstractXtextPsiParser {
 

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.linking.lazy.idea.highlighting;
 
-import org.eclipse.xtext.linking.lazy.idea.lang.Bug311337TestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.linking.lazy.idea.lang.Bug311337TestLanguageLanguage;
 
 
 public class Bug311337TestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

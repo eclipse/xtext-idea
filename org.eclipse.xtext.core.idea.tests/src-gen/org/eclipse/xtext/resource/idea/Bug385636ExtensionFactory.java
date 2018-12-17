@@ -1,8 +1,7 @@
 package org.eclipse.xtext.resource.idea;
 
-import org.eclipse.xtext.resource.idea.lang.Bug385636Language;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.resource.idea.lang.Bug385636Language;
 
 public class Bug385636ExtensionFactory implements ExtensionFactory {
 

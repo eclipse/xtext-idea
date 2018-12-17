@@ -7,19 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.lang;
 
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.psi.impl.LeafXtextPsiElement;
-import org.eclipse.xtext.psi.impl.LeafXtextPsiReferenceElement;
-import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-
 import com.google.inject.Inject;
 import com.intellij.lang.DefaultASTFactoryImpl;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.psi.impl.LeafXtextPsiElement;
+import org.eclipse.xtext.psi.impl.LeafXtextPsiReferenceElement;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 
 public class BaseXtextASTFactory extends DefaultASTFactoryImpl {
 

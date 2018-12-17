@@ -1,11 +1,10 @@
 package org.eclipse.xtext.grammarinheritance.idea;
 
-import org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetupGenerated;
-import org.eclipse.xtext.util.Modules2;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class AbstractTestLanguageStandaloneSetupIdea extends AbstractTestLanguageStandaloneSetupGenerated {
 

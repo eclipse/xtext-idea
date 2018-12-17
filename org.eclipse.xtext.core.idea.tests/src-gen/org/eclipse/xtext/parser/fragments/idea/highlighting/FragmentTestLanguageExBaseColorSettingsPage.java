@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.fragments.idea.highlighting;
 
-import org.eclipse.xtext.parser.fragments.idea.lang.FragmentTestLanguageExLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parser.fragments.idea.lang.FragmentTestLanguageExLanguage;
 
 
 public class FragmentTestLanguageExBaseColorSettingsPage extends AbstractColorSettingsPage {

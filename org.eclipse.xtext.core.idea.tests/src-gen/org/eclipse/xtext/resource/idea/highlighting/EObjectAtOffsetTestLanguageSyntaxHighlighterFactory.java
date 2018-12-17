@@ -1,10 +1,9 @@
 package org.eclipse.xtext.resource.idea.highlighting;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageLanguage;
+import org.jetbrains.annotations.NotNull;
 
 public class EObjectAtOffsetTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	

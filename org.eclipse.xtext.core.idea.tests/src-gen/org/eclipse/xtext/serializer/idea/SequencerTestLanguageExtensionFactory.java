@@ -1,8 +1,7 @@
 package org.eclipse.xtext.serializer.idea;
 
-import org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageLanguage;
 
 public class SequencerTestLanguageExtensionFactory implements ExtensionFactory {
 

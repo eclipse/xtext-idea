@@ -1,10 +1,6 @@
 package org.eclipse.xtext.parsetree.formatter.idea.facet;
 
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.openapi.components.StorageScheme;
+import com.intellij.openapi.components.*;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 

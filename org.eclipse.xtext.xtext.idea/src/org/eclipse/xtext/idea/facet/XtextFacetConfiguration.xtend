@@ -10,9 +10,7 @@ import com.intellij.openapi.components.StoragePathMacros
 import com.intellij.openapi.components.StorageScheme
 
 @State(name = "org.eclipse.xtext.XtextGenerator", storages = #[
-		@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-		@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-				+ "/XtextGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)])
+		@Storage("XtextGeneratorConfig.xml")])
  class XtextFacetConfiguration extends AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>{
 
 }

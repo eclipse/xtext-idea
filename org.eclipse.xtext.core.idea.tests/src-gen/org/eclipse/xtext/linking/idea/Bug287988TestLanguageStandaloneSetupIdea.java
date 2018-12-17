@@ -1,11 +1,10 @@
 package org.eclipse.xtext.linking.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.linking.Bug287988TestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.linking.Bug287988TestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class Bug287988TestLanguageStandaloneSetupIdea extends Bug287988TestLanguageStandaloneSetupGenerated {
 

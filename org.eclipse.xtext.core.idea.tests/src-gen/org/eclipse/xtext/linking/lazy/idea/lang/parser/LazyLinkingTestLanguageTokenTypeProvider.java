@@ -1,14 +1,13 @@
 package org.eclipse.xtext.linking.lazy.idea.lang.parser;
 
-import static org.eclipse.xtext.linking.lazy.idea.parser.antlr.internal.PsiInternalLazyLinkingTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageLanguage;
 import org.eclipse.xtext.linking.lazy.idea.parser.antlr.internal.PsiInternalLazyLinkingTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.linking.lazy.idea.parser.antlr.internal.PsiInternalLazyLinkingTestLanguageParser.*;
 
 @Singleton public class LazyLinkingTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

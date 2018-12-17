@@ -1,11 +1,10 @@
 package org.eclipse.xtext.enumrules.idea.lang.psi.impl;
 
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageFileType;
-import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage;
-
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageFileType;
+import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 
 public final class EnumRulesTestLanguageFileImpl extends BaseXtextFile {
 

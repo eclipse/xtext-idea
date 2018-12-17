@@ -1,8 +1,7 @@
 package org.eclipse.xtext.metamodelreferencing.tests.idea;
 
-import org.eclipse.xtext.metamodelreferencing.tests.idea.lang.EcoreReferenceTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.metamodelreferencing.tests.idea.lang.EcoreReferenceTestLanguageLanguage;
 
 public class EcoreReferenceTestLanguageExtensionFactory implements ExtensionFactory {
 

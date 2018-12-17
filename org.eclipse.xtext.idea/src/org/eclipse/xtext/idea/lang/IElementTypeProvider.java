@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.lang;
 
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-
-import com.intellij.psi.tree.IFileElementType;
 
 public interface IElementTypeProvider {
 

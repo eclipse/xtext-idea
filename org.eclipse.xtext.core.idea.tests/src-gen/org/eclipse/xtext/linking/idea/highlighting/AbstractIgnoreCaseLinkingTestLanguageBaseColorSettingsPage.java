@@ -1,7 +1,7 @@
 package org.eclipse.xtext.linking.idea.highlighting;
 
-import org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseLinkingTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseLinkingTestLanguageLanguage;
 
 
 public class AbstractIgnoreCaseLinkingTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

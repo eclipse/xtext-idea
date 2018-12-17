@@ -1,8 +1,7 @@
 package org.eclipse.xtext.dummy.idea;
 
-import org.eclipse.xtext.dummy.idea.lang.DummyTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.dummy.idea.lang.DummyTestLanguageLanguage;
 
 public class DummyTestLanguageExtensionFactory implements ExtensionFactory {
 

@@ -8,8 +8,6 @@
 package org.eclipse.xtend.core.idea.lang;
 
 import com.intellij.psi.tree.IFileElementType;
-import java.util.HashMap;
-import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
@@ -17,6 +15,9 @@ import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class XtendElementTypeProvider implements IElementTypeProvider {
 

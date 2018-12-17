@@ -1,17 +1,16 @@
 package org.eclipse.xtext.generator.ecore.idea.lang;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.EcoreFragmentTestLanguageFileImpl;
 import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess;
+import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 
-import com.intellij.psi.tree.IFileElementType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EcoreFragmentTestLanguageElementTypeProvider implements IElementTypeProvider {
 

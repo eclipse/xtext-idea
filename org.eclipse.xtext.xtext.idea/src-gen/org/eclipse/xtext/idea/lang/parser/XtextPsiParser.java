@@ -5,15 +5,16 @@ package org.eclipse.xtext.idea.lang.parser;
 
 import com.google.inject.Inject;
 import com.intellij.lang.PsiBuilder;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.xtext.idea.lang.XtextElementTypeProvider;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 import org.eclipse.xtext.idea.parser.antlr.internal.PsiInternalXtextParser;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class XtextPsiParser extends AbstractXtextPsiParser {
 

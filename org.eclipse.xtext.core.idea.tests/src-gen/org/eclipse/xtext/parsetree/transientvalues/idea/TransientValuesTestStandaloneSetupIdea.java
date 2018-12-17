@@ -1,11 +1,10 @@
 package org.eclipse.xtext.parsetree.transientvalues.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTestStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTestStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class TransientValuesTestStandaloneSetupIdea extends TransientValuesTestStandaloneSetupGenerated {
 

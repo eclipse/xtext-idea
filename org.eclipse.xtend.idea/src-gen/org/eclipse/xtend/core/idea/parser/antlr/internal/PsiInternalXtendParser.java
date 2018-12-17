@@ -1,21 +1,12 @@
 package org.eclipse.xtend.core.idea.parser.antlr.internal;
 
-import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+import com.intellij.lang.PsiBuilder;
+import org.antlr.runtime.*;
 import org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtend.core.services.XtendGrammarAccess;
-
-import com.intellij.lang.PsiBuilder;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 /*******************************************************************************
  * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials

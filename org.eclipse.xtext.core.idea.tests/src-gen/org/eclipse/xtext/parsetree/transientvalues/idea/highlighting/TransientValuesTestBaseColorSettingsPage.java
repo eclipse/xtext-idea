@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.transientvalues.idea.highlighting;
 
-import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestLanguage;
 
 
 public class TransientValuesTestBaseColorSettingsPage extends AbstractColorSettingsPage {

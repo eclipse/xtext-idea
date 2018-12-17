@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.parameters.idea.highlighting;
 
-import org.eclipse.xtext.parser.parameters.idea.lang.ParametersTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.parser.parameters.idea.lang.ParametersTestLanguageLanguage;
 
 
 public class ParametersTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

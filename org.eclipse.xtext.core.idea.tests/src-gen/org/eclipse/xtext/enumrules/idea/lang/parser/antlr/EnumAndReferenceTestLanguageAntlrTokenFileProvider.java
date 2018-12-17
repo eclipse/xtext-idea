@@ -1,7 +1,8 @@
 package org.eclipse.xtext.enumrules.idea.lang.parser.antlr;
 
-import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+
+import java.io.InputStream;
 
 public class EnumAndReferenceTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	

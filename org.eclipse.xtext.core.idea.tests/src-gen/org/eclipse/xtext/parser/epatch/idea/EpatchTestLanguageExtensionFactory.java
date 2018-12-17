@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.epatch.idea;
 
-import org.eclipse.xtext.parser.epatch.idea.lang.EpatchTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.epatch.idea.lang.EpatchTestLanguageLanguage;
 
 public class EpatchTestLanguageExtensionFactory implements ExtensionFactory {
 

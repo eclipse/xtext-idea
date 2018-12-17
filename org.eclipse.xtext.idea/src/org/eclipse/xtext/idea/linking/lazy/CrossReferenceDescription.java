@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.linking.lazy;
 
-import java.util.Collections;
-import java.util.Iterator;
-
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -20,8 +19,8 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.ITextRegion;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class CrossReferenceDescription implements ICrossReferenceDescription {
 	

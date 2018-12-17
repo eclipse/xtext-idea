@@ -1,7 +1,8 @@
 package org.eclipse.xtext.testlanguages.idea.lang.parser.antlr;
 
-import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+
+import java.io.InputStream;
 
 public class FowlerDslTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	

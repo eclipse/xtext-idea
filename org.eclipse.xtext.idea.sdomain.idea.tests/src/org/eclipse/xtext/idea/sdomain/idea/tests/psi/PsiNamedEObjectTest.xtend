@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.idea.tests.psi
 
+import com.intellij.codeInsight.TargetElementUtil
 import com.intellij.codeInsight.TargetElementUtilBase
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import com.intellij.util.IncorrectOperationException
@@ -445,7 +446,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def findPsiNamedEObject(int offset) {
-		val targetElement = TargetElementUtilBase.instance.findTargetElement(myFixture.editor, ELEMENT_NAME_ACCEPTED, offset)
+		val targetElement = TargetElementUtilBase.instance.findTargetElement(myFixture.editor, TargetElementUtil.ELEMENT_NAME_ACCEPTED, offset)
 		if (targetElement instanceof PsiNamedEObject) {
 			targetElement
 		}

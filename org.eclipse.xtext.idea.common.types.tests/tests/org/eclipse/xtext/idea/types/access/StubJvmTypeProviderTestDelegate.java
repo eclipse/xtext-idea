@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.types.access;
 
-import java.util.Set;
-
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+import com.intellij.openapi.module.Module;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
@@ -22,9 +23,7 @@ import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.junit.Test;
 
-import com.google.common.collect.Sets;
-import com.google.inject.Inject;
-import com.intellij.openapi.module.Module;
+import java.util.Set;
 
 /*
  * This class is abstract to filter it from the JUnit test suite.

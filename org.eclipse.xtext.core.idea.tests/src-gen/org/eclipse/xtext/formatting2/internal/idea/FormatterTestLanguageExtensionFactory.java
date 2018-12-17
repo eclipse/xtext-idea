@@ -1,8 +1,7 @@
 package org.eclipse.xtext.formatting2.internal.idea;
 
-import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.formatting2.internal.idea.lang.FormatterTestLanguageLanguage;
 
 public class FormatterTestLanguageExtensionFactory implements ExtensionFactory {
 

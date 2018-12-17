@@ -1,17 +1,16 @@
 package org.eclipse.xtext.validation.idea.lang;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.validation.idea.lang.psi.impl.ConcreteSyntaxValidationTestLanguageFileImpl;
-import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.validation.idea.lang.psi.impl.ConcreteSyntaxValidationTestLanguageFileImpl;
+import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess;
 
-import com.intellij.psi.tree.IFileElementType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConcreteSyntaxValidationTestLanguageElementTypeProvider implements IElementTypeProvider {
 

@@ -1,11 +1,10 @@
 package org.eclipse.xtext.index.idea;
 
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetupGenerated;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 public class IndexTestLanguageStandaloneSetupIdea extends IndexTestLanguageStandaloneSetupGenerated {
 

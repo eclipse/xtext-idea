@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parsetree.reconstr.idea.lang.parser;
 
-import static org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal.PsiInternalSerializationErrorTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationErrorTestLanguageLanguage;
 import org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal.PsiInternalSerializationErrorTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parsetree.reconstr.idea.parser.antlr.internal.PsiInternalSerializationErrorTestLanguageParser.*;
 
 @Singleton public class SerializationErrorTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

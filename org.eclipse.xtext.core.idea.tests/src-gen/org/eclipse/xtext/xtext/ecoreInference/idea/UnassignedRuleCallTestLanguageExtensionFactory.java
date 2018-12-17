@@ -1,8 +1,7 @@
 package org.eclipse.xtext.xtext.ecoreInference.idea;
 
-import org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageLanguage;
 
 public class UnassignedRuleCallTestLanguageExtensionFactory implements ExtensionFactory {
 

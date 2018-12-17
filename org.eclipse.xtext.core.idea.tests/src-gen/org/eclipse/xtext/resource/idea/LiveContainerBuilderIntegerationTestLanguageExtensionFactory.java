@@ -1,8 +1,7 @@
 package org.eclipse.xtext.resource.idea;
 
-import org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageLanguage;
 
 public class LiveContainerBuilderIntegerationTestLanguageExtensionFactory implements ExtensionFactory {
 

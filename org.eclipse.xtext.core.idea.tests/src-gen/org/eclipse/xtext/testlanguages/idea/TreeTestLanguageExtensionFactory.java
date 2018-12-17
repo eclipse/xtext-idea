@@ -1,8 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea;
 
-import org.eclipse.xtext.testlanguages.idea.lang.TreeTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.testlanguages.idea.lang.TreeTestLanguageLanguage;
 
 public class TreeTestLanguageExtensionFactory implements ExtensionFactory {
 

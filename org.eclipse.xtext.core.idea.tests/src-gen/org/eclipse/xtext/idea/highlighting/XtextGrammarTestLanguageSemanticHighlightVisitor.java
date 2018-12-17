@@ -1,6 +1,5 @@
 package org.eclipse.xtext.idea.highlighting;
 
-import org.eclipse.xtext.idea.highlighting.SemanticHighlightVisitor;
 import org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageLanguage;
 
 public class XtextGrammarTestLanguageSemanticHighlightVisitor extends SemanticHighlightVisitor {

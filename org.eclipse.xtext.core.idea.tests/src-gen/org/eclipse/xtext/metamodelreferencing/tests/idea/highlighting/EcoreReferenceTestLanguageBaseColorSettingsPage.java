@@ -1,7 +1,7 @@
 package org.eclipse.xtext.metamodelreferencing.tests.idea.highlighting;
 
-import org.eclipse.xtext.metamodelreferencing.tests.idea.lang.EcoreReferenceTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.metamodelreferencing.tests.idea.lang.EcoreReferenceTestLanguageLanguage;
 
 
 public class EcoreReferenceTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {

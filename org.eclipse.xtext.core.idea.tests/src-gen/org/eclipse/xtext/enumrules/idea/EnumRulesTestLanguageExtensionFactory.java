@@ -1,8 +1,7 @@
 package org.eclipse.xtext.enumrules.idea;
 
-import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage;
 
 public class EnumRulesTestLanguageExtensionFactory implements ExtensionFactory {
 

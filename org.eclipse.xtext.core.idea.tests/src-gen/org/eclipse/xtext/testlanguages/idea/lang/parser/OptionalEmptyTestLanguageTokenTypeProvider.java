@@ -1,14 +1,13 @@
 package org.eclipse.xtext.testlanguages.idea.lang.parser;
 
-import static org.eclipse.xtext.testlanguages.idea.parser.antlr.internal.PsiInternalOptionalEmptyTestLanguageParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.OptionalEmptyTestLanguageLanguage;
 import org.eclipse.xtext.testlanguages.idea.parser.antlr.internal.PsiInternalOptionalEmptyTestLanguageParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.testlanguages.idea.parser.antlr.internal.PsiInternalOptionalEmptyTestLanguageParser.*;
 
 @Singleton public class OptionalEmptyTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

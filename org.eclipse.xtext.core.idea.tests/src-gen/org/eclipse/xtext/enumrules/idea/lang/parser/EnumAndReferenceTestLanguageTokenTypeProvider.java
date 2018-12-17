@@ -1,14 +1,13 @@
 package org.eclipse.xtext.enumrules.idea.lang.parser;
 
-import static org.eclipse.xtext.enumrules.idea.parser.antlr.internal.PsiInternalEnumAndReferenceTestLanguageParser.*;
-
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.enumrules.idea.lang.EnumAndReferenceTestLanguageLanguage;
-import org.eclipse.xtext.enumrules.idea.parser.antlr.internal.PsiInternalEnumAndReferenceTestLanguageParser;
-
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.eclipse.xtext.enumrules.idea.lang.EnumAndReferenceTestLanguageLanguage;
+import org.eclipse.xtext.enumrules.idea.parser.antlr.internal.PsiInternalEnumAndReferenceTestLanguageParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+
+import static org.eclipse.xtext.enumrules.idea.parser.antlr.internal.PsiInternalEnumAndReferenceTestLanguageParser.*;
 
 @Singleton public class EnumAndReferenceTestLanguageTokenTypeProvider implements TokenTypeProvider {
 

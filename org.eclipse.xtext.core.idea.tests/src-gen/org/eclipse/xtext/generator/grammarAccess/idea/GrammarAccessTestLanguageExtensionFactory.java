@@ -1,8 +1,7 @@
 package org.eclipse.xtext.generator.grammarAccess.idea;
 
-import org.eclipse.xtext.generator.grammarAccess.idea.lang.GrammarAccessTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.generator.grammarAccess.idea.lang.GrammarAccessTestLanguageLanguage;
 
 public class GrammarAccessTestLanguageExtensionFactory implements ExtensionFactory {
 

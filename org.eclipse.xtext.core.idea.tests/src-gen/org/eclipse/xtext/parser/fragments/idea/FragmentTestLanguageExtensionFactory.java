@@ -1,8 +1,7 @@
 package org.eclipse.xtext.parser.fragments.idea;
 
-import org.eclipse.xtext.parser.fragments.idea.lang.FragmentTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.parser.fragments.idea.lang.FragmentTestLanguageLanguage;
 
 public class FragmentTestLanguageExtensionFactory implements ExtensionFactory {
 

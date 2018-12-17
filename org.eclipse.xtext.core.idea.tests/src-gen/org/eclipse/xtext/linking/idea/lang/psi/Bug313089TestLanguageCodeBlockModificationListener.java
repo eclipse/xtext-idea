@@ -1,8 +1,8 @@
 package org.eclipse.xtext.linking.idea.lang.psi;
 
 import com.intellij.psi.util.PsiModificationTracker;
-import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener;
 import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageLanguage;
+import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener;
 
 public class Bug313089TestLanguageCodeBlockModificationListener extends BaseXtextCodeBlockModificationListener {
 

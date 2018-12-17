@@ -1,8 +1,7 @@
 package org.eclipse.xtext.grammarinheritance.idea;
 
-import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest3LanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest3LanguageLanguage;
 
 public class InheritanceTest3LanguageExtensionFactory implements ExtensionFactory {
 

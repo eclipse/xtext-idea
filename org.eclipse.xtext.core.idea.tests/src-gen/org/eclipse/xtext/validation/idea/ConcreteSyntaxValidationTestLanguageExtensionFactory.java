@@ -1,8 +1,7 @@
 package org.eclipse.xtext.validation.idea;
 
-import org.eclipse.xtext.validation.idea.lang.ConcreteSyntaxValidationTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.validation.idea.lang.ConcreteSyntaxValidationTestLanguageLanguage;
 
 public class ConcreteSyntaxValidationTestLanguageExtensionFactory implements ExtensionFactory {
 

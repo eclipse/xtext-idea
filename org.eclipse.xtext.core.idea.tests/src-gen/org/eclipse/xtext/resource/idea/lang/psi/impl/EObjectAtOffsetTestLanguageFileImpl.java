@@ -1,11 +1,10 @@
 package org.eclipse.xtext.resource.idea.lang.psi.impl;
 
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageFileType;
 import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageLanguage;
-
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
 
 public final class EObjectAtOffsetTestLanguageFileImpl extends BaseXtextFile {
 

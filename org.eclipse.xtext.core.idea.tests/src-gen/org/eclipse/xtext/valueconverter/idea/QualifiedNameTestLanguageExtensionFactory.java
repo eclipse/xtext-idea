@@ -1,8 +1,7 @@
 package org.eclipse.xtext.valueconverter.idea;
 
-import org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageLanguage;
 
 public class QualifiedNameTestLanguageExtensionFactory implements ExtensionFactory {
 

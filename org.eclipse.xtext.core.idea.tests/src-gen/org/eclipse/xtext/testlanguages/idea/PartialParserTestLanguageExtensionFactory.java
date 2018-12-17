@@ -1,8 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea;
 
-import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageLanguage;
-
 import com.intellij.openapi.extensions.ExtensionFactory;
+import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageLanguage;
 
 public class PartialParserTestLanguageExtensionFactory implements ExtensionFactory {
 

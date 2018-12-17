@@ -1,7 +1,7 @@
 package org.eclipse.xtext.testlanguages.idea.highlighting;
 
-import org.eclipse.xtext.testlanguages.idea.lang.ActionTestLanguage2Language;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.testlanguages.idea.lang.ActionTestLanguage2Language;
 
 
 public class ActionTestLanguage2BaseColorSettingsPage extends AbstractColorSettingsPage {

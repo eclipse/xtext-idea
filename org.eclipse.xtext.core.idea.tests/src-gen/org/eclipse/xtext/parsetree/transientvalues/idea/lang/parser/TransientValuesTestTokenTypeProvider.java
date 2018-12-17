@@ -1,14 +1,13 @@
 package org.eclipse.xtext.parsetree.transientvalues.idea.lang.parser;
 
-import static org.eclipse.xtext.parsetree.transientvalues.idea.parser.antlr.internal.PsiInternalTransientValuesTestParser.*;
-
+import com.google.inject.Singleton;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestLanguage;
 import org.eclipse.xtext.parsetree.transientvalues.idea.parser.antlr.internal.PsiInternalTransientValuesTestParser;
 
-import com.google.inject.Singleton;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import static org.eclipse.xtext.parsetree.transientvalues.idea.parser.antlr.internal.PsiInternalTransientValuesTestParser.*;
 
 @Singleton public class TransientValuesTestTokenTypeProvider implements TokenTypeProvider {
 
