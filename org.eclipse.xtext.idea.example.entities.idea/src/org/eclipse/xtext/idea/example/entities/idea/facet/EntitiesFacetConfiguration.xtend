@@ -10,8 +10,6 @@ package org.eclipse.xtext.idea.example.entities.idea.facet
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
-import com.intellij.openapi.components.StoragePathMacros
-import com.intellij.openapi.components.StorageScheme
 import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState
 

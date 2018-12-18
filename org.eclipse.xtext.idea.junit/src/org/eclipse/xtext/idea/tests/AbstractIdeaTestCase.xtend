@@ -44,8 +44,8 @@ abstract class AbstractIdeaTestCase extends IdeaTestCase {
 		write [
 			val mnr = ModuleRootManager.getInstance(module)
 			val model = mnr.modifiableModel
-			val entry = model.addContentEntry(project.baseDir)
-			srcFolder = VfsUtil.createDirectoryIfMissing(project.baseDir, "src")
+			val entry = model.addContentEntry(module.moduleFile)
+			srcFolder = VfsUtil.createDirectoryIfMissing(module.moduleFile, "src")
 			entry.addSourceFolder(srcFolder, srcFolder.testSource)
 			configureModule(module, model, entry)
 			model.commit

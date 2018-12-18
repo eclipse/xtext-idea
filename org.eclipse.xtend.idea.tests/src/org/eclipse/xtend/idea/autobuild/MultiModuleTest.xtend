@@ -16,7 +16,6 @@ import com.intellij.facet.FacetTypeRegistry
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
-import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.openapi.roots.impl.ModifiableModelCommitter
 import com.intellij.openapi.roots.ui.configuration.actions.ModuleDeleteProvider
@@ -72,7 +71,8 @@ class MultiModuleTest extends PsiTestCase {
 	def void testTwoModulesWithoutDependency() {
 		val moduleA = createModule('moduleA')
 		val moduleB = createModule('moduleB')
-		println("Module basedir" + project.baseDir)
+		println("ModuleA basedir" + moduleA.moduleFilePath)
+		println("ModuleB basedir" + moduleB.moduleFilePath)
 
 		val referencing = createFile(moduleB, "OtherClass.xtend", '''
 			class OtherClass extends MyClass {
@@ -136,7 +136,6 @@ class MultiModuleTest extends PsiTestCase {
 		assertNotNull(generatedReferenced)
 
 		ApplicationManager.application.runWriteAction [
-			val modifiableModel = ModuleRootManager.getInstance(moduleA).getModifiableModel()
 			val moduleManager = ModuleManager.getInstance(project)
 			val modifiableModuleModel = moduleManager.getModifiableModel()
 			val otherModules = #[]

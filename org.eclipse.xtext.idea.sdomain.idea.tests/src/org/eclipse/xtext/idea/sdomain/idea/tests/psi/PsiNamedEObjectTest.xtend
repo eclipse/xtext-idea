@@ -14,8 +14,6 @@ import com.intellij.util.IncorrectOperationException
 import org.eclipse.xtext.psi.PsiEObjectIdentifier
 import org.eclipse.xtext.psi.PsiNamedEObject
 
-import static com.intellij.codeInsight.TargetElementUtilBase.*
-
 class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 
 	def void testEntity_01() {
