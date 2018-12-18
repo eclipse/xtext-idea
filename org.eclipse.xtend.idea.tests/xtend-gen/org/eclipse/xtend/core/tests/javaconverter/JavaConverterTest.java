@@ -7,13 +7,30 @@ import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.*;
+import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
+import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.impl.XtendFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.*;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsFactoryImpl;
 import org.eclipse.xtext.xbase.impl.XbaseFactoryImpl;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -1694,7 +1711,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     XtendMember _get_1 = clazz.getMembers().get(2);
     XExpression _initialValue_1 = ((XtendField) _get_1).getInitialValue();
     Assert.assertTrue((_initialValue_1 instanceof RichString));
-    Assert.assertEquals("static package String a=\'\'\'ï¿½(i - i)ï¿½ï¿½iï¿½4=ï¿½({i=i - 1})ï¿½1=ï¿½(i++)ï¿½ï¿½iï¿½\'\'\'", 
+    Assert.assertEquals("static package String a=\'\'\'«(i - i)»«i»4=«({i=i - 1})»1=«(i++)»«i»\'\'\'", 
       this.toXtendClassBodyDeclr("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"));
   }
   
@@ -1702,7 +1719,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   public void testRichStringCase1() throws Exception {
     String _newLine = Strings.newLine();
     String _plus = ("int i=0" + _newLine);
-    String _plus_1 = (_plus + "String richTxt=\'\'\'int i=ï¿½iï¿½.\'\'\'");
+    String _plus_1 = (_plus + "String richTxt=\'\'\'int i=«i».\'\'\'");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("private int i = 0;");
     _builder.newLine();
@@ -1717,7 +1734,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("String str = \"Step: \" + info + \" memory: free / total / max MB \" + runtime.freeMemory() / (1000 * 1000) + \" / \" + runtime.totalMemory() / (1000 * 1000) + \" / \" + runtime.maxMemory() / (1000 * 1000)");
     _builder.newLine();
     Assert.assertEquals(
-      "package String str=\'\'\'Step: ï¿½infoï¿½ memory: free / total / max MB ï¿½runtime.freeMemory() / (1000 * 1000)ï¿½ / ï¿½runtime.totalMemory() / (1000 * 1000)ï¿½ / ï¿½runtime.maxMemory() / (1000 * 1000)ï¿½\'\'\'", 
+      "package String str=\'\'\'Step: «info» memory: free / total / max MB «runtime.freeMemory() / (1000 * 1000)» / «runtime.totalMemory() / (1000 * 1000)» / «runtime.maxMemory() / (1000 * 1000)»\'\'\'", 
       this.toXtendClassBodyDeclr(_builder));
   }
   
@@ -1743,14 +1760,14 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("+ \".xtexterror\";");
     _builder.newLine();
     Assert.assertEquals(
-      "public String someVar=\".\"\npublic String loadingURI=\'\'\'classpath:/ï¿½(\'\'\'ï¿½someVarï¿½LoadingResourceWithError\'\'\').replace(Character.valueOf(\'.\').charValue, Character.valueOf(\'/\').charValue)ï¿½.xtexterror\'\'\'", 
+      "public String someVar=\".\"\npublic String loadingURI=\'\'\'classpath:/«(\'\'\'«someVar»LoadingResourceWithError\'\'\').replace(Character.valueOf(\'.\').charValue, Character.valueOf(\'/\').charValue)».xtexterror\'\'\'", 
       this.toXtendClassBodyDeclr(_builder));
   }
   
   @Test
   public void testRichStringSpecialCase() throws Exception {
     XtendClass clazz = this.toValidXtendClass(
-      "class Z { String richTxt = \"a\" +\"\" +\"\'\" +\"s \" + \"\'\'\' no ï¿½\'foo\'.lengthï¿½ side-effect \'\'\'\";}");
+      "class Z { String richTxt = \"a\" +\"\" +\"\'\" +\"s \" + \"\'\'\' no «\'foo\'.length» side-effect \'\'\'\";}");
     Assert.assertNotNull(clazz);
     XtendMember _get = clazz.getMembers().get(0);
     XtendField xtendMember = ((XtendField) _get);
@@ -1762,8 +1779,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testRichStringSpecialCase2() throws Exception {
     XtendClass clazz = this.toValidXtendClass(
-      (("class Z { String richTxt = \"test\" + \"\'\'\'ï¿½FOR a: \'123\'.toCharArray SEPARATOR \',\\n  \\t\'ï¿½\\n" + "a\\n") + 
-        "ï¿½ENDFORï¿½\'\'\'\";}"));
+      (("class Z { String richTxt = \"test\" + \"\'\'\'«FOR a: \'123\'.toCharArray SEPARATOR \',\\n  \\t\'»\\n" + "a\\n") + 
+        "«ENDFOR»\'\'\'\";}"));
     Assert.assertNotNull(clazz);
     XtendMember _get = clazz.getMembers().get(0);
     XtendField xtendMember = ((XtendField) _get);
