@@ -5,3 +5,7 @@ build/
 *._trace
 *.xtendbin
 org.eclipse.buildship.core.prefs
+*.iml
+*.eml
+.idea/
+out/
