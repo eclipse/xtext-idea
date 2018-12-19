@@ -27,29 +27,29 @@ class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileElementT
 	}
 
 	override getExternalId() {
-		'''«language.ID».FILE'''
+		'''?language.ID?.FILE'''
 	}
 
 	override serialize(T stub, StubOutputStream it) throws IOException {
 		writeURI(stub.uri)
 	}
-	
+
 	protected def writeURI(StubOutputStream it, URI uri) {
 		writeUTF(uri.toString)
-	} 
-	
+	}
+
 
 	override deserialize(StubInputStream it, StubElement parentStub) throws IOException {
 		val stub = new XtextFileStub(null, this)
 		stub.uri = readURI
 		stub as T
 	}
-	
+
 	protected def readURI(StubInputStream it) {
-		URI.createURI(readUTF)	
+		URI.createURI(readUTF)
 	}
-	
+
 	override indexStub(T stub, IndexSink sink) {
 	}
-	
+
 }

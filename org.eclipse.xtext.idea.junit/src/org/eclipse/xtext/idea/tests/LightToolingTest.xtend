@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.tests
 
+import javax.swing.JTree
+
 import com.google.inject.Inject
 import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.facet.FacetManager
@@ -33,6 +35,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettingsManager
 import com.intellij.psi.tree.IElementType
 import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
+import com.intellij.testFramework.PlatformTestUtil
 import com.intellij.util.Consumer
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
@@ -43,7 +46,6 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
-
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
@@ -164,7 +166,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 				highlights.advance
 			}
 			if (tokenType.xtextStyle != HighlightingStyles.DEFAULT_ID) {
-				compactHighlights.append('''�start�-�end�:�tokenType.xtextStyle�''')
+				compactHighlights.append('''?start?-?end?:?tokenType.xtextStyle?''')
 				compactHighlights.append("\n")
 			}
 		}
@@ -186,8 +188,8 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def assertTreeStructure(StructureViewComponent component, String expected) {
-		//component.getTree.expandAll
-		//component.myTreeStructure.assertTreeStructureEquals(expected)
+		PlatformTestUtil.expandAll(component.tree)
+		PlatformTestUtil.assertTreeEqual(component.tree, expected)
 	}
 
 	protected def void testStructureView(String model, Consumer<StructureViewComponent> consumer) {

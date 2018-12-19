@@ -8,7 +8,7 @@
 package org.eclipse.xtend.idea.parsing
 
 import org.eclipse.xtend.core.idea.lang.XtendFileType
-//import org.eclipse.xtend.core.tests.parsing.ParserTest
+import org.eclipse.xtend.core.tests.parsing.ParserTest
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase

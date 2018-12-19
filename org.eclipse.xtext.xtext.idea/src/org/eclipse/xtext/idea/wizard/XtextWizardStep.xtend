@@ -33,8 +33,8 @@ class XtextWizardStep extends ModuleWizardStep {
 	JCheckBox web
 	JCheckBox test
 
-	ComboBox buildSystem
-	ComboBox layout
+	ComboBox<Object> buildSystem
+	ComboBox<Object> layout
 
 	WizardContext context
 

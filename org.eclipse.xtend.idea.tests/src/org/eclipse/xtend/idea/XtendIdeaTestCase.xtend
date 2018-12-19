@@ -22,7 +22,7 @@ import com.intellij.openapi.vfs.VfsUtil
 abstract class XtendIdeaTestCase extends AbstractIdeaTestCase {
 	override configureModule(Module module, ModifiableRootModel model, ContentEntry entry) {
 		LibraryUtil.addXtendLibrary(model)
-		val srcGenFolder = VfsUtil.createDirectoryIfMissing(project.baseDir, "xtend-gen")
+		val srcGenFolder = VfsUtil.createDirectoryIfMissing(module.moduleFile, "xtend-gen")
 		entry.addSourceFolder(srcGenFolder, srcGenFolder.testSource)
 		LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
 	}
