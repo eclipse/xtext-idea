@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -71,12 +70,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 		}
 		if (validate) {
 			List<Issue> issues = Lists.newArrayList(Iterables.filter(((XtextResource) resource).getResourceServiceProvider().getResourceValidator()
-					.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl), new Predicate<Issue>() {
-						@Override
-						public boolean apply(Issue issue) {
-							return issue.getSeverity() == Severity.ERROR;
-						}
-					}));
+					.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl), issue -> issue.getSeverity() == Severity.ERROR));
 			assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
 		}
 		XtendFile file = (XtendFile) resource.getContents().get(0);
@@ -108,7 +102,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 			resource.load(new StringInputStream(string), null);
 			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		}
-		for (Resource resource: new ArrayList<Resource>(set.getResources())) {
+		for (Resource resource: new ArrayList<>(set.getResources())) {
 			XtendFile file = (XtendFile) resource.getContents().get(0);
 			result.add(file);
 		}

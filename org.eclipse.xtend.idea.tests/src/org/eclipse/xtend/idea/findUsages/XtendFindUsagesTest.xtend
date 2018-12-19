@@ -18,7 +18,6 @@ import com.intellij.usageView.UsageInfo
 import com.intellij.util.CommonProcessors
 import org.eclipse.xtend.idea.LightXtendTest
 
-import static extension com.intellij.codeInsight.highlighting.HighlightUsagesHandler.*
 import static extension com.intellij.psi.util.PsiTreeUtil.*
 
 /**

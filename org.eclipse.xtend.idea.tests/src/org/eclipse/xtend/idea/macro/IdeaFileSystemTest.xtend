@@ -53,10 +53,9 @@ class IdeaFileSystemTest extends PsiTestCase {
 
 	override protected createModule(String moduleName) {
 		val module = super.createModule(moduleName)
-		val moduleDir = createChildDirectory(project.baseDir, moduleName)
-		val srcDir = createChildDirectory(moduleDir, 'src')
+		val srcDir = createChildDirectory(module.moduleFile, 'src')
 		module.updateModel [ rootModel |
-			val contentEntry = rootModel.addContentEntry(moduleDir)
+			val contentEntry = rootModel.addContentEntry(module.moduleFile)
 			contentEntry.addSourceFolder(srcDir, false)
 		]
 		module

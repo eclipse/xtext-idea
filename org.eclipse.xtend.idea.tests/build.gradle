@@ -1,7 +1,8 @@
 apply from: "${rootDir}/gradle/idea-development.gradle"
+apply plugin: "java"
 
 dependencies {
-	//compile project(':org.eclipse.xtend.core.tests')
+	compile "org.eclipse.xtend:org.eclipse.xtend.core.tests:$versions.xtext"
 	compile project(':org.eclipse.xtext.idea.junit')
 }
 
@@ -18,3 +19,11 @@ ideaDevelopment {
 }
 
 test.enabled = false
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}

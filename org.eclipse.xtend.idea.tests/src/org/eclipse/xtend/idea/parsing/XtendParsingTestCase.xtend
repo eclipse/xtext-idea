@@ -8,7 +8,7 @@
 package org.eclipse.xtend.idea.parsing
 
 import org.eclipse.xtend.core.idea.lang.XtendFileType
-import org.eclipse.xtend.core.tests.parsing.ParserTest
+//import org.eclipse.xtend.core.tests.parsing.ParserTest
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
@@ -115,6 +115,5 @@ class XtendParsingTestCase extends AbstractModelTestCase {
 		override testRichStringWithComment_03() throws Exception {
 			super.testRichStringWithComment_03()
 		}
-		
 	}
 }
