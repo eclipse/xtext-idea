@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.eclipse.xtext.xtype.XtypePackage
 
-import static org.eclipse.xtend.core.validation.IssueCodes.ACTIVE_ANNOTAION_IN_SAME_CONTAINER
+import static org.eclipse.xtend.core.validation.IssueCodes.ACTIVE_ANNOTATION_IN_SAME_CONTAINER
 
 import static extension org.eclipse.xtext.util.Strings.*
 import com.intellij.openapi.application.ApplicationManager
@@ -60,7 +60,7 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 					"The referenced active annotation cannot be used from within the same module.",
 					XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE,
 					-1,
-					ACTIVE_ANNOTAION_IN_SAME_CONTAINER
+					ACTIVE_ANNOTATION_IN_SAME_CONTAINER
 				)
 			}
 		}
