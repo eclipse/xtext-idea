@@ -50,6 +50,12 @@ project {
 			organizationUrl = 'http://typefox.io'
 		}
 		developer {
+			name = 'Tamas Miklossy'
+			email = 'miklossy@itemis.de'
+			organization = 'itemis'
+			organizationUrl = 'http://www.itemis.com'
+		}
+		developer {
 			name = 'Stefan Oehme'
 		}
 		developer {
@@ -81,6 +87,9 @@ project {
 		}
 		developer {
 			name = 'Sebastian Zarnekow'
+			email = 'sebastian.zarnekow@gmail.com'
+			organization = 'itemis'
+			organizationUrl = 'http://www.itemis.com'
 		}
 	}
 }
